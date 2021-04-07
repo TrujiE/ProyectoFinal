@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Views_specialist = () => {
+const Client = () => {
     return ( 
         <diV>
             <h1>Vista cliente</h1>
@@ -8,4 +8,4 @@ const Views_specialist = () => {
      );
 }
  
-export default Views_specialist;
+export default Client;
