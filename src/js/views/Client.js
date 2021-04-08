@@ -37,7 +37,7 @@ const Client = () => {
 			  <input className="form-control" type="date" value="2011-08-19" id="example-date-input" />
 			  &nbsp;
 			  &nbsp;
-			  <button type="button" className="btn btn-success">Buscar</button>			  
+			  <button type="button" className="btn btn-success" >Buscar</button>			  
 			</div>
 
 			
