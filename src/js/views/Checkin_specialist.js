@@ -1,15 +1,43 @@
 import React from "react";
 
-const Checkin_client = () => {
+const Checkin_specialist = () => {
   return (
     <div className="container mt-5">
       <h1 className=" text-center">Te ayudo... con tu registro?</h1>
       <hr />
       <div className="row">
         <div className="col-8">
+
+
+
+
+
+        <ul class="nav nav-pills nav-fill mb-5">
+  <li class="nav-item ">
+      <button className="btn  text-success">Cliente</button>
+    {/* <a class="nav-link text-success active-success" href="#">Cliente</a> */}
+  </li>
+  <li class="nav-item">
+    <a class="nav-link btn-success btn-sm " href="#">Especialista</a>
+  </li>
+  
+  
+</ul>
+
+
+
+
+
+
+
+
+
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text  bg-success text-white" id="basic-addon1">
+              <span
+                class="input-group-text  bg-success text-white"
+                id="basic-addon1"
+              >
                 Nombre
               </span>
             </div>
@@ -24,7 +52,10 @@ const Checkin_client = () => {
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text bg-success text-white" id="basic-addon2">
+              <span
+                class="input-group-text bg-success text-white"
+                id="basic-addon2"
+              >
                 Apellidos
               </span>
             </div>
@@ -38,7 +69,10 @@ const Checkin_client = () => {
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text bg-success text-white" id="basic-addon2">
+              <span
+                class="input-group-text bg-success text-white"
+                id="basic-addon2"
+              >
                 Rut
               </span>
             </div>
@@ -50,33 +84,56 @@ const Checkin_client = () => {
               aria-describedby="basic-addon2"
             />
           </div>
-        
-
-          <div class="input-group mb-3">
-          <div class="input-group-prepend">
-              <span class="input-group-text bg-success text-white" id="basic-addon2">
-                Direccion
-              </span>
-            </div>
-  <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="ingrese su direccion"/>
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Comuna</button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-      <div role="separator" class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Separated link</a>
-    </div>
-  </div>
-     </div>
-
-
-
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text bg-success text-white" id="basic-addon2">
+              <span
+                class="input-group-text bg-success text-white"
+                id="basic-addon2"
+              >
+                Direccion
+              </span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Text input with dropdown button"
+              placeholder="ingrese su direccion"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary dropdown-toggle"
+                type="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Comuna
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">
+                  Action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Another action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Something else here
+                </a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  Separated link
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span
+                class="input-group-text bg-success text-white"
+                id="basic-addon2"
+              >
                 Telefono
               </span>
             </div>
@@ -90,8 +147,11 @@ const Checkin_client = () => {
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text bg-success text-white" id="basic-addon2">
-               Correo
+              <span
+                class="input-group-text bg-success text-white"
+                id="basic-addon2"
+              >
+                Correo
               </span>
             </div>
             <input
@@ -104,8 +164,11 @@ const Checkin_client = () => {
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text bg-success text-white" id="basic-addon2">
-               Contraseña
+              <span
+                class="input-group-text bg-success text-white"
+                id="basic-addon2"
+              >
+                Contraseña
               </span>
             </div>
             <input
@@ -118,8 +181,11 @@ const Checkin_client = () => {
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text bg-success text-white" id="basic-addon2">
-               Repita la contraseña
+              <span
+                class="input-group-text bg-success text-white"
+                id="basic-addon2"
+              >
+                Repita la contraseña
               </span>
             </div>
             <input
@@ -132,8 +198,11 @@ const Checkin_client = () => {
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text bg-success text-white" id="basic-addon2">
-               Pregunta de seguridad
+              <span
+                class="input-group-text bg-success text-white"
+                id="basic-addon2"
+              >
+                Pregunta de seguridad
               </span>
             </div>
             <input
@@ -145,16 +214,16 @@ const Checkin_client = () => {
             />
           </div>
         </div>
-        <div className="col-4">
+        <div className="col-4 mt-5">
           <button className="btn btn-danger float-right">Registrarse</button>
           <div class="card mt-5">
             <img
-              src="https://picsum.photos/id/1074/50/50"
+              src="https://picsum.photos/id/237/50/50"
               class="card-img-top"
               alt="..."
             />
             <div class="card-body border-success">
-              <h5 class="card-title text-center">Nombre Cliente</h5>
+              <h5 class="card-title text-center">Nuevo Especialista</h5>
               <p class="card-text"></p>
             </div>
           </div>
@@ -164,4 +233,4 @@ const Checkin_client = () => {
   );
 };
 
-export default Checkin_client;
+export default Checkin_specialist;
