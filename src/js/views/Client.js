@@ -5,7 +5,7 @@ const Client = () => {
         <div className="container">
 
         	<div className="d-flex">
-            	<h2 style={{textAlign:"left"}}>te ayudo?&nbsp; Hola Cliente1232 en qué te ayudamos?</h2> &nbsp; <h6 style={{textAlign:"right"}}>Cerrar sesion</h6>
+            	<h2 style={{textAlign:"left"}}>te ayudo?&nbsp; Hola Cliente1232 en qué te ayudamos?</h2> &nbsp; <h6 style={{textAlign:"right"}}><button style={{textAlign:"right"}} type="button" className="btn btn-success" >Cerrar sesion</button></h6>
             </div>
 
             <br/>
