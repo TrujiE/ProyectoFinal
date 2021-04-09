@@ -213,6 +213,40 @@ const Checkin_specialist = () => {
               aria-describedby="basic-addon2"
             />
           </div>
+
+
+
+          <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Especialidad</label>
+  </div>
+  <select class="custom-select" id="inputGroupSelect01">
+    <option selected>Electicista</option>
+    <option value="1">Gasfiter-Plomero</option>
+    <option value="2">Carpintero</option>
+    <option value="3">Albañil</option>
+  </select>
+</div>
+
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Comunas en las que atiende</label>
+  </div>
+  <select class="custom-select" id="inputGroupSelect01">
+    <option selected>Santiago</option>
+    <option value="1">Providencia</option>
+    <option value="2">Maipu</option>
+    <option value="3">Valparaiso</option>
+  </select>
+</div>
+
+
+
+
+
+
         </div>
         <div className="col-4 mt-5">
           <button className="btn btn-danger float-right">Registrarse</button>
