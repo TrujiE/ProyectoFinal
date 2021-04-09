@@ -1,10 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
-	</footer>
-);
+
+const Components = () =>{
+	return (
+	<div className="contenido-footer bg-success">		
+  		<span className="navbar-text" >
+  			<Link className="justify-content-left" name="nosotros" style={{color:"white"}}>Nosotros</Link>
+
+  			<Link className="justify-content-right" name="contactanos" style={{color:"white"}}>Contactanos</Link>
+  		</span>
+  	</div>
+	)
+}
+
+export default Components;
