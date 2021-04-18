@@ -45,10 +45,13 @@ const Home = () => {
         <div className="col-9 d-flex justify-content-end ">
           <h5 className=" ">
             <span>
-              <a href="">
-                {" "}
+                <Link to = "/registro_cliente">  
+                
+                
                 <u>Registrarse </u>{" "}
-              </a>
+                
+                  </Link>
+            
             </span>
           </h5>
         </div>

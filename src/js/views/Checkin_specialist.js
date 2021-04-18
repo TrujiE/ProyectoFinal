@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Checkin_specialist = () => {
   return (
@@ -9,7 +10,7 @@ const Checkin_specialist = () => {
         <div className="col-8">
           <ul className="nav nav-pills nav-fill mb-5">
             <li className="nav-item ">
-              <button className="btn  text-success">Cliente</button>
+              <Link to= "/registro_cliente"  className="btn  text-success">Cliente</Link>
               {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
             </li>
             <li className="nav-item">

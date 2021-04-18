@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Checkin_client = () => {
   return (
@@ -13,9 +14,9 @@ const Checkin_client = () => {
               {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
             </li>
             <li className="nav-item">
-              <a className="nav-link text-success  " href="#">
+              <Link to= "/registro_especialista" className="nav-link text-success  " >
                 Especialista
-              </a>
+              </Link>
             </li>
           </ul>
 
