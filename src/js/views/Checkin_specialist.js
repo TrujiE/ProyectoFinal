@@ -10,7 +10,9 @@ const Checkin_specialist = () => {
         <div className="col-8">
           <ul className="nav nav-pills nav-fill mb-5">
             <li className="nav-item ">
-              <Link to= "/registro_cliente"  className="btn  text-success">Cliente</Link>
+              <Link to="/registro_cliente" className="btn  text-success">
+                Cliente
+              </Link>
               {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
             </li>
             <li className="nav-item">
@@ -250,7 +252,11 @@ const Checkin_specialist = () => {
           </div>
         </div>
         <div className="col-4 mt-5">
-          <button className="btn btn-danger float-right">Registrarse</button>
+          <button className="btn btn-danger float-right">
+            <Link to="/especialista" className="text-white">
+              Registrarse
+            </Link>
+          </button>
           <div className="card mt-5">
             <img
               src="https://picsum.photos/id/237/50/50"

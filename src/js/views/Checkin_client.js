@@ -14,7 +14,10 @@ const Checkin_client = () => {
               {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
             </li>
             <li className="nav-item">
-              <Link to= "/registro_especialista" className="nav-link text-success  " >
+              <Link
+                to="/registro_especialista"
+                className="nav-link text-success  "
+              >
                 Especialista
               </Link>
             </li>
@@ -203,7 +206,11 @@ const Checkin_client = () => {
           </div>
         </div>
         <div className="col-4 mt-5">
-          <button className="btn btn-danger float-right">Registrarse</button>
+          <button className="btn btn-danger float-right">
+            <Link to="/cliente" className="text-white">
+              Registrarse
+            </Link>
+          </button>
           <div className="card mt-5">
             <img
               src="https://picsum.photos/id/1074/50/50"
