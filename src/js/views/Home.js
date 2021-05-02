@@ -35,7 +35,9 @@ const Home = () => {
             />
 
             <button type="submit" className="btn btn-success mb-2">
-              Entrar
+               <Link to="/cliente" className="text-white">
+                 Entrar
+               </Link>
             </button>
           </form>
         </div>
