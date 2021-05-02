@@ -1,11 +1,12 @@
 import React from 'react';
+import Components from "../components/Components";
 
 const Client = () => {
     return ( 
         <div className="container">
-
+        	<h6 style={{textAlign:"right"}}><button type="button" className="btn btn-success" >Cerrar sesion</button></h6>
         	<div className="d-flex">
-            	<h2 style={{textAlign:"left"}}>te ayudo?&nbsp; Hola Cliente1232 en qué te ayudamos?</h2> &nbsp; <h6 style={{textAlign:"right"}}><button style={{textAlign:"right"}} type="button" className="btn btn-success" >Cerrar sesion</button></h6>
+            	<h3 style={{textAlign:"left"}}>Hola Cliente1232 en qué te ayudamos?</h3> &nbsp; 
             </div>
 
             <br/>
@@ -66,9 +67,10 @@ const Client = () => {
 					
 
 
-			
+			<Components/>
 
         </div>
+    
      );
 }
  

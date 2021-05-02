@@ -16,9 +16,9 @@ const Requests_client = () => {
                                 </div>
                             </div>
                         </a>
-                        <a className="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Editar Cuenta</a>
-                        <a className="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Historial de Solicitudes</a>
-                        <a className="nav-link" id="v-pills-create-tab" data-toggle="pill" href="#v-pills-create" role="tab" aria-controls="v-pills-create" aria-selected="false">Crear Solicitud</a>
+                        <a className="nav-link btn btn-success" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Editar Cuenta</a>
+                        <a className="nav-link active btn btn-success" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Historial de Solicitudes</a>
+                        <a className="nav-link btn btn-success" id="v-pills-create-tab" data-toggle="pill" href="#v-pills-create" role="tab" aria-controls="v-pills-create" aria-selected="false">Crear Solicitud</a>
                     </div>
                 </div>
 
@@ -37,10 +37,16 @@ const Requests_client = () => {
                                     <div className="col-4">
                                         <h4>Solicitudes</h4>
                                     </div>
-                                    <div className="col-4">
-                                        checkbox
+                                    <div className="d-flex col-8">
+                                         <div className="form-check">
+                                             <input className="form-check-input" type="checkbox" id="defaultCheck1"></input>
+                                             <label className="form-check-label" for="defaultCheck1">
+                                                Mostrar todo
+                                             </label>
+                                         </div>
                                     </div>
-                                    </div>
+                                        
+                                </div>
                                 </div>
                                 <ul className="list-group">
                                     <li href="#" className="list-group-item list-group-item-action">Solicitud 1</li>
