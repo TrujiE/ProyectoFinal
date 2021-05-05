@@ -37,9 +37,15 @@ const Home = () => {
             />
 
             <button type="submit" className="btn btn-success mb-2">
+<<<<<<< HEAD
               <Link to="/seleccion_usuario" className="text-white">
                 Entrar
               </Link>
+=======
+               <Link to="/cliente" className="text-white">
+                 Entrar
+               </Link>
+>>>>>>> e4998f81638f2baa00eb68888234a8823716076d
             </button>
           </form>
         </div>
