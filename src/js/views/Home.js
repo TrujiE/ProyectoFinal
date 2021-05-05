@@ -17,10 +17,11 @@ const Home = () => {
                 <div className="input-group-text">@</div>
               </div>
               <input
-                type="text"
+                type="mail"
                 className="form-control"
                 id="inlineFormInputGroupUsername2"
-                placeholder="Usuario"
+                placeholder="Mail"
+                //onChange={handleInputChange}
               />
             </div>
 
@@ -32,10 +33,13 @@ const Home = () => {
               className="form-control mb-2 mr-sm-2"
               id="inlineFormInputName2"
               placeholder="Contraseña"
+              //onChange={handleInputChange}
             />
 
             <button type="submit" className="btn btn-success mb-2">
-              Entrar
+              <Link to="/seleccion_usuario" className="text-white">
+                Entrar
+              </Link>
             </button>
           </form>
         </div>
