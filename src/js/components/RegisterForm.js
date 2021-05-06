@@ -47,7 +47,9 @@ else if(!regexEmail.test(form.email.trim())){
     errors.email= "ha ingresado un formato de email no valido"
 }
 
-
+if(!form.lastName.trim())
+{errors.lastName = "el apellido  es requerido"
+}
 
 return errors
 };
@@ -167,7 +169,7 @@ const RegisterForm = () => {
           className="form-control mb-3"
           type="text"
           name="secretAnswer"
-          placeholder="escribe tu respuesta secreta"
+          placeholder="escribe tu respuesta"
           onChange={handleChange}
           value={form.secretAnswer}
           onBlur={handleBlur}
