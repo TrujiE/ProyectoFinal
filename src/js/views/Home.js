@@ -5,7 +5,8 @@ import * as EmailValidator from "email-validator";
 import * as Yup from "yup";
 
 const Home = () => {
-    <Formik
+    return (
+    <Formik 
         initialValues={{ email: "", password: "" }}   // Valores Iniciales
         onSubmit={(values, { setSubmitting }) => {     // setSubmitting permitira habilitar o deshabilitar el boton Entrar
             setTimeout(() => {
@@ -98,9 +99,9 @@ const Home = () => {
                     </div>
                 </div>
             );   //Finaliza el Return
-        }}
+        }} 
     </Formik>
-
+    )
 };
 
 export default Home;
