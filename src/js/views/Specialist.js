@@ -10,21 +10,26 @@ const Specialist = () => {
                         <button type="button" className="btn btn-link">Cerrar sesión</button>
                     </div>
                 </div>
+                <br />
+                <br />
                 <div className="row">
                     <div className="col-sm-3">
                         <div className="card" style={{ height: "8rem" }}>
                             <img className="card-img-top" src="..." alt="Card image cap" />
                         </div>
+                        <br />
                         <p>Especialista</p>
-                        <button type="button" className="btn btn-secondary" style={{ width: "12rem" }}>Editar cuenta</button>
-                        <button type="button" className="btn btn-secondary" style={{ width: "12rem" }}>Historial de solicitudes</button>
-                        <button type="button" className="btn btn-secondary" style={{ width: "12rem" }}>Calendario disponible</button>
+                        <hr />
+                        <button type="button" className="btn btn-success" style={{ width: "12rem" }}>Editar cuenta</button>
+                        <button type="button" className="btn btn-success" style={{ width: "12rem" }}>Historial de solicitudes</button>
+                        <button type="button" className="btn btn-success" style={{ width: "12rem" }}>Calendario disponible</button>
                     </div>
                     <div className="col-sm-6 px-md-4">
                         <div className="btn-group d-flex flex-row-reverse col-sm-6" role="group" aria-label="Basic example">
-                            <button type="button" className="btn btn-secondary">Disponibilidad</button>
-                            <button type="button" className="btn btn-primary">Solicitudes</button>
+                            <button type="button" className="btn btn-success">Disponibilidad</button>
+                            <button type="button" className="btn btn-secondary">Solicitudes</button>
                         </div>
+                        <br />
                         <div className="form-group">
                             <div className="row px-md-4">
                                 <p>Hola Especialista, estas son tus solicitudes:   </p>
