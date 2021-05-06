@@ -6,6 +6,9 @@ import Checkin_specialist from './js/views/Checkin_specialist';
 import Client from './js/views/Client';
 import Specialist from './js/views/Specialist';
 import Requests_client from './js/views/Requests_client';
+import Select_user from './js/views/Select_user';
+import injectContext from "./js/store/app_Context";
+
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
 						<Route exact path="/cliente" component={Client} />
 						<Route exact path="/especialista" component={Specialist} />
 						<Route exact path="/solicitudes" component={Requests_client} />
+                        <Route exact path="/seleccion_usuario" component={Select_user} />
 						<Route render={() => <h1 className="notfound">Not found!</h1>} />
 					</Switch>
 				</div>
@@ -27,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default injectContext(App);
