@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useFormik } from "formik";
+import * as EmailValidator from "email-validator";
+import * as Yup from "yup";
 
 const Home = () => {
-    const { register, errors, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    
 
   return (
     <div className="container mt-5">
@@ -12,7 +13,7 @@ const Home = () => {
       <hr />
       <div className="row">
         <div className="col-12">
-          <form className="form-inline d-flex justify-content-end" onSubmit={handleSubmit(onSubmit)}>
+          <form className="form-inline d-flex justify-content-end">
             <label className="sr-only" for="inlineFormInputGroupUsername2">
               Usuario
             </label>
@@ -26,18 +27,10 @@ const Home = () => {
                 id="inlineFormInputGroupUsername2"
                 placeholder="Mail"
                 name="mail"
-                ref={
-                    register({
-                        required: {value: true, message: "Ingrese mail de registro"}
-                    }
-
-                    )
-                }
+                
                 //onChange={handleInputChange}
               />
-              <span className="text-danger text-small d-block mb-2">
-                {errors?.mail?.message}
-            </span>
+             
             </div>
 
             <label className="sr-only" for="inlineFormInputName2">
@@ -49,18 +42,10 @@ const Home = () => {
               id="inlineFormInputName2"
               placeholder="Contraseña"
               name="password"
-              ref={
-                    register({
-                        required: {value: true, message: "Ingrese password"}
-                    }
-
-                    )
-                }
+              
               //onChange={handleInputChange}
             />
-            <span className="text-danger text-small d-block mb-2">
-                {errors?.password?.message}
-            </span>
+            
             <button type="submit" className="btn btn-success mb-2" >
               <Link to="/seleccion_usuario" className="text-white">
                 Entrar
