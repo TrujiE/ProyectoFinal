@@ -1,10 +1,11 @@
 import React from 'react';
 import Components from "../components/Components";
+import Log_out from "../components/Log_out";
 
 const Client = () => {
     return ( 
         <div className="container">
-        	<h6 style={{textAlign:"right"}}><button type="button" className="btn btn-success" >Cerrar sesion</button></h6>
+			<Log_out/>        	
         	<div className="d-flex">
             	<h3 style={{textAlign:"left"}}>Hola Cliente1232 en qué te ayudamos?</h3> &nbsp; 
             </div>
@@ -12,33 +13,41 @@ const Client = () => {
             <br/>
             <br/>
 
-			<div className="d-flex col-4">
-			  <button className="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    Especialidad
-			  </button>			  
-			  <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-			    <button className="dropdown-item" type="button">Action</button>
-			    <button className="dropdown-item" type="button">Another action</button>
-			    <button className="dropdown-item" type="button">Something else here</button>
+			<div className="d-flex col-8">
+			<div className="input-group mb-3">
+			  	<div className="input-group-prepend">
+              		<label className="input-group-text bg-success text-white" for="inputGroupSelect01">
+		                Especialidad
+        	      	</label>
+				  	<select className="custom-select btn-success" id="inputGroupSelect01">
+    	          		<option selected>Carpintero</option>
+        	      		<option value="1">Electricista</option>
+            	  		<option value="2">Gasfiter</option>
+              			<option value="3">Albañil</option>
+            		</select>
+			  	</div>			 
 			  </div>
-
 			  &nbsp;
-
-			  <button className="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    Comuna
-			  </button>
-			  <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-			    <button className="dropdown-item" type="button">Action</button>
-			    <button className="dropdown-item" type="button">Another action</button>
-			    <button className="dropdown-item" type="button">Something else here</button>
-			  </div>			 
-
+			  <div className="input-group mb-3">
+			  	<div className="input-group-prepend">
+              		<label className="input-group-text bg-success text-white" for="inputGroupSelect01">
+		                Comuna
+        	      	</label>
+				  	<select className="custom-select btn-success" id="inputGroupSelect01">
+    	          		<option selected>Santiago</option>
+        	      		<option value="1">Providencia</option>
+            	  		<option value="2">Maipu</option>
+              			<option value="3">La Florida</option>
+            		</select>
+			  	</div>			 
+			  </div>
 			  &nbsp;
-
 			  <input className="form-control" type="date" value="2011-08-19" id="example-date-input" />
 			  &nbsp;
 			  &nbsp;
-			  <button type="button" className="btn btn-success" >Buscar</button>			  
+			  <div>			
+			  	<button type="button" className="btn btn-success" >Buscar</button>			  
+			  </div>		  
 			</div>
 
 			
@@ -62,13 +71,10 @@ const Client = () => {
 			    </textarea>
 			    <br />
 			    <button style={{textAlign:"right"}} type="button" className="btn btn-success" >Solicitar</button>
-			</div>	
-
-					
-
-
+			</div>
+			<br />
+			<br />
 			<Components/>
-
         </div>
     
      );
