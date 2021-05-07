@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import RegisterForm from "../components/RegisterForm";
-
+import { useFormik } from "formik";
+import ClientForm from "../components/ClientForm";
 const Checkin_client = () => {
   return (
     <div className="container mt-5">
@@ -23,16 +23,12 @@ const Checkin_client = () => {
               </Link>
             </li>
           </ul>
-          <RegisterForm/>
-          
+
+          <ClientForm />
         </div>
-        <div className="col-4 mt-5">
-          <button className="btn btn-danger float-right">
-            <Link to="/cliente" className="text-white">
-              Registrarse
-            </Link>
-          </button>
-          <div className="card mt-5">
+        <div className="col-4 mt-5 pt-5">
+          <button className="btn btn-dark  btn-block text-white">Avatar</button>
+          <div className="card mt-3">
             <img
               src="https://picsum.photos/id/1074/50/50"
               className="card-img-top"
