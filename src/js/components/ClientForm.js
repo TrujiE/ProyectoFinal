@@ -1,6 +1,13 @@
 import React from "react";
-import { useFormik, } from "formik";
+import { useFormik, Form } from "formik";
 import * as Yup from "yup";
+
+const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
+
+const lowercaseRegex = /(?=.*[a-z])/;
+const uppercaseRegex = /(?=.*[A-Z])/;
+const numericRegex = /(?=.*[0-9])/;
+const rutRegex= ("^([0-9]+-[0-9Kk])$");
 
 const ClientForm = () => {
   const formik = useFormik({
@@ -17,25 +24,54 @@ const ClientForm = () => {
       secretAswer: "",
     },
 
-    validationSchema: Yup.object({
-      firstName: Yup.string().required("se requiere el nombre"),
-      lastName: Yup.string().required("se requiere el apellido"),
-      rut: Yup.string().required("se requiere el rut"),
+    validationSchema: Yup.object().shape({
+      firstName: Yup.string()
+        .required("se requiere el nombre")
+        .min(2, "nombre debe ser mayor aun caracter")
+        .max(18, "nombre muy largo debe ser 15 caracteres maximo"),
+
+      lastName: Yup.string()
+        .required("se requiere el apellido")
+        .min(2, "apellido debe ser mayor aun caracter")
+        .max(18, "apellido muy largo debe ser 15 caracteres maximo"),
+
+      rut: Yup.string().required("se requiere el rut")
+      .matches(rutRegex, "rut invalido"),
+
 
       email: Yup.string()
+        .lowercase()
+        .notOneOf(emailadresses, "ese correo ya esxiste")
         .email("correo invalido")
+        .max(30, "correo  debe ser 30 caracteres maximo")
         .required("se requiere el correo"),
 
-      adress: Yup.string().required("se requiere la direccion"),
+      adress: Yup.string()
+        .required("se requiere la direccion")
+        .min(5, " direccion debe ser mayor 5 caracteres")
+        .max(30, "direccion  debe ser 30 caracteres maximo"),
+
       comuna: Yup.string().required("se requiere la comuna"),
-      password: Yup.string().required("se requiere la contraseña"),
-      confirmPassword: Yup.string().required(
-        "se requiere confirmar contraseña"
-      ),
-      secretQuestion: Yup.string().required(
-        "se requiere el la pregunta secreta"
-      ),
-      secretAswer: Yup.string().required("se requiere la respuesta secreta"),
+
+      password: Yup.string()
+        .required("se requiere la contraseña")
+        .matches(lowercaseRegex, "se requiere almenos una minuscula")
+        .matches(uppercaseRegex, "se requiere almenos una mayuscula")
+        .matches(numericRegex, "se requiere almenos un numero")
+        .min(4, "contraseña muy corta , minimo 4 caracteres")
+        .max(10, "la contraseña  debe ser 30 caracteres maximo"),
+
+      confirmPassword: Yup.string()
+
+        .oneOf([Yup.ref("password")], "la contraseã debe coincidir")
+        .required("se requiere confirmar contraseña"),
+
+      secretQuestion: Yup.string()
+        .required("se requiere el la pregunta secreta")
+        .max(60, "pregunta  debe ser 60 caracteres maximo"),
+      secretAswer: Yup.string()
+        .required("se requiere la respuesta secreta")
+        .max(30, "respuesta  debe ser 30 caracteres maximo"),
     }),
 
     onSubmit: (values) => {
@@ -76,11 +112,11 @@ const ClientForm = () => {
           value={formik.values.lastName}
         />
 
-        {formik.touched.lastName && formik.errors.lastName? (
+        {formik.touched.lastName && formik.errors.lastName ? (
           <div className="text-danger">{formik.errors.lastName}</div>
         ) : null}
 
-        <label htmlFor="rut">Rut</label>
+        <label htmlFor="rut">Rut <span class="text-muted"> formato 1111111-1</span></label>
         <input
           className="form-control mb-3"
           id="rut"
@@ -152,7 +188,7 @@ const ClientForm = () => {
           className="form-control mb-3"
           id="password"
           name="password"
-          type="text"
+          type="password"
           placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -168,8 +204,8 @@ const ClientForm = () => {
           className="form-control mb-3"
           id="confirmPassword"
           name="confirmPassword"
-          type="text"
-          placeholder="*********"
+          type="password"
+          placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.confirmPassword}
