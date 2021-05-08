@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormik, Form } from "formik";
+import { useFormik,  } from "formik";
 import * as Yup from "yup";
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
@@ -28,12 +28,12 @@ const ClientForm = () => {
       firstName: Yup.string()
         .required("se requiere el nombre")
         .min(2, "nombre debe ser mayor aun caracter")
-        .max(18, "nombre muy largo debe ser 15 caracteres maximo"),
+        .max(15, "nombre muy largo debe ser 15 caracteres maximo"),
 
       lastName: Yup.string()
         .required("se requiere el apellido")
         .min(2, "apellido debe ser mayor aun caracter")
-        .max(18, "apellido muy largo debe ser 15 caracteres maximo"),
+        .max(15, "apellido muy largo debe ser 15 caracteres maximo"),
 
       rut: Yup.string().required("se requiere el rut")
       .matches(rutRegex, "rut invalido"),
