@@ -1,39 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Formik } from "formik";
-import * as EmailValidator from "email-validator";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const Home = () => {
-    return (
-        <Formik
-            initialValues={{ email: "", password: "" }}   // Valores Iniciales
-            validationSchema={Yup.object().shape({        // Validaciones Email y Password
+const Home = () => { 
+        const formik = useFormik({
+            initialValues: {
+               email: "" , 
+               password: "",       // Valores Iniciales
+             },
+            validationSchema: Yup.object({        // Validaciones Email y Password
                 email: Yup.string()
                     .email("Ingrese un email")
                     .required("Requerido"),
                 password: Yup.string()
                     .required("No se ingreso contraseña")
                     .min(6, "La contraseña es demasiado corta; debe tener un mínimo de 6 caracteres")
-            })}
-            onSubmit={(values, { setSubmitting }) => {     // setSubmitting permitira habilitar o deshabilitar el boton Entrar
-                setTimeout(() => {
-                    console.log("Logging in", values);
-                    setSubmitting(false);
-                }, 500);
-            }}
-        >
-            {props => {
-                const {
-                    values,
-                    touched,
-                    errors,
-                    isSubmitting,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit
-                } = props;
+            }),
 
+             onSubmit: (values) => {
+                alert(JSON.stringify(values, null, 2));
+             },
+        });
+        
                 return (
                     <div className="container mt-5">
                         <h1 className="text-center">TeAYUDO?</h1>
@@ -42,54 +31,49 @@ const Home = () => {
                             <div className="col-12">
                                 <form
                                     className="form-inline d-flex justify-content-end"
-                                    onSubmit={handleSubmit}
+                                    onSubmit={formik.handleSubmit}
                                 >
-                                    <label className="sr-only" for="email">
-                                        Usuario
-                                </label>
-                                    <div className="input-group mb-2 mr-sm-2">
+                                    <label className="sr-only" htmlFor="email">
+                                    </label>
+                                     <div className="input-group mb-2 mr-sm-2">
                                         <div className="input-group-prepend">
-                                            <div className="input-group-text">@</div>
+                                            <div className="input-group-text">Email</div>
                                         </div>
+                                        
                                         <input
                                             type="text"
                                             className="form-control"
                                             id="email"
                                             placeholder="Ingrese su email"
                                             name="email"
-                                            value={values.email}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            className={errors.email && touched.email && "error"}
+                                            value={formik.values.email}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
                                         />
-                                        {errors.email && touched.email && (
-                                            <div className="input-feedback">{errors.email}</div>
-                                        )}
-
+                                          {formik.touched.email && formik.errors.email && (
+                                              <div className="text-danger">{formik.errors.email}</div>
+                                           )}
                                     </div>
 
-                                    <label className="sr-only" for="password">
-                                        Name
-                                    </label>
+                                    <label className="sr-only" htmlFor="password">
+                                    Contraseña</label>
                                     <input
                                         type="password"
                                         className="form-control mb-2 mr-sm-2"
                                         id="password"
                                         placeholder="Ingrese su contraseña"
                                         name="password"
-                                        value={values.password}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={errors.password && touched.password && "error"}
+                                        value={formik.values.password}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        
                                     />
-                                    {errors.password && touched.password && (
-                                        <div className="input-feedback">{errors.password}</div>
-                                    )}
+                                       {formik.touched.password && formik.errors.password ? (
+                                           <div className="text-danger">{formik.errors.password}</div>
+                                         ) : null}
 
-                                    <button type="submit" disabled={isSubmitting} className="btn btn-success mb-2" >
-                                        <Link to="/seleccion_usuario" className="text-white">
-                                            Entrar
-                                        </Link>
+                                    <button type="submit" className="btn btn-success mb-2 text-white" >
+                                        Entrar
                                     </button>
                                 </form>
                             </div>
@@ -118,10 +102,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                );   //Finaliza el segundo return
-            }}
-        </Formik>
-    )   //Finaliza el primer return
+            );   //Finaliza el return    
 };
 
 export default Home;
