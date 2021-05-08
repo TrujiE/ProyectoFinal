@@ -1,14 +1,14 @@
 import React from 'react';
+import Components from "../components/Components";
+import Log_out from "../components/Log_out";
 
 const Specialist = () => {
     return ( 
         <div>
             <div className="container">
+                <Log_out/>    
                 <div className="row">
                     <h1>Te Ayudo?...con tus solicitudes</h1>
-                    <div className="col-md-6 text-right">
-                        <button type="button" className="btn btn-link">Cerrar sesión</button>
-                    </div>
                 </div>
                 <div className="row">
                     <div className="col-sm-3">
@@ -16,14 +16,14 @@ const Specialist = () => {
                             <img className="card-img-top" src="..." alt="Card image cap" />
                         </div>
                         <p>Especialista</p>
-                        <button type="button" className="btn btn-secondary" style={{ width: "12rem" }}>Editar cuenta</button>
-                        <button type="button" className="btn btn-secondary" style={{ width: "12rem" }}>Historial de solicitudes</button>
-                        <button type="button" className="btn btn-secondary" style={{ width: "12rem" }}>Calendario disponible</button>
+                        <button type="button" className="btn btn-outline-success" style={{ width: "12rem" }}>Editar cuenta</button>
+                        <button type="button" className="btn btn-outline-success" style={{ width: "12rem" }}>Historial de solicitudes</button>
+                        <button type="button" className="btn btn-outline-success" style={{ width: "12rem" }}>Calendario disponible</button>
                     </div>
                     <div className="col-sm-6 px-md-4">
                         <div className="btn-group d-flex flex-row-reverse col-sm-6" role="group" aria-label="Basic example">
-                            <button type="button" className="btn btn-secondary">Disponibilidad</button>
-                            <button type="button" className="btn btn-primary">Solicitudes</button>
+                            <button type="button" className="btn btn-outline-success">Disponibilidad</button>
+                            <button type="button" className="btn btn-outline-success">Solicitudes</button>
                         </div>
                         <div className="form-group">
                             <div className="row px-md-4">
@@ -44,8 +44,10 @@ const Specialist = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-
+                <br />
+			    <br />
+			    <Components/>                
+            </div>            
         </div>
      );
 }
