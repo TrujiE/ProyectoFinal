@@ -3,93 +3,70 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
 
-const comunasList = 
-  [ 
-
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerro Navia", label: "Cerro Navia" },
-    { value: "El Bosque", label: "El Bosque" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    { value: "Cerrillos", label: "Cerrillos" },
-    "Cerrillos",
-    "Cerro Navia",
-    "Conchalí",
-    "El Bosque",
-    "Estación Central",
-    "Huechuraba",
-    "Independencia",
-    "La Cisterna",
-    "La Florida",
-    "La Granja",
-    "La Pintana",
-    "La Reina",
-    "Las Condes",
-    "Lo Barnechea",
-    "Lo Espejo",
-    "Lo Prado",
-    "Macul",
-    "Maipú",
-    "Ñuñoa",
-    "Pedro Aguirre Cerda",
-    "Peñalolén",
-    "Providencia",
-    "Pudahuel",
-    "Quilicura",
-    "Quinta Normal",
-    "Recoleta",
-    "Renca",
-    "Santiago",
-    "San Joaquín",
-    "San Miguel",
-    "San Ramón",
-    "Vitacura",
-    "Puente Alto",
-    "Pirque",
-    "San José de Maipo",
-    "Colina",
-    "Lampa",
-    "Tiltil",
-    "San Bernardo",
-    "Buin",
-    "Calera de Tango",
-    "Paine",
-    "Melipilla",
-    "Alhué",
-    "Curacaví",
-    "María Pinto",
-    "San Pedro",
-    "Talagante",
-    "El Monte",
-    "Isla de Maipo",
-    "Padre Hurtado",
-    "Peñaflor",
-  ];
 
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
+
+
+const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
+
+const lowercaseRegex = /(?=.*[a-z])/;
+const uppercaseRegex = /(?=.*[A-Z])/;
+const numericRegex = /(?=.*[0-9])/;
+const rutRegex= ("^([0-9]+-[0-9Kk])$");
+
+const comunasList = [
+  { value: "Alhué", label: "Alhué" },
+  { value: "Buin", label: "Buin" },
+  { value: "Calera de Tango", label: "Calera de Tango" },
+  { value: "Cerrillos", label: "Cerrillos" },
+  { value: "Cerro Navia", label: "Cerro Navia" },
+  { value: "Colina", label: "Colina" },
+  { value: "Conchalí", label: "Conchalí" },
+  { value: "Curacaví", label: "Curacaví" },
+  { value: "El Bosque", label: "El Bosque" },
+  { value: "El Monte", label: "El Monte" },
+  { value: "Estación Central", label: "Estación Central" },
+  { value: "Huechuraba", label: "Huechuraba" },
+  { value: "Independencia", label: "Independencia" },
+  { value: "Isla de Maipo", label: "Isla de Maipo" },
+  { value: "La Cisterna", label: "La Cisterna" },
+  { value: "La Florida", label: "La Florida" },
+  { value: "La Granja", label: "La Granja" },
+  { value: "La Pintana", label: "La Pintana" },
+  { value: "La Reina", label: "La Reina" },
+  { value: "Lampa", label: "Lampa" },
+  { value: "Las Condes", label: "Las Condes" },
+  { value: "Lo Barnechea", label: "Lo Barnechea" },
+  { value: "Lo Espejo", label: "Lo Espejo" },
+  { value: "Lo Prado", label: "Lo Prado" },
+  { value: "Macul", label: "Macul" },
+  { value: "Maipú", label: "Maipú" },
+  { value: "María Pinto", label: "María Pinto" },
+  { value: "Melipilla", label: "Melipilla" },
+  { value: "Ñuñoa", label: "Ñuñoa" },
+  { value: "Padre Hurtado", label: "Padre Hurtado" },
+  { value: "Paine", label: "Paine" },
+  { value: "Pedro Aguirre Cerda", label: "Pedro Aguirre Cerda" },
+  { value: "Peñaflor", label: "Peñaflor" },
+  { value: "Peñalolén", label: "Peñalolén" },
+  { value: "Pirque", label: "Pirque" },
+  { value: "Providencia", label: "Providencia" },
+  { value: "Pudahuel", label: "Pudahuel" },
+  { value: "Puente Alto", label: "Puente Alto" },
+  { value: "Quilicura", label: "Quilicura" },
+  { value: "Quinta Normal", label: "Quinta Normal" },
+  { value: "Recoleta", label: "Recoleta" },
+  { value: "Renca", label: "Renca" },
+  { value: "San Bernardo", label: "San Bernardo" },
+  { value: "San Joaquín", label: "San Joaquín" },
+  { value: "San José de Maipo", label: "San José de Maipo" },
+  { value: "San Miguel", label: "San Miguel" },
+  { value: "San Pedro", label: "San Pedro" },
+  { value: "San Ramón", label: "San Ramón" },
+  { value: "Santiago", label: "Santiago" },
+  { value: "Talagante", label: "Talagante" },
+  { value: "Tiltil", label: "Tiltil" },
+  { value: "Vitacura", label: "Vitacura" },
 ];
 
 const SpecialistForm = () => {
@@ -110,30 +87,66 @@ const SpecialistForm = () => {
       skills: "",
     },
 
-    validationSchema: Yup.object({
-      firstName: Yup.string().required("se requiere el nombre"),
-      lastName: Yup.string().required("se requiere el apellido"),
-      rut: Yup.string().required("se requiere el rut"),
+    validationSchema: Yup.object().shape({
+      firstName: Yup.string()
+        .required("se requiere el nombre")
+        .min(2, "nombre debe ser mayor aun caracter")
+        .max(15, "nombre muy largo debe ser 15 caracteres maximo"),
+
+      lastName: Yup.string()
+        .required("se requiere el apellido")
+        .min(2, "apellido debe ser mayor aun caracter")
+        .max(15, "apellido muy largo debe ser 15 caracteres maximo"),
+
+      rut: Yup.string().required("se requiere el rut")
+      .matches(rutRegex, "rut invalido"),
+
 
       email: Yup.string()
+        .lowercase()
+        .notOneOf(emailadresses, "ese correo ya esxiste")
         .email("correo invalido")
+        .max(30, "correo  debe ser 30 caracteres maximo")
         .required("se requiere el correo"),
 
-      adress: Yup.string().required("se requiere la direccion"),
+      adress: Yup.string()
+        .required("se requiere la direccion")
+        .min(5, " direccion debe ser mayor 5 caracteres")
+        .max(30, "direccion  debe ser 30 caracteres maximo"),
+
       comuna: Yup.string().required("se requiere la comuna"),
-      password: Yup.string().required("se requiere la contraseña"),
-      confirmPassword: Yup.string().required(
-        "se requiere confirmar contraseña"
-      ),
-      secretQuestion: Yup.string().required(
-        "se requiere el la pregunta secreta"
-      ),
-      secretAswer: Yup.string().required("se requiere la respuesta secreta"),
-      specialty: Yup.string().required("se requiere la respuesta secreta"),
-      sattentionComunes: Yup.string().required(
-        "se requiere la respuesta secreta"
-      ),
-      skills: Yup.string().required("se requiere la respuesta secreta"),
+
+      password: Yup.string()
+        .required("se requiere la contraseña")
+        .matches(lowercaseRegex, "se requiere almenos una minuscula")
+        .matches(uppercaseRegex, "se requiere almenos una mayuscula")
+        .matches(numericRegex, "se requiere almenos un numero")
+        .min(4, "contraseña muy corta , minimo 4 caracteres")
+        .max(10, "la contraseña  debe ser 30 caracteres maximo"),
+
+      confirmPassword: Yup.string()
+
+        .oneOf([Yup.ref("password")], "la contraseã debe coincidir")
+        .required("se requiere confirmar contraseña"),
+
+      secretQuestion: Yup.string()
+        .required("se requiere el la pregunta secreta")
+        .max(60, "pregunta  debe ser 60 caracteres maximo"),
+      secretAswer: Yup.string()
+        .required("se requiere la respuesta secreta")
+        .max(30, "respuesta  debe ser 30 caracteres maximo"),
+
+        specialty: Yup.string("se requiere la especialidad")
+        .required(),
+
+        attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
+        .required(),
+
+        skills: Yup.string("se requiere el la pregunta secreta")
+        .required(),
+
+
+
     }),
 
     onSubmit: (values) => {
@@ -328,32 +341,20 @@ const SpecialistForm = () => {
         ) : null}
 
         <label htmlFor="attentionComune">Comunas que atiende</label>
-        <select
-          className="form-control mb-3"
-          id="attentionComune"
-          name="attentionComune"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.attentionComune}
-        >
-          <option selected>Santiago</option>
-          <option value="1">Providencia</option>
-          <option value="2">Maipu</option>
-          <option value="3">Valparaiso</option>
-        </select>
+
+        <Select
+          isMulti
+          options={comunasList}
+          className="basic-multi-select mb-3"
+          classNamePrefix="select"
+          name="attentionComune" 
+                
+
+        />
 
         {formik.touched.attentionComune && formik.errors.sattentionComune ? (
           <div className="text-danger"> {formik.errors.attentionComune}</div>
         ) : null}
-
-        <div className="mb-5">
-          <Select
-            isMulti
-            options={comunasList}
-            className="basic-multi-select"
-            classNamePrefix="select"
-          />
-        </div>
 
         <label htmlFor="skills">Experiencia</label>
         <textarea
