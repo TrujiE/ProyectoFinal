@@ -19,6 +19,18 @@ const Home = () => {
             }),
 
              onSubmit: (values) => {
+                const config = {
+                    headers: {'Content-Type' :'Application/json'},	
+                    body: JSON.stringify({
+                    "email": "prueba@gmail.com",
+                    "password" : "123456"
+                    }),
+                    method: "POST"
+                    }                
+                fetch("http://127.0.0.1:5000/user/login", config)
+                .then(respuesta => respuesta.json())
+                .then(data => console.log(data))	
+                .catch(error => console.error(error))        
                 alert(JSON.stringify(values, null, 2));
              },
         });

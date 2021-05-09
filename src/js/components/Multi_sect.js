@@ -11,7 +11,7 @@ const communesList = [
 
 const animatedComponents = makeAnimated();
 
- const MultiSelect = () => {
+ const Multi_sect = () => {
   return (
     <Select
       closeMenuOnSelect={false}
@@ -23,4 +23,4 @@ const animatedComponents = makeAnimated();
   );
 }
 
-export default MultiSelect;
+export default Multi_sect;
