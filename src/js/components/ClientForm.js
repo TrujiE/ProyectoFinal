@@ -130,7 +130,7 @@ const ClientForm = () => {
           type="email"
           placeholder="ejemplo@correo.com"
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={formik.handleChange-+}
           value={formik.values.email}
         />
 
