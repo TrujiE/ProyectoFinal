@@ -75,6 +75,27 @@ const ClientForm = () => {
     }),
 
     onSubmit: (values) => {
+      const profile_user = {
+        headers: {'Content-Type' :'Application/json'},	
+        body: JSON.stringify({
+          "email" : "variable_email",
+          "rut" : "variable_rut",
+          "full_name": "variable_full_name",
+          "last_name" : "variable_last_name",
+          "phone" : "variable_phone",
+          "address" : "variable_address",
+          "name_commune" : "variable_commune",
+          "password" : "variable_password",
+          "role" : "client",
+          "question": "variable_question",
+          "answer": "variable_answer"
+        }),
+        method: "POST"
+        }      
+      fetch("http://127.0.0.1:5000/user/profile", profile_user)
+        .then(respuesta => respuesta.json())
+        .then(data => console.log(data))	
+        .catch(error => console.error(error))      
       alert(JSON.stringify(values, null, 2));
     },
   });

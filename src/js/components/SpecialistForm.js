@@ -150,6 +150,30 @@ const SpecialistForm = () => {
     }),
 
     onSubmit: (values) => {
+      const profile_specialist = {
+        headers: {'Content-Type' :'Application/json'},	
+        body: JSON.stringify({
+          "email" : "variable_email",
+          "rut" : "variable_rut",
+          "full_name": "variable_full_name",
+          "last_name" : "variable_last_name",
+          "phone" : "variable_phone",
+          "address" : "variable_address",
+          "name_commune" : "variable_commune",
+          "password" : "variable_password",
+          "role" : "variable_specialist",
+          "question": "variable_question",
+          "answer": "variable_answer",
+          "experience": "variable_experience",
+          "communes": ["communes"]
+        }),
+        method: "POST"
+        }
+      
+      fetch("http://127.0.0.1:5000/user/profile", profile_specialist)
+      .then(respuesta => respuesta.json())
+      .then(data => console.log(data))	
+      .catch(error => console.error(error))      
       alert(JSON.stringify(values, null, 2));
     },
   });
