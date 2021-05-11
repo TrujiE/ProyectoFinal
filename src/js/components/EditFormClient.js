@@ -70,7 +70,7 @@ const EditFormClient = () => {
               "question": values.secretQuestion,
               "answer": values.secretAswer
             }),
-            method: "POST"
+            method: "PUT"
             }      
           fetch("http://127.0.0.1:5000/user/profile", profile_user)
             .then(respuesta => respuesta.json())
