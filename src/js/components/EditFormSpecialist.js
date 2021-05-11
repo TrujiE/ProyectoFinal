@@ -1,9 +1,8 @@
 import React from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Select from "react-select";
 import {useParams} from "react-router-dom"
-
-
 
 
 
@@ -14,7 +13,64 @@ const numericRegex = /(?=.*[0-9])/;
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 
-const EditFormClient = () => {
+
+const comunasList = [
+  { value: "Alhué", label: "Alhué" },
+  { value: "Buin", label: "Buin" },
+  { value: "Calera de Tango", label: "Calera de Tango" },
+  { value: "Cerrillos", label: "Cerrillos" },
+  { value: "Cerro Navia", label: "Cerro Navia" },
+  { value: "Colina", label: "Colina" },
+  { value: "Conchalí", label: "Conchalí" },
+  { value: "Curacaví", label: "Curacaví" },
+  { value: "El Bosque", label: "El Bosque" },
+  { value: "El Monte", label: "El Monte" },
+  { value: "Estación Central", label: "Estación Central" },
+  { value: "Huechuraba", label: "Huechuraba" },
+  { value: "Independencia", label: "Independencia" },
+  { value: "Isla de Maipo", label: "Isla de Maipo" },
+  { value: "La Cisterna", label: "La Cisterna" },
+  { value: "La Florida", label: "La Florida" },
+  { value: "La Granja", label: "La Granja" },
+  { value: "La Pintana", label: "La Pintana" },
+  { value: "La Reina", label: "La Reina" },
+  { value: "Lampa", label: "Lampa" },
+  { value: "Las Condes", label: "Las Condes" },
+  { value: "Lo Barnechea", label: "Lo Barnechea" },
+  { value: "Lo Espejo", label: "Lo Espejo" },
+  { value: "Lo Prado", label: "Lo Prado" },
+  { value: "Macul", label: "Macul" },
+  { value: "Maipú", label: "Maipú" },
+  { value: "María Pinto", label: "María Pinto" },
+  { value: "Melipilla", label: "Melipilla" },
+  { value: "Ñuñoa", label: "Ñuñoa" },
+  { value: "Padre Hurtado", label: "Padre Hurtado" },
+  { value: "Paine", label: "Paine" },
+  { value: "Pedro Aguirre Cerda", label: "Pedro Aguirre Cerda" },
+  { value: "Peñaflor", label: "Peñaflor" },
+  { value: "Peñalolén", label: "Peñalolén" },
+  { value: "Pirque", label: "Pirque" },
+  { value: "Providencia", label: "Providencia" },
+  { value: "Pudahuel", label: "Pudahuel" },
+  { value: "Puente Alto", label: "Puente Alto" },
+  { value: "Quilicura", label: "Quilicura" },
+  { value: "Quinta Normal", label: "Quinta Normal" },
+  { value: "Recoleta", label: "Recoleta" },
+  { value: "Renca", label: "Renca" },
+  { value: "San Bernardo", label: "San Bernardo" },
+  { value: "San Joaquín", label: "San Joaquín" },
+  { value: "San José de Maipo", label: "San José de Maipo" },
+  { value: "San Miguel", label: "San Miguel" },
+  { value: "San Pedro", label: "San Pedro" },
+  { value: "San Ramón", label: "San Ramón" },
+  { value: "Santiago", label: "Santiago" },
+  { value: "Talagante", label: "Talagante" },
+  { value: "Tiltil", label: "Tiltil" },
+  { value: "Vitacura", label: "Vitacura" },
+];
+
+
+const EditFormSpecialist = () => {
 
   const {id} = useParams();
 
@@ -28,6 +84,9 @@ const EditFormClient = () => {
           confirmPassword: "",
           secretQuestion: "",
           secretAswer: "",
+          specialty: "",
+          attentionComunes: ["santiago","providencia","quilicura"],
+          skills: "",
         },
     
         validationSchema: Yup.object().shape({
@@ -61,6 +120,16 @@ const EditFormClient = () => {
           secretAswer: Yup.string()
             .required("se requiere la respuesta secreta")
             .max(30, "respuesta  debe ser 30 caracteres maximo"),
+
+            specialty: Yup.string()
+            .required("se requiere la especialidad"),
+    
+            // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
+            // .required(),
+    
+            skills: Yup.string()
+            .required("se requiere el la pregunta secreta"),
+
         }),
     
         onSubmit: (values) => {
@@ -73,9 +142,11 @@ const EditFormClient = () => {
               "address" : values.adress,
               "name_commune" : values.comuna,
               "password" : values.password,
-              "role" : "client",
+              "role" : values.specialty,
               "question": values.secretQuestion,
-              "answer": values.secretAswer
+              "answer": values.secretAswer,
+              "experience": values.skills,
+              "communes": ["santiago","lo prado","quilicura","La reina"]
             }),
             method: "PUT"
             }      
@@ -206,6 +277,58 @@ const EditFormClient = () => {
             {formik.touched.secretAswer && formik.errors.secretAswer ? (
               <div className="text-danger"> {formik.errors.secretAswer}</div>
             ) : null}
+
+
+<label htmlFor="specialty">Especialidad</label>
+        <select
+          className="form-control mb-3"
+          id="specialty"
+          name="specialty"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.specialty}
+        >
+          <option selected>Electricista</option>
+          <option value="Plomero">Plomero</option>
+          <option value="Carpintero">Carpintero</option>
+          <option value="Albañil">Albañil</option>
+        </select>
+
+        {formik.touched.specialty && formik.errors.specialty ? (
+          <div className="text-danger"> {formik.errors.specialty}</div>
+        ) : null}
+
+        {/* <label htmlFor="attentionComune">Comunas que atiende</label>
+
+        <Select
+          isMulti
+          options={comunasList}
+          className="basic-multi-select mb-3"
+          classNamePrefix="select"
+          name="attentionComune" 
+                
+
+        />
+
+        {formik.touched.attentionComune && formik.errors.sattentionComune ? (
+          <div className="text-danger"> {formik.errors.attentionComune}</div>
+        ) : null} */}
+
+        <label htmlFor="skills">Experiencia</label>
+        <textarea
+          className="form-control mb-3"
+          id="skills"
+          name="skills"
+          aria-label="With textarea"
+          placeholder="Para agregar un resumen de experiencia del especialista."
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.skills}
+        ></textarea>
+
+        {formik.touched.skills && formik.errors.skills ? (
+          <div className="text-danger"> {formik.errors.skills}</div>
+        ) : null}
     
             <button type="submit" className="btn btn-danger    text-white">
               Editar
@@ -215,4 +338,4 @@ const EditFormClient = () => {
       );
 };
 
-export default EditFormClient
+export default EditFormSpecialist
