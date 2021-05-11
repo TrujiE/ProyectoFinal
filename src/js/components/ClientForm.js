@@ -8,6 +8,7 @@ const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 const rutRegex = "^([0-9]+-[0-9Kk])$";
+const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 const ClientForm = () => {
   const formik = useFormik({
@@ -47,7 +48,8 @@ const ClientForm = () => {
         .max(30, "correo  debe ser 30 caracteres maximo")
         .required("se requiere el correo"),
 
-      phoneNumber: Yup.string().required("se requiere el telefono"),
+      phoneNumber: Yup.string().required("se requiere el telefono")
+      .matches(phonereg,"ingrese un formato de numero valido"),
 
       adress: Yup.string()
         .required("se requiere la direccion")
@@ -121,7 +123,7 @@ const ClientForm = () => {
         />
 
         {formik.touched.firstName && formik.errors.firstName ? (
-          <div className="text-danger">{formik.errors.firstName}</div>
+          <div className="alert alert-danger " role>{formik.errors.firstName}</div>
         ) : null}
 
         <label htmlFor="lastName">Apellido</label>

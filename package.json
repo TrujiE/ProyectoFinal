@@ -11,6 +11,7 @@
     "flux": "^4.0.1",
     "formik": "^2.2.6",
     "react": "^17.0.2",
+    "react-calendar": "^3.4.0",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.4.0",
     "react-router-dom": "^5.2.0",

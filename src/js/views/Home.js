@@ -35,11 +35,11 @@ const Home = () => {
                 method: "POST"
             }
             fetch("http://127.0.0.1:5000/user/login", config)
-                .then(respuesta => {return respuesta.json();})
+                .then(respuesta => respuesta.json())
                 .then(data => console.log(data))
-                .catch(error => console.error(error))                                               
-            //alert(JSON.stringify(values, null, 2));
-        },
+                .catch(error => console.error(error))
+            alert(JSON.stringify(values, null, 2));
+        }, 
     });
     
     return (
@@ -92,8 +92,7 @@ const Home = () => {
                         ) : null}
 
                          <button type="submit" className="btn btn-success mb-2 text-white"
-                                 //onClick={handleClick}
-                                 >
+                           >
                             Entrar
                          </button>
                     </form>
