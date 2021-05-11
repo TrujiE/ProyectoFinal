@@ -76,6 +76,7 @@ const SpecialistForm = () => {
       lastName: "",
       rut: "",
       email: "",
+      phoneNumber:"",
       adress: "",
       comuna: "",
       password: "",
@@ -83,7 +84,7 @@ const SpecialistForm = () => {
       secretQuestion: "",
       secretAswer: "",
       specialty: "",
-      attentionComunes: "",
+      attentionComunes: ["santiago","providencia","quilicura"],
       skills: "",
     },
 
@@ -108,6 +109,9 @@ const SpecialistForm = () => {
         .email("correo invalido")
         .max(30, "correo  debe ser 30 caracteres maximo")
         .required("se requiere el correo"),
+
+      phoneNumber: Yup.string()
+      .required("se requiere el telefono"),
 
       adress: Yup.string()
         .required("se requiere la direccion")
@@ -136,45 +140,47 @@ const SpecialistForm = () => {
         .required("se requiere la respuesta secreta")
         .max(30, "respuesta  debe ser 30 caracteres maximo"),
 
-        specialty: Yup.string("se requiere la especialidad")
-        .required(),
+        specialty: Yup.string()
+        .required("se requiere la especialidad"),
 
-        attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
-        .required(),
+        // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
+        // .required(),
 
-        skills: Yup.string("se requiere el la pregunta secreta")
-        .required(),
+        skills: Yup.string()
+        .required("se requiere el la pregunta secreta"),
 
 
 
     }),
 
     onSubmit: (values) => {
+      // alert(JSON.stringify(values, null, 2));
+
       const profile_specialist = {
-        headers: {'Content-Type' :'Application/json'},	
+        headers: {'Content-Type' :'Application/json'},  
         body: JSON.stringify({
-          "email" : "variable_email",
-          "rut" : "variable_rut",
-          "full_name": "variable_full_name",
-          "last_name" : "variable_last_name",
-          "phone" : "variable_phone",
-          "address" : "variable_address",
-          "name_commune" : "variable_commune",
-          "password" : "variable_password",
-          "role" : "variable_specialist",
-          "question": "variable_question",
-          "answer": "variable_answer",
-          "experience": "variable_experience",
-          "communes": ["communes"]
+          "email" : values.email,
+          "rut" : values.rut,
+          "full_name": values.firstName,
+          "last_name" : values.lastName,
+          "phone" : values.phoneNumber,
+          "address" : values.adress,
+          "name_commune" : values.comuna,
+          "password" : values.password,
+          "role" : values.specialty,
+          "question": values.secretQuestion,
+          "answer": values.secretAswer,
+          "experience": values.skills,
+          "communes": ["santiago","lo prado","quilicura","La reina"]
         }),
         method: "POST"
         }
-      
       fetch("http://127.0.0.1:5000/user/profile", profile_specialist)
       .then(respuesta => respuesta.json())
-      .then(data => console.log(data))	
+      .then(data => console.log(data))  
       .catch(error => console.error(error))      
       alert(JSON.stringify(values, null, 2));
+      
     },
   });
 
@@ -246,6 +252,24 @@ const SpecialistForm = () => {
           <div className="text-danger">{formik.errors.email}</div>
         ) : null}
 
+        <label htmlFor="phoneNumber">Telefono</label>
+        <input
+          className="form-control mb-3"
+          id="phoneNumber"
+          name="phoneNumber"
+          type="text"
+          placeholder="123456789"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.phoneNumber}
+        />
+
+
+        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+          <div className="text-danger">{formik.errors.phoneNumber}</div>
+        ) : null}
+
+
         <label htmlFor="adress">Diereccion</label>
         <input
           className="form-control mb-3"
@@ -257,6 +281,7 @@ const SpecialistForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.adress}
         />
+
 
         {formik.touched.adress && formik.errors.adress ? (
           <div className="text-danger">{formik.errors.adress}</div>
@@ -272,9 +297,9 @@ const SpecialistForm = () => {
           value={formik.values.comuna}
         >
           <option selected>Santiago</option>
-          <option value="1">Providencia</option>
-          <option value="2">Maipu</option>
-          <option value="3">Valparaiso</option>
+          <option value="Providencia">Providencia</option>
+          <option value="Maipu">Maipu</option>
+          <option value="Valparaiso">Valparaiso</option>
         </select>
 
         {formik.touched.comuna && formik.errors.comuna ? (
@@ -286,7 +311,7 @@ const SpecialistForm = () => {
           className="form-control mb-3"
           id="password"
           name="password"
-          type="text"
+          type="password"
           placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -302,7 +327,7 @@ const SpecialistForm = () => {
           className="form-control mb-3"
           id="confirmPassword"
           name="confirmPassword"
-          type="text"
+          type="password"
           placeholder="*********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -355,16 +380,16 @@ const SpecialistForm = () => {
           value={formik.values.specialty}
         >
           <option selected>Electricista</option>
-          <option value="1">Gasfiter-Plomero</option>
-          <option value="2">Carpintero</option>
-          <option value="3">Albañil</option>
+          <option value="Plomero">Plomero</option>
+          <option value="Carpintero">Carpintero</option>
+          <option value="Albañil">Albañil</option>
         </select>
 
         {formik.touched.specialty && formik.errors.specialty ? (
           <div className="text-danger"> {formik.errors.specialty}</div>
         ) : null}
 
-        <label htmlFor="attentionComune">Comunas que atiende</label>
+        {/* <label htmlFor="attentionComune">Comunas que atiende</label>
 
         <Select
           isMulti
@@ -378,7 +403,7 @@ const SpecialistForm = () => {
 
         {formik.touched.attentionComune && formik.errors.sattentionComune ? (
           <div className="text-danger"> {formik.errors.attentionComune}</div>
-        ) : null}
+        ) : null} */}
 
         <label htmlFor="skills">Experiencia</label>
         <textarea

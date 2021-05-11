@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormik,  } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
@@ -7,7 +7,7 @@ const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
-const rutRegex= ("^([0-9]+-[0-9Kk])$");
+const rutRegex = "^([0-9]+-[0-9Kk])$";
 
 const ClientForm = () => {
   const formik = useFormik({
@@ -16,6 +16,7 @@ const ClientForm = () => {
       lastName: "",
       rut: "",
       email: "",
+      phoneNumber: "",
       adress: "",
       comuna: "",
       password: "",
@@ -35,9 +36,9 @@ const ClientForm = () => {
         .min(2, "apellido debe ser mayor aun caracter")
         .max(15, "apellido muy largo debe ser 15 caracteres maximo"),
 
-      rut: Yup.string().required("se requiere el rut")
-      .matches(rutRegex, "rut invalido"),
-
+      rut: Yup.string()
+        .required("se requiere el rut")
+        .matches(rutRegex, "rut invalido"),
 
       email: Yup.string()
         .lowercase()
@@ -45,6 +46,8 @@ const ClientForm = () => {
         .email("correo invalido")
         .max(30, "correo  debe ser 30 caracteres maximo")
         .required("se requiere el correo"),
+
+      phoneNumber: Yup.string().required("se requiere el telefono"),
 
       adress: Yup.string()
         .required("se requiere la direccion")
@@ -75,28 +78,36 @@ const ClientForm = () => {
     }),
 
     onSubmit: (values) => {
+      // alert(JSON.stringify(values, null, 2));
       const profile_user = {
-        headers: {'Content-Type' :'Application/json'},	
+        headers: {'Content-Type' :'Application/json'},  
         body: JSON.stringify({
-          "email" : "variable_email",
-          "rut" : "variable_rut",
-          "full_name": "variable_full_name",
-          "last_name" : "variable_last_name",
-          "phone" : "variable_phone",
-          "address" : "variable_address",
-          "name_commune" : "variable_commune",
-          "password" : "variable_password",
+          "email" : values.email,
+          "rut" : values.rut,
+          "full_name": values.firstName,
+          "last_name" : values.lastName,
+          "phone" : values.phoneNumber,
+          "address" : values.adress,
+          "name_commune" : values.comuna,
+          "password" : values.password,
           "role" : "client",
-          "question": "variable_question",
-          "answer": "variable_answer"
+          "question": values.secretQuestion,
+          "answer": values.secretAswer
         }),
         method: "POST"
         }      
       fetch("http://127.0.0.1:5000/user/profile", profile_user)
         .then(respuesta => respuesta.json())
+<<<<<<< HEAD
         .then(data => console.log(data))	
         .catch(error => console.error(error))      
       alert(JSON.stringify(values, null, 2));
+=======
+        .then(data => console.log(data))  
+        .catch(error => console.error(error))      
+        alert(JSON.stringify(values, null, 2));
+
+>>>>>>> 1316f2aa995dcf5fc0e08236d5014e6fc8a80a92
     },
   });
 
@@ -137,7 +148,9 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.lastName}</div>
         ) : null}
 
-        <label htmlFor="rut">Rut <span class="text-muted"> formato 1111111-1</span></label>
+        <label htmlFor="rut">
+          Rut <span class="text-muted"> formato 1111111-1</span>
+        </label>
         <input
           className="form-control mb-3"
           id="rut"
@@ -169,6 +182,22 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.email}</div>
         ) : null}
 
+        <label htmlFor="phoneNumber">Telefono</label>
+        <input
+          className="form-control mb-3"
+          id="phoneNumber"
+          name="phoneNumber"
+          type="text"
+          placeholder="123456789"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.phoneNumber}
+        />
+
+        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+          <div className="text-danger">{formik.errors.phoneNumber}</div>
+        ) : null}
+
         <label htmlFor="adress">Diereccion</label>
         <input
           className="form-control mb-3"
@@ -195,9 +224,9 @@ const ClientForm = () => {
           value={formik.values.comuna}
         >
           <option selected>Santiago</option>
-          <option value="1">Providencia</option>
-          <option value="2">Maipu</option>
-          <option value="3">Valparaiso</option>
+          <option value="Providencia">Providencia</option>
+          <option value="Maipu">Maipu</option>
+          <option value="Valparaiso">Valparaiso</option>
         </select>
 
         {formik.touched.comuna && formik.errors.comuna ? (
