@@ -9,6 +9,7 @@ import Requests_client from './js/views/Requests_client';
 import Select_user from './js/views/Select_user';
 import injectContext from "./js/store/app_Context";
 import MultiSelect from "./js/components/Multi_sect";
+import EditClient from "./js/views/EditClient";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
 						<Route exact path="/solicitudes" component={Requests_client} />
                         <Route exact path="/seleccion_usuario" component={Select_user} />
                         <Route exact path="/prueba_select" component={MultiSelect} />  
+                        <Route exact path="/editarCliente" component={EditClient} />  
 						<Route render={() => <h1 className="notfound">Not found!</h1>} />
 					</Switch>
 				</div>
