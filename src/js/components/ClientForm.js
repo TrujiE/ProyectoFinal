@@ -98,16 +98,10 @@ const ClientForm = () => {
         }      
       fetch("http://127.0.0.1:5000/user/profile", profile_user)
         .then(respuesta => respuesta.json())
-<<<<<<< HEAD
-        .then(data => console.log(data))	
-        .catch(error => console.error(error))      
-      alert(JSON.stringify(values, null, 2));
-=======
         .then(data => console.log(data))  
         .catch(error => console.error(error))      
         alert(JSON.stringify(values, null, 2));
 
->>>>>>> 1316f2aa995dcf5fc0e08236d5014e6fc8a80a92
     },
   });
 
