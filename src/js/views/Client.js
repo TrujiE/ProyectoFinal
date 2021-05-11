@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState} from 'react';
 import Components from "../components/Components";
 import Log_out from "../components/Log_out";
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
 
 const Client = () => {
+    const [value, onChange] = useState(new Date());
     return ( 
         <div className="container">
 			<Log_out/>        	
@@ -41,10 +44,12 @@ const Client = () => {
             		</select>
 			  	</div>			 
 			  </div>
-			  &nbsp;
-			  <input className="form-control" type="date" value="2011-08-19" id="example-date-input" />
-			  &nbsp;
-			  &nbsp;
+              <div className="container">
+                  <Calendar
+                     onChange={onChange}
+                     value={value}
+                    /> 
+               </div>
 			  <div>			
 			  	<button type="button" className="btn btn-success" >Buscar</button>			  
 			  </div>		  

@@ -92,7 +92,7 @@ const Home = () => {
                         ) : null}
 
                          <button type="submit" className="btn btn-success mb-2 text-white"
-                                 onClick={handleClick}>
+                           >
                             Entrar
                          </button>
                     </form>
