@@ -11,11 +11,14 @@ const Specialist = () => {
                 <div className="row">
                     <h1>Te Ayudo?...con tus solicitudes</h1>
                 </div>
+                <br />
+                <br />
                 <div className="row">
                     <div className="col-sm-3">
                         <div className="card" style={{ height: "8rem" }}>
                             <img className="card-img-top" src="..." alt="Card image cap" />
                         </div>
+                        <br />
                         <p>Especialista</p>
                         <button type="button" className="btn btn-outline-success" style={{ width: "12rem" }}>Editar cuenta</button>
                         <button type="button" className="btn btn-outline-success" style={{ width: "12rem" }}>Historial de solicitudes</button>
@@ -27,6 +30,7 @@ const Specialist = () => {
                             <ModalCalendar/>
                             <button type="button" className="btn btn-outline-success">Solicitudes</button>
                         </div>
+                        <br />
                         <div className="form-group">
                             <div className="row px-md-4">
                                 <p>Hola Especialista, estas son tus solicitudes:   </p>
