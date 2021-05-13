@@ -1,12 +1,13 @@
 import React from 'react';
 import Components from "../components/Components";
 import Log_out from "../components/Log_out";
+import ModalCalendar from '../components/ModalCalendar';
 
 const Specialist = () => {
-    return ( 
+    return (
         <div>
             <div className="container">
-                <Log_out/>    
+                <Log_out />
                 <div className="row">
                     <h1>Te Ayudo?...con tus solicitudes</h1>
                 </div>
@@ -25,7 +26,8 @@ const Specialist = () => {
                     </div>
                     <div className="col-sm-6 px-md-4">
                         <div className="btn-group d-flex flex-row-reverse col-sm-6" role="group" aria-label="Basic example">
-                            <button type="button" className="btn btn-outline-success">Disponibilidad</button>
+                            <button type="button" className="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">Disponibilidad</button>  
+                            <ModalCalendar/>
                             <button type="button" className="btn btn-outline-success">Solicitudes</button>
                         </div>
                         <br />
@@ -49,11 +51,11 @@ const Specialist = () => {
                     </div>
                 </div>
                 <br />
-			    <br />
-			    <Components/>                
-            </div>            
+                <br />
+                <Components />
+            </div>
         </div>
-     );
+    );
 }
- 
+
 export default Specialist;

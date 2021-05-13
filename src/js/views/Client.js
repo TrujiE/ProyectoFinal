@@ -1,11 +1,11 @@
 import React, { useState} from 'react';
 import Components from "../components/Components";
 import Log_out from "../components/Log_out";
-import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css';
+import Calendar_component from "../components/CalendarClient";
+import Calendar_client from '../components/CalendarClient';
 
 const Client = () => {
-    const [value, onChange] = useState(new Date());
+
     return ( 
         <div className="container">
 			<Log_out/>        	
@@ -45,10 +45,7 @@ const Client = () => {
 			  	</div>			 
 			  </div>
               <div className="container">
-                  <Calendar
-                     onChange={onChange}
-                     value={value}
-                    /> 
+                  <Calendar_client/>
                </div>
 			  <div>			
 			  	<button type="button" className="btn btn-success" >Buscar</button>			  
