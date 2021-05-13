@@ -2,7 +2,7 @@ import React from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
-import {useParams} from "react-router-dom"
+import {useParams} from "react-router-dom";
 
 
 
@@ -72,21 +72,25 @@ const comunasList = [
 
 const EditFormSpecialist = () => {
 
+  const userProfile = 
+    localStorage.getItem('loginUser')?
+    JSON.parse(localStorage.getItem('loginUser')):{};
+
   const {id} = useParams();
 
     const formik = useFormik({
-        initialValues: {
-          
-          phoneNumber: "",
-          adress: "",
-          comuna: "",
+      
+        initialValues: { 
+          phoneNumber: userProfile.user? userProfile.user.phone :'',
+          adress: userProfile.user? userProfile.user.address :'',
+          comuna: userProfile.user? userProfile.user.name_commune :'',
           password: "",
           confirmPassword: "",
-          secretQuestion: "",
-          secretAswer: "",
-          specialty: "",
+          secretQuestion: userProfile.user? userProfile.profile.question :'',
+          secretAswer: userProfile.user? userProfile.profile.answer :'',
+          specialty: userProfile.user? userProfile.profile.role :'',
           attentionComunes: ["santiago","providencia","quilicura"],
-          skills: "",
+          skills: userProfile.user? userProfile.profile.experience :'',
         },
     
         validationSchema: Yup.object().shape({
@@ -169,7 +173,7 @@ const EditFormSpecialist = () => {
               id="phoneNumber"
               name="phoneNumber"
               type="text"
-              placeholder="123456789"
+              placeholder={userProfile.user.phone}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phoneNumber}
