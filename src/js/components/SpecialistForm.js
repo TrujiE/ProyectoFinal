@@ -1,10 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-<<<<<<< HEAD
-=======
 import Select from "react-select";
-
 
 
 
@@ -71,7 +68,6 @@ const comunasList = [
   { value: "Tiltil", label: "Tiltil" },
   { value: "Vitacura", label: "Vitacura" },
 ];
->>>>>>> develop
 
 const SpecialistForm = () => {
   const formik = useFormik({
@@ -80,10 +76,7 @@ const SpecialistForm = () => {
       lastName: "",
       rut: "",
       email: "",
-<<<<<<< HEAD
-=======
       phoneNumber:"",
->>>>>>> develop
       adress: "",
       comuna: "",
       password: "",
@@ -91,47 +84,6 @@ const SpecialistForm = () => {
       secretQuestion: "",
       secretAswer: "",
       specialty: "",
-<<<<<<< HEAD
-      attentionComunes: "",
-      skills: "",
-    },
-
-    validationSchema: Yup.object({
-        firstName: Yup.string().required("se requiere el nombre"),
-        lastName: Yup.string().required("se requiere el apellido"),
-        rut: Yup.string().required("se requiere el rut"),
-  
-        email: Yup.string()
-          .email("correo invalido")
-          .required("se requiere el correo"),
-  
-        adress: Yup.string().required("se requiere la direccion"),
-        comuna: Yup.string().required("se requiere la comuna"),
-        password: Yup.string().required("se requiere la contraseña"),
-        confirmPassword: Yup.string().required(
-          "se requiere confirmar contraseña"
-        ),
-        secretQuestion: Yup.string().required(
-          "se requiere el la pregunta secreta"
-        ),
-        secretAswer: Yup.string().required("se requiere la respuesta secreta"),
-        specialty: Yup.string().required("se requiere la respuesta secreta"),
-        sattentionComunes: Yup.string().required("se requiere la respuesta secreta"),
-        skills: Yup.string().required("se requiere la respuesta secreta"),
-      }),
-  
-      onSubmit: (values) => {
-        alert(JSON.stringify(values, null, 2));
-      },
-    });
-  
-
-
-
-
-
-  
-=======
       attentionComunes: ["santiago","providencia","quilicura"],
       skills: "",
     },
@@ -231,7 +183,6 @@ const SpecialistForm = () => {
       
     },
   });
->>>>>>> develop
 
   return (
     <div>
@@ -265,17 +216,9 @@ const SpecialistForm = () => {
           value={formik.values.lastName}
         />
 
-<<<<<<< HEAD
-
-{formik.touched.lastName && formik.errors.lastName? (
-          <div className="text-danger">{formik.errors.lastName}</div>
-        ) : null}
-        
-=======
         {formik.touched.lastName && formik.errors.lastName ? (
           <div className="text-danger">{formik.errors.lastName}</div>
         ) : null}
->>>>>>> develop
 
         <label htmlFor="rut">Rut</label>
         <input
@@ -289,11 +232,7 @@ const SpecialistForm = () => {
           value={formik.values.rut}
         />
 
-<<<<<<< HEAD
-{formik.touched.rut && formik.errors.rut ? (
-=======
         {formik.touched.rut && formik.errors.rut ? (
->>>>>>> develop
           <div className="text-danger">{formik.errors.rut}</div>
         ) : null}
 
@@ -309,14 +248,6 @@ const SpecialistForm = () => {
           value={formik.values.email}
         />
 
-<<<<<<< HEAD
-        
-
-{formik.touched.email && formik.errors.email ? (
-          <div className="text-danger">{formik.errors.email}</div>
-        ) : null}
-
-=======
         {formik.touched.email && formik.errors.email ? (
           <div className="text-danger">{formik.errors.email}</div>
         ) : null}
@@ -339,7 +270,6 @@ const SpecialistForm = () => {
         ) : null}
 
 
->>>>>>> develop
         <label htmlFor="adress">Diereccion</label>
         <input
           className="form-control mb-3"
@@ -353,19 +283,10 @@ const SpecialistForm = () => {
         />
 
 
-<<<<<<< HEAD
-{formik.touched.adress && formik.errors.adress ? (
-          <div className="text-danger">{formik.errors.adress}</div>
-        ) : null}
-
-
-
-=======
         {formik.touched.adress && formik.errors.adress ? (
           <div className="text-danger">{formik.errors.adress}</div>
         ) : null}
 
->>>>>>> develop
         <label htmlFor="comuna">Comuna</label>
         <select
           className="form-control mb-3"
@@ -376,20 +297,11 @@ const SpecialistForm = () => {
           value={formik.values.comuna}
         >
           <option selected>Santiago</option>
-<<<<<<< HEAD
-          <option value="1">Providencia</option>
-          <option value="2">Maipu</option>
-          <option value="3">Valparaiso</option>
-        </select>
-
-
-=======
           <option value="Providencia">Providencia</option>
           <option value="Maipu">Maipu</option>
           <option value="Valparaiso">Valparaiso</option>
         </select>
 
->>>>>>> develop
         {formik.touched.comuna && formik.errors.comuna ? (
           <div className="text-danger">{formik.errors.comuna}</div>
         ) : null}
@@ -399,25 +311,14 @@ const SpecialistForm = () => {
           className="form-control mb-3"
           id="password"
           name="password"
-<<<<<<< HEAD
-          type="text"
-=======
           type="password"
->>>>>>> develop
           placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
-<<<<<<< HEAD
-        /> 
-
-
-{formik.touched.password && formik.errors.password ? (
-=======
         />
 
         {formik.touched.password && formik.errors.password ? (
->>>>>>> develop
           <div className="text-danger">{formik.errors.password}</div>
         ) : null}
 
@@ -426,22 +327,14 @@ const SpecialistForm = () => {
           className="form-control mb-3"
           id="confirmPassword"
           name="confirmPassword"
-<<<<<<< HEAD
-          type="text"
-=======
           type="password"
->>>>>>> develop
           placeholder="*********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.confirmPassword}
         />
 
-<<<<<<< HEAD
-{formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-=======
         {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
->>>>>>> develop
           <div className="text-danger">{formik.errors.confirmPassword}</div>
         ) : null}
 
@@ -457,19 +350,10 @@ const SpecialistForm = () => {
           value={formik.values.secretQuestion}
         />
 
-<<<<<<< HEAD
-{formik.touched.secretQuestion && formik.errors.secretQuestion ? (
-          <div className="text-danger">{formik.errors.secretQuestion}</div>
-        ) : null}
-
-
-
-=======
         {formik.touched.secretQuestion && formik.errors.secretQuestion ? (
           <div className="text-danger">{formik.errors.secretQuestion}</div>
         ) : null}
 
->>>>>>> develop
         <label htmlFor="secretAswer">Respuesta secreta</label>
         <input
           className="form-control mb-3"
@@ -482,11 +366,7 @@ const SpecialistForm = () => {
           value={formik.values.secretAswer}
         />
 
-<<<<<<< HEAD
-{formik.touched.secretAswer && formik.errors.secretAswer ? (
-=======
         {formik.touched.secretAswer && formik.errors.secretAswer ? (
->>>>>>> develop
           <div className="text-danger"> {formik.errors.secretAswer}</div>
         ) : null}
 
@@ -500,42 +380,15 @@ const SpecialistForm = () => {
           value={formik.values.specialty}
         >
           <option selected>Electricista</option>
-<<<<<<< HEAD
-          <option value="1">Gasfiter-Plomero</option>
-          <option value="2">Carpintero</option>
-          <option value="3">Albañil</option>
-=======
           <option value="Plomero">Plomero</option>
           <option value="Carpintero">Carpintero</option>
           <option value="Albañil">Albañil</option>
->>>>>>> develop
         </select>
 
         {formik.touched.specialty && formik.errors.specialty ? (
           <div className="text-danger"> {formik.errors.specialty}</div>
         ) : null}
 
-<<<<<<< HEAD
-        <label htmlFor="attentionComune">Comunas que atiende</label>
-        <select
-          className="form-control mb-3"
-          id="attentionComune"
-          name="attentionComune"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.attentionComune}
-        >
-          <option selected>Santiago</option>
-          <option value="1">Providencia</option>
-          <option value="2">Maipu</option>
-          <option value="3">Valparaiso</option>
-        </select>
-
-
-        {formik.touched.attentionComune && formik.errors.sattentionComune ? (
-          <div className="text-danger"> {formik.errors.attentionComune}</div>
-        ) : null}
-=======
         {/* <label htmlFor="attentionComune">Comunas que atiende</label>
 
         <Select
@@ -551,7 +404,6 @@ const SpecialistForm = () => {
         {formik.touched.attentionComune && formik.errors.sattentionComune ? (
           <div className="text-danger"> {formik.errors.attentionComune}</div>
         ) : null} */}
->>>>>>> develop
 
         <label htmlFor="skills">Experiencia</label>
         <textarea
@@ -565,12 +417,7 @@ const SpecialistForm = () => {
           value={formik.values.skills}
         ></textarea>
 
-<<<<<<< HEAD
-
-{formik.touched.skills && formik.errors.skills ? (
-=======
         {formik.touched.skills && formik.errors.skills ? (
->>>>>>> develop
           <div className="text-danger"> {formik.errors.skills}</div>
         ) : null}
 
@@ -582,8 +429,4 @@ const SpecialistForm = () => {
   );
 };
 
-<<<<<<< HEAD
 export default SpecialistForm;
-=======
-export default SpecialistForm;
->>>>>>> develop

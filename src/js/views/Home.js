@@ -1,19 +1,12 @@
 import React, {useContext} from 'react';
-import { Context } from '../store/app_Context';
+import { Context } from '../store/appContext';
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useHistory } from 'react-router-dom';
-
 
 const Home = () => {
 
-    const { store, actions } = useContext(Context);
-
-       const history = useHistory();
-       const handleClick = () => {
-           history.push ("/seleccion_usuario");
-        }    
+    const { store, actions } = useContext(Context);  
 
     const SaveLocalStore = () => {
             localStorage.setItem('loginUser',JSON.stringify(store.profileUser));
@@ -114,7 +107,7 @@ const Home = () => {
                 <div className="col-9 d-flex justify-content-end ">
                     <h5 className=" ">
                         <span>
-                            <Link to="/registro_cliente">
+                            <Link to="/registroCliente">
                                 <u>Registrarse </u>{" "}
                             </Link>
                         </span>
