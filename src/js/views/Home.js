@@ -33,13 +33,15 @@ const Home = () => {
                     "password": formik.values.password
                 }),
                 method: "POST"
-            }
+                }
             fetch("http://127.0.0.1:5000/user/login", config)
                 .then(respuesta => respuesta.json())
-                .then(data => console.log(data))
+                .then(data => { if (!data.ok) alert(data.json)
+                    //else alert("OOOOOOK")
+                    })
                 .catch(error => console.error(error))
-            alert(JSON.stringify(values, null, 2));
-        }, 
+                alert(JSON.stringify(values, null, 2));
+        }, //console.log(data))
     });
     
     return (
