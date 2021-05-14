@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useContext} from 'react';
+import { Context } from '../store/app_Context';
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,11 +7,18 @@ import { useHistory } from 'react-router-dom';
 
 
 const Home = () => {
+
+    const { store, actions } = useContext(Context);
+
        const history = useHistory();
        const handleClick = () => {
            history.push ("/seleccion_usuario");
         }    
 
+    const SaveLocalStore = () => {
+            localStorage.setItem('loginUser',JSON.stringify(store.profileUser));
+        }  
+        
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -36,9 +44,10 @@ const Home = () => {
                 }
             fetch("http://127.0.0.1:5000/user/login", config)
                 .then(respuesta => respuesta.json())
-                .then(data => { if (!data.ok) alert(data.json)
-                    //else alert("OOOOOOK")
-                    })
+                .then(data => {
+                    actions.setProfile(data);
+                    SaveLocalStore()
+                })
                 .catch(error => console.error(error))
                 alert(JSON.stringify(values, null, 2));
         }, //console.log(data))

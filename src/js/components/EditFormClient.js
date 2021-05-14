@@ -16,18 +16,22 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 const EditFormClient = () => {
 
-  const {id} = useParams();
+  const userProfile = 
+  localStorage.getItem('loginUser')?
+  JSON.parse(localStorage.getItem('loginUser')):{};
 
+  const {id} = useParams();
+ 
     const formik = useFormik({
         initialValues: {
-          
-          phoneNumber: "",
-          adress: "",
-          comuna: "",
+          phoneNumber: userProfile.user? userProfile.user.phone :'',
+          adress: userProfile.user? userProfile.user.address :'',
+          comuna: userProfile.user? userProfile.user.name_commune :'',
           password: "",
           confirmPassword: "",
-          secretQuestion: "",
-          secretAswer: "",
+          secretQuestion: userProfile.user? userProfile.profile.question :'',
+          secretAswer: userProfile.user? userProfile.profile.answer :'',
+          specialty: userProfile.user? userProfile.profile.role :'',
         },
     
         validationSchema: Yup.object().shape({
