@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import Components from "../components/Components";
-import Log_out from "../components/Log_out";
+import Log_out from "../components/LogOut";
 import Calendar_component from "../components/CalendarClient";
 import Calendar_client from '../components/CalendarClient';
 

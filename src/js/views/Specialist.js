@@ -1,13 +1,13 @@
 import React from 'react';
 import Components from "../components/Components";
-import Log_out from "../components/Log_out";
+import LogOut from "../components/LogOut";
 import ModalCalendar from '../components/ModalCalendar';
 
 const Specialist = () => {
     return (
         <div>
             <div className="container">
-                <Log_out />
+                <LogOut />
                 <div className="row">
                     <h1>Te Ayudo?...con tus solicitudes</h1>
                 </div>
