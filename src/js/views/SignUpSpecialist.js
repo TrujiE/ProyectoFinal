@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SpecialistForm from "../components/SpecialistForm";
 
-const Checkin_specialist = () => {
+const SignUpSpecialist = () => {
   return (
     <div className="container mt-5">
       <h1 className=" text-center">Te ayudo... con tu registro?</h1>
@@ -11,7 +11,7 @@ const Checkin_specialist = () => {
         <div className="col-8">
           <ul className="nav nav-pills nav-fill mb-5">
             <li className="nav-item ">
-              <Link to="/registro_cliente" className="btn  text-success">
+              <Link to="/registroCliente" className="btn  text-success">
                 Cliente
               </Link>
               {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
@@ -44,4 +44,4 @@ const Checkin_specialist = () => {
   );
 };
 
-export default Checkin_specialist;
+export default SignUpSpecialist;

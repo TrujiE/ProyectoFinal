@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { Formik } from "formik";
 import "bootstrap/dist/css/bootstrap.css";
 
 ReactDOM.render(
