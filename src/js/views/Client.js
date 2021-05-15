@@ -54,7 +54,7 @@ const Client = () => {
                             Horario
         	      	</label>
                         <select className="custom-select btn-success" id="inputGroupSelect01">
-                            <option selected>8:00 - 11:00</option>
+                            <option selected>08:00 - 11:00</option>
                             <option value="1">11:00 - 14:00</option>
                             <option value="2">14:00 - 17:00</option>
                         </select>
@@ -68,7 +68,7 @@ const Client = () => {
 
             <br />
 
-            <div className="d-flex col-8">
+            <div className="d-flex col-10">
                 <input type="text" className="form-control" id="direccion" placeholder="Direccion actual" /> &nbsp;
 				<div className="form-group form-check">
                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
@@ -76,7 +76,8 @@ const Client = () => {
                 </div>
             </div>
 
-            <div className="form-group col-8">
+            <div className="form-group col-10">
+                <h5>Seleccione su especialista</h5>
                 <TableComponet/>
                 <button style={{ textAlign: "right" }} type="button" className="btn btn-success" >Solicitar</button>
             </div>
