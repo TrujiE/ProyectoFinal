@@ -4,8 +4,31 @@ import Log_out from "../components/LogOut";
 import Calendar_component from "../components/CalendarClient";
 import Calendar_client from '../components/CalendarClient';
 import TableComponet from '../components/Table';
+import Select from 'react-select'
 
 const Client = () => {
+    const [specialty, setSpecialty] = useState("");
+    const [commune, setCommune] = useState("");
+    const [hour, setHour] = useState("");
+
+    const specialties = [
+  { value: 'Electricista', label: 'Electricista' },
+  { value: 'Plomero', label: 'Plomero' },
+  { value: 'Carpintero', label: 'Carpintero' }
+] 
+const communes = [
+  { value: 'La Florida', label: 'La Florida' },
+  { value: 'Pudahuel', label: 'Pudahuel' },
+  { value: 'Santiago', label: 'Santiago' }
+] 
+const hours = [
+  { value: false, label: '08:00 - 11:00' },
+  { value: true, label: '11:00 - 14:00' },
+  { value: false, label: '14:00 - 17:00' }
+] 
+
+const array=[specialty, commune, hour]
+console.log(array)
 
     return (
         <div className="container">
@@ -13,56 +36,39 @@ const Client = () => {
             <div className="d-flex">
                 <h3 style={{ textAlign: "left" }}>Hola Cliente1232 en qué te ayudamos?</h3> &nbsp;
             </div>
-
             <br />
             <br />
 
-            <div className="d-flex col-10">
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <label className="input-group-text bg-success text-white" for="inputGroupSelect01">
-                            Especialidad
-        	      	</label>
-                        <select className="custom-select btn-success" id="inputGroupSelect01">
-                            <option selected>Carpintero</option>
-                            <option value="1">Electricista</option>
-                            <option value="2">Plomero</option>
-                            <option value="3">Albañil</option>
-                        </select>
-                    </div>
-                </div>
-			  &nbsp;
-			  <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <label className="input-group-text bg-success text-white" for="inputGroupSelect01">
-                            Comuna
-        	      	</label>
-                        <select className="custom-select btn-success" id="inputGroupSelect01">
-                            <option selected>Santiago</option>
-                            <option value="1">Providencia</option>
-                            <option value="2">Maipu</option>
-                            <option value="3">La Florida</option>
-                        </select>
-                    </div>
-                </div>
+            <div className="d-flex col-10"> 
+                    <div className="container"> 
+                        <Select defaultValue={{ label: "Especialidad", value: 0 }}
+                                options={specialties} 
+                                onChange={e => setSpecialty(e.value)}
+                                />
+                     </div>  
+			  &nbsp;    
+			  <div className="container"> 
+                        <Select defaultValue={{ label: "Comuna", value: 0 }}
+                                options={communes} 
+                                onChange={e => setCommune(e.value)}
+                                />
+                     </div>
+                &nbsp;
                 <div className="container">
                     <Calendar_client />
                 </div>
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <label className="input-group-text bg-success text-white" for="inputGroupSelect01">
-                            Horario
-        	      	</label>
-                        <select className="custom-select btn-success" id="inputGroupSelect01">
-                            <option selected>08:00 - 11:00</option>
-                            <option value="1">11:00 - 14:00</option>
-                            <option value="2">14:00 - 17:00</option>
-                        </select>
-                    </div>
-                </div>
+                &nbsp;
+                <div className="container"> 
+                        <Select defaultValue={{ label: "Horario", value: 0 }}
+                                options={hours} 
+                                onChange={e => setHour(e.value)}
+                                />
+                     </div>
                 &nbsp;
                 <div>
-                    <button type="button" className="btn btn-success" >Buscar</button>
+                    <button type="button" className="btn btn-success" 
+                            
+                    >Buscar</button>
                 </div>
             </div>
 
