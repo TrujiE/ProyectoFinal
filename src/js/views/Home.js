@@ -37,7 +37,7 @@ const Home = () => {
                 }
             fetch("http://127.0.0.1:5000/user/login", config)
                 .then(respuesta => respuesta.json())
-                .then(data => {
+                .then(data => {console.log(data) 
                     actions.setProfile(data);
                     SaveLocalStore()
                 })
