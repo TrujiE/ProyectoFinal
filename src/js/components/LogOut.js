@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-const Log_out = () =>{
+const LogOut = () =>{
 	return (
 	<div className="container ">  		    
         <h6 style={{textAlign:"right"}}>            
@@ -14,4 +14,4 @@ const Log_out = () =>{
 	)
 }
 
-export default Log_out;
+export default LogOut;

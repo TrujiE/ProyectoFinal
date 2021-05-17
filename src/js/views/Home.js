@@ -1,16 +1,17 @@
-import React from "react";
+import React, {useContext} from 'react';
+import { Context } from '../store/appContext';
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useHistory } from 'react-router-dom';
-
 
 const Home = () => {
-       const history = useHistory();
-       const handleClick = () => {
-           history.push ("/seleccion_usuario");
-        }    
 
+    const { store, actions } = useContext(Context);  
+
+    const SaveLocalStore = () => {
+            localStorage.setItem('loginUser',JSON.stringify(store.profileUser));
+        }  
+        
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -36,7 +37,10 @@ const Home = () => {
             }
             fetch("http://127.0.0.1:5000/user/login", config)
                 .then(respuesta => respuesta.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    actions.setProfile(data);
+                    SaveLocalStore()
+                })
                 .catch(error => console.error(error))
             alert(JSON.stringify(values, null, 2));
         }, 
@@ -103,7 +107,7 @@ const Home = () => {
                 <div className="col-9 d-flex justify-content-end ">
                     <h5 className=" ">
                         <span>
-                            <Link to="/registro_cliente">
+                            <Link to="/registroCliente">
                                 <u>Registrarse </u>{" "}
                             </Link>
                         </span>

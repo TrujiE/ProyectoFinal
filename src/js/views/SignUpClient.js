@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import ClientForm from "../components/ClientForm";
-const Checkin_client = () => {
+const SignUpClient = () => {
   return (
     <div className="container mt-5">
       <h1 className=" text-center">Te ayudo... con tu registro?</h1>
@@ -16,7 +16,7 @@ const Checkin_client = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/registro_especialista"
+                to="/registroEspecialista"
                 className="nav-link text-success  "
               >
                 Especialista
@@ -47,4 +47,4 @@ const Checkin_client = () => {
   );
 };
 
-export default Checkin_client;
+export default SignUpClient;

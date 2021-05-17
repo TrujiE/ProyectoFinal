@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Select_user = () => {
+const SelectUser = () => {
   return (
     <div className="container mt-5">
       <h1 className="text-center">TeAYUDO? Selecciona como quieres ingresar:</h1>
@@ -24,4 +24,4 @@ const Select_user = () => {
 );
 };
 
-export default Select_user;
+export default SelectUser;

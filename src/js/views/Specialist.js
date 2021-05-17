@@ -1,20 +1,24 @@
 import React from 'react';
 import Components from "../components/Components";
-import Log_out from "../components/Log_out";
+import LogOut from "../components/LogOut";
+import ModalCalendar from '../components/ModalCalendar';
 
 const Specialist = () => {
-    return ( 
+    return (
         <div>
             <div className="container">
-                <Log_out/>    
+                <LogOut />
                 <div className="row">
                     <h1>Te Ayudo?...con tus solicitudes</h1>
                 </div>
+                <br />
+                <br />
                 <div className="row">
                     <div className="col-sm-3">
                         <div className="card" style={{ height: "8rem" }}>
                             <img className="card-img-top" src="..." alt="Card image cap" />
                         </div>
+                        <br />
                         <p>Especialista</p>
                         <button type="button" className="btn btn-outline-success" style={{ width: "12rem" }}>Editar cuenta</button>
                         <button type="button" className="btn btn-outline-success" style={{ width: "12rem" }}>Historial de solicitudes</button>
@@ -22,9 +26,11 @@ const Specialist = () => {
                     </div>
                     <div className="col-sm-6 px-md-4">
                         <div className="btn-group d-flex flex-row-reverse col-sm-6" role="group" aria-label="Basic example">
-                            <button type="button" className="btn btn-outline-success">Disponibilidad</button>
+                            <button type="button" className="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">Disponibilidad</button>  
+                            <ModalCalendar/>
                             <button type="button" className="btn btn-outline-success">Solicitudes</button>
                         </div>
+                        <br />
                         <div className="form-group">
                             <div className="row px-md-4">
                                 <p>Hola Especialista, estas son tus solicitudes:   </p>
@@ -45,11 +51,11 @@ const Specialist = () => {
                     </div>
                 </div>
                 <br />
-			    <br />
-			    <Components/>                
-            </div>            
+                <br />
+                <Components />
+            </div>
         </div>
-     );
+    );
 }
- 
+
 export default Specialist;

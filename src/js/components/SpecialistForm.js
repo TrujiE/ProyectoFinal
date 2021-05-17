@@ -5,7 +5,6 @@ import Select from "react-select";
 import comunasList2 from "../utils/communesFile"
 import comunasList from "../utils/comunasObj"
 
-
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
 const lowercaseRegex = /(?=.*[a-z])/;
