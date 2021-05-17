@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Components from "../components/Components";
 import Log_out from "../components/LogOut";
 import Calendar_component from "../components/CalendarClient";
 import Calendar_client from '../components/CalendarClient';
 import TableComponet from '../components/Table';
-import Select from 'react-select'
+import Select from 'react-select';
 
 const Client = () => {
+    
     const [specialty, setSpecialty] = useState("");
     const [commune, setCommune] = useState("");
     const [hour, setHour] = useState("");
 
     const specialties = [
-  { value: 'Electricista', label: 'Electricista' },
-  { value: 'Plomero', label: 'Plomero' },
-  { value: 'Carpintero', label: 'Carpintero' }
-] 
-const communes = [
-  { value: 'La Florida', label: 'La Florida' },
-  { value: 'Pudahuel', label: 'Pudahuel' },
-  { value: 'Santiago', label: 'Santiago' }
-] 
-const hours = [
-  { value: false, label: '08:00 - 11:00' },
-  { value: true, label: '11:00 - 14:00' },
-  { value: false, label: '14:00 - 17:00' }
-] 
-
-const array=[specialty, commune, hour]
-console.log(array)
+        { value: 'Electricista', label: 'Electricista' },
+        { value: 'Plomero', label: 'Plomero' },
+        { value: 'Carpintero', label: 'Carpintero' }
+    ]
+    const communes = [
+        { value: 'La Florida', label: 'La Florida' },
+        { value: 'Pudahuel', label: 'Pudahuel' },
+        { value: 'Santiago', label: 'Santiago' }
+    ]
+    const hours = [
+        { value: false, label: '08:00 - 11:00' },
+        { value: true, label: '11:00 - 14:00' },
+        { value: false, label: '14:00 - 17:00' }
+    ]
+    const array = [specialty, commune, hour]
+    console.log(array)
 
     return (
         <div className="container">
@@ -38,40 +38,39 @@ console.log(array)
             </div>
             <br />
             <br />
-
-            <div className="d-flex col-10"> 
-                    <div className="container"> 
+                <div className="d-flex col-12">
+                    <div className="container">
                         <Select defaultValue={{ label: "Especialidad", value: 0 }}
-                                options={specialties} 
-                                onChange={e => setSpecialty(e.value)}
-                                />
-                     </div>  
-			  &nbsp;    
-			  <div className="container"> 
+                            options={specialties}
+                            onChange={e => setSpecialty(e.value)}    
+                        />
+                    </div>
+			  &nbsp;
+			  <div className="container">
                         <Select defaultValue={{ label: "Comuna", value: 0 }}
-                                options={communes} 
-                                onChange={e => setCommune(e.value)}
-                                />
-                     </div>
+                            options={communes}
+                            onChange={e => setCommune(e.value)}
+                        />
+                    </div>
                 &nbsp;
                 <div className="container">
-                    <Calendar_client />
-                </div>
+                        <Calendar_client 
+                        />
+
+                    </div>
                 &nbsp;
-                <div className="container"> 
+                <div className="container">
                         <Select defaultValue={{ label: "Horario", value: 0 }}
-                                options={hours} 
-                                onChange={e => setHour(e.value)}
-                                />
-                     </div>
+                            options={hours}
+                            onChange={e => setHour(e.value)}
+                        />
+                    </div>
                 &nbsp;
                 <div>
-                    <button type="button" className="btn btn-success" 
-                            
-                    >Buscar</button>
+                        <button type="submit" className="btn btn-success"
+                        >Buscar</button>
+                    </div>
                 </div>
-            </div>
-
             <br />
 
             <div className="d-flex col-10">
@@ -84,7 +83,7 @@ console.log(array)
 
             <div className="form-group col-10">
                 <h5>Seleccione su especialista</h5>
-                <TableComponet/>
+                <TableComponet />
                 <button style={{ textAlign: "right" }} type="button" className="btn btn-success" >Solicitar</button>
             </div>
             <br />
