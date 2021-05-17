@@ -3,7 +3,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
 import {useParams} from "react-router-dom";
-
+import comunasList2 from "../utils/communesFile"
+import comunasList from "../utils/comunasObj"
 
 
 
@@ -14,63 +15,67 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 
 
-const comunasList = [
-  { value: "Alhué", label: "Alhué" },
-  { value: "Buin", label: "Buin" },
-  { value: "Calera de Tango", label: "Calera de Tango" },
-  { value: "Cerrillos", label: "Cerrillos" },
-  { value: "Cerro Navia", label: "Cerro Navia" },
-  { value: "Colina", label: "Colina" },
-  { value: "Conchalí", label: "Conchalí" },
-  { value: "Curacaví", label: "Curacaví" },
-  { value: "El Bosque", label: "El Bosque" },
-  { value: "El Monte", label: "El Monte" },
-  { value: "Estación Central", label: "Estación Central" },
-  { value: "Huechuraba", label: "Huechuraba" },
-  { value: "Independencia", label: "Independencia" },
-  { value: "Isla de Maipo", label: "Isla de Maipo" },
-  { value: "La Cisterna", label: "La Cisterna" },
-  { value: "La Florida", label: "La Florida" },
-  { value: "La Granja", label: "La Granja" },
-  { value: "La Pintana", label: "La Pintana" },
-  { value: "La Reina", label: "La Reina" },
-  { value: "Lampa", label: "Lampa" },
-  { value: "Las Condes", label: "Las Condes" },
-  { value: "Lo Barnechea", label: "Lo Barnechea" },
-  { value: "Lo Espejo", label: "Lo Espejo" },
-  { value: "Lo Prado", label: "Lo Prado" },
-  { value: "Macul", label: "Macul" },
-  { value: "Maipú", label: "Maipú" },
-  { value: "María Pinto", label: "María Pinto" },
-  { value: "Melipilla", label: "Melipilla" },
-  { value: "Ñuñoa", label: "Ñuñoa" },
-  { value: "Padre Hurtado", label: "Padre Hurtado" },
-  { value: "Paine", label: "Paine" },
-  { value: "Pedro Aguirre Cerda", label: "Pedro Aguirre Cerda" },
-  { value: "Peñaflor", label: "Peñaflor" },
-  { value: "Peñalolén", label: "Peñalolén" },
-  { value: "Pirque", label: "Pirque" },
-  { value: "Providencia", label: "Providencia" },
-  { value: "Pudahuel", label: "Pudahuel" },
-  { value: "Puente Alto", label: "Puente Alto" },
-  { value: "Quilicura", label: "Quilicura" },
-  { value: "Quinta Normal", label: "Quinta Normal" },
-  { value: "Recoleta", label: "Recoleta" },
-  { value: "Renca", label: "Renca" },
-  { value: "San Bernardo", label: "San Bernardo" },
-  { value: "San Joaquín", label: "San Joaquín" },
-  { value: "San José de Maipo", label: "San José de Maipo" },
-  { value: "San Miguel", label: "San Miguel" },
-  { value: "San Pedro", label: "San Pedro" },
-  { value: "San Ramón", label: "San Ramón" },
-  { value: "Santiago", label: "Santiago" },
-  { value: "Talagante", label: "Talagante" },
-  { value: "Tiltil", label: "Tiltil" },
-  { value: "Vitacura", label: "Vitacura" },
-];
+// const comunasList = [
+//   { value: "Alhué", label: "Alhué" },
+//   { value: "Buin", label: "Buin" },
+//   { value: "Calera de Tango", label: "Calera de Tango" },
+//   { value: "Cerrillos", label: "Cerrillos" },
+//   { value: "Cerro Navia", label: "Cerro Navia" },
+//   { value: "Colina", label: "Colina" },
+//   { value: "Conchalí", label: "Conchalí" },
+//   { value: "Curacaví", label: "Curacaví" },
+//   { value: "El Bosque", label: "El Bosque" },
+//   { value: "El Monte", label: "El Monte" },
+//   { value: "Estación Central", label: "Estación Central" },
+//   { value: "Huechuraba", label: "Huechuraba" },
+//   { value: "Independencia", label: "Independencia" },
+//   { value: "Isla de Maipo", label: "Isla de Maipo" },
+//   { value: "La Cisterna", label: "La Cisterna" },
+//   { value: "La Florida", label: "La Florida" },
+//   { value: "La Granja", label: "La Granja" },
+//   { value: "La Pintana", label: "La Pintana" },
+//   { value: "La Reina", label: "La Reina" },
+//   { value: "Lampa", label: "Lampa" },
+//   { value: "Las Condes", label: "Las Condes" },
+//   { value: "Lo Barnechea", label: "Lo Barnechea" },
+//   { value: "Lo Espejo", label: "Lo Espejo" },
+//   { value: "Lo Prado", label: "Lo Prado" },
+//   { value: "Macul", label: "Macul" },
+//   { value: "Maipú", label: "Maipú" },
+//   { value: "María Pinto", label: "María Pinto" },
+//   { value: "Melipilla", label: "Melipilla" },
+//   { value: "Ñuñoa", label: "Ñuñoa" },
+//   { value: "Padre Hurtado", label: "Padre Hurtado" },
+//   { value: "Paine", label: "Paine" },
+//   { value: "Pedro Aguirre Cerda", label: "Pedro Aguirre Cerda" },
+//   { value: "Peñaflor", label: "Peñaflor" },
+//   { value: "Peñalolén", label: "Peñalolén" },
+//   { value: "Pirque", label: "Pirque" },
+//   { value: "Providencia", label: "Providencia" },
+//   { value: "Pudahuel", label: "Pudahuel" },
+//   { value: "Puente Alto", label: "Puente Alto" },
+//   { value: "Quilicura", label: "Quilicura" },
+//   { value: "Quinta Normal", label: "Quinta Normal" },
+//   { value: "Recoleta", label: "Recoleta" },
+//   { value: "Renca", label: "Renca" },
+//   { value: "San Bernardo", label: "San Bernardo" },
+//   { value: "San Joaquín", label: "San Joaquín" },
+//   { value: "San José de Maipo", label: "San José de Maipo" },
+//   { value: "San Miguel", label: "San Miguel" },
+//   { value: "San Pedro", label: "San Pedro" },
+//   { value: "San Ramón", label: "San Ramón" },
+//   { value: "Santiago", label: "Santiago" },
+//   { value: "Talagante", label: "Talagante" },
+//   { value: "Tiltil", label: "Tiltil" },
+//   { value: "Vitacura", label: "Vitacura" },
+// ];
 
 
 const EditFormSpecialist = () => {
+
+  const listaComunas = comunasList2.map((comuna, index) =>
+  <option value={comuna}>{comuna}</option>
+)
 
   const userProfile = 
     localStorage.getItem('loginUser')?
@@ -208,10 +213,8 @@ const EditFormSpecialist = () => {
               onBlur={formik.handleBlur}
               value={formik.values.comuna}
             >
-              <option selected>Santiago</option>
-              <option value="Providencia">Providencia</option>
-              <option value="Maipu">Maipu</option>
-              <option value="Valparaiso">Valparaiso</option>
+              <option selected>Elija una comuna</option>
+              {listaComunas}
             </select>
     
             {formik.touched.comuna && formik.errors.comuna ? (
@@ -302,7 +305,7 @@ const EditFormSpecialist = () => {
           <div className="text-danger"> {formik.errors.specialty}</div>
         ) : null}
 
-        {/* <label htmlFor="attentionComune">Comunas que atiende</label>
+        <label htmlFor="attentionComune">Comunas que atiende</label>
 
         <Select
           isMulti
@@ -316,7 +319,7 @@ const EditFormSpecialist = () => {
 
         {formik.touched.attentionComune && formik.errors.sattentionComune ? (
           <div className="text-danger"> {formik.errors.attentionComune}</div>
-        ) : null} */}
+        ) : null}
 
         <label htmlFor="skills">Experiencia</label>
         <textarea

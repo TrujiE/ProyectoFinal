@@ -2,6 +2,7 @@ import React from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {useParams} from "react-router-dom"
+import comunasList2 from "../utils/communesFile"
 
 
 
@@ -15,6 +16,11 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 
 const EditFormClient = () => {
+
+
+  const listaComunas = comunasList2.map((comuna, index) =>
+  <option value={comuna}>{comuna}</option>
+)
 
   const userProfile = 
   localStorage.getItem('loginUser')?
@@ -137,10 +143,10 @@ const EditFormClient = () => {
               onBlur={formik.handleBlur}
               value={formik.values.comuna}
             >
-              <option selected>Santiago</option>
-              <option value="Providencia">Providencia</option>
-              <option value="Maipu">Maipu</option>
-              <option value="Valparaiso">Valparaiso</option>
+              <option selected>Elija una comuna</option>
+              
+              {listaComunas}
+
             </select>
     
             {formik.touched.comuna && formik.errors.comuna ? (

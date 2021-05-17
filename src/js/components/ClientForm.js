@@ -232,7 +232,7 @@ const ClientForm = () => {
           
           {listaComunas}
 
-        </select>
+          </select>
 
         {formik.touched.comuna && formik.errors.comuna ? (
           <div className="text-danger">{formik.errors.comuna}</div>
