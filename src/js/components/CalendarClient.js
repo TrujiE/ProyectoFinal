@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import DatePicker from "react-datepicker";
+import { addDays } from "date-fns";
+import { Context } from "../store/appContext";
+import getState from "../store/flux";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 const Calendar_client = () => {
-  const [startDate, setStartDate] = useState(new Date());
-    console.log(startDate)
+  const { store, actions } = useContext(Context);
+  console.log(store.startDate)
+
   return (
-    <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+    <DatePicker
+      dateFormat="yyyy-MM-dd"
+      selected={store.startDate}
+      onChange={date => actions.setCalendar(date)}
+      minDate={addDays(new Date(), 1)} //Se establece el dia minimo a seleccionar
+    />
   );
 };
 
