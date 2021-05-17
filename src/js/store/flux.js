@@ -20,9 +20,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({specialistsAvailable: data})
 				},
-			setCounter:(data) =>{
+			setCounter:() =>{
 				const store = getStore();
-				setStore({counter: data})
+				setStore({counter: store.counter + 1 })
 				},
             
         }

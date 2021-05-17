@@ -32,9 +32,8 @@ const TableComponet = () => {
         }else{
             setState(false)
         }
+        console.log(valueDefault, "valueDefault dentro" )
     }, [store.counter])
-    console.log(valueDefault, "valueDefault" )
-
     return (
         <div className="table-responsive-xl">
             <table className="table table-sm">

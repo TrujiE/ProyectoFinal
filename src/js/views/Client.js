@@ -10,7 +10,7 @@ import { format, compareAsc } from 'date-fns';
 
 
 const Client = () => {
-    const [state, setState] = useState(0)
+    
     const [specialty, setSpecialty] = useState("");
     const [commune, setCommune] = useState("");
     const [hour, setHour] = useState("");
@@ -25,6 +25,7 @@ const Client = () => {
   { value: 'electricista', label: 'Electricista' },
   { value: "pintor", label: 'Pintor' },
   { value: 'plomero', label: 'Plomero' },
+  { value: 'albañil', label: 'Albañil' },
   { value: 'carpintero', label: 'Carpintero' }
 ] 
 const communes = [
@@ -59,8 +60,7 @@ const SendValue = () =>{
         setAfternoon(0);
         setEvening(1);
     }
-    setState(state+1);
-    actions.setCounter(state);
+    
     const config = {
         headers: { 'Content-Type': 'Application/json' },
         body: JSON.stringify({
@@ -78,6 +78,9 @@ const SendValue = () =>{
         .then(data => {
             console.log(data)
             actions.setAvailable(data);
+            if(data){
+                actions.setCounter();
+            }
         })
         .catch(error => console.error(error));
 }
