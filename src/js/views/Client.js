@@ -1,34 +1,83 @@
 import React, { useState, useContext } from 'react';
 import Components from "../components/Components";
 import Log_out from "../components/LogOut";
+import { Context } from "../store/appContext";
 import Calendar_component from "../components/CalendarClient";
 import Calendar_client from '../components/CalendarClient';
 import TableComponet from '../components/Table';
-import Select from 'react-select';
+import Select from 'react-select'
+import { format, compareAsc } from 'date-fns';
+import listCommunes from '../utility/ListCommunes';
 
 const Client = () => {
-    
+
     const [specialty, setSpecialty] = useState("");
     const [commune, setCommune] = useState("");
     const [hour, setHour] = useState("");
 
+    const [morning, setMorning] = useState(1)
+    const [afternoon, setAfternoon] = useState(0)
+    const [evening, setEvening] = useState(0)
+
+    const { store, actions } = useContext(Context);
+
     const specialties = [
-        { value: 'Electricista', label: 'Electricista' },
-        { value: 'Plomero', label: 'Plomero' },
-        { value: 'Carpintero', label: 'Carpintero' }
-    ]
-    const communes = [
-        { value: 'La Florida', label: 'La Florida' },
-        { value: 'Pudahuel', label: 'Pudahuel' },
-        { value: 'Santiago', label: 'Santiago' }
+        { value: 'electricista', label: 'Electricista' },
+        { value: "pintor", label: 'Pintor' },
+        { value: 'plomero', label: 'Plomero' },
+        { value: 'albañil', label: 'Albañil' },
+        { value: 'carpintero', label: 'Carpintero' }
     ]
     const hours = [
-        { value: false, label: '08:00 - 11:00' },
-        { value: true, label: '11:00 - 14:00' },
-        { value: false, label: '14:00 - 17:00' }
+        { value: "morning", label: '08:00 - 11:00' },
+        { value: "afternoon", label: '11:00 - 14:00' },
+        { value: "evening", label: '14:00 - 17:00' }
     ]
+
     const array = [specialty, commune, hour]
     console.log(array)
+
+
+    //POST para obtener los especialistas disponibles
+
+    const SendValue = () => {
+        if (hours == "morning") {
+            setMorning(1);
+            setAfternoon(0);
+            setEvening(0);
+        } else if (hours == "afternoon") {
+            setMorning(0);
+            setAfternoon(1);
+            setEvening(0);
+        } else if (hours == "evening") {
+            setMorning(0);
+            setAfternoon(0);
+            setEvening(1);
+        }
+
+        const config = {
+            headers: { 'Content-Type': 'Application/json' },
+            body: JSON.stringify({
+                "name_specialty": specialty,
+                "name_commune": commune,
+                "date": format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000'),
+                "morning": morning,
+                "afternoon": afternoon,
+                "evening": evening
+            }),
+            method: "POST"
+        }
+        fetch("http://127.0.0.1:5000/service", config)
+            .then(respuesta => respuesta.json())
+            .then(data => {
+                console.log(data)
+                actions.setAvailable(data);
+                if (data) {
+                    actions.setCounter();
+                }
+            })
+            .catch(error => console.error(error));
+    }
 
     return (
         <div className="container">
@@ -38,39 +87,39 @@ const Client = () => {
             </div>
             <br />
             <br />
-                <div className="d-flex col-12">
-                    <div className="container">
-                        <Select defaultValue={{ label: "Especialidad", value: 0 }}
-                            options={specialties}
-                            onChange={e => setSpecialty(e.value)}    
-                        />
-                    </div>
+            <div className="d-flex col-12">
+                <div className="container">
+                    <Select defaultValue={{ label: "Especialidad", value: 0 }}
+                        options={specialties}
+                        onChange={e => setSpecialty(e.value)}
+                    />
+                </div>
 			  &nbsp;
 			  <div className="container">
-                        <Select defaultValue={{ label: "Comuna", value: 0 }}
-                            options={communes}
-                            onChange={e => setCommune(e.value)}
-                        />
-                    </div>
+                    <Select defaultValue={{ label: "Comuna", value: 0 }}
+                        options={listCommunes}
+                        onChange={e => setCommune(e.value)}
+                    />
+                </div>
                 &nbsp;
                 <div className="container">
-                        <Calendar_client 
-                        />
+                    <Calendar_client
+                    />
 
-                    </div>
+                </div>
                 &nbsp;
                 <div className="container">
-                        <Select defaultValue={{ label: "Horario", value: 0 }}
-                            options={hours}
-                            onChange={e => setHour(e.value)}
-                        />
-                    </div>
+                    <Select defaultValue={{ label: "Horario", value: 0 }}
+                        options={hours}
+                        onChange={e => setHour(e.value)}
+                    />
+                </div>
                 &nbsp;
                 <div>
-                        <button type="submit" className="btn btn-success"
-                        >Buscar</button>
-                    </div>
+                    <button type="button" className="btn btn-success" onClick={SendValue}
+                    >Buscar</button>
                 </div>
+            </div>
             <br />
 
             <div className="d-flex col-10">
