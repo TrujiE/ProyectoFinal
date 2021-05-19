@@ -10,7 +10,7 @@ import { format, compareAsc } from 'date-fns';
 
 
 const Client = () => {
-    
+
     const [specialty, setSpecialty] = useState("");
     const [commune, setCommune] = useState("");
     const [hour, setHour] = useState("");
@@ -22,68 +22,70 @@ const Client = () => {
     const { store, actions } = useContext(Context);
 
     const specialties = [
-  { value: 'electricista', label: 'Electricista' },
-  { value: "pintor", label: 'Pintor' },
-  { value: 'plomero', label: 'Plomero' },
-  { value: 'albañil', label: 'Albañil' },
-  { value: 'carpintero', label: 'Carpintero' }
-] 
-const communes = [
-  { value: 'La Florida', label: 'La Florida' },
-  { value: 'Pudahuel', label: 'Pudahuel' },
-  { value: "Centro", label: 'Centro' },
-  { value: 'Santiago', label: 'Santiago' }
-] 
-const hours = [
-  { value: "morning", label: '08:00 - 11:00' },
-  { value: "afternoon", label: '11:00 - 14:00' },
-  { value: "evening", label: '14:00 - 17:00' }
-] 
+        { value: '', label: 'Todas' },
+        { value: 'electricista', label: 'Electricista' },
+        { value: "pintor", label: 'Pintor' },
+        { value: 'plomero', label: 'Plomero' },
+        { value: 'albañil', label: 'Albañil' },
+        { value: 'carpintero', label: 'Carpintero' }
+    ]
+    const communes = [
+        { value: '', label: 'Todas' },
+        { value: 'Florida', label: 'La Florida' },
+        { value: 'Pudahuel', label: 'Pudahuel' },
+        { value: "Centro", label: 'Centro' },
+        { value: 'Santiago', label: 'Santiago' }
+    ]
+    const hours = [
+        { value: "morning", label: '08:00 - 11:00' },
+        { value: "afternoon", label: '11:00 - 14:00' },
+        { value: "evening", label: '14:00 - 17:00' }
+    ]
 
-const array=[specialty, commune, hour]
-console.log(array)
+    const array = [specialty, commune, hour]
+    console.log(array)
 
 
-//POST para obtener los especialistas disponibles
+    //POST para obtener los especialistas disponibles
 
-const SendValue = () =>{
-    if (hours == "morning") {
-        setMorning(1);
-        setAfternoon(0);
-        setEvening(0);
-    } else if(hours == "afternoon"){
-        setMorning(0);
-        setAfternoon(1);
-        setEvening(0);
-    } else if(hours == "evening"){
-        setMorning(0);
-        setAfternoon(0);
-        setEvening(1);
+    const SendValue = () => {
+        if (hour == "morning") {
+            setMorning(1);
+            setAfternoon(0);
+            setEvening(0);
+        } else if (hour == "afternoon") {
+            setMorning(0);
+            setAfternoon(1);
+            setEvening(0);
+        } else if (hour == "evening") {
+            setMorning(0);
+            setAfternoon(0);
+            setEvening(1);
+        }
+
+        const config = {
+            headers: { 'Content-Type': 'Application/json' },
+            body: JSON.stringify({
+                "name_specialty": specialty,
+                "name_commune": commune,
+                "date": format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000'),
+                "morning": morning,
+                "afternoon": afternoon,
+                "evening": evening
+            }),
+            method: "POST"
+        }
+        fetch("http://127.0.0.1:5000/service", config)
+            .then(respuesta => respuesta.json())
+            .then(data => {
+                console.log(data)
+                actions.setAvailable(data);
+                if (data) {
+                    actions.setCounter();
+                }
+            })
+            .catch(error => console.error(error));
     }
-    
-    const config = {
-        headers: { 'Content-Type': 'Application/json' },
-        body: JSON.stringify({
-            "name_specialty": specialty,
-            "name_commune": commune,
-            "date": format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000'),
-            "morning": morning,
-            "afternoon": afternoon,
-            "evening": evening
-        }),
-        method: "POST"
-    }
-    fetch("http://127.0.0.1:5000/service", config)
-        .then(respuesta => respuesta.json())
-        .then(data => {
-            console.log(data)
-            actions.setAvailable(data);
-            if(data){
-                actions.setCounter();
-            }
-        })
-        .catch(error => console.error(error));
-}
 
     return (
         <div className="container">
@@ -94,34 +96,34 @@ const SendValue = () =>{
             <br />
             <br />
 
-            <div className="d-flex col-10"> 
-                    <div className="container"> 
-                        <Select defaultValue={{ label: "Especialidad", value: 0 }}
-                                options={specialties} 
-                                onChange={e => setSpecialty(e.value)}
-                                />
-                     </div>  
-			  &nbsp;    
-			  <div className="container"> 
-                        <Select defaultValue={{ label: "Comuna", value: 0 }}
-                                options={communes} 
-                                onChange={e => setCommune(e.value)}
-                                />
-                     </div>
+            <div className="d-flex col-10">
+                <div className="container">
+                    <Select defaultValue={{ label: "Especialidad", value: 0 }}
+                        options={specialties}
+                        onChange={e => setSpecialty(e.value)}
+                    />
+                </div>
+			  &nbsp;
+			  <div className="container">
+                    <Select defaultValue={{ label: "Comuna", value: 0 }}
+                        options={communes}
+                        onChange={e => setCommune(e.value)}
+                    />
+                </div>
                 &nbsp;
                 <div className="container">
                     <Calendar_client />
                 </div>
                 &nbsp;
-                <div className="container"> 
-                        <Select defaultValue={{ label: "Horario", value: 0 }}
-                                options={hours} 
-                                onChange={e => setHour(e.value)}
-                                />
-                     </div>
+                <div className="container">
+                    <Select defaultValue={{ label: "Horario", value: 0 }}
+                        options={hours}
+                        onChange={e => setHour(e.value)}
+                    />
+                </div>
                 &nbsp;
                 <div>
-                    <button type="button" className="btn btn-success" onClick={SendValue}                  
+                    <button type="button" className="btn btn-success" onClick={SendValue}
                     >Buscar</button>
                 </div>
             </div>
@@ -138,8 +140,7 @@ const SendValue = () =>{
 
             <div className="form-group col-10">
                 <h5>Seleccione su especialista</h5>
-                <TableComponet/>
-                <button style={{ textAlign: "right" }} type="button" className="btn btn-success" >Solicitar</button>
+                <TableComponet commune={commune} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
             </div>
             <br />
             <br />
