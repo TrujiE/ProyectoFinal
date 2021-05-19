@@ -14,6 +14,9 @@ const Client = () => {
     const [specialty, setSpecialty] = useState("");
     const [commune, setCommune] = useState("");
     const [hour, setHour] = useState("");
+    const [check, setCheck] = useState(false);
+    const [address, setAddress] = useState("");
+    const addressDefault = "direccion actual"
 
     const [morning, setMorning] = useState(1)
     const [afternoon, setAfternoon] = useState(0)
@@ -34,9 +37,18 @@ const Client = () => {
         { value: "evening", label: '14:00 - 17:00' }
     ]
 
-    const array = [specialty, commune, hour]
-    console.log(array)
+    // Funcion para habilitar el imput address
+    const handleChange = (e) => {
+        if (check == true) {
+            setAddress(e.target.value);
+        }
+    }
 
+    //Lo que veo en consola
+    const array = [specialty, commune, hour, address]
+    console.log(array)
+    console.log(check)
+    console.log(addressDefault)
 
     //POST para obtener los especialistas disponibles
 
@@ -121,15 +133,30 @@ const Client = () => {
                 </div>
             </div>
             <br />
-
-            <div className="d-flex col-10">
-                <input type="text" className="form-control" id="direccion" placeholder="Direccion actual" /> &nbsp;
+        
+            <div className="d-flex col-8">
+                <input
+                    type="text"
+                    className="form-control"
+                    id="address"
+                    defaultValue={addressDefault}
+                    readonly
+                    onChange={handleChange}
+                />
+            &nbsp;
 				<div className="form-group form-check">
-                    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id="Check"
+                        defaultChecked={false}
+                        checked={check}
+                        onChange={(evento) => setCheck(evento.target.checked)}
+                    />
                     <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
                 </div>
             </div>
-
+            
             <div className="form-group col-10">
                 <h5>Seleccione su especialista</h5>
                 <TableComponet />
