@@ -22,6 +22,7 @@ const Client = () => {
     const { store, actions } = useContext(Context);
 
     const specialties = [
+        { value: '', label: 'Todas' },
         { value: 'electricista', label: 'Electricista' },
         { value: "pintor", label: 'Pintor' },
         { value: 'plomero', label: 'Plomero' },
@@ -41,15 +42,15 @@ const Client = () => {
     //POST para obtener los especialistas disponibles
 
     const SendValue = () => {
-        if (hours == "morning") {
+        if (hour == "morning") {
             setMorning(1);
             setAfternoon(0);
             setEvening(0);
-        } else if (hours == "afternoon") {
+        } else if (hour == "afternoon") {
             setMorning(0);
             setAfternoon(1);
             setEvening(0);
-        } else if (hours == "evening") {
+        } else if (hour == "evening") {
             setMorning(0);
             setAfternoon(0);
             setEvening(1);
@@ -132,8 +133,7 @@ const Client = () => {
 
             <div className="form-group col-10">
                 <h5>Seleccione su especialista</h5>
-                <TableComponet />
-                <button style={{ textAlign: "right" }} type="button" className="btn btn-success" >Solicitar</button>
+                <TableComponet commune={commune} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
             </div>
             <br />
             <br />
