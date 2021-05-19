@@ -7,7 +7,7 @@ import Calendar_client from '../components/CalendarClient';
 import TableComponet from '../components/Table';
 import Select from 'react-select'
 import { format, compareAsc } from 'date-fns';
-
+import listCommunes from '../utility/ListCommunes';
 
 const Client = () => {
 
@@ -28,13 +28,6 @@ const Client = () => {
         { value: 'plomero', label: 'Plomero' },
         { value: 'albañil', label: 'Albañil' },
         { value: 'carpintero', label: 'Carpintero' }
-    ]
-    const communes = [
-        { value: '', label: 'Todas' },
-        { value: 'Florida', label: 'La Florida' },
-        { value: 'Pudahuel', label: 'Pudahuel' },
-        { value: "Centro", label: 'Centro' },
-        { value: 'Santiago', label: 'Santiago' }
     ]
     const hours = [
         { value: "morning", label: '08:00 - 11:00' },
@@ -95,8 +88,7 @@ const Client = () => {
             </div>
             <br />
             <br />
-
-            <div className="d-flex col-10">
+            <div className="d-flex col-12">
                 <div className="container">
                     <Select defaultValue={{ label: "Especialidad", value: 0 }}
                         options={specialties}
@@ -106,13 +98,15 @@ const Client = () => {
 			  &nbsp;
 			  <div className="container">
                     <Select defaultValue={{ label: "Comuna", value: 0 }}
-                        options={communes}
+                        options={listCommunes}
                         onChange={e => setCommune(e.value)}
                     />
                 </div>
                 &nbsp;
                 <div className="container">
-                    <Calendar_client />
+                    <Calendar_client
+                    />
+
                 </div>
                 &nbsp;
                 <div className="container">
@@ -127,7 +121,6 @@ const Client = () => {
                     >Buscar</button>
                 </div>
             </div>
-
             <br />
 
             <div className="d-flex col-10">
