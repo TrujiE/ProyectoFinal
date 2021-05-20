@@ -18,8 +18,16 @@ const Client = () => {
     const [morning, setMorning] = useState(1)
     const [afternoon, setAfternoon] = useState(0)
     const [evening, setEvening] = useState(0)
+    const [address, setAddress] = useState('');
 
     const { store, actions } = useContext(Context);
+
+
+    const [list1, setList1] = useState(['Make the bed', 'Eat', 'Walk the dog']);
+
+    const InputAddress = (e) => {
+        setAddress(e.target.value);
+    }
 
     const specialties = [
         { value: '', label: 'Todas' },
@@ -124,7 +132,14 @@ const Client = () => {
             <br />
 
             <div className="d-flex col-10">
-                <input type="text" className="form-control" id="direccion" placeholder="Direccion actual" /> &nbsp;
+                <input 
+                    type="text" 
+                    className="form-control" 
+                    id="direccion" 
+                    placeholder="Direccion actual" 
+                    value={address}
+                    onChange={InputAddress}
+                    /> &nbsp;
 				<div className="form-group form-check">
                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                     <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
@@ -133,7 +148,7 @@ const Client = () => {
 
             <div className="form-group col-10">
                 <h5>Seleccione su especialista</h5>
-                <TableComponet commune={commune} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
+                <TableComponet commune={commune} address={address} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
             </div>
             <br />
             <br />

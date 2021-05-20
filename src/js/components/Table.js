@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 
-const TableComponet = ({commune, date, hour}) => {
+const TableComponet = ({commune, date, hour, address}) => {
 
     const [valueDefault, setValueDefault] = useState([]);
 
