@@ -55,7 +55,7 @@ const TableComponet = ({commune, date, hour, address}) => {
             alert("Por favor, seleccione un horario de atención");
         } 
         else if (userProfile.user) {
-            console.log("Existe usuario")
+            console.log("Existe usuario", address)
             const config = {
                 headers: { 'Content-Type': 'Application/json' },
                 body: JSON.stringify({
@@ -68,7 +68,7 @@ const TableComponet = ({commune, date, hour, address}) => {
                     "full_name_profile": valueDefault[option].user.full_name,
                     "last_name_profile": valueDefault[option].user.last_name,
                     "contact_phone_profile": valueDefault[option].user.phone,
-                    "address": userProfile.user.address,
+                    "address": address,
                     "date": date,
                     "hour": hour,
                     "id_user": userProfile.user.email,
@@ -83,7 +83,6 @@ const TableComponet = ({commune, date, hour, address}) => {
                     console.log(data);
                 })
                 .catch(error => console.error(error))
-                option=-1;
         }
     }
     return (

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import Components from "../components/Components";
 import Log_out from "../components/LogOut";
 import { Context } from "../store/appContext";
@@ -14,20 +14,14 @@ const Client = () => {
     const [specialty, setSpecialty] = useState("");
     const [commune, setCommune] = useState("");
     const [hour, setHour] = useState("");
-
+    //const [check, setCheck] = useState(false);
+    const [address, setAddress] = useState("");
+    
     const [morning, setMorning] = useState(1)
     const [afternoon, setAfternoon] = useState(0)
     const [evening, setEvening] = useState(0)
-    const [address, setAddress] = useState('');
 
     const { store, actions } = useContext(Context);
-
-
-    const [list1, setList1] = useState(['Make the bed', 'Eat', 'Walk the dog']);
-
-    const InputAddress = (e) => {
-        setAddress(e.target.value);
-    }
 
     const specialties = [
         { value: '', label: 'Todas' },
@@ -43,9 +37,38 @@ const Client = () => {
         { value: "evening", label: '14:00 - 17:00' }
     ]
 
-    const array = [specialty, commune, hour]
-    console.log(array)
+    const userProfile =
+        localStorage.getItem('loginUser') ?
+            JSON.parse(localStorage.getItem('loginUser')) : {};
 
+
+    useEffect(() => {
+        if (userProfile.user) {
+            setAddress(userProfile.user.address);
+        } else{
+            setAddress("");
+        }
+    }, [])
+    
+
+    // Funcion para habilitar el imput address
+    const setCheck = (e) => {
+        if (e.target.checked == false) {
+            document.getElementById("address").disabled = true;
+            setAddress(userProfile.user.address)   
+        } else{
+            document.getElementById("address").disabled = false;
+        }
+    }
+    
+    const handleChange = (e) => {
+        setAddress(e.target.value )       
+    }
+
+    //Lo que veo en consola
+    const array = [specialty, commune, hour, address]
+    console.log(array)
+    //console.log(check)
 
     //POST para obtener los especialistas disponibles
 
@@ -92,7 +115,7 @@ const Client = () => {
         <div className="container">
             <Log_out />
             <div className="d-flex">
-                <h3 style={{ textAlign: "left" }}>Hola Cliente1232 en qué te ayudamos?</h3> &nbsp;
+                <h3 style={{ textAlign: "left" }}>Hola {userProfile.user.full_name? userProfile.user.full_name : ""}, en qué te ayudamos?</h3> &nbsp;
             </div>
             <br />
             <br />
@@ -130,22 +153,29 @@ const Client = () => {
                 </div>
             </div>
             <br />
-
-            <div className="d-flex col-10">
-                <input 
-                    type="text" 
-                    className="form-control" 
-                    id="direccion" 
-                    placeholder="Direccion actual" 
+        
+            <div className="d-flex col-8">
+                <input
+                    type="text"
+                    className="form-control"
+                    id="address"
                     value={address}
-                    onChange={InputAddress}
-                    /> &nbsp;
+                    disabled="disabled"
+                    onChange={handleChange}
+                />
+            &nbsp;
 				<div className="form-group form-check">
-                    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id="Check"
+                        defaultChecked={false}
+                        onChange={setCheck}
+                    />
                     <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
                 </div>
             </div>
-
+            
             <div className="form-group col-10">
                 <h5>Seleccione su especialista</h5>
                 <TableComponet commune={commune} address={address} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
