@@ -76,7 +76,7 @@ const EditFormSpecialist = () => {
     localStorage.getItem('loginUser')?
     JSON.parse(localStorage.getItem('loginUser')):{};
 
-  const {id} = useParams();
+  let id = userProfile.user? userProfile.user.id :'';
 
     const formik = useFormik({
       
@@ -154,7 +154,7 @@ const EditFormSpecialist = () => {
             }),
             method: "PUT"
             }      
-          fetch(`http://127.0.0.1:5000/user/profile/${id}`, profile_user)
+          fetch("http://127.0.0.1:5000/user/profile/" + id, profile_user)
             .then(respuesta => respuesta.json())
             .then(data => console.log(data))  
             .catch(error => console.error(error))      
