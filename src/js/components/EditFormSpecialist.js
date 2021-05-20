@@ -155,7 +155,7 @@ const EditFormSpecialist = () => {
               "question": values.secretQuestion,
               "answer": values.secretAswer,
               "experience": values.skills,
-              "communes": ["santiago","lo prado","quilicura","La reina"]
+              "communes": values.attentionComunes.map(item => item.value)
             }),
             method: "PUT"
             }      
@@ -312,8 +312,10 @@ const EditFormSpecialist = () => {
           options={comunasList}
           className="basic-multi-select mb-3"
           classNamePrefix="select"
-          name="attentionComune" 
-                
+          name="attentionComunes" 
+          onChange = {e =>  ( formik.setFieldValue("attentionComunes", e))}
+          value= {formik.values.attentionComunes}
+     
 
         />
 

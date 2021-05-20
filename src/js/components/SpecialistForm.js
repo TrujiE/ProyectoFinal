@@ -15,6 +15,8 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 
 
+
+
 const SpecialistForm = () => {
 
   const listaComunas = comunasList2.map((comuna, index) =>
@@ -34,8 +36,8 @@ const SpecialistForm = () => {
       confirmPassword: "",
       secretQuestion: "",
       secretAswer: "",
-      specialty: "",
-      attentionComunes: ["santiago","providencia","quilicura"],
+      specialty: [],
+      attentionComunes: [],
       skills: "",
     },
 
@@ -118,11 +120,12 @@ const SpecialistForm = () => {
           "address" : values.adress,
           "name_commune" : values.comuna,
           "password" : values.password,
-          "role" : values.specialty,
+          "role" : "specialist",
           "question": values.secretQuestion,
           "answer": values.secretAswer,
           "experience": values.skills,
-          "communes": ["santiago","lo prado","quilicura","La reina"]
+          "name_specialty": ["pitor","carpintero","electricista"],
+          "communes": values.attentionComunes.map(item => item.value) 
         }),
         method: "POST"
         }
@@ -347,7 +350,12 @@ const SpecialistForm = () => {
           className="basic-multi-select mb-3"
           classNamePrefix="select"
           options={comunasList}
-          name="attentionComune" 
+          name="attentionComunes" 
+
+          onChange = {e =>  ( formik.setFieldValue("attentionComunes", e))}
+          value= {formik.values.attentionComunes}
+
+
                 
 
         />
