@@ -37,7 +37,7 @@ const EditFormClient = () => {
           confirmPassword: "",
           secretQuestion: userProfile.user? userProfile.profile.question :'',
           secretAswer: userProfile.user? userProfile.profile.answer :'',
-          specialty: userProfile.user? userProfile.profile.role :'',
+          // specialty: userProfile.user? userProfile.profile.role :'',
         },
     
         validationSchema: Yup.object().shape({
