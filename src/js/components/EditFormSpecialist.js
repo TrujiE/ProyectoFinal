@@ -5,6 +5,7 @@ import Select from "react-select";
 import {useParams} from "react-router-dom";
 import comunasList2 from "../utils/communesFile"
 import comunasList from "../utils/comunasObj"
+import specialties from "../utils/specialties"
 
 
 
@@ -38,8 +39,8 @@ const EditFormSpecialist = () => {
           confirmPassword: "",
           secretQuestion: userProfile.user? userProfile.profile.question :'',
           secretAswer: userProfile.user? userProfile.profile.answer :'',
-          specialty: userProfile.user? userProfile.profile.role :'',
-          attentionComunes: ["santiago","providencia","quilicura"],
+          specialty: userProfile.user? userProfile.profile.name_specialty :[],
+          attentionComunes: userProfile.user? userProfile.profile.communes :[],
           skills: userProfile.user? userProfile.profile.experience :'',
         },
     
@@ -75,8 +76,8 @@ const EditFormSpecialist = () => {
             .required("se requiere la respuesta secreta")
             .max(30, "respuesta  debe ser 30 caracteres maximo"),
 
-            specialty: Yup.string()
-            .required("se requiere la especialidad"),
+            // specialty: Yup.string()
+            // .required("se requiere la especialidad"),
     
             // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
             // .required(),
@@ -96,10 +97,11 @@ const EditFormSpecialist = () => {
               "address" : values.adress,
               "name_commune" : values.comuna,
               "password" : values.password,
-              "role" : values.specialty,
+              "role" : "specialist",
               "question": values.secretQuestion,
               "answer": values.secretAswer,
               "experience": values.skills,
+              "name_specialty": values.specialty.map(item => item.value),
               "communes": values.attentionComunes.map(item => item.value)
             }),
             method: "PUT"
@@ -231,20 +233,18 @@ const EditFormSpecialist = () => {
             ) : null}
 
 
-<label htmlFor="specialty">Especialidad</label>
-        <select
-          className="form-control mb-3"
+        <label htmlFor="specialty">Especialidad</label>
+        <Select
+          isMulti
+          className="basic-multi-select mb-3"
           id="specialty"
           name="specialty"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.specialty}
-        >
-          <option selected>Electricista</option>
-          <option value="Plomero">Plomero</option>
-          <option value="Carpintero">Carpintero</option>
-          <option value="Albañil">Albañil</option>
-        </select>
+          options = {specialties}
+          onChange = {e => (formik.setFieldValue("specialty", e))}
+          value = {formik.values.specialty}
+          
+          
+        />
 
         {formik.touched.specialty && formik.errors.specialty ? (
           <div className="text-danger"> {formik.errors.specialty}</div>
