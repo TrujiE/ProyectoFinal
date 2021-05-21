@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import comunasList2 from "../utils/communesFile"
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
@@ -10,7 +11,13 @@ const numericRegex = /(?=.*[0-9])/;
 const rutRegex = "^([0-9]+-[0-9Kk])$";
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
+
 const ClientForm = () => {
+
+  const listaComunas = comunasList2.map((comuna, index) =>
+  <option value={comuna}>{comuna}</option>
+)
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -123,7 +130,7 @@ const ClientForm = () => {
         />
 
         {formik.touched.firstName && formik.errors.firstName ? (
-          <div className="alert alert-danger " role>{formik.errors.firstName}</div>
+          <div className=" text-danger " role>{formik.errors.firstName}</div>
         ) : null}
 
         <label htmlFor="lastName">Apellido</label>
@@ -219,11 +226,13 @@ const ClientForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.comuna}
         >
-          <option selected>Santiago</option>
-          <option value="Providencia">Providencia</option>
-          <option value="Maipu">Maipu</option>
-          <option value="Valparaiso">Valparaiso</option>
-        </select>
+        <option selected>
+            Elija una comuna 
+          </option>
+          
+          {listaComunas}
+
+          </select>
 
         {formik.touched.comuna && formik.errors.comuna ? (
           <div className="text-danger">{formik.errors.comuna}</div>
