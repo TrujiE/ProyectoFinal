@@ -15,8 +15,9 @@ const Client = () => {
     const [commune, setCommune] = useState("");
     const [hour, setHour] = useState("");
     const [check, setCheck] = useState(false);
-    const [address, setAddress] = useState("");
     const addressDefault = "direccion actual"
+    const [address, setAddress] = useState(addressDefault);
+    
 
     const [morning, setMorning] = useState(1)
     const [afternoon, setAfternoon] = useState(0)
@@ -25,7 +26,6 @@ const Client = () => {
     const { store, actions } = useContext(Context);
 
     const specialties = [
-        { value: '', label: 'Todas' },
         { value: 'electricista', label: 'Electricista' },
         { value: "pintor", label: 'Pintor' },
         { value: 'plomero', label: 'Plomero' },
@@ -40,7 +40,9 @@ const Client = () => {
 
     // Funcion para habilitar el imput address
     const handleChange = (e) => {
-        if (check == true) {
+        if (check == false) {
+            setAddress(addressDefault);
+        } else if (check == true){
             setAddress(e.target.value);
         }
     }
@@ -49,20 +51,19 @@ const Client = () => {
     const array = [specialty, commune, hour, address]
     console.log(array)
     console.log(check)
-    console.log(addressDefault)
 
     //POST para obtener los especialistas disponibles
 
     const SendValue = () => {
-        if (hour == "morning") {
+        if (hours == "morning") {
             setMorning(1);
             setAfternoon(0);
             setEvening(0);
-        } else if (hour == "afternoon") {
+        } else if (hours == "afternoon") {
             setMorning(0);
             setAfternoon(1);
             setEvening(0);
-        } else if (hour == "evening") {
+        } else if (hours == "evening") {
             setMorning(0);
             setAfternoon(0);
             setEvening(1);
@@ -140,7 +141,8 @@ const Client = () => {
                     type="text"
                     className="form-control"
                     id="address"
-                    defaultValue={addressDefault}
+                    placeholder={addressDefault}
+                    Value={address}
                     readonly
                     onChange={handleChange}
                 />
@@ -160,7 +162,8 @@ const Client = () => {
             
             <div className="form-group col-10">
                 <h5>Seleccione su especialista</h5>
-                <TableComponet commune={commune} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
+                <TableComponet />
+                <button style={{ textAlign: "right" }} type="button" className="btn btn-success" >Solicitar</button>
             </div>
             <br />
             <br />
