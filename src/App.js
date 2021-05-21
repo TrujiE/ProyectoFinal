@@ -29,8 +29,8 @@ function App() {
 						<Route exact path="/especialista" component={Specialist} />
 						<Route exact path="/solicitudes" component={RequestsClient} />
                         <Route exact path="/seleccionUsuario" component={Select_user} />  
-                        <Route exact path="/editarCliente/:id" component={EditClient} />  
-                        <Route exact path="/editarEspecialista/:id" component={EditSpecialist} />  
+                        <Route exact path="/editarCliente" component={EditClient} />  
+                        <Route exact path="/editarEspecialista" component={EditSpecialist} />  
 						<Route render={() => <h1 className="notfound">Not found!</h1>} />
 					</Switch>
 				</div>
