@@ -41,7 +41,7 @@ const Client = () => {
         localStorage.getItem('loginUser') ?
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
-
+    let id = userProfile.user? userProfile.user.id :'';
     useEffect(() => {
         if (userProfile.user) {
             setAddress(userProfile.user.address);
@@ -99,13 +99,14 @@ const Client = () => {
             }),
             method: "POST"
         }
-        fetch("http://127.0.0.1:5000/service", config)
+        fetch("http://127.0.0.1:5000/service/"+ id, config)
             .then(respuesta => respuesta.json())
             .then(data => {
                 console.log(data)
                 actions.setAvailable(data);
                 if (data) {
                     actions.setCounter();
+                    actions.setSpecialists();
                 }
             })
             .catch(error => console.error(error));
