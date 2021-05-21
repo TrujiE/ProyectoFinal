@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useState, useContext, useEffect} from 'react';
 import LogOut from "../components/LogOut";
+import TableRequestsClient from '../components/Table';
+import { Context } from "../store/appContext";
+import { format, compareAsc } from 'date-fns';
+
 
 const RequestsClient = () => {
+    const [specialty, setSpecialty] = useState("");
+    const [commune, setCommune] = useState("");
+    const [hour, setHour] = useState("");
+    //const [check, setCheck] = useState(false);
+    const [address, setAddress] = useState("");
+    
+    const [morning, setMorning] = useState(1)
+    const [afternoon, setAfternoon] = useState(0)
+    const [evening, setEvening] = useState(0)
+
+    const { store, actions } = useContext(Context);
+
+    const specialties = [
+        { value: '', label: 'Todas' },
+        { value: 'electricista', label: 'Electricista' },
+        { value: "pintor", label: 'Pintor' },
+        { value: 'plomero', label: 'Plomero' },
+        { value: 'albañil', label: 'Albañil' },
+        { value: 'carpintero', label: 'Carpintero' }
+    ]
+    const hours = [
+        { value: "morning", label: '08:00 - 11:00' },
+        { value: "afternoon", label: '11:00 - 14:00' },
+        { value: "evening", label: '14:00 - 17:00' }
+    ]
+    const userProfile =
+    localStorage.getItem('loginUser') ?
+        JSON.parse(localStorage.getItem('loginUser')) : {};  
+
     return (
         <div className="container">
             <LogOut />
@@ -68,8 +101,8 @@ const RequestsClient = () => {
                 </div>
 
                 <div className="col-9">
-                    <div className="row justify-content-center mt-5 mb-5">
-                        <h5>Hola Cliente xxxx en que te ayudamos?</h5>
+                    <div className="row justify-content-left mt-5 mb-5">
+                        <h5>Hola {userProfile.user.full_name? userProfile.user.full_name : ""} en que te ayudamos?</h5>
                     </div>
 
                     <div className="tab-content" id="v-pills-tabContent">
@@ -106,7 +139,7 @@ const RequestsClient = () => {
                             <div className="container">
                                 <div className="row justify-content-between">
                                     <div className="col-4">
-                                        <h4>Solicitudes</h4>
+                                        <h5>Seleccione su Solicitud</h5>
                                     </div>
                                     <div className="d-flex col-8">
                                         <div className="form-check">
@@ -117,28 +150,14 @@ const RequestsClient = () => {
                                             ></input>
                                             <label className="form-check-label" for="defaultCheck1">
                                                 Mostrar todo
-                      </label>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <ul className="list-group">
-                                <li href="#" className="list-group-item list-group-item-action">
-                                    Solicitud 1
-                </li>
-                                <li href="#" className="list-group-item list-group-item-action">
-                                    Solicitud 2
-                </li>
-                                <li href="#" className="list-group-item list-group-item-action">
-                                    Solicitud 3
-                </li>
-                                <li href="#" className="list-group-item list-group-item-action">
-                                    Solicitud 4
-                </li>
-                                <li href="#" className="list-group-item list-group-item-action">
-                                    Solicitud 5
-                </li>
-                            </ul>
+                            <div className="form-group col-10">
+                                <TableRequestsClient hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />                                    
+                            </div>
                         </div>
                     </div>
                 </div>
