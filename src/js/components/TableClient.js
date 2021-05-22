@@ -46,7 +46,7 @@ const TableRequestsClient = ({commune, date, hour, address}) => {
                 body: JSON.stringify({
                     "id": userProfile.user.id
                 }),
-                method: "POST"
+                method: "GET"
             }
             fetch("http://127.0.0.1:5000/user/requests_client/<int:id>", config)
                 .then(respuesta => respuesta.json())
