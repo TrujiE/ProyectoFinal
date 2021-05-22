@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
+import { format, compareAsc } from 'date-fns';
 
 const TableRequestsClient = ({date, hour}) => {
 
@@ -14,20 +15,22 @@ const TableRequestsClient = ({date, hour}) => {
     const userProfile =
         localStorage.getItem('loginUser') ?
             JSON.parse(localStorage.getItem('loginUser')) : {};
-
+        
+    let id = userProfile.user? userProfile.user.id :'';
+    date = format(new Date(store.startDate), 'yyyy-MM-dd')
     // GET para obtener los valores por defecto
     useEffect(() => {
-        const config = {
-            headers: { 'Content-Type': 'Application/json' },
-            body: JSON.stringify({
-                "id": userProfile.user.id
-            }),
-            method: "GET"
-            }
-        fetch("http://127.0.0.1:5000/user/requests_client", config)
+        fetch("http://127.0.0.1:5000/user/requests_client/" + id)
             .then(respuesta => respuesta.json())
             .then(data => {
                 setValueDefault(data);
+                if (Array.isArray(data)) {
+                    setState(true)
+                    console.log(state, "es un arreglo")
+                } else {
+                    console.log(state, "no es un arreglo")
+                    setState(false)
+                }                
             })
             .catch(error => console.error(error));
     }, [])
@@ -72,7 +75,7 @@ const TableRequestsClient = ({date, hour}) => {
                                     <td>{list.requests.full_name_profile}</td>
                                     <td>{list.requests.last_name_profile}</td>
                                     <td>{list.requests.request_status}</td>
-                                    <td>{list.requests.date}</td>
+                                    <td>{list.requests.date=format(new Date(store.startDate), 'dd-MM-yyyy')}</td>
                                     <td>{list.requests.hour}</td>                                    
                                     <td>
                                         <div className="form-check">

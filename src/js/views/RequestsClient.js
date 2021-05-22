@@ -34,6 +34,39 @@ const RequestsClient = () => {
     const userProfile =
     localStorage.getItem('loginUser') ?
         JSON.parse(localStorage.getItem('loginUser')) : {};  
+    
+    let id = userProfile.user? userProfile.user.id :'';
+
+    const SendValue = () => {
+        if (hour == "morning") {
+            setMorning(1);
+            setAfternoon(0);
+            setEvening(0);
+        } else if (hour == "afternoon") {
+            setMorning(0);
+            setAfternoon(1);
+            setEvening(0);
+        } else if (hour == "evening") {
+            setMorning(0);
+            setAfternoon(0);
+            setEvening(1);
+        }
+
+        const config = {
+            headers: { 'Content-Type': 'Application/json' },
+            body: JSON.stringify({
+                "date": format(new Date(store.startDate), 'yyyy-MM-dd')
+            }),
+            method: "GET"
+        }
+        fetch("http://127.0.0.1:5000/user/requests_client/"+ id, config)
+            .then(respuesta => respuesta.json())
+            .then(data => {
+                console.log(data)
+                actions.setAvailable(data);
+            })
+            .catch(error => console.error(error));
+    }
 
     return (
         <div className="container">
@@ -104,7 +137,6 @@ const RequestsClient = () => {
                     <div className="row justify-content-left mt-5 mb-5">
                         <h5>Hola {userProfile.user.full_name? userProfile.user.full_name : ""} acá puedes revisar tus solicitudes.</h5>
                     </div>
-
                     <div className="tab-content" id="v-pills-tabContent">
                         <div
                             className="tab-pane fade"
@@ -140,11 +172,11 @@ const RequestsClient = () => {
                                 <div className="row justify-content-between">
                                     <div className="col-4">
                                         <h5>Seleccione su Solicitud</h5>
-                                    </div>
+                                    </div>                                  
                                 </div>
                             </div>
                             <div className="form-group col-10">
-                                <TableRequestsClient hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />                                    
+                                <TableRequestsClient hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd')} />                                    
                             </div>
                         </div>
                     </div>
