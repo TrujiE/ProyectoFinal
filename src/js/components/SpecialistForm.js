@@ -2,9 +2,9 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
-
-
-
+import comunasList2 from "../utils/communesFile"
+import comunasList from "../utils/comunasObj"
+import specialties from "../utils/specialties"
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
@@ -14,62 +14,16 @@ const numericRegex = /(?=.*[0-9])/;
 const rutRegex= ("^([0-9]+-[0-9Kk])$");
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
-const comunasList = [
-  { value: "Alhué", label: "Alhué" },
-  { value: "Buin", label: "Buin" },
-  { value: "Calera de Tango", label: "Calera de Tango" },
-  { value: "Cerrillos", label: "Cerrillos" },
-  { value: "Cerro Navia", label: "Cerro Navia" },
-  { value: "Colina", label: "Colina" },
-  { value: "Conchalí", label: "Conchalí" },
-  { value: "Curacaví", label: "Curacaví" },
-  { value: "El Bosque", label: "El Bosque" },
-  { value: "El Monte", label: "El Monte" },
-  { value: "Estación Central", label: "Estación Central" },
-  { value: "Huechuraba", label: "Huechuraba" },
-  { value: "Independencia", label: "Independencia" },
-  { value: "Isla de Maipo", label: "Isla de Maipo" },
-  { value: "La Cisterna", label: "La Cisterna" },
-  { value: "La Florida", label: "La Florida" },
-  { value: "La Granja", label: "La Granja" },
-  { value: "La Pintana", label: "La Pintana" },
-  { value: "La Reina", label: "La Reina" },
-  { value: "Lampa", label: "Lampa" },
-  { value: "Las Condes", label: "Las Condes" },
-  { value: "Lo Barnechea", label: "Lo Barnechea" },
-  { value: "Lo Espejo", label: "Lo Espejo" },
-  { value: "Lo Prado", label: "Lo Prado" },
-  { value: "Macul", label: "Macul" },
-  { value: "Maipú", label: "Maipú" },
-  { value: "María Pinto", label: "María Pinto" },
-  { value: "Melipilla", label: "Melipilla" },
-  { value: "Ñuñoa", label: "Ñuñoa" },
-  { value: "Padre Hurtado", label: "Padre Hurtado" },
-  { value: "Paine", label: "Paine" },
-  { value: "Pedro Aguirre Cerda", label: "Pedro Aguirre Cerda" },
-  { value: "Peñaflor", label: "Peñaflor" },
-  { value: "Peñalolén", label: "Peñalolén" },
-  { value: "Pirque", label: "Pirque" },
-  { value: "Providencia", label: "Providencia" },
-  { value: "Pudahuel", label: "Pudahuel" },
-  { value: "Puente Alto", label: "Puente Alto" },
-  { value: "Quilicura", label: "Quilicura" },
-  { value: "Quinta Normal", label: "Quinta Normal" },
-  { value: "Recoleta", label: "Recoleta" },
-  { value: "Renca", label: "Renca" },
-  { value: "San Bernardo", label: "San Bernardo" },
-  { value: "San Joaquín", label: "San Joaquín" },
-  { value: "San José de Maipo", label: "San José de Maipo" },
-  { value: "San Miguel", label: "San Miguel" },
-  { value: "San Pedro", label: "San Pedro" },
-  { value: "San Ramón", label: "San Ramón" },
-  { value: "Santiago", label: "Santiago" },
-  { value: "Talagante", label: "Talagante" },
-  { value: "Tiltil", label: "Tiltil" },
-  { value: "Vitacura", label: "Vitacura" },
-];
+
+
+
 
 const SpecialistForm = () => {
+
+  const listaComunas = comunasList2.map((comuna, index) =>
+  <option value={comuna}>{comuna}</option>
+)
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -83,8 +37,8 @@ const SpecialistForm = () => {
       confirmPassword: "",
       secretQuestion: "",
       secretAswer: "",
-      specialty: "",
-      attentionComunes: ["santiago","providencia","quilicura"],
+      specialty: [],
+      attentionComunes: [],
       skills: "",
     },
 
@@ -100,7 +54,7 @@ const SpecialistForm = () => {
         .max(15, "apellido muy largo debe ser 15 caracteres maximo"),
 
       rut: Yup.string().required("se requiere el rut")
-      .matches(rutRegex, "rut invalido"),
+        .matches(rutRegex, "rut invalido"),
 
 
       email: Yup.string()
@@ -110,7 +64,7 @@ const SpecialistForm = () => {
         .max(30, "correo  debe ser 30 caracteres maximo")
         .required("se requiere el correo"),
 
-        phoneNumber: Yup.string().required("se requiere el telefono")
+      phoneNumber: Yup.string().required("se requiere el telefono")
         .matches(phonereg,"ingrese un formato de numero valido"),
 
       adress: Yup.string()
@@ -140,14 +94,14 @@ const SpecialistForm = () => {
         .required("se requiere la respuesta secreta")
         .max(30, "respuesta  debe ser 30 caracteres maximo"),
 
-        specialty: Yup.string()
-        .required("se requiere la especialidad"),
+      // specialty: Yup.Array().of(yup.string)
+      //   .required("se requiere la especialidad"),
 
         // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
         // .required(),
 
-        skills: Yup.string()
-        .required("se requiere el la pregunta secreta"),
+      skills: Yup.string()
+        .required("se requiere la experiencia"),
 
 
 
@@ -167,11 +121,12 @@ const SpecialistForm = () => {
           "address" : values.adress,
           "name_commune" : values.comuna,
           "password" : values.password,
-          "role" : values.specialty,
+          "role" : "specialist",
           "question": values.secretQuestion,
           "answer": values.secretAswer,
           "experience": values.skills,
-          "communes": ["santiago","lo prado","quilicura","La reina"]
+          "name_specialty": values.specialty.map(item => item.value),
+          "communes": values.attentionComunes.map(item => item.value) 
         }),
         method: "POST"
         }
@@ -296,10 +251,10 @@ const SpecialistForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.comuna}
         >
-          <option selected>Santiago</option>
-          <option value="Providencia">Providencia</option>
-          <option value="Maipu">Maipu</option>
-          <option value="Valparaiso">Valparaiso</option>
+          <option selected>Elija una comuna</option>
+        
+          {listaComunas}
+
         </select>
 
         {formik.touched.comuna && formik.errors.comuna ? (
@@ -371,39 +326,40 @@ const SpecialistForm = () => {
         ) : null}
 
         <label htmlFor="specialty">Especialidad</label>
-        <select
-          className="form-control mb-3"
+        <Select
+          isMulti
+          className="basic-multi-select mb-3"
           id="specialty"
           name="specialty"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.specialty}
-        >
-          <option selected>Electricista</option>
-          <option value="Plomero">Plomero</option>
-          <option value="Carpintero">Carpintero</option>
-          <option value="Albañil">Albañil</option>
-        </select>
+          options = {specialties}
+          onChange = {e => (formik.setFieldValue("specialty", e))}
+          value = {formik.values.specialty}
+          
+          
+        />
+      
 
         {formik.touched.specialty && formik.errors.specialty ? (
           <div className="text-danger"> {formik.errors.specialty}</div>
         ) : null}
 
-        {/* <label htmlFor="attentionComune">Comunas que atiende</label>
+        <label htmlFor="attentionComune">Comunas que atiende</label>
 
         <Select
           isMulti
-          options={comunasList}
           className="basic-multi-select mb-3"
           classNamePrefix="select"
-          name="attentionComune" 
-                
+          options={comunasList}
+          name="attentionComunes" 
+
+          onChange = {e =>  ( formik.setFieldValue("attentionComunes", e))}
+          value= {formik.values.attentionComunes}           
 
         />
 
-        {formik.touched.attentionComune && formik.errors.sattentionComune ? (
+        {formik.touched.attentionComune && formik.errors.attentionComune ? (
           <div className="text-danger"> {formik.errors.attentionComune}</div>
-        ) : null} */}
+        ) : null}
 
         <label htmlFor="skills">Experiencia</label>
         <textarea

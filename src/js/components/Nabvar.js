@@ -13,8 +13,8 @@ const Nabvar = () => {
                     <Link className="nav-link" to="/cliente">PerfilCliente</Link>
                     <Link className="nav-link" to="/especialista">PerfilEspecialista</Link>
                     <Link className="nav-link" to="/solicitudes">Solicitudes</Link>
-                    <Link className="nav-link" to="/editarCliente/:id">EditarCliente</Link>
-                    <Link className="nav-link" to="/editarEspecialista/:id">EditarEspecialista</Link>
+                    <Link className="nav-link" to="/editarCliente">EditarCliente</Link>
+                    <Link className="nav-link" to="/editarEspecialista">EditarEspecialista</Link>
                 </div>
             </div>
         </nav>
