@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 
-const TableRequestsClient = ({commune, date, hour, address}) => {
+const TableRequestsClient = ({date, hour}) => {
 
     const [valueDefault, setValueDefault] = useState([]);
 
@@ -39,6 +39,8 @@ const TableRequestsClient = ({commune, date, hour, address}) => {
 
     const CancelRequest = () => {
 
+        alert("¿Está seguro de CANCELAR la solicitud?");
+        
     }
 
     const CloseRequest = () => {
