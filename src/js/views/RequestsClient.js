@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect} from 'react';
 import LogOut from "../components/LogOut";
-import TableRequestsClient from '../components/Table';
+import TableRequestsClient from '../components/TableClient';
 import { Context } from "../store/appContext";
 import { format, compareAsc } from 'date-fns';
 
@@ -102,7 +102,7 @@ const RequestsClient = () => {
 
                 <div className="col-9">
                     <div className="row justify-content-left mt-5 mb-5">
-                        <h5>Hola {userProfile.user.full_name? userProfile.user.full_name : ""} en que te ayudamos?</h5>
+                        <h5>Hola {userProfile.user.full_name? userProfile.user.full_name : ""} acá puedes revisar tus solicitudes.</h5>
                     </div>
 
                     <div className="tab-content" id="v-pills-tabContent">
@@ -140,18 +140,6 @@ const RequestsClient = () => {
                                 <div className="row justify-content-between">
                                     <div className="col-4">
                                         <h5>Seleccione su Solicitud</h5>
-                                    </div>
-                                    <div className="d-flex col-8">
-                                        <div className="form-check">
-                                            <input
-                                                className="form-check-input"
-                                                type="checkbox"
-                                                id="defaultCheck1"
-                                            ></input>
-                                            <label className="form-check-label" for="defaultCheck1">
-                                                Mostrar todo
-                                            </label>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

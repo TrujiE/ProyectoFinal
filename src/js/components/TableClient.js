@@ -9,53 +9,42 @@ const TableRequestsClient = ({commune, date, hour, address}) => {
 
     const [state, setState] = useState(false);
 
+    let option = -1;    
+
     const userProfile =
         localStorage.getItem('loginUser') ?
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
     // GET para obtener los valores por defecto
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/user/requests_client/<int:id>")
+        const config = {
+            headers: { 'Content-Type': 'Application/json' },
+            body: JSON.stringify({
+                "id": userProfile.user.id
+            }),
+            method: "GET"
+            }
+        fetch("http://127.0.0.1:5000/user/requests_client", config)
             .then(respuesta => respuesta.json())
             .then(data => {
                 setValueDefault(data);
-                if (Array.isArray(valueDefault)) {
-                    setState(true)
-                } else {
-                    setState(false)
-                }
             })
             .catch(error => console.error(error));
     }, [])
 
-    useEffect(() => {
-        if (Array.isArray(store.specialistsAvailable)) {
-            setValueDefault(store.specialistsAvailable);
-            console.log(valueDefault, "uno mas")
-            setState(true)
-        } else {
-            setState(false)
-        }
-        console.log(valueDefault, "valueDefault dentro")
-    }, [store.counter])
-
-    const Choose = () => {
-        if (userProfile.user) {
-            const config = {
-                headers: { 'Content-Type': 'Application/json' },
-                body: JSON.stringify({
-                    "id": userProfile.user.id
-                }),
-                method: "GET"
-            }
-            fetch("http://127.0.0.1:5000/user/requests_client/<int:id>", config)
-                .then(respuesta => respuesta.json())
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => console.error(error))
-        }
+    const checkInput = (index) => {
+        option = index;
+        console.log(option);
     }
+
+    const CancelRequest = () => {
+
+    }
+
+    const CloseRequest = () => {
+
+    }
+
     return (
         <div className="table-responsive-xl">
             <table className="table table-sm">
@@ -104,10 +93,10 @@ const TableRequestsClient = ({commune, date, hour, address}) => {
                     }
                 </tbody>
             </table>
-            <button style={{ textAlign: "right" }} type="button" className="btn btn-danger" onClick={Choose}
-            >Cancelar</button>
-            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={Choose}
-            >Cerrada</button>
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-danger" onClick={CancelRequest}
+            >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CloseRequest}
+            >Cerrar Solicitud</button>
         </div>
     )
 }
