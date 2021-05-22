@@ -15,15 +15,19 @@ const TableComponet = ({commune, date, hour, address}) => {
         localStorage.getItem('loginUser') ?
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
+    let id = userProfile.user? userProfile.user.id :'';
+
     // GET para obtener los valores por defecto
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/service/default")
+        fetch("http://127.0.0.1:5000/service/default/" + id)
             .then(respuesta => respuesta.json())
             .then(data => {
                 setValueDefault(data);
-                if (Array.isArray(valueDefault)) {
+                if (Array.isArray(data)) {
                     setState(true)
+                    console.log(state, "es un arreglo")
                 } else {
+                    console.log(state, "no es un arreglo")
                     setState(false)
                 }
             })
@@ -31,7 +35,8 @@ const TableComponet = ({commune, date, hour, address}) => {
     }, [])
 
     useEffect(() => {
-        if (Array.isArray(store.specialistsAvailable)) {
+        if (Array.isArray(store.specialistsAvailable) && store.specialists>0 ) { 
+            actions.resetSpecialists();
             setValueDefault(store.specialistsAvailable);
             console.log(valueDefault, "uno mas")
             setState(true)
