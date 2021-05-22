@@ -125,7 +125,7 @@ const EditFormSpecialist = () => {
               id="phoneNumber"
               name="phoneNumber"
               type="text"
-              placeholder={userProfile.user.phone}
+              placeholder="telefonoooo"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phoneNumber}
