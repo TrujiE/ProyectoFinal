@@ -16,17 +16,7 @@ const TableRequestsClient = ({date, hour}) => {
         localStorage.getItem('loginUser') ?
             JSON.parse(localStorage.getItem('loginUser')) : {};
         
-    let id = userProfile.user? userProfile.user.id :'';
-    date =Date.parse(date);
-    
-
-    if (hour == "morning") {
-        hour= '08:00 - 11:00';
-    } else if (hour == "afternoon") {
-        hour= '11:00 - 14:00';
-    } else if (hour == "evening") {
-        hour= '14:00 - 17:00';
-    }
+    let id = userProfile.user? userProfile.user.id :''; 
     
     // GET para obtener los valores por defecto
     useEffect(() => {
@@ -132,7 +122,6 @@ const TableRequestsClient = ({date, hour}) => {
                                                 id="exampleRadios1"
                                                 value="option1"
                                                 onClick={() => checkInput(index)}
-
                                             />
                                         </div>
                                     </td>

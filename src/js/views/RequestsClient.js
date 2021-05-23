@@ -6,53 +6,13 @@ import { format, compareAsc } from 'date-fns';
 
 
 const RequestsClient = () => {
-    const [specialty, setSpecialty] = useState("");
-    const [commune, setCommune] = useState("");
     const [hour, setHour] = useState("");
-    //const [check, setCheck] = useState(false);
-    const [address, setAddress] = useState("");
-    
-    const [morning, setMorning] = useState(1)
-    const [afternoon, setAfternoon] = useState(0)
-    const [evening, setEvening] = useState(0)
-
     const { store, actions } = useContext(Context);
-
-    const specialties = [
-        { value: '', label: 'Todas' },
-        { value: 'electricista', label: 'Electricista' },
-        { value: "pintor", label: 'Pintor' },
-        { value: 'plomero', label: 'Plomero' },
-        { value: 'albañil', label: 'Albañil' },
-        { value: 'carpintero', label: 'Carpintero' }
-    ]
-    const hours = [
-        { value: "morning", label: '08:00 - 11:00' },
-        { value: "afternoon", label: '11:00 - 14:00' },
-        { value: "evening", label: '14:00 - 17:00' }
-    ]
     const userProfile =
     localStorage.getItem('loginUser') ?
         JSON.parse(localStorage.getItem('loginUser')) : {};  
     
     let id = userProfile.user? userProfile.user.id :'';
-
-    const SendValue = () => {
-        const config = {
-            headers: { 'Content-Type': 'Application/json' },
-            body: JSON.stringify({
-            }),
-            method: "GET"
-        }
-        fetch("http://127.0.0.1:5000/user/requests_client/"+ id, config)
-            .then(respuesta => respuesta.json())
-            .then(data => {
-                console.log(data)
-                actions.setAvailable(data);
-            })
-            .catch(error => console.error(error));
-    }
-
     return (
         <div className="container">
             <LogOut />
