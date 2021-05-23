@@ -38,24 +38,9 @@ const RequestsClient = () => {
     let id = userProfile.user? userProfile.user.id :'';
 
     const SendValue = () => {
-        if (hour == "morning") {
-            setMorning(1);
-            setAfternoon(0);
-            setEvening(0);
-        } else if (hour == "afternoon") {
-            setMorning(0);
-            setAfternoon(1);
-            setEvening(0);
-        } else if (hour == "evening") {
-            setMorning(0);
-            setAfternoon(0);
-            setEvening(1);
-        }
-
         const config = {
             headers: { 'Content-Type': 'Application/json' },
             body: JSON.stringify({
-                "date": format(new Date(store.startDate), 'yyyy-MM-dd')
             }),
             method: "GET"
         }
@@ -176,7 +161,7 @@ const RequestsClient = () => {
                                 </div>
                             </div>
                             <div className="form-group col-10">
-                                <TableRequestsClient hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd')} />                                    
+                                <TableRequestsClient hour={hour} date={format((store.startDate), 'yyyy-MM-dd')} />                                    
                             </div>
                         </div>
                     </div>
