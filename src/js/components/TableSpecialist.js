@@ -44,7 +44,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
     //valueDefault[option].requests.id
     const AcceptRequest = () => {
         if (option == -1) {
-            alert("Por favor, seleccione un especialista");
+            alert("Por favor, seleccione un servicio");
         }else{
             let options = window.confirm("¿Está seguro que desea ACEPTAR la solicitud?");
             if (options == true) {
@@ -70,7 +70,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
     }
     const CancelRequest = () => {
         if (option == -1) {
-            alert("Por favor, seleccione un especialista");
+            alert("Por favor, seleccione un servicio");
         }else{
             let options = window.confirm("¿Está seguro que desea CANCELAR la solicitud?");
             if (options == true) {
@@ -97,7 +97,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
 
     const CloseRequest = () => {
         if (option == -1) {
-            alert("Por favor, seleccione un especialista");
+            alert("Por favor, seleccione un servicio");
         }else{
             if (valueDefault[option].requests.request_status != 'aceptada') {
                 alert("No puede cerrar un servicio que no ha sido aceptado");
