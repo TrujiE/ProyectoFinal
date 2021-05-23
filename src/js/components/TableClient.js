@@ -17,6 +17,8 @@ const TableRequestsClient = ({date, hour}) => {
             JSON.parse(localStorage.getItem('loginUser')) : {};
         
     let id = userProfile.user? userProfile.user.id :'';
+   
+    
     // GET para obtener los valores por defecto
     useEffect(() => {
         fetch("http://127.0.0.1:5000/user/requests_client/" + id)
@@ -39,14 +41,51 @@ const TableRequestsClient = ({date, hour}) => {
         console.log(option);
     }
 
+    //valueDefault[option].requests.id
     const CancelRequest = () => {
+        let options = window.confirm("¿Está seguro que desea CANCELAR la solicitud?");
+        if (options == true) {
+            const config = {
+                headers: { 'Content-Type': 'Application/json' },
+                body: JSON.stringify({
+                    "id":valueDefault[option].requests.id
+                }),
+                method: "PUT"
+            }
+            fetch("http://127.0.0.1:5000/user/cancel_request", config)
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    console.log(data)
+                    actions.setAvailable(data);
+                })
+                .catch(error => console.error(error));
 
-        alert("¿Está seguro de CANCELAR la solicitud?");
-        
+        } else {
+            //alert("Usted ");
+        }      
     }
 
     const CloseRequest = () => {
+        let options = window.confirm("¿Está seguro que desea CERRAR la solicitud?");
+        if (options == true) {
+            const config = {
+                headers: { 'Content-Type': 'Application/json' },
+                body: JSON.stringify({
+                    "id":valueDefault[option].requests.id
+                }),
+                method: "PUT"
+            }
+            fetch("http://127.0.0.1:5000/user/close_request", config)
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    console.log(data)
+                    actions.setAvailable(data);
+                })
+                .catch(error => console.error(error));
 
+        } else {
+            //alert("Usted ");
+        }      
     }
 
     return (
@@ -74,8 +113,8 @@ const TableRequestsClient = ({date, hour}) => {
                                     <td>{list.requests.full_name_profile}</td>
                                     <td>{list.requests.last_name_profile}</td>
                                     <td>{list.requests.request_status}</td>
-                                    <td>{list.requests.date=format(new Date(store.startDate), 'dd-MM-yyyy')}</td>
-                                    <td>{list.requests.hour}</td>                                    
+                                    <td>{new Date(list.requests.date).toUTCString().replace('00:00:00 GMT', '')}</td>
+                                    <td>{list.requests.hour.replace('morning','08:00 - 11:00').replace('afternoon','11:00 - 14:00').replace('evening','14:00 - 17:00')}</td>                                    
                                     <td>
                                         <div className="form-check">
                                             <input className="form-check-input"
