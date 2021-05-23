@@ -42,49 +42,59 @@ const TableRequestsClient = ({date, hour}) => {
 
     //valueDefault[option].requests.id
     const CancelRequest = () => {
-        let options = window.confirm("¿Está seguro que desea CANCELAR la solicitud?");
-        if (options == true) {
-            const config = {
-                headers: { 'Content-Type': 'Application/json' },
-                body: JSON.stringify({
-                    "id":valueDefault[option].requests.id
-                }),
-                method: "PUT"
-            }
-            fetch("http://127.0.0.1:5000/user/cancel_request", config)
-                .then(respuesta => respuesta.json())
-                .then(data => {
-                    console.log(data)
-                    actions.setAvailable(data);
-                })
-                .catch(error => console.error(error));
+        if (option == -1) {
+            alert("Por favor, seleccione una solicitud");
+        }else{
+            let options = window.confirm("¿Está seguro que desea CANCELAR la solicitud?");
+            if (options == true) {
+                const config = {
+                    headers: { 'Content-Type': 'Application/json' },
+                    body: JSON.stringify({
+                        "id":valueDefault[option].requests.id
+                    }),
+                    method: "PUT"
+                }
+                fetch("http://127.0.0.1:5000/user/cancel_request", config)
+                    .then(respuesta => respuesta.json())
+                    .then(data => {
+                        console.log(data)
+                        alert(data)
+                        actions.setAvailable(data);
+                    })
+                    .catch(error => console.error(error));
 
-        } else {
-            //alert("Usted ");
-        }      
+            } else {
+                alert("Usted decidió no cancelar la solicitud");
+            }
+        }
     }
 
     const CloseRequest = () => {
-        let options = window.confirm("¿Está seguro que desea CERRAR la solicitud?");
-        if (options == true) {
-            const config = {
-                headers: { 'Content-Type': 'Application/json' },
-                body: JSON.stringify({
-                    "id":valueDefault[option].requests.id
-                }),
-                method: "PUT"
-            }
-            fetch("http://127.0.0.1:5000/user/close_request", config)
-                .then(respuesta => respuesta.json())
-                .then(data => {
-                    console.log(data)
-                    actions.setAvailable(data);
-                })
-                .catch(error => console.error(error));
+        if (option == -1) {
+            alert("Por favor, seleccione una solicitud");
+        }else{        
+            let options = window.confirm("¿Está seguro que desea CERRAR la solicitud?");
+            if (options == true) {
+                const config = {
+                    headers: { 'Content-Type': 'Application/json' },
+                    body: JSON.stringify({
+                        "id":valueDefault[option].requests.id
+                    }),
+                    method: "PUT"
+                }
+                fetch("http://127.0.0.1:5000/user/close_request", config)
+                    .then(respuesta => respuesta.json())
+                    .then(data => {
+                        console.log(data)
+                        alert(data)
+                        actions.setAvailable(data);
+                    })
+                    .catch(error => console.error(error));
 
-        } else {
-            //alert("Usted ");
-        }      
+            } else {
+                alert("Usted decidió no cerrar la solicitud");
+            }  
+        }                
     }
 
     return (
