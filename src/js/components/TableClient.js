@@ -38,11 +38,13 @@ const TableRequestsClient = ({date, hour}) => {
     const checkInput = (index) => {
         option = index;
         console.log(option);
+        console.log(valueDefault[option].requests.id)
     }
 
     const CancelRequest = () => {
 
         alert("¿Está seguro de CANCELAR la solicitud?");
+    
         
     }
 
