@@ -17,7 +17,6 @@ const TableRequestsClient = ({date, hour}) => {
             JSON.parse(localStorage.getItem('loginUser')) : {};
         
     let id = userProfile.user? userProfile.user.id :'';
-    date = format(new Date(store.startDate), 'yyyy-MM-dd')
     // GET para obtener los valores por defecto
     useEffect(() => {
         fetch("http://127.0.0.1:5000/user/requests_client/" + id)
