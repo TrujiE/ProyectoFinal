@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import { format, compareAsc } from 'date-fns';
 
-const TableRequestsClient = ({date, hour}) => {
+const TableRequestsSpecialist = ({ date, hour }) => {
 
     const [valueDefault, setValueDefault] = useState([]);
 
@@ -10,18 +10,18 @@ const TableRequestsClient = ({date, hour}) => {
 
     const [state, setState] = useState(false);
 
-    let option = -1;    
+    let option = -1;
 
     const userProfile =
         localStorage.getItem('loginUser') ?
             JSON.parse(localStorage.getItem('loginUser')) : {};
-        
-    let id = userProfile.user? userProfile.user.id :'';
-   
-    
+
+    let id = userProfile.user ? userProfile.user.id : '';
+
+
     // GET para obtener los valores por defecto
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/user/requests_client/" + id)
+        fetch("http://127.0.0.1:5000/user/requests_specialist/" + id)
             .then(respuesta => respuesta.json())
             .then(data => {
                 setValueDefault(data);
@@ -31,7 +31,7 @@ const TableRequestsClient = ({date, hour}) => {
                 } else {
                     console.log(state, "no es un arreglo")
                     setState(false)
-                }                
+                }
             })
             .catch(error => console.error(error));
     }, [])
@@ -42,16 +42,42 @@ const TableRequestsClient = ({date, hour}) => {
     }
 
     //valueDefault[option].requests.id
+    const AcceptRequest = () => {
+        if (option == -1) {
+            alert("Por favor, seleccione un especialista");
+        }else{
+            let options = window.confirm("¿Está seguro que desea ACEPTAR la solicitud?");
+            if (options == true) {
+                const config = {
+                    headers: { 'Content-Type': 'Application/json' },
+                    body: JSON.stringify({
+                        "id": valueDefault[option].requests.id
+                    }),
+                    method: "PUT"
+                }
+                fetch("http://127.0.0.1:5000/user/acept_request", config)
+                    .then(respuesta => respuesta.json())
+                    .then(data => {
+                        console.log(data)
+                        actions.setAvailable(data);
+                    })
+                    .catch(error => console.error(error));
+    
+            } else {
+                //alert("Usted ");
+            }
+        }
+    }
     const CancelRequest = () => {
         if (option == -1) {
-            alert("Por favor, seleccione una solicitud");
+            alert("Por favor, seleccione un especialista");
         }else{
             let options = window.confirm("¿Está seguro que desea CANCELAR la solicitud?");
             if (options == true) {
                 const config = {
                     headers: { 'Content-Type': 'Application/json' },
                     body: JSON.stringify({
-                        "id":valueDefault[option].requests.id
+                        "id": valueDefault[option].requests.id
                     }),
                     method: "PUT"
                 }
@@ -59,43 +85,45 @@ const TableRequestsClient = ({date, hour}) => {
                     .then(respuesta => respuesta.json())
                     .then(data => {
                         console.log(data)
-                        alert(data)
                         actions.setAvailable(data);
                     })
                     .catch(error => console.error(error));
-
+    
             } else {
-                alert("Usted decidió no cancelar la solicitud");
+                //alert("Usted ");
             }
         }
     }
 
     const CloseRequest = () => {
         if (option == -1) {
-            alert("Por favor, seleccione una solicitud");
-        }else{        
-            let options = window.confirm("¿Está seguro que desea CERRAR la solicitud?");
-            if (options == true) {
-                const config = {
-                    headers: { 'Content-Type': 'Application/json' },
-                    body: JSON.stringify({
-                        "id":valueDefault[option].requests.id
-                    }),
-                    method: "PUT"
-                }
-                fetch("http://127.0.0.1:5000/user/close_request", config)
-                    .then(respuesta => respuesta.json())
-                    .then(data => {
-                        console.log(data)
-                        alert(data)
-                        actions.setAvailable(data);
-                    })
-                    .catch(error => console.error(error));
-
+            alert("Por favor, seleccione un especialista");
+        }else{
+            if (valueDefault[option].requests.request_status != 'aceptada') {
+                alert("No puede cerrar un servicio que no ha sido aceptado");
             } else {
-                alert("Usted decidió no cerrar la solicitud");
-            }  
-        }                
+                let options = window.confirm("¿Está seguro que desea CERRAR la solicitud?");
+                if (options == true) {
+                    const config = {
+                        headers: { 'Content-Type': 'Application/json' },
+                        body: JSON.stringify({
+                            "id": valueDefault[option].requests.id
+                        }),
+                        method: "PUT"
+                    }
+                    fetch("http://127.0.0.1:5000/user/close_request", config)
+                        .then(respuesta => respuesta.json())
+                        .then(data => {
+                            console.log(data)
+                            actions.setAvailable(data);
+                        })
+                        .catch(error => console.error(error));
+    
+                } else {
+                    //alert("Usted ");
+                }
+            }
+        }
     }
 
     return (
@@ -107,9 +135,10 @@ const TableRequestsClient = ({date, hour}) => {
                         <th scope="col">Especialidad</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
+                        <th scope="col">Dirección</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Hora</th>                        
+                        <th scope="col">Hora</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -120,11 +149,12 @@ const TableRequestsClient = ({date, hour}) => {
                                 <tr key={index}>
                                     <td>{list.requests.id}</td>
                                     <td>{list.requests.name_specialty}</td>
-                                    <td>{list.requests.full_name_profile}</td>
-                                    <td>{list.requests.last_name_profile}</td>
+                                    <td>{list.requests.full_name_user}</td>
+                                    <td>{list.requests.last_name_user}</td>
+                                    <td>{list.requests.address}</td>
                                     <td>{list.requests.request_status}</td>
                                     <td>{new Date(list.requests.date).getDate() + 1 +"-" + (new Date(list.requests.date).getMonth()+1) +"-"+ new Date(list.requests.date).getFullYear()}</td>
-                                    <td>{list.requests.hour.replace('morning','08:00 - 11:00').replace('afternoon','11:00 - 14:00').replace('evening','14:00 - 17:00')}</td>                                    
+                                    <td>{list.requests.hour.replace('morning', '08:00 - 11:00').replace('afternoon', '11:00 - 14:00').replace('evening', '14:00 - 17:00')}</td>
                                     <td>
                                         <div className="form-check">
                                             <input className="form-check-input"
@@ -133,6 +163,7 @@ const TableRequestsClient = ({date, hour}) => {
                                                 id="exampleRadios1"
                                                 value="option1"
                                                 onClick={() => checkInput(index)}
+
                                             />
                                         </div>
                                     </td>
@@ -145,11 +176,13 @@ const TableRequestsClient = ({date, hour}) => {
                     }
                 </tbody>
             </table>
-            <button style={{ textAlign: "right" }} type="button" className="btn btn-danger" onClick={CancelRequest}
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={AcceptRequest}
+            >Aceptar Solicitud</button>&nbsp;&nbsp;&nbsp;
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CancelRequest}
             >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
             <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CloseRequest}
             >Cerrar Solicitud</button>
         </div>
     )
 }
-export default TableRequestsClient;
+export default TableRequestsSpecialist;

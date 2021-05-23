@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import LogOut from "../components/LogOut";
 import TableRequestsClient from '../components/TableClient';
 import { Context } from "../store/appContext";
@@ -7,12 +7,36 @@ import { format, compareAsc } from 'date-fns';
 
 const RequestsClient = () => {
     const [hour, setHour] = useState("");
+    //const [check, setCheck] = useState(false);
+    const [address, setAddress] = useState("");
+
+    const [morning, setMorning] = useState(1)
+    const [afternoon, setAfternoon] = useState(0)
+    const [evening, setEvening] = useState(0)
+
     const { store, actions } = useContext(Context);
     const userProfile =
-    localStorage.getItem('loginUser') ?
-        JSON.parse(localStorage.getItem('loginUser')) : {};  
-    
-    let id = userProfile.user? userProfile.user.id :'';
+        localStorage.getItem('loginUser') ?
+            JSON.parse(localStorage.getItem('loginUser')) : {};
+
+    let id = userProfile.user ? userProfile.user.id : '';
+
+    const SendValue = () => {
+        const config = {
+            headers: { 'Content-Type': 'Application/json' },
+            body: JSON.stringify({
+            }),
+            method: "GET"
+        }
+        fetch("http://127.0.0.1:5000/user/requests_client/" + id, config)
+            .then(respuesta => respuesta.json())
+            .then(data => {
+                console.log(data)
+                actions.setAvailable(data);
+            })
+            .catch(error => console.error(error));
+    }
+
     return (
         <div className="container">
             <LogOut />
@@ -80,7 +104,7 @@ const RequestsClient = () => {
 
                 <div className="col-9">
                     <div className="row justify-content-left mt-5 mb-5">
-                        <h5>Hola {userProfile.user.full_name? userProfile.user.full_name : ""} acá puedes revisar tus solicitudes.</h5>
+                        <h5>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""} acá puedes revisar tus solicitudes.</h5>
                     </div>
                     <div className="tab-content" id="v-pills-tabContent">
                         <div
@@ -117,11 +141,11 @@ const RequestsClient = () => {
                                 <div className="row justify-content-between">
                                     <div className="col-4">
                                         <h5>Seleccione su Solicitud</h5>
-                                    </div>                                  
+                                    </div>
                                 </div>
                             </div>
                             <div className="form-group col-10">
-                                <TableRequestsClient hour={hour} date={format((store.startDate), 'yyyy-MM-dd')} />                                    
+                                <TableRequestsClient hour={hour} date={format((store.startDate), 'yyyy-MM-dd')} />
                             </div>
                         </div>
                     </div>
