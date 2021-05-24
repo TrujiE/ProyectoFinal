@@ -75,8 +75,8 @@ const ClientForm = () => {
 
       confirmPassword: Yup.string()
 
-        .oneOf([Yup.ref("password")], "la contraseã debe coincidir")
-        .required("la contraseña debe coincidir"),
+        .oneOf([Yup.ref("password")], "la contraseña debe coincidir")
+        .required("se requiere confirmar contraseña"),
 
       secretQuestion: Yup.string()
         .required("se requiere el la pregunta secreta")
@@ -191,7 +191,7 @@ const ClientForm = () => {
           id="phoneNumber"
           name="phoneNumber"
           type="text"
-          placeholder="569 11111111"
+          placeholder="56912345678"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.phoneNumber}

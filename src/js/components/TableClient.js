@@ -39,6 +39,7 @@ const TableRequestsClient = ({date, hour}) => {
     const checkInput = (index) => {
         option = index;
         console.log(option);
+        console.log(valueDefault[option].requests.id)
     }
 
     //valueDefault[option].requests.id
