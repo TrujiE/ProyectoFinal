@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               specialistsAvailable: [],
 			  startDate: new Date(),
 			  counter: 0,
+			  specialists: 0,
               especialist: []
 		},
 		actions: {
@@ -20,9 +21,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({specialistsAvailable: data})
 				},
+			setSpecialists:() =>{
+				const store = getStore();
+				setStore({specialists: store.specialists + 1 })
+				},
 			setCounter:() =>{
 				const store = getStore();
 				setStore({counter: store.counter + 1 })
+				},
+			resetSpecialists:() =>{
+				const store = getStore();
+				setStore({specialists: 0 })
 				},
             
         }
