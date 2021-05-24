@@ -76,7 +76,7 @@ const ClientForm = () => {
       confirmPassword: Yup.string()
 
         .oneOf([Yup.ref("password")], "la contraseã debe coincidir")
-        .required("se requiere confirmar contraseña"),
+        .required("la contraseña debe coincidir"),
 
       secretQuestion: Yup.string()
         .required("se requiere el la pregunta secreta")
@@ -191,7 +191,7 @@ const ClientForm = () => {
           id="phoneNumber"
           name="phoneNumber"
           type="text"
-          placeholder="123456789"
+          placeholder="569 11111111"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.phoneNumber}
@@ -201,7 +201,7 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.phoneNumber}</div>
         ) : null}
 
-        <label htmlFor="adress">Diereccion</label>
+        <label htmlFor="adress">Direccion</label>
         <input
           className="form-control mb-3"
           id="adress"
@@ -227,7 +227,7 @@ const ClientForm = () => {
           value={formik.values.comuna}
         >
         <option selected>
-            Elija una comuna 
+        seleccione su comuna 
           </option>
           
           {listaComunas}
