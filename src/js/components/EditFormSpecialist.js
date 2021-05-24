@@ -83,7 +83,7 @@ const EditFormSpecialist = () => {
             // .required(),
     
             skills: Yup.string()
-            .required("se requiere el la pregunta secreta"),
+            .required("se requiere  la experiencia"),
 
         }),
     
@@ -269,7 +269,7 @@ const EditFormSpecialist = () => {
         ) : null}
 
         <label htmlFor="skills">Experiencia</label>
-        <textarea
+        <select
           className="form-control mb-3"
           id="skills"
           name="skills"
@@ -278,7 +278,20 @@ const EditFormSpecialist = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.skills}
-        ></textarea>
+        >
+           <option selected>seleccione su experiencia</option>
+
+          <option value="menos de 1 año">menos de 1 año</option>
+          <option value="mas de 1 año">mas de 1 año</option>
+          <option value="mas de 2 años">mas de 2 años</option>
+          <option value="mas de 3 años">mas de 3 años</option>
+          <option value="mas de 4 años">mas de 4 años</option>
+          <option value="mas de 5 años">mas de 5 años</option>
+          <option value="mas de 6 años">mas de 6 años</option>
+          <option value="mas de 7 años">mas de 7 años</option>
+          <option value="mas de 8 años">mas de 8 años</option>
+
+        </select>
 
         {formik.touched.skills && formik.errors.skills ? (
           <div className="text-danger"> {formik.errors.skills}</div>

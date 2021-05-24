@@ -227,7 +227,7 @@ const ClientForm = () => {
           value={formik.values.comuna}
         >
         <option selected>
-            Elija una comuna 
+        seleccione su comuna 
           </option>
           
           {listaComunas}
