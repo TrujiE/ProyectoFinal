@@ -66,7 +66,7 @@ const EditFormSpecialist = () => {
     
           confirmPassword: Yup.string()
     
-            .oneOf([Yup.ref("password")], "la contraseã debe coincidir")
+            .oneOf([Yup.ref("password")], "la contraseña debe coincidir")
             .required("se requiere confirmar contraseña"),
     
           secretQuestion: Yup.string()
@@ -125,7 +125,7 @@ const EditFormSpecialist = () => {
               id="phoneNumber"
               name="phoneNumber"
               type="text"
-              placeholder="telefonoooo"
+              placeholder="56912345678"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phoneNumber}
@@ -135,7 +135,7 @@ const EditFormSpecialist = () => {
               <div className="text-danger">{formik.errors.phoneNumber}</div>
             ) : null}
     
-            <label htmlFor="adress">Diereccion</label>
+            <label htmlFor="adress">Direccion</label>
             <input
               className="form-control mb-3"
               id="adress"
