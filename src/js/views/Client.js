@@ -24,7 +24,6 @@ const Client = () => {
     const { store, actions } = useContext(Context);
 
     const specialties = [
-        { value: '', label: 'Todas' },
         { value: 'electricista', label: 'Electricista' },
         { value: "pintor", label: 'Pintor' },
         { value: 'plomero', label: 'Plomero' },
@@ -73,15 +72,15 @@ const Client = () => {
     //POST para obtener los especialistas disponibles
 
     const SendValue = () => {
-        if (hour == "morning") {
+        if (hours == "morning") {
             setMorning(1);
             setAfternoon(0);
             setEvening(0);
-        } else if (hour == "afternoon") {
+        } else if (hours == "afternoon") {
             setMorning(0);
             setAfternoon(1);
             setEvening(0);
-        } else if (hour == "evening") {
+        } else if (hours == "evening") {
             setMorning(0);
             setAfternoon(0);
             setEvening(1);

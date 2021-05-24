@@ -84,7 +84,7 @@ const SpecialistForm = () => {
 
       confirmPassword: Yup.string()
 
-        .oneOf([Yup.ref("password")], "la contraseã debe coincidir")
+        .oneOf([Yup.ref("password")], "la contraseña debe coincidir")
         .required("se requiere confirmar contraseña"),
 
       secretQuestion: Yup.string()
@@ -213,7 +213,7 @@ const SpecialistForm = () => {
           id="phoneNumber"
           name="phoneNumber"
           type="text"
-          placeholder="123456789"
+          placeholder="56912345678"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.phoneNumber}
@@ -225,7 +225,7 @@ const SpecialistForm = () => {
         ) : null}
 
 
-        <label htmlFor="adress">Diereccion</label>
+        <label htmlFor="adress">Direccion</label>
         <input
           className="form-control mb-3"
           id="adress"
