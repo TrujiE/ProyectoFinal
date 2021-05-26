@@ -58,7 +58,8 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                 fetch("http://127.0.0.1:5000/user/acept_request", config)
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        console.log(data)
+                        console.log(data);
+                        alert(data);
                         actions.setAvailable(data);
                     })
                     .catch(error => console.error(error));
@@ -84,7 +85,8 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                 fetch("http://127.0.0.1:5000/user/cancel_request", config)
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        console.log(data)
+                        console.log(data);
+                        alert(data);
                         actions.setAvailable(data);
                     })
                     .catch(error => console.error(error));
@@ -114,7 +116,8 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                     fetch("http://127.0.0.1:5000/user/close_request", config)
                         .then(respuesta => respuesta.json())
                         .then(data => {
-                            console.log(data)
+                            console.log(data);
+                            alert(data);
                             actions.setAvailable(data);
                         })
                         .catch(error => console.error(error));
@@ -181,7 +184,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
             <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CancelRequest}
             >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
             <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CloseRequest}
-            >Cerrar Solicitud</button>
+            >Resolver Solicitud</button>
         </div>
     )
 }
