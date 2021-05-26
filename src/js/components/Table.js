@@ -86,6 +86,9 @@ const TableComponet = ({commune, date, hour, address}) => {
                 .then(respuesta => respuesta.json())
                 .then(data => {
                     console.log(data);
+                    alert(data);
+                    actions.setAvailable(data);
+                    window.location.reload();
                 })
                 .catch(error => console.error(error))
         }
