@@ -62,7 +62,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                         actions.setAvailable(data);
                     })
                     .catch(error => console.error(error));
-    
+                    window.location.reload();
             } else {
                 //alert("Usted ");
             }
@@ -88,7 +88,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                         actions.setAvailable(data);
                     })
                     .catch(error => console.error(error));
-    
+                    window.location.reload();
             } else {
                 //alert("Usted ");
             }
@@ -118,7 +118,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                             actions.setAvailable(data);
                         })
                         .catch(error => console.error(error));
-    
+                        window.location.reload();
                 } else {
                     //alert("Usted ");
                 }
