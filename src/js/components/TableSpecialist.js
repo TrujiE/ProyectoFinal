@@ -61,11 +61,12 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                         console.log(data);
                         alert(data);
                         actions.setAvailable(data);
+                        window.location.reload();
                     })
                     .catch(error => console.error(error));
     
             } else {
-                //alert("Usted ");
+                alert("Usted decidió no aceptar la solicitud");
             }
         }
     }
@@ -88,11 +89,12 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                         console.log(data);
                         alert(data);
                         actions.setAvailable(data);
+                        window.location.reload();
                     })
                     .catch(error => console.error(error));
     
             } else {
-                //alert("Usted ");
+                alert("Usted decidió no cancelar la solicitud");
             }
         }
     }
@@ -102,9 +104,9 @@ const TableRequestsSpecialist = ({ date, hour }) => {
             alert("Por favor, seleccione un servicio");
         }else{
             if (valueDefault[option].requests.request_status != 'aceptada') {
-                alert("No puede cerrar un servicio que no ha sido aceptado");
+                alert("No puede resolver un servicio que no ha sido aceptado");
             } else {
-                let options = window.confirm("¿Está seguro que desea CERRAR la solicitud?");
+                let options = window.confirm("¿Está seguro que desea RESOLVER la solicitud?");
                 if (options == true) {
                     const config = {
                         headers: { 'Content-Type': 'Application/json' },
@@ -119,11 +121,12 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                             console.log(data);
                             alert(data);
                             actions.setAvailable(data);
+                            window.location.reload();
                         })
                         .catch(error => console.error(error));
     
                 } else {
-                    //alert("Usted ");
+                    alert("Usted decidió no resolver la solicitud");
                 }
             }
         }

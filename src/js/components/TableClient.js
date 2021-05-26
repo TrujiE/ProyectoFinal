@@ -62,6 +62,7 @@ const TableRequestsClient = ({date, hour}) => {
                         console.log(data);
                         alert(data);
                         actions.setAvailable(data);
+                        window.location.reload();
                     })
                     .catch(error => console.error(error));
 
@@ -75,7 +76,7 @@ const TableRequestsClient = ({date, hour}) => {
         if (option == -1) {
             alert("Por favor, seleccione una solicitud");
         }else{        
-            let options = window.confirm("¿Está seguro que desea CERRAR la solicitud?");
+            let options = window.confirm("¿Está seguro que desea RESOLVER la solicitud?");
             if (options == true) {
                 const config = {
                     headers: { 'Content-Type': 'Application/json' },
@@ -90,11 +91,12 @@ const TableRequestsClient = ({date, hour}) => {
                         console.log(data);
                         alert(data);
                         actions.setAvailable(data);
+                        window.location.reload();
                     })
                     .catch(error => console.error(error));
 
             } else {
-                alert("Usted decidió no cerrar la solicitud");
+                alert("Usted decidió no resolver la solicitud");
             }  
         }                
     }
