@@ -58,13 +58,15 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                 fetch("http://127.0.0.1:5000/user/acept_request", config)
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        console.log(data)
+                        console.log(data);
+                        alert(data);
                         actions.setAvailable(data);
+                        window.location.reload();
                     })
                     .catch(error => console.error(error));
                     window.location.reload();
             } else {
-                //alert("Usted ");
+                alert("Usted decidió no aceptar la solicitud");
             }
         }
     }
@@ -84,13 +86,15 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                 fetch("http://127.0.0.1:5000/user/cancel_request", config)
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        console.log(data)
+                        console.log(data);
+                        alert(data);
                         actions.setAvailable(data);
+                        window.location.reload();
                     })
                     .catch(error => console.error(error));
                     window.location.reload();
             } else {
-                //alert("Usted ");
+                alert("Usted decidió no cancelar la solicitud");
             }
         }
     }
@@ -100,9 +104,9 @@ const TableRequestsSpecialist = ({ date, hour }) => {
             alert("Por favor, seleccione un servicio");
         }else{
             if (valueDefault[option].requests.request_status != 'aceptada') {
-                alert("No puede cerrar un servicio que no ha sido aceptado");
+                alert("No puede resolver un servicio que no ha sido aceptado");
             } else {
-                let options = window.confirm("¿Está seguro que desea CERRAR la solicitud?");
+                let options = window.confirm("¿Está seguro que desea RESOLVER la solicitud?");
                 if (options == true) {
                     const config = {
                         headers: { 'Content-Type': 'Application/json' },
@@ -114,13 +118,15 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                     fetch("http://127.0.0.1:5000/user/close_request", config)
                         .then(respuesta => respuesta.json())
                         .then(data => {
-                            console.log(data)
+                            console.log(data);
+                            alert(data);
                             actions.setAvailable(data);
+                            window.location.reload();
                         })
                         .catch(error => console.error(error));
                         window.location.reload();
                 } else {
-                    //alert("Usted ");
+                    alert("Usted decidió no resolver la solicitud");
                 }
             }
         }
@@ -181,7 +187,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
             <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CancelRequest}
             >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
             <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CloseRequest}
-            >Cerrar Solicitud</button>
+            >Resolver Solicitud</button>
         </div>
     )
 }

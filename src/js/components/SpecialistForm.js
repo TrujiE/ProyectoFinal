@@ -84,7 +84,7 @@ const SpecialistForm = () => {
 
       confirmPassword: Yup.string()
 
-        .oneOf([Yup.ref("password")], "la contraseã debe coincidir")
+        .oneOf([Yup.ref("password")], "la contraseña debe coincidir")
         .required("se requiere confirmar contraseña"),
 
       secretQuestion: Yup.string()
@@ -213,7 +213,7 @@ const SpecialistForm = () => {
           id="phoneNumber"
           name="phoneNumber"
           type="text"
-          placeholder="123456789"
+          placeholder="56912345678"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.phoneNumber}
@@ -225,7 +225,7 @@ const SpecialistForm = () => {
         ) : null}
 
 
-        <label htmlFor="adress">Diereccion</label>
+        <label htmlFor="adress">Direccion</label>
         <input
           className="form-control mb-3"
           id="adress"
@@ -247,11 +247,12 @@ const SpecialistForm = () => {
           className="form-control mb-3"
           id="comuna"
           name="comuna"
+          // placeholder="Elija una comuna"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.comuna}
         >
-          <option selected>Elija una comuna</option>
+          <option selected>seleccione su comuna</option>
         
           {listaComunas}
 
@@ -331,6 +332,7 @@ const SpecialistForm = () => {
           className="basic-multi-select mb-3"
           id="specialty"
           name="specialty"
+          placeholder="Elija una especialidad"
           options = {specialties}
           onChange = {e => (formik.setFieldValue("specialty", e))}
           value = {formik.values.specialty}
@@ -349,6 +351,7 @@ const SpecialistForm = () => {
           isMulti
           className="basic-multi-select mb-3"
           classNamePrefix="select"
+          placeholder="seleccione las comunas que atenderá"
           options={comunasList}
           name="attentionComunes" 
 
@@ -362,16 +365,29 @@ const SpecialistForm = () => {
         ) : null}
 
         <label htmlFor="skills">Experiencia</label>
-        <textarea
+        <select
           className="form-control mb-3"
           id="skills"
           name="skills"
-          aria-label="With textarea"
-          placeholder="Para agregar un resumen de experiencia del especialista."
+          // placeholder="escoja su tiempo de experiencia"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.skills}
-        ></textarea>
+        >
+
+        <option selected>seleccione su experiencia</option>
+
+          <option value="menos de 1 año">menos de 1 año</option>
+          <option value="mas de 1 año">mas de 1 año</option>
+          <option value="mas de 2 años">mas de 2 años</option>
+          <option value="mas de 3 años">mas de 3 años</option>
+          <option value="mas de 4 años">mas de 4 años</option>
+          <option value="mas de 5 años">mas de 5 años</option>
+          <option value="mas de 6 años">mas de 6 años</option>
+          <option value="mas de 7 años">mas de 7 años</option>
+          <option value="mas de 8 años">mas de 8 años</option>
+          
+        </select>
 
         {formik.touched.skills && formik.errors.skills ? (
           <div className="text-danger"> {formik.errors.skills}</div>

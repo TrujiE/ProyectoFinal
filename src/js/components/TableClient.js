@@ -39,6 +39,7 @@ const TableRequestsClient = ({date, hour}) => {
     const checkInput = (index) => {
         option = index;
         console.log(option);
+        console.log(valueDefault[option].requests.id)
     }
 
     //valueDefault[option].requests.id
@@ -58,9 +59,10 @@ const TableRequestsClient = ({date, hour}) => {
                 fetch("http://127.0.0.1:5000/user/cancel_request", config)
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        console.log(data)
-                        alert(data)
+                        console.log(data);
+                        alert(data);
                         actions.setAvailable(data);
+                        window.location.reload();
                     })
                     .catch(error => console.error(error));
 
@@ -74,7 +76,7 @@ const TableRequestsClient = ({date, hour}) => {
         if (option == -1) {
             alert("Por favor, seleccione una solicitud");
         }else{        
-            let options = window.confirm("¿Está seguro que desea CERRAR la solicitud?");
+            let options = window.confirm("¿Está seguro que desea RESOLVER la solicitud?");
             if (options == true) {
                 const config = {
                     headers: { 'Content-Type': 'Application/json' },
@@ -86,14 +88,15 @@ const TableRequestsClient = ({date, hour}) => {
                 fetch("http://127.0.0.1:5000/user/close_request", config)
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        console.log(data)
-                        alert(data)
+                        console.log(data);
+                        alert(data);
                         actions.setAvailable(data);
+                        window.location.reload();
                     })
                     .catch(error => console.error(error));
 
             } else {
-                alert("Usted decidió no cerrar la solicitud");
+                alert("Usted decidió no resolver la solicitud");
             }  
         }                
     }
@@ -145,10 +148,10 @@ const TableRequestsClient = ({date, hour}) => {
                     }
                 </tbody>
             </table>
-            <button style={{ textAlign: "right" }} type="button" className="btn btn-danger" onClick={CancelRequest}
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CancelRequest}
             >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
             <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CloseRequest}
-            >Cerrar Solicitud</button>
+            >Resolver Solicitud</button>
         </div>
     )
 }
