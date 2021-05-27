@@ -86,6 +86,12 @@ const TableComponet = ({commune, date, hour, address}) => {
                 .then(respuesta => respuesta.json())
                 .then(data => {
                     console.log(data);
+                    if (typeof data == 'object'){
+                        alert("Solicitud enviada");
+                        actions.setAvailable(data);
+                    }else{
+                        alert(data);
+                    }
                 })
                 .catch(error => console.error(error))
         }
