@@ -100,6 +100,10 @@ const TableRequestsClient = ({date, hour}) => {
     }
 
     return (
+        <div className="container">
+            <div className="row">
+	            <div className="col-lg-12">
+		            <div className="main-box clearfix">
         <div className="table-responsive-xl">
             <table className="table table-sm">
                 <thead>
@@ -146,6 +150,10 @@ const TableRequestsClient = ({date, hour}) => {
                     }
                 </tbody>
             </table>
+        </div>
+	</div>
+</div>
+</div>
             <button style={{ textAlign: "right" }} type="button" className="btn btn-danger" onClick={CancelRequest}
             >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
             <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CloseRequest}

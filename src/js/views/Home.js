@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext, Fragment } from 'react';
 import { Context } from '../store/appContext';
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
@@ -6,12 +6,12 @@ import * as Yup from "yup";
 
 const Home = () => {
 
-    const { store, actions } = useContext(Context);  
+    const { store, actions } = useContext(Context);
 
     const SaveLocalStore = () => {
-            localStorage.setItem('loginUser',JSON.stringify(store.profileUser));
-        }  
-        
+        localStorage.setItem('loginUser', JSON.stringify(store.profileUser));
+    }
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -34,7 +34,7 @@ const Home = () => {
                     "password": formik.values.password
                 }),
                 method: "POST"
-                }
+            }
             fetch("http://127.0.0.1:5000/user/login", config)
                 .then(respuesta => respuesta.json())
                 .then(data => {
@@ -43,41 +43,40 @@ const Home = () => {
                     SaveLocalStore()
                 })
                 .catch(error => console.error(error))
-                alert(JSON.stringify(values, null, 2));
+            alert(JSON.stringify(values, null, 2));
         }, //console.log(data))
     });
-    
+
     return (
+        
         <div className="container mt-5">
-            <h1 className="text-center">TeAYUDO?</h1>
-            <hr />
+
             <div className="row">
                 <div className="col-12">
                     <form
-                        className="form-inline d-flex justify-content-end"
+                        id="formLogin"
+                        className="form-inline d-flex justify-content-center"
                         onSubmit={formik.handleSubmit}
                     >
+                        <h1 className="col-12"><span>TeAYUDO?</span></h1>
                         <label className="sr-only" htmlFor="email">
                         </label>
-                        <div className="input-group mb-2 mr-sm-2">
-                            <div className="input-group-prepend">
-                                <div className="input-group-text">Email</div>
-                            </div>
 
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="email"
-                                placeholder="Ingrese su email"
-                                name="email"
-                                value={formik.values.email}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {formik.touched.email && formik.errors.email && (
-                                <div className="text-danger">{formik.errors.email}</div>
-                            )}
-                        </div>
+
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="email"
+                            placeholder="Ingrese su email"
+                            name="email"
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                        {formik.touched.email && formik.errors.email && (
+                            <div className="text-danger">{formik.errors.email}</div>
+                        )}
+
 
                         <label className="sr-only" htmlFor="password">
                             Contraseña</label>
@@ -96,8 +95,8 @@ const Home = () => {
                             <div className="text-danger">{formik.errors.password}</div>
                         ) : null}
 
-                         <button type="submit" className="btn btn-success mb-2 text-white"
-                           >
+                        <button type="submit" className="btn btn-success mb-2 text-white"
+                        >
                             Entrar
                          </button>
                     </form>
