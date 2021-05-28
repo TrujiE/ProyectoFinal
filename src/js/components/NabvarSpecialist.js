@@ -8,7 +8,6 @@ const NabvarSpecialist = () => {
             
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                    <Link className="nav-link" to="/registroCliente">Registro</Link>
                     <Link className="nav-link" to="/cliente">Cliente</Link>
                     <Link className="nav-link" to="/especialista">Especialista</Link>
                     <Link className="nav-link" to="/solicitudes">Solicitudes</Link>

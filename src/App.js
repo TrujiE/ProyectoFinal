@@ -24,15 +24,7 @@ function App() {
         <div className="">
             <BrowserRouter>
                 <div className="container">
-                    {() => userProfile.profile ?
-                        userProfile.profile.role == "client" ?
-                            <NabvarClient />
-                            :
-                             <NabvarSpecialist />
-                        :
-                        < ></>
-                        
-                }
+                    <NabvarSpecialist />
 
                 </div>
                 <div>
