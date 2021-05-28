@@ -11,11 +11,12 @@ import injectContext from "./js/store/appContext";
 import EditClient from "./js/views/EditClient";
 import EditSpecialist from "./js/views/EditSpecialist";
 import Nabvar from "./js/components/Nabvar";
+import "./App.css"
 
 
 function App() {
   return (
-    <div className="">
+    <div className="App">
       <BrowserRouter>
              <div className="container">
                 <Nabvar/>

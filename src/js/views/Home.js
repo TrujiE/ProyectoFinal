@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import logoTA from "../../img/logoTA.bmp"
+import "../../js/custom.css"
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
@@ -55,43 +57,75 @@ const Home = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center">TeAYUDO?</h1>
+      {/* <h1 className="text-center">TeAYUDO?</h1> */}
       <hr />
+      
+      
       <div className="row">
-        <div className="col-12">
+
+        <div className="col-12 d-flex justify-content-center mb-5 mr-5">
+
+
+        <img src={logoTA} alt="" className=" mr-5 " style={ { maxWidth:"150px"}}/>
+
+        </div>
+
+      </div>
+      
+      <div className="row">
+
+        {/* <div className="col-6 d-flex justify-content-end  ">
+
+        <span className="ml-5">
+              <Link to="/registroCliente">
+                <u  className=" ml-5" style={{fontSize:"15px"}}> Registrar </u>{" "}
+              </Link>
+            </span>
+        
+
+        </div> */}
+
+      </div>
+      
+      
+      
+      
+      <div className="row">
+        <div className="col-8 ml-5 mt-5 ">
           <form
-            className="form-inline d-flex justify-content-end"
+            // className="form-inline  d-flex align-items-center mt-5"
+            className="  form-inline d-flex justify-content-end "
             onSubmit={formik.handleSubmit}
           >
             <label className="sr-only" htmlFor="email"></label>
             <div className="input-group mb-2 mr-sm-2">
-              <div className="input-group-prepend">
+              {/* <div className="input-group-prepend">
                 <div className="input-group-text">Email</div>
-              </div>
+              </div> */}
 
               <input
                 type="text"
                 className="form-control"
                 id="email"
-                placeholder="Ingrese su email"
+                placeholder="Ingrese su correo"
                 name="email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               {formik.touched.email && formik.errors.email && (
-                <div className="text-danger">{formik.errors.email}</div>
+                <div className=" text-danger" >{formik.errors.email}</div>
               )}
             </div>
 
-            <label className="sr-only" htmlFor="password">
-              Contraseña
-            </label>
+            <label className="sr-only" htmlFor="password"></label>
+            
+            
             <input
               type="password"
               className="form-control mb-2 mr-sm-2"
               id="password"
-              placeholder="Ingrese su contraseña"
+              placeholder="Contraseña"
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
@@ -101,30 +135,37 @@ const Home = () => {
               <div className="text-danger">{formik.errors.password}</div>
             ) : null}
 
+
+              <div>
+
+
+              </div>
+
             <button type="submit" className="btn btn-success mb-2 text-white">
               Entrar
             </button>
+
           </form>
         </div>
       </div>
 
       <div className="row mt-3">
-        <div className="col-9 d-flex justify-content-end ">
+        <div className="col-8 d-flex justify-content-end ml-5  ">
           <h5 className=" ">
             <span>
               <Link to="/registroCliente">
-                <u>Registrarse </u>{" "}
+                <u  className="" style={{fontSize:"15px"}}> Registrar </u>{" "}
               </Link>
             </span>
           </h5>
         </div>
-        <div className="col-3 d-flex justify-content-start ">
+        <div className="col-3 d-flex justify-content-end  ">
           <h5 className=" ">
             <span>
               {" "}
-              <a href="">
+              <a href="#!">
                 {" "}
-                <u> Olvidé Contraseña </u>
+                {/* <u style={{fontSize:"15px"}}> Olvidé Contraseña </u> */}
               </a>
             </span>
           </h5>
