@@ -1,4 +1,5 @@
-import React, { useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import Components from "../components/Components";
 import Log_out from "../components/LogOut";
 import { Context } from "../store/appContext";
@@ -16,7 +17,7 @@ const Client = () => {
     const [hour, setHour] = useState("");
     //const [check, setCheck] = useState(false);
     const [address, setAddress] = useState("");
-    
+
     const [morning, setMorning] = useState(1)
     const [afternoon, setAfternoon] = useState(0)
     const [evening, setEvening] = useState(0)
@@ -40,28 +41,28 @@ const Client = () => {
         localStorage.getItem('loginUser') ?
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
-    let id = userProfile.user? userProfile.user.id :'';
+    let id = userProfile.user ? userProfile.user.id : '';
     useEffect(() => {
         if (userProfile.user) {
             setAddress(userProfile.user.address);
-        } else{
+        } else {
             setAddress("");
         }
     }, [])
-    
+
 
     // Funcion para habilitar el imput address
     const setCheck = (e) => {
         if (e.target.checked == false) {
             document.getElementById("address").disabled = true;
-            setAddress(userProfile.user.address)   
-        } else{
+            setAddress(userProfile.user.address)
+        } else {
             document.getElementById("address").disabled = false;
         }
     }
-    
+
     const handleChange = (e) => {
-        setAddress(e.target.value )       
+        setAddress(e.target.value)
     }
 
     //Lo que veo en consola
@@ -98,7 +99,7 @@ const Client = () => {
             }),
             method: "POST"
         }
-        fetch("http://127.0.0.1:5000/service/"+ id, config)
+        fetch("http://127.0.0.1:5000/service/" + id, config)
             .then(respuesta => respuesta.json())
             .then(data => {
                 console.log(data)
@@ -114,71 +115,91 @@ const Client = () => {
     return (
         <div className="container">
             <Log_out />
-            <div className="d-flex">
-                <h3 style={{ textAlign: "left" }}>Hola {userProfile.user.full_name? userProfile.user.full_name : ""}, en qué te ayudamos?</h3> &nbsp;
+            <div className="row">
+                <div className="col">
+                    <h4 style={{ textAlign: "left" }}>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, en qué te ayudamos?</h4>
+                </div>
             </div>
-            <br />
-            <br />
-            <div className="d-flex col-12">
-                <div className="container">
-                    <Select defaultValue={{ label: "Especialidad", value: 0 }}
-                        options={specialties}
-                        onChange={e => setSpecialty(e.value)}
-                    />
-                </div>
-			  &nbsp;
-			  <div className="container">
-                    <Select defaultValue={{ label: "Comuna", value: 0 }}
-                        options={listCommunes}
-                        onChange={e => setCommune(e.value)}
-                    />
-                </div>
-                &nbsp;
-                <div className="container">
-                    <Calendar_client
-                    />
+            <div className="row">
 
+                <div className="col-2">
+                    <div className="card mt-4">
+                        <img
+                            src="https://ingeniousservices.com/service-forms/wp-content/uploads/wpcf7_drag-n-drop_uploads/panamaorganico-com/juan-gomez.png"
+                            className="img-fluid "
+                            alt="..."
+                        ></img>
+                    </div>
+                    <br />
+                    <div className="col-12">
+                        <Link type="button" className="btn btn-outline-success btn-sm btn-block" to="/editarEspecialista">Editar cuenta</Link>
+                        <Link type="button" className="btn btn-outline-success btn-sm btn-block" to="/solicitudes">Solicitudes</Link>
+                        <button type="button" className="btn btn-success btn-sm btn-block">Crear Solicitud</button>
+                    </div>
                 </div>
-                &nbsp;
-                <div className="container">
-                    <Select defaultValue={{ label: "Horario", value: 0 }}
-                        options={hours}
-                        onChange={e => setHour(e.value)}
-                    />
-                </div>
-                &nbsp;
-                <div>
-                    <button type="button" className="btn btn-success" onClick={SendValue}
-                    >Buscar</button>
-                </div>
-            </div>
-            <br />
-        
-            <div className="d-flex col-8">
-                <input
-                    type="text"
-                    className="form-control"
-                    id="address"
-                    value={address}
-                    disabled="disabled"
-                    onChange={handleChange}
-                />
-            &nbsp;
-				<div className="form-group form-check">
+
+                <div className="col-10 mt-4">
+                    <div className="row">
+                        <div className="col-3">
+                            <Select defaultValue={{ label: "Especialidad", value: 0 }}
+                                options={specialties}
+                                onChange={e => setSpecialty(e.value)}
+                            />
+                        </div>
+			             
+			            <div className="col-2">
+                            <Select defaultValue={{ label: "Comuna", value: 0 }}
+                                options={listCommunes}
+                                onChange={e => setCommune(e.value)}
+                            />
+                        </div>
+                        
+                        <div className="col-3">
+                            <Calendar_client
+                            />
+                        </div>
+                        
+                        <div className="col-2">
+                            <Select defaultValue={{ label: "Horario", value: 0 }}
+                                options={hours}
+                                onChange={e => setHour(e.value)}
+                            />
+                        </div>
+                        
+                        <div className="col-2">
+                            <button type="button" className="btn btn-success" onClick={SendValue}
+                                >Buscar</button>
+                        </div>
+                    </div>
+                <br />
+
+                <div className="col-6">
                     <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="Check"
-                        defaultChecked={false}
-                        onChange={setCheck}
+                        type="text"
+                        className="form-control"
+                        id="address"
+                        value={address}
+                        disabled="disabled"
+                        onChange={handleChange}
                     />
-                    <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
+            
+				<div className="form-group form-check">
+                        <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id="Check"
+                            defaultChecked={false}
+                            onChange={setCheck}
+                        />
+                        <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
+                    </div>
+                </div>
+
+                <div className="form-group col-10">
+                    <h5>Seleccione su especialista</h5>
+                    <TableComponet commune={commune} address={address} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
                 </div>
             </div>
-            
-            <div className="form-group col-10">
-                <h5>Seleccione su especialista</h5>
-                <TableComponet commune={commune} address={address} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
             </div>
             <br />
             <br />

@@ -132,9 +132,16 @@ const SpecialistForm = () => {
         }
       fetch("http://127.0.0.1:5000/user/profile", profile_specialist)
       .then(respuesta => respuesta.json())
-      .then(data => console.log(data))  
-      .catch(error => console.error(error))      
-      alert(JSON.stringify(values, null, 2));
+      .then(data => {
+        console.log(data);
+        if (typeof data == 'object'){
+          alert(JSON.stringify('Perfil creado con éxito', null, 2));
+          window.location.href = "/";
+        }else{
+          alert(JSON.stringify(data, null, 2));
+        }
+  })  
+  .catch(error => console.error(error))
       
     },
   });

@@ -47,6 +47,15 @@ const Home = () => {
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
+          if (data !== "Ha ingresado mal la contraseña.") {
+            alert("Bienvenido a la aplicación TeAyudo?");
+            //abrir una ventana aparte
+            //window.open("/seleccionUsuario" , "seleccionUsuario" , "width=1920,height=1080,scrollbars=NO")
+            //redireccionar a seleccionUsuario
+            window.location.href = "/seleccionUsuario";
+          }else{
+            alert(data);
+          }
           actions.setProfile(data);
           SaveLocalStore();
         })
