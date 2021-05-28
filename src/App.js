@@ -16,39 +16,39 @@ import Nabvar from "./js/components/Nabvar";
 function App() {
 
 	const userProfile =
-        localStorage.getItem('loginUser') ?
-            JSON.parse(localStorage.getItem('loginUser')) : {};
+		localStorage.getItem('loginUser') ?
+			JSON.parse(localStorage.getItem('loginUser')) : {};
 
-  return (
-    <div className="">
-      <BrowserRouter>
-             <div className="container">
-                <Nabvar/>
-             </div>
+	return (
+		<div className="">
+			<BrowserRouter>
+				<div className="container">
+					<Nabvar />
+				</div>
 				<div>
 					<Switch>
 						<Route exact path="/" component={Home} />
-						<Route exact path="/registroCliente" component={SignUpClient} /> 
+						<Route exact path="/registroCliente" component={SignUpClient} />
 						<Route exact path="/registroEspecialista" component={SignUpSpecialist} />
 						<Route exact path="/cliente" component={Client} />
 						<Route exact path="/especialista" render={
-							()=>userProfile.profile?
-									userProfile.profile.role=="client"?
-										<Redirect to={{pathname:"/editarEspecialista"}}></Redirect>
-										:
-										<Specialist/>
+							() => userProfile.profile ?
+								userProfile.profile.role == "client" ?
+									<Redirect to={{ pathname: "/editarEspecialista" }}></Redirect>
 									:
-									<Redirect to={{pathname:"/"}}></Redirect>}/>
+									<Specialist />
+								:
+								<Redirect to={{ pathname: "/" }}></Redirect>} />
 						<Route exact path="/solicitudes" component={RequestsClient} />
-                        <Route exact path="/seleccionUsuario" component={SelectUser} />  
-                        <Route exact path="/editarCliente" component={EditClient} />  
-                        <Route exact path="/editarEspecialista" component={EditSpecialist} />  
+						<Route exact path="/seleccionUsuario" component={SelectUser} />
+						<Route exact path="/editarCliente" component={EditClient} />
+						<Route exact path="/editarEspecialista" component={EditSpecialist} />
 						<Route render={() => <h1 className="notfound">Not found!</h1>} />
 					</Switch>
 				</div>
 			</BrowserRouter>
-    </div>
-  );
+		</div>
+	);
 }
 
 export default injectContext(App);

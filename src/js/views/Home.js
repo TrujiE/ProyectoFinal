@@ -50,7 +50,7 @@ const Home = () => {
             //abrir una ventana aparte
             //window.open("/seleccionUsuario" , "seleccionUsuario" , "width=1920,height=1080,scrollbars=NO")
             //redireccionar a seleccionUsuario
-            window.location.href = "/seleccionUsuario";
+            window.location.href = "/cliente";
           }else{
             alert(data);
           }
