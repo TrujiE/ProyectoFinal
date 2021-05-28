@@ -72,20 +72,20 @@ const Client = () => {
     //POST para obtener los especialistas disponibles
 
     const SendValue = () => {
-        if (hours == "morning") {
+        if (hour == "morning") {
             setMorning(1);
             setAfternoon(0);
             setEvening(0);
-        } else if (hours == "afternoon") {
+        } else if (hour == "afternoon") {
             setMorning(0);
             setAfternoon(1);
             setEvening(0);
-        } else if (hours == "evening") {
+        } else if (hour == "evening") {
             setMorning(0);
             setAfternoon(0);
             setEvening(1);
         }
-
+        console.log(morning, afternoon, evening, hour);
         const config = {
             headers: { 'Content-Type': 'Application/json' },
             body: JSON.stringify({
