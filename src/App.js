@@ -12,6 +12,7 @@ import EditClient from "./js/views/EditClient";
 import EditSpecialist from "./js/views/EditSpecialist";
 import NabvarSpecialist from "./js/components/NabvarSpecialist";
 import NabvarClient from "./js/components/NabvarClient";
+import "./App.css"
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
     return (
-        <div className="">
+        <div className="App">
             <BrowserRouter>
                 <div className="container">
                     <NabvarSpecialist />

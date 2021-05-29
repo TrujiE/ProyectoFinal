@@ -3,8 +3,8 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import logoTA from "../../img/logoTA.bmp"
-import "../../js/custom.css"
+import logoTA from "../../img/logoTA.bmp";
+import "../../js/custom.css";
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
@@ -26,7 +26,7 @@ const Home = () => {
       // Validaciones Email y Password
       email: Yup.string().email("Ingrese un email").required("Requerido"),
       password: Yup.string()
-        .required("No se ingreso contraseña")
+        .required("No se ingresó contraseña")
         .min(4, "La contraseña debe tener un mínimo de 4 caracteres")
         .matches(lowercaseRegex, "se requiere almenos una minuscula")
         .matches(uppercaseRegex, "se requiere almenos una mayuscula")
@@ -53,7 +53,7 @@ const Home = () => {
             //window.open("/seleccionUsuario" , "seleccionUsuario" , "width=1920,height=1080,scrollbars=NO")
             //redireccionar a seleccionUsuario
             window.location.href = "/seleccionUsuario";
-          }else{
+          } else {
             alert(data);
           }
           actions.setProfile(data);
@@ -66,118 +66,72 @@ const Home = () => {
 
   return (
     <div className="container mt-5">
-      {/* <h1 className="text-center">TeAYUDO?</h1> */}
       <hr />
-      
-      
-      <div className="row">
 
-        <div className="col-12 d-flex justify-content-center mb-5 mr-5">
-
-
-        <img src={logoTA} alt="" className=" mr-5 " style={ { maxWidth:"150px"}}/>
-
-        </div>
-
-      </div>
-      
-      <div className="row">
-
-        {/* <div className="col-6 d-flex justify-content-end  ">
-
-        <span className="ml-5">
-              <Link to="/registroCliente">
-                <u  className=" ml-5" style={{fontSize:"15px"}}> Registrar </u>{" "}
-              </Link>
-            </span>
-        
-
-        </div> */}
-
-      </div>
-      
-      
-      
-      
-      <div className="row">
-        <div className="col-8 ml-5 mt-5 ">
-          <form
-            // className="form-inline  d-flex align-items-center mt-5"
-            className="  form-inline d-flex justify-content-end "
-            onSubmit={formik.handleSubmit}
-          >
-            <label className="sr-only" htmlFor="email"></label>
-            <div className="input-group mb-2 mr-sm-2">
-              {/* <div className="input-group-prepend">
-                <div className="input-group-text">Email</div>
-              </div> */}
-
-              <input
-                type="text"
-                className="form-control"
-                id="email"
-                placeholder="Ingrese su correo"
-                name="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.email && formik.errors.email && (
-                <div className=" text-danger" >{formik.errors.email}</div>
-              )}
-            </div>
-
-            <label className="sr-only" htmlFor="password"></label>
-            
-            
-            <input
-              type="password"
-              className="form-control mb-2 mr-sm-2"
-              id="password"
-              placeholder="Contraseña"
-              name="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.password && formik.errors.password ? (
-              <div className="text-danger">{formik.errors.password}</div>
-            ) : null}
-
-
-              <div>
-
-
+      <div className=" main-b">
+        <div className=" modal-dialog text-center ">
+          <div className=" col-sm-8 main-section">
+            <div className="modal-content">
+              <div className=" col-12 main-logo">
+                <img
+                  src={logoTA}
+                  alt=""
+                  className="mt-3 "
+                  style={{ maxWidth: "150px" }}
+                />
               </div>
 
-            <button type="submit" className="btn btn-success mb-2 text-white">
-              Entrar
-            </button>
+              <form className=" col-12 " onSubmit={formik.handleSubmit}>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control text-center mt-5"
+                    id="email"
+                    placeholder="Ingrese su correo"
+                    name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.email && formik.errors.email && (
+                    <div className=" text-danger mt-2">{formik.errors.email}</div>
+                  )}
+                </div>
 
-          </form>
-        </div>
-      </div>
+                <div className="form-group">
+                  <input
+                    type="password"
+                    className="form-control  text-center"
+                    id="password"
+                    placeholder="Contraseña"
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.password && formik.errors.password ? (
+                    <div className="text-danger mt-2">{formik.errors.password}</div>
+                  ) : null}
+                </div>
 
-      <div className="row mt-3">
-        <div className="col-8 d-flex justify-content-end ml-5  ">
-          <h5 className=" ">
-            <span>
-              <Link to="/registroCliente">
-                <u  className="" style={{fontSize:"15px"}}> Registrar </u>{" "}
-              </Link>
-            </span>
-          </h5>
-        </div>
-        <div className="col-3 d-flex justify-content-end  ">
-          <h5 className=" ">
-            <span>
-              {" "}
-              <a href="#!">
-                {" "}
-                {/* <u style={{fontSize:"15px"}}> Olvidé Contraseña </u> */}
-              </a>
-            </span>
-          </h5>
+                <button
+                  type="submit"
+                  className="btn btn-success btn-block  text-white "
+                >
+                  Ingresar
+                </button>
+
+                <div className="mt-2 mb-2">
+                  <Link to="/registroCliente">
+                    <u className="text-center " style={{ fontSize: "15px" }}>
+                      {" "}
+                      Registrarse{" "}
+                    </u>{" "}
+                  </Link>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
