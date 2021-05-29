@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import logoTA from "../../img/logoTA.bmp";
 import "../../js/custom.css";
+import swal from "sweetalert"
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
@@ -48,7 +49,7 @@ const Home = () => {
         .then((data) => {
           console.log(data);
           if (data !== "Ha ingresado mal la contraseña.") {
-            alert("Bienvenido a la aplicación TeAyudo?");
+            // alert("Bienvenido a la aplicación TeAyudo?");
             //abrir una ventana aparte
             //window.open("/seleccionUsuario" , "seleccionUsuario" , "width=1920,height=1080,scrollbars=NO")
             //redireccionar a seleccionUsuario
@@ -60,7 +61,8 @@ const Home = () => {
           SaveLocalStore();
         })
         .catch((error) => console.error(error));
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
+      swal("has ingresado")
     }, //console.log(data))
   });
 
