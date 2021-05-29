@@ -9,6 +9,7 @@ import RequestsClient from './js/views/RequestsClient';
 import injectContext from "./js/store/appContext";
 import EditClient from "./js/views/EditClient";
 import EditSpecialist from "./js/views/EditSpecialist";
+import "./App.css"
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
     return (
-        <div className="">
+        <div className="App">
             <BrowserRouter>
                 <div>
                     <Switch>

@@ -130,7 +130,7 @@ const ClientForm = () => {
           id="firstName"
           name="firstName"
           type="text"
-          placeholder="nombre"
+          placeholder="Nombre"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.firstName}
@@ -146,7 +146,7 @@ const ClientForm = () => {
           id="lastName"
           name="lastName"
           type="text"
-          placeholder="apellido"
+          placeholder="Apellido"
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
           onChange={formik.handleChange}
@@ -166,7 +166,7 @@ const ClientForm = () => {
           id="rut"
           name="rut"
           type="text"
-          placeholder="ingrese su rut"
+          placeholder="Ingrese su rut"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.rut}
@@ -234,7 +234,7 @@ const ClientForm = () => {
           value={formik.values.comuna}
         >
         <option selected>
-        seleccione su comuna 
+        Seleccione su comuna 
           </option>
           
           {listaComunas}
@@ -299,7 +299,7 @@ const ClientForm = () => {
           id="secretAswer"
           name="secretAswer"
           type="text"
-          placeholder="pizza sin piña"
+          placeholder="Pizza sin piña"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.secretAswer}
