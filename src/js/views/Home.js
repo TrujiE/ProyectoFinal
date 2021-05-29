@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import "bootstrap/dist/css/bootstrap.css";
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
@@ -45,11 +46,12 @@ const Home = () => {
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-          if (data !== "Ha ingresado mal la contraseña.") {
-            alert("Bienvenido a la aplicación TeAyudo?");
-            //abrir una ventana aparte
-            //window.open("/seleccionUsuario" , "seleccionUsuario" , "width=1920,height=1080,scrollbars=NO")
-            //redireccionar a seleccionUsuario
+          if (typeof data == 'object'){
+             <div className="alert alert-warning alert-dismissable">
+                <button type="button" className="close" data-dismiss="alert">&times;</button>
+                <strong>Bienvenido a la aplicación TeAyudo?.</strong>
+            </div>              
+            alert("Bienvenido a la aplicación TeAyudo?.");
             window.location.href = "/seleccionUsuario";
           }else{
             alert(data);
