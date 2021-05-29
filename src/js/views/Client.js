@@ -137,14 +137,14 @@ const Client = () => {
                             />
                         </div>
 
-                        <div className="col-2">
+                        <div className="col-3">
                             <Select defaultValue={{ label: "Comuna", value: 0 }}
                                 options={listCommunes}
                                 onChange={e => setCommune(e.value)}
                             />
                         </div>
 
-                        <div className="col-3">
+                        <div className="col-2">
                             <Calendar_client
                             />
                         </div>
