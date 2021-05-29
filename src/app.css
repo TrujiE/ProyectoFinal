@@ -35,9 +35,11 @@ background: linear-gradient(90deg, rgba(192,246,186,1) 0%, rgba(164,235,167,1) 0
 
 }
 
-img {
+.main-section {
 
-  max-width: 50px;
+  margin: 0 auto;
+  margin-top: 40%;
+
 }
 
 
