@@ -12,11 +12,11 @@ const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 
 const Home = () => {
-  const { store, actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
 
-  const SaveLocalStore = () => {
-    localStorage.setItem("loginUser", JSON.stringify(store.profileUser));
-  };
+    const SaveLocalStore = () => {
+        localStorage.setItem("loginUser", JSON.stringify(store.profileUser));
+    };
 
   const formik = useFormik({
     initialValues: {
@@ -48,12 +48,9 @@ const Home = () => {
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-          if (data !== "Ha ingresado mal la contraseña.") {
-            // alert("Bienvenido a la aplicación TeAyudo?");
-            //abrir una ventana aparte
-            //window.open("/seleccionUsuario" , "seleccionUsuario" , "width=1920,height=1080,scrollbars=NO")
-            //redireccionar a seleccionUsuario
-            window.location.href = "/seleccionUsuario";
+           if (typeof data == 'object') {
+                alert("Bienvenido a la aplicación TeAyudo?");
+                window.location.href = "/cliente";
           } else {
             alert(data);
           }
@@ -135,9 +132,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  ); //Finaliza el return
+        </div>
+        </div>
+    ); //Finaliza el return
 };
 
 export default Home;
