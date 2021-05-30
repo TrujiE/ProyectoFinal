@@ -86,38 +86,43 @@ const TableRequestsClient = ({ date, hour }) => {
         if (option == -1) {
             swal("Por favor, seleccione una solicitud");
         } else {
-            swal({
-                title: "¿Está seguro que desea RESOLVER la solicitud?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        const config = {
-                            headers: { 'Content-Type': 'Application/json' },
-                            body: JSON.stringify({
-                                "id": valueDefault[option].requests.id
-                            }),
-                            method: "PUT"
-                        }
-                        fetch("http://127.0.0.1:5000/user/close_request", config)
-                            .then(respuesta => respuesta.json())
-                            .then(data => {
-                                console.log(data);
-                                swal(data)
-                                    .then(() => {
-                                        actions.setAvailable(data);
-                                        window.location.reload();
-                                    });
+            if (valueDefault[option].requests.request_status != 'aceptada') {
+                swal("No puede resolver un servicio que no ha sido aceptado");
+            }
+            else {
+                swal({
+                    title: "¿Está seguro que desea RESOLVER la solicitud?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            const config = {
+                                headers: { 'Content-Type': 'Application/json' },
+                                body: JSON.stringify({
+                                    "id": valueDefault[option].requests.id
+                                }),
+                                method: "PUT"
+                            }
+                            fetch("http://127.0.0.1:5000/user/close_request", config)
+                                .then(respuesta => respuesta.json())
+                                .then(data => {
+                                    console.log(data);
+                                    swal(data)
+                                        .then(() => {
+                                            actions.setAvailable(data);
+                                            window.location.reload();
+                                        });
 
-                            })
-                            .catch(error => console.error(error));
-                    }
-                    else {
-                        swal("Su solicitud continua aceptada");
-                    }
-                });
+                                })
+                                .catch(error => console.error(error));
+                        }
+                        else {
+                            swal("Su solicitud continua aceptada");
+                        }
+                    });
+            }
         }
     }
 
@@ -146,7 +151,7 @@ const TableRequestsClient = ({ date, hour }) => {
                                     <td>{list.requests.full_name_profile}</td>
                                     <td>{list.requests.last_name_profile}</td>
                                     <td>{list.requests.request_status}</td>
-                                    <td>{new Date(list.requests.date).getDate() + 1 + "-" + (new Date(list.requests.date).getMonth() + 1) + "-" + new Date(list.requests.date).getFullYear()}</td>
+                                    <td>{new Date(list.requests.date).toUTCString().replace('00:00:00 GMT', '').replace('Mon,', '').replace('Tue,', '').replace('Wed,', '').replace('Thu,', '').replace('Fri,', '').replace('Sat,', '').replace('Sun,', '')}</td>
                                     <td>{list.requests.hour.replace('morning', '08:00 - 11:00').replace('afternoon', '11:00 - 14:00').replace('evening', '14:00 - 17:00')}</td>
                                     <td>
                                         <div className="form-check">

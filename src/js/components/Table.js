@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
+import swal from 'sweetalert';
 
-const TableComponet = ({commune, date, hour, address}) => {
+const TableComponet = ({ commune, date, hour, address }) => {
 
     const [valueDefault, setValueDefault] = useState([]);
 
@@ -15,7 +16,7 @@ const TableComponet = ({commune, date, hour, address}) => {
         localStorage.getItem('loginUser') ?
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
-    let id = userProfile.user? userProfile.user.id :'';
+    let id = userProfile.user ? userProfile.user.id : '';
 
     // GET para obtener los valores por defecto
     useEffect(() => {
@@ -35,7 +36,7 @@ const TableComponet = ({commune, date, hour, address}) => {
     }, [])
 
     useEffect(() => {
-        if (Array.isArray(store.specialistsAvailable) && store.specialists>0 ) { 
+        if (Array.isArray(store.specialistsAvailable) && store.specialists > 0) {
             actions.resetSpecialists();
             setValueDefault(store.specialistsAvailable);
             console.log(valueDefault, "uno mas")
@@ -54,11 +55,11 @@ const TableComponet = ({commune, date, hour, address}) => {
     const Choose = () => {
         console.log(option)
         if (option == -1) {
-            alert("Por favor, seleccione un especialista");
+            swal("Por favor, seleccione un especialista");
         }
-         else if (hour=="") {
-            alert("Por favor, seleccione un horario de atención");
-        } 
+        else if (hour == "") {
+            swal("Por favor, seleccione un horario de atención");
+        }
         else if (userProfile.user) {
             console.log("Existe usuario", address)
             const config = {
@@ -86,11 +87,13 @@ const TableComponet = ({commune, date, hour, address}) => {
                 .then(respuesta => respuesta.json())
                 .then(data => {
                     console.log(data);
-                    if (typeof data == 'object'){
-                        alert("Solicitud enviada");
-                        actions.setAvailable(data);
-                    }else{
-                        alert(data);
+                    if (typeof data == 'object') {
+                        swal("Solicitud enviada")
+                            .then(() => {
+                                actions.setAvailable(data);
+                            });
+                    } else {
+                        swal(data);
                     }
                 })
                 .catch(error => console.error(error))
