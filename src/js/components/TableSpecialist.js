@@ -47,49 +47,11 @@ const TableRequestsSpecialist = ({ date, hour }) => {
         if (option == -1) {
             swal("Por favor, seleccione un servicio");
         } else {
-            swal({
-                title: "¿Está seguro que desea ACEPTAR la solicitud?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        const config = {
-                            headers: { 'Content-Type': 'Application/json' },
-                            body: JSON.stringify({
-                                "id": valueDefault[option].requests.id
-                            }),
-                            method: "PUT"
-                        }
-                        fetch("http://127.0.0.1:5000/user/acept_request", config)
-                            .then(respuesta => respuesta.json())
-                            .then(data => {
-                                console.log(data);
-                                swal(data)
-                                    .then(() => {
-                                        actions.setAvailable(data);
-                                        window.location.reload();
-                                    });
-                            })
-                            .catch(error => console.error(error));
-                    } else {
-                        swal("Su solicitud continua pendiente");
-                    }
-                });
-        }
-    }
-
-    const CancelRequest = () => {
-        if (option == -1) {
-            swal("Por favor, seleccione un servicio");
-        } else {
             if (valueDefault[option].requests.request_status != 'pendiente') {
-                swal("No puede cancelar un servicio que ya a sido aceptado o cancelado");
-            }
-            else {
+                swal("Solo puede aceptar servicios pendientes");
+            } else {
                 swal({
-                    title: "¿Está seguro que desea CANCELAR la solicitud?",
+                    title: "¿Está seguro que desea ACEPTAR la solicitud?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -114,9 +76,46 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                                         });
                                 })
                                 .catch(error => console.error(error));
-                        } else {
-                            swal("Su solicitud continua pendiente");
-                        }
+                        } 
+                    });
+            }
+        }
+    }
+
+    const CancelRequest = () => {
+        if (option == -1) {
+            swal("Por favor, seleccione un servicio");
+        } else {
+            if (valueDefault[option].requests.request_status == 'cancelada' || valueDefault[option].requests.request_status == 'resuelta') {
+                swal("Solo puede cancelar servicios pendientes o aceptados");
+            } else {
+                swal({
+                    title: "¿Está seguro que desea CANCELAR la solicitud?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            const config = {
+                                headers: { 'Content-Type': 'Application/json' },
+                                body: JSON.stringify({
+                                    "id": valueDefault[option].requests.id
+                                }),
+                                method: "PUT"
+                            }
+                            fetch("http://127.0.0.1:5000/user/cancel_request", config)
+                                .then(respuesta => respuesta.json())
+                                .then(data => {
+                                    console.log(data);
+                                    swal(data)
+                                        .then(() => {
+                                            actions.setAvailable(data);
+                                            window.location.reload();
+                                        });
+                                })
+                                .catch(error => console.error(error));
+                        } 
                     });
             }
         }
@@ -126,7 +125,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
             swal("Por favor, seleccione un servicio");
         } else {
             if (valueDefault[option].requests.request_status != 'aceptada') {
-                swal("No puede resolver un servicio que no ha sido aceptado");
+                swal("Solo puede resolver servicios en estado aceptado");
             } else {
                 swal({
                     title: "¿Está seguro que desea RESOLVER la solicitud?",
@@ -155,9 +154,6 @@ const TableRequestsSpecialist = ({ date, hour }) => {
 
                                 })
                                 .catch(error => console.error(error));
-                        }
-                        else {
-                            swal("Su solicitud continua aceptada");
                         }
                     });
             }
