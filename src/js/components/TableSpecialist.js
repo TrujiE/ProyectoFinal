@@ -84,36 +84,41 @@ const TableRequestsSpecialist = ({ date, hour }) => {
         if (option == -1) {
             swal("Por favor, seleccione un servicio");
         } else {
-            swal({
-                title: "¿Está seguro que desea CANCELAR la solicitud?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        const config = {
-                            headers: { 'Content-Type': 'Application/json' },
-                            body: JSON.stringify({
-                                "id": valueDefault[option].requests.id
-                            }),
-                            method: "PUT"
+            if (valueDefault[option].requests.request_status != 'pendiente') {
+                swal("No puede cancelar un servicio que ya a sido aceptado o cancelado");
+            }
+            else {
+                swal({
+                    title: "¿Está seguro que desea CANCELAR la solicitud?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            const config = {
+                                headers: { 'Content-Type': 'Application/json' },
+                                body: JSON.stringify({
+                                    "id": valueDefault[option].requests.id
+                                }),
+                                method: "PUT"
+                            }
+                            fetch("http://127.0.0.1:5000/user/acept_request", config)
+                                .then(respuesta => respuesta.json())
+                                .then(data => {
+                                    console.log(data);
+                                    swal(data)
+                                        .then(() => {
+                                            actions.setAvailable(data);
+                                            window.location.reload();
+                                        });
+                                })
+                                .catch(error => console.error(error));
+                        } else {
+                            swal("Su solicitud continua pendiente");
                         }
-                        fetch("http://127.0.0.1:5000/user/acept_request", config)
-                            .then(respuesta => respuesta.json())
-                            .then(data => {
-                                console.log(data);
-                                swal(data)
-                                    .then(() => {
-                                        actions.setAvailable(data);
-                                        window.location.reload();
-                                    });
-                            })
-                            .catch(error => console.error(error));
-                    } else {
-                        swal("Su solicitud continua pendiente");
-                    }
-                });
+                    });
+            }
         }
     }
     const CloseRequest = () => {
@@ -159,63 +164,63 @@ const TableRequestsSpecialist = ({ date, hour }) => {
         }
     }
 
-        return (
-            <div className="table-responsive-xl">
-                <table className="table table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Especialidad</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Dirección</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            state == true ?
-                                valueDefault.map((list, index) =>
-                                    <tr key={index}>
-                                        <td>{list.requests.id}</td>
-                                        <td>{list.requests.name_specialty}</td>
-                                        <td>{list.requests.full_name_user}</td>
-                                        <td>{list.requests.last_name_user}</td>
-                                        <td>{list.requests.address}</td>
-                                        <td>{list.requests.request_status}</td>
-                                        <td>{new Date(list.requests.date).toUTCString().replace('00:00:00 GMT', '').replace('Mon,', '').replace('Tue,', '').replace('Wed,', '').replace('Thu,', '').replace('Fri,', '').replace('Sat,', '').replace('Sun,', '')}</td>
-                                        <td>{list.requests.hour.replace('morning', '08:00 - 11:00').replace('afternoon', '11:00 - 14:00').replace('evening', '14:00 - 17:00')}</td>
-                                        <td>
-                                            <div className="form-check">
-                                                <input className="form-check-input"
-                                                    type="radio"
-                                                    name="exampleRadios"
-                                                    id="exampleRadios1"
-                                                    value="option1"
-                                                    onClick={() => checkInput(index)}
+    return (
+        <div className="table-responsive-xl">
+            <table className="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Especialidad</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        state == true ?
+                            valueDefault.map((list, index) =>
+                                <tr key={index}>
+                                    <td>{list.requests.id}</td>
+                                    <td>{list.requests.name_specialty}</td>
+                                    <td>{list.requests.full_name_user}</td>
+                                    <td>{list.requests.last_name_user}</td>
+                                    <td>{list.requests.address}</td>
+                                    <td>{list.requests.request_status}</td>
+                                    <td>{new Date(list.requests.date).toUTCString().replace('00:00:00 GMT', '').replace('Mon,', '').replace('Tue,', '').replace('Wed,', '').replace('Thu,', '').replace('Fri,', '').replace('Sat,', '').replace('Sun,', '')}</td>
+                                    <td>{list.requests.hour.replace('morning', '08:00 - 11:00').replace('afternoon', '11:00 - 14:00').replace('evening', '14:00 - 17:00')}</td>
+                                    <td>
+                                        <div className="form-check">
+                                            <input className="form-check-input"
+                                                type="radio"
+                                                name="exampleRadios"
+                                                id="exampleRadios1"
+                                                value="option1"
+                                                onClick={() => checkInput(index)}
 
-                                                />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                )
-                                :
-                                <tr>
-                                    <td>No hay solicitudes creadas</td>
+                                            />
+                                        </div>
+                                    </td>
                                 </tr>
-                        }
-                    </tbody>
-                </table>
-                <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={AcceptRequest}
-                >Aceptar Solicitud</button>&nbsp;&nbsp;&nbsp;
-                <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CancelRequest}
-                >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
-                <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CloseRequest}
-                >Resolver Solicitud</button>
-            </div>
-        )
-    }
-    export default TableRequestsSpecialist;
+                            )
+                            :
+                            <tr>
+                                <td>No hay solicitudes creadas</td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={AcceptRequest}
+            >Aceptar Solicitud</button>&nbsp;&nbsp;&nbsp;
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CancelRequest}
+            >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CloseRequest}
+            >Resolver Solicitud</button>
+        </div>
+    )
+}
+export default TableRequestsSpecialist;
