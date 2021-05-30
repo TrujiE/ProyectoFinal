@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import logoTA from "../../img/logoTA.bmp";
 import "../../js/custom.css";
+import swal from "sweetalert"
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
@@ -48,16 +49,23 @@ const Home = () => {
         .then((data) => {
           console.log(data);
            if (typeof data == 'object') {
-                alert("Bienvenido a la aplicación TeAyudo?");
-                window.location.href = "/cliente";
+                swal({
+                  title: "Bienvenido!",
+                  text: "Ahora iras a tu perfil de usuario en la aplicacaion !",
+                  icon: "success",
+                  button: "ir",
+                })
+                .then(()=> { window.location.href = "/cliente";});
+                
           } else {
-            alert(data);
+            swal(data,{icon: "error"});
           }
           actions.setProfile(data);
           SaveLocalStore();
         })
         .catch((error) => console.error(error));
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
+      // swal("has ingresado")
     }, //console.log(data))
   });
 

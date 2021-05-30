@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 import comunasList2 from "../utils/communesFile"
 import comunasList from "../utils/comunasObj"
 import specialties from "../utils/specialties"
+import swal from "sweetalert";
 
 
 
@@ -108,13 +109,27 @@ const EditFormSpecialist = () => {
             }      
           fetch("http://127.0.0.1:5000/user/profile/" + id, profile_user)
             .then(respuesta => respuesta.json())
-            .then(data => console.log(data))  
-            .catch(error => console.error(error))      
-            alert(JSON.stringify(values, null, 2));
+            .then((data) => {
+              console.log(data);
     
+              swal({
+                title: "Tu perfil se ha editado exitosamente!",
+                text: "Ahora podras volver a tu perfil de usuario!",
+                icon: "success",
+                button: "volver a mi perfil",
+              }).then(() => {
+                window.location.href = "/especialista";
+              });
+    
+              // else {
+              //   swal(data,{icon: "error"});
+              // }
+            })
+    
+            .catch((error) => console.error(error));
+          // alert(JSON.stringify(values, null, 2));
         },
       });
-    
       return (
         <div>
           <form onSubmit={formik.handleSubmit}>  

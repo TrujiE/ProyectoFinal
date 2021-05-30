@@ -5,6 +5,7 @@ import Select from "react-select";
 import comunasList2 from "../utils/communesFile"
 import comunasList from "../utils/comunasObj"
 import specialties from "../utils/specialties"
+import swal from "sweetalert";
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
@@ -135,10 +136,19 @@ const SpecialistForm = () => {
       .then(data => {
         console.log(data);
         if (typeof data == 'object'){
-          alert(JSON.stringify('Perfil creado con éxito', null, 2));
-          window.location.href = "/";
-        }else{
-          alert(JSON.stringify(data, null, 2));
+          
+          swal({
+            title: "Felicidades ahora eres un especialista! ;)",
+            text: "Ahora te redirecionaremos al inicio de sesion para que puedas entrar a tu perfil!",
+            icon: "success",
+            button: "ir",
+          }).then(() => {
+            window.location.href = "/";
+          });
+        } else {
+          swal(data, { icon: "error" }).then(() => {
+            window.location.href = "/";
+          });
         }
   })  
   .catch(error => console.error(error))
