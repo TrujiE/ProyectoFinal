@@ -28,13 +28,12 @@ function App() {
         <div className="">
             <BrowserRouter>
                 <div className="container">
-                    {() => state.profile ?
-                        state.profile.role == "client" ?
+                    {
+                        state.profile?.role == "client" ?
                             <NabvarClient />
                             :
                              <NabvarSpecialist />
-                        :
-                        < ></>
+                        
                         
                 }
 
