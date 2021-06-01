@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import { format, compareAsc } from 'date-fns';
+import swal from 'sweetalert';
 
-const TableRequestsClient = ({date, hour}) => {
+const TableRequestsClient = ({ date, hour }) => {
 
     const [valueDefault, setValueDefault] = useState([]);
 
@@ -10,15 +11,15 @@ const TableRequestsClient = ({date, hour}) => {
 
     const [state, setState] = useState(false);
 
-    let option = -1;    
+    let option = -1;
 
     const userProfile =
         localStorage.getItem('loginUser') ?
             JSON.parse(localStorage.getItem('loginUser')) : {};
-        
-    let id = userProfile.user? userProfile.user.id :'';
-   
-    
+
+    let id = userProfile.user ? userProfile.user.id : '';
+
+
     // GET para obtener los valores por defecto
     useEffect(() => {
         fetch("http://127.0.0.1:5000/user/requests_client/" + id)
@@ -31,7 +32,7 @@ const TableRequestsClient = ({date, hour}) => {
                 } else {
                     console.log(state, "no es un arreglo")
                     setState(false)
-                }                
+                }
             })
             .catch(error => console.error(error));
     }, [])
@@ -45,60 +46,82 @@ const TableRequestsClient = ({date, hour}) => {
     //valueDefault[option].requests.id
     const CancelRequest = () => {
         if (option == -1) {
-            alert("Por favor, seleccione una solicitud");
-        }else{
-            let options = window.confirm("¿Está seguro que desea CANCELAR la solicitud?");
-            if (options == true) {
-                const config = {
-                    headers: { 'Content-Type': 'Application/json' },
-                    body: JSON.stringify({
-                        "id":valueDefault[option].requests.id
-                    }),
-                    method: "PUT"
-                }
-                fetch("http://127.0.0.1:5000/user/cancel_request", config)
-                    .then(respuesta => respuesta.json())
-                    .then(data => {
-                        console.log(data);
-                        alert(data);
-                        actions.setAvailable(data);
-                        window.location.reload();
-                    })
-                    .catch(error => console.error(error));
-
+            swal("Por favor, seleccione una solicitud");
+        } else {
+            if (valueDefault[option].requests.request_status == 'cancelada' || valueDefault[option].requests.request_status == 'resuelta') {
+                swal("Solo puede cancelar solicitudes pendientes o aceptados");
             } else {
-                alert("Usted decidió no cancelar la solicitud");
+                swal({
+                    title: "¿Está seguro que desea CANCELAR la solicitud?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            const config = {
+                                headers: { 'Content-Type': 'Application/json' },
+                                body: JSON.stringify({
+                                    "id": valueDefault[option].requests.id
+                                }),
+                                method: "PUT"
+                            }
+                            fetch("http://127.0.0.1:5000/user/cancel_request", config)
+                                .then(respuesta => respuesta.json())
+                                .then(data => {
+                                    console.log(data);
+                                    swal(data)
+                                        .then(() => {
+                                            actions.setAvailable(data);
+                                            window.location.reload();
+                                        });
+
+                                })
+                                .catch(error => console.error(error));
+                        }
+                    });
             }
         }
     }
-
     const CloseRequest = () => {
         if (option == -1) {
-            alert("Por favor, seleccione una solicitud");
-        }else{        
-            let options = window.confirm("¿Está seguro que desea RESOLVER la solicitud?");
-            if (options == true) {
-                const config = {
-                    headers: { 'Content-Type': 'Application/json' },
-                    body: JSON.stringify({
-                        "id":valueDefault[option].requests.id
-                    }),
-                    method: "PUT"
-                }
-                fetch("http://127.0.0.1:5000/user/close_request", config)
-                    .then(respuesta => respuesta.json())
-                    .then(data => {
-                        console.log(data);
-                        alert(data);
-                        actions.setAvailable(data);
-                        window.location.reload();
-                    })
-                    .catch(error => console.error(error));
+            swal("Por favor, seleccione una solicitud");
+        } else {
+            if (valueDefault[option].requests.request_status != 'aceptada') {
+                swal("Solo puede resolver solicitudes en estado aceptado");
+            }
+            else {
+                swal({
+                    title: "¿Está seguro que desea RESOLVER la solicitud?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            const config = {
+                                headers: { 'Content-Type': 'Application/json' },
+                                body: JSON.stringify({
+                                    "id": valueDefault[option].requests.id
+                                }),
+                                method: "PUT"
+                            }
+                            fetch("http://127.0.0.1:5000/user/close_request", config)
+                                .then(respuesta => respuesta.json())
+                                .then(data => {
+                                    console.log(data);
+                                    swal(data)
+                                        .then(() => {
+                                            actions.setAvailable(data);
+                                            window.location.reload();
+                                        });
 
-            } else {
-                alert("Usted decidió no resolver la solicitud");
-            }  
-        }                
+                                })
+                                .catch(error => console.error(error));
+                        }
+                    });
+            }
+        }
     }
 
     return (
@@ -112,7 +135,7 @@ const TableRequestsClient = ({date, hour}) => {
                         <th scope="col">Apellido</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Hora</th>                        
+                        <th scope="col">Hora</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -126,8 +149,8 @@ const TableRequestsClient = ({date, hour}) => {
                                     <td>{list.requests.full_name_profile}</td>
                                     <td>{list.requests.last_name_profile}</td>
                                     <td>{list.requests.request_status}</td>
-                                    <td>{new Date(list.requests.date).toUTCString().replace('00:00:00 GMT', '').replace('Mon,','').replace('Tue,','').replace('Wed,','').replace('Thu,','').replace('Fri,','').replace('Sat,','').replace('Sun,','')}</td>
-                                    <td>{list.requests.hour.replace('morning','08:00 - 11:00').replace('afternoon','11:00 - 14:00').replace('evening','14:00 - 17:00')}</td>                                    
+                                    <td>{new Date(list.requests.date).toUTCString().replace('00:00:00 GMT', '').replace('Mon,', '').replace('Tue,', '').replace('Wed,', '').replace('Thu,', '').replace('Fri,', '').replace('Sat,', '').replace('Sun,', '')}</td>
+                                    <td>{list.requests.hour.replace('morning', '08:00 - 11:00').replace('afternoon', '11:00 - 14:00').replace('evening', '14:00 - 17:00')}</td>
                                     <td>
                                         <div className="form-check">
                                             <input className="form-check-input"
