@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import LogOut from "../components/LogOut";
 import TableRequestsClient from '../components/TableClient';
 import { Context } from "../store/appContext";
 import { format, compareAsc } from 'date-fns';
 import Components from "../components/Components";
-
+import SidebarClient from "../components/SidebarClient";
+import SidebarSpecialist from "../components/SidebarSpecialist";
+import Nabvar from '../components/Nabvar';
 
 const RequestsClient = () => {
     const [hour, setHour] = useState("");
@@ -41,30 +42,18 @@ const RequestsClient = () => {
 
     return (
         <div className="container">
-            <LogOut />
+            <Nabvar />
             <div className="row">
                 <div className="col">
-                    <h4>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""} acá puedes revisar tus solicitudes</h4>
+                    <h4>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes revisar tus solicitudes</h4>
                 </div>
             </div>
             <div className="row">   
-            
-                <div className="col-2">
-                    <div className="card mt-4">
-                        <img
-                            src="https://ingeniousservices.com/service-forms/wp-content/uploads/wpcf7_drag-n-drop_uploads/panamaorganico-com/juan-gomez.png"
-                            className="img-fluid "
-                            alt="..."
-                        ></img>
-                    </div>
-                    <br />
-                    <div className="col-12">
-                        <Link type="button" className="btn btn-outline-success btn-sm btn-block" to="/editarEspecialista">Editar cuenta</Link>
-                        <button type="button" className="btn btn-success btn-sm btn-block">Solicitudes</button>
-                        <Link type="button" className="btn btn-outline-success btn-sm btn-block" to="/cliente">Crear Solicitud</Link>
-                    </div>
-                </div>
-
+                 {userProfile.profile.role == "client" ?
+                <SidebarClient/>
+                :
+                <SidebarSpecialist/>
+            }
                 <div className="col-10">
                     <div className="row mt-4">
                         <div className="col-10">

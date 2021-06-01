@@ -98,9 +98,9 @@ const TableComponet = ({commune, date, hour, address}) => {
     }
     return (
         <div className="table-responsive-xl">
-            <table className="table table-sm">
+            <table className="table table-sm table-bordered table-striped  enable-rounded=true">
                 <thead>
-                    <tr>
+                    <tr className="bg-success text-white">
                         <th scope="col">Especialidad</th>
                         <th scope="col">Comuna</th>
                         <th scope="col">Nombre</th>
@@ -110,11 +110,11 @@ const TableComponet = ({commune, date, hour, address}) => {
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-striped ">
                     {
                         state == true ?
                             valueDefault.map((list, index) =>
-                                <tr key={index}>
+                                <tr className="" key={index}>
                                     <td>{list.specialty.name_specialty}</td>
                                     <td>{list.commune.name_commune}</td>
                                     <td>{list.user.full_name}</td>

@@ -6,12 +6,10 @@ import SignUpSpecialist from './js/views/SignUpSpecialist';
 import Client from './js/views/Client';
 import Specialist from './js/views/Specialist';
 import RequestsClient from './js/views/RequestsClient';
-import SelectUser from './js/views/SelectUser';
 import injectContext from "./js/store/appContext";
 import EditClient from "./js/views/EditClient";
 import EditSpecialist from "./js/views/EditSpecialist";
-import NabvarSpecialist from "./js/components/NabvarSpecialist";
-import NabvarClient from "./js/components/NabvarClient";
+import "./App.css"
 
 
 function App() {
@@ -21,12 +19,8 @@ function App() {
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
     return (
-        <div className="">
+        <div className="App">
             <BrowserRouter>
-                <div className="container">
-                    <NabvarSpecialist />
-
-                </div>
                 <div>
                     <Switch>
                         <Route exact path="/" component={Home} />
@@ -42,7 +36,6 @@ function App() {
                                 :
                                 <Redirect to={{ pathname: "/" }}></Redirect>} />
                         <Route exact path="/solicitudes" component={RequestsClient} />
-                        <Route exact path="/seleccionUsuario" component={SelectUser} />
                         <Route exact path="/editarCliente" component={EditClient} />
                         <Route exact path="/editarEspecialista" component={EditSpecialist} />
                         <Route render={() => <h1 className="notfound">Not found!</h1>} />
