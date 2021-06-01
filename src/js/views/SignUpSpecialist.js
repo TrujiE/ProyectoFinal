@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SpecialistForm from "../components/SpecialistForm";
+import logoTA from "../../img/logoTA.bmp";
 
 const SignUpSpecialist = () => {
   return (
@@ -25,17 +26,34 @@ const SignUpSpecialist = () => {
 
           <SpecialistForm />
         </div>
-        <div className="col-4 mt-5 pt-5">
-        <button className="btn btn-dark  btn-block text-white">Avatar</button>
-          <div className="card mt-3">
-            <img
-              src="https://picsum.photos/id/237/50/50"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body border-success">
-              <h5 className="card-title text-center">Nuevo Especialista</h5>
-              <p className="card-text"></p>
+
+        <div className="col-4 sideBar-right rounded border border-secondary">
+          <div className=" modal-dialog text-center ">
+            <div className="">
+              <div className="modal-content">
+                <div className=" col-12 main-logo">
+                  <img
+                    src={logoTA}
+                    alt=""
+                    className="mt-3 "
+                    style={{ maxWidth: "150px" }}
+                  />
+                </div>
+              </div>
+              <p className="mt-5">
+                Registrandote en nuestra aplicacion como ESPECIALISTA te
+                ayudaremos a prestar tus servicios en las siguientes categorias:
+              </p>
+
+              <div>
+                <ul class="list-group  laLista">
+                  <li class="  mt-5 ">Electricista</li>
+                  <li class="  mt-5">Carpintero</li>
+                  <li class="  mt-5">Pintor</li>
+                  <li class="  mt-5">Albañil</li>
+                  <li class="  mt-5">Plomero</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
