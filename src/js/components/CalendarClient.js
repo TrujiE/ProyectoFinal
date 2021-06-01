@@ -16,6 +16,7 @@ const Calendar_client = () => {
       selected={store.startDate}
       onChange={date => actions.setCalendar(date)}
       minDate={addDays(new Date(), 1)} //Se establece el dia minimo a seleccionar
+      className="form-control"
     />
   );
 };

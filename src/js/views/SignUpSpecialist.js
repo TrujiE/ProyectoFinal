@@ -4,25 +4,33 @@ import SpecialistForm from "../components/SpecialistForm";
 import logoTA from "../../img/logoTA.bmp";
 
 const SignUpSpecialist = () => {
-  return (
-    <div className="container mt-5">
-      <h1 className=" text-center">Te ayudo... con tu registro?</h1>
-      <hr />
-      <div className="row">
-        <div className="col-8">
-          <ul className="nav nav-pills nav-fill mb-5">
-            <li className="nav-item ">
-              <Link to="/registroCliente" className="btn  text-success">
-                Cliente
-              </Link>
-              {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
-            </li>
-            <li className="nav-item">
-              <a className="nav-link btn-success btn-sm " href="#">
-                Especialista
-              </a>
-            </li>
-          </ul>
+    return (
+        <div className="container mt-5">
+            <h1 className=" text-center">Te ayudo... con tu registro?</h1>
+            <hr />
+            <div className="row">
+                <div className="col-8">
+                    <ul className="nav nav-pills nav-fill mb-5">
+                        <li className="nav-item ">
+                            <Link to="/registroCliente" className="btn  text-success">
+                                Cliente
+                            </Link>
+                            {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link btn-success btn-sm " href="#">
+                                Especialista
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                to="/"
+                                className="nav-link text-success  "
+                            >
+                                Volver al Inicio
+                            </Link>
+                        </li>
+                    </ul>
 
           <SpecialistForm />
         </div>
@@ -55,11 +63,8 @@ const SignUpSpecialist = () => {
                 </ul>
               </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default SignUpSpecialist;
