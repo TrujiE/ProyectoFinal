@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Components from "../components/Components";
-import Log_out from "../components/LogOut";
 import { Context } from "../store/appContext";
 import Calendar_component from "../components/CalendarClient";
 import Calendar_client from '../components/CalendarClient';
@@ -9,6 +8,9 @@ import TableComponet from '../components/Table';
 import Select from 'react-select'
 import { format, compareAsc } from 'date-fns';
 import listCommunes from '../utility/ListCommunes';
+import SidebarClient from '../components/SidebarClient';
+import SidebarSpecialist from '../components/SidebarSpecialist';
+import Nabvar from '../components/Nabvar';
 
 const Client = () => {
 
@@ -114,30 +116,18 @@ const Client = () => {
 
     return (
         <div className="container">
-            <Log_out />
+            <Nabvar />
             <div className="row">
                 <div className="col">
-                    <h4 style={{ textAlign: "left" }}>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, en qué te ayudamos?</h4>
+                    <h4 style={{ textAlign: "left" }}>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes crear una solicitud</h4>
                 </div>
             </div>
             <div className="row">
-
-                <div className="col-2">
-                    <div className="card mt-4">
-                        <img
-                            src="https://ingeniousservices.com/service-forms/wp-content/uploads/wpcf7_drag-n-drop_uploads/panamaorganico-com/juan-gomez.png"
-                            className="img-fluid "
-                            alt="..."
-                        ></img>
-                    </div>
-                    <br />
-                    <div className="col-12">
-                        <Link type="button" className="btn btn-outline-success btn-sm btn-block" to="/editarEspecialista">Editar cuenta</Link>
-                        <Link type="button" className="btn btn-outline-success btn-sm btn-block" to="/solicitudes">Solicitudes</Link>
-                        <button type="button" className="btn btn-success btn-sm btn-block">Crear Solicitud</button>
-                    </div>
-                </div>
-
+                {userProfile.profile.role == "client" ?
+                    <SidebarClient />
+                    :
+                    <SidebarSpecialist />
+                }
                 <div className="col-10 mt-4">
                     <div className="row">
                         <div className="col-3">
@@ -146,60 +136,60 @@ const Client = () => {
                                 onChange={e => setSpecialty(e.value)}
                             />
                         </div>
-			             
-			            <div className="col-2">
+
+                        <div className="col-2">
                             <Select defaultValue={{ label: "Comuna", value: 0 }}
                                 options={listCommunes}
                                 onChange={e => setCommune(e.value)}
                             />
                         </div>
-                        
+
                         <div className="col-3">
                             <Calendar_client
                             />
                         </div>
-                        
+
                         <div className="col-2">
                             <Select defaultValue={{ label: "Horario", value: 0 }}
                                 options={hours}
                                 onChange={e => setHour(e.value)}
                             />
                         </div>
-                        
+
                         <div className="col-2">
                             <button type="button" className="btn btn-success" onClick={SendValue}
-                                >Buscar</button>
+                            >Buscar</button>
                         </div>
                     </div>
-                <br />
+                    <br />
 
-                <div className="col-6">
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="address"
-                        value={address}
-                        disabled="disabled"
-                        onChange={handleChange}
-                    />
-            
-				<div className="form-group form-check">
+                    <div className="col-6">
                         <input
-                            type="checkbox"
-                            className="form-check-input"
-                            id="Check"
-                            defaultChecked={false}
-                            onChange={setCheck}
+                            type="text"
+                            className="form-control"
+                            id="address"
+                            value={address}
+                            disabled="disabled"
+                            onChange={handleChange}
                         />
-                        <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
+
+                        <div className="form-group form-check">
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                                id="Check"
+                                defaultChecked={false}
+                                onChange={setCheck}
+                            />
+                            <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
+                        </div>
+                    </div>
+
+                    <div className="form-group col-10">
+                        <h5>Seleccione su especialista</h5>
+                        <TableComponet commune={commune} address={address} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
                     </div>
                 </div>
-
-                <div className="form-group col-10">
-                    <h5>Seleccione su especialista</h5>
-                    <TableComponet commune={commune} address={address} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
-                </div>
-            </div>
             </div>
             <br />
             <br />

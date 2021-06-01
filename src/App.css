@@ -1,0 +1,27 @@
+
+.App{
+      
+    /* font-family:roboto; */
+    /* background-color: rgb(102,205,170); */
+    /* background-color: rgb(204,217,204); */
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+textarea:focus, input:focus, input[type]:focus {
+
+    border-color: rgb(3, 143, 72);
+  
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6);
+  
+    outline: 0 none;
+  
+  }
+
+.main-section {
+
+     margin: 0 auto;
+     margin-top: 20%;
+
+}
