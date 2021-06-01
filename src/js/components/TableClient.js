@@ -10,9 +10,10 @@ const TableRequestsClient = ({ date, hour }) => {
     const { store, actions } = useContext(Context);
 
     const [state, setState] = useState(false);
+    
+    const [reloadTable, setTable] = useState(0);
 
     let option = -1;
-    let reloadTable = 0;
 
     const userProfile =
         localStorage.getItem('loginUser') ?
@@ -74,12 +75,13 @@ const TableRequestsClient = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            reloadTable ++;
                                         });
 
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         }
+
                     });
             }
         }
@@ -114,11 +116,11 @@ const TableRequestsClient = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            reloadTable ++;
                                         });
 
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         }
                     });
             }

@@ -11,6 +11,8 @@ const TableRequestsSpecialist = ({ date, hour }) => {
 
     const [state, setState] = useState(false);
 
+    const [reloadTable, setTable] = useState(0);
+
     let option = -1;
 
     const userProfile =
@@ -35,7 +37,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                 }
             })
             .catch(error => console.error(error));
-    }, [])
+    }, [reloadTable])
 
     const checkInput = (index) => {
         option = index;
@@ -72,10 +74,10 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
                                         });
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         } 
                     });
             }
@@ -111,10 +113,10 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
                                         });
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         } 
                     });
             }
@@ -149,11 +151,11 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
                                         });
 
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         }
                     });
             }
