@@ -6,6 +6,8 @@ import logoTA from "../../img/logoTA.bmp";
 
 const SignUpClient = () => {
     return (
+
+      
         <div className="container mt-5">
             <h1 className=" text-center">Te ayudo... con tu registro?</h1>
             <hr />
@@ -66,12 +68,14 @@ const SignUpClient = () => {
                 </ul>
               </div>
             </div>
-            <hr />
+         
 
         </div>
       </div>
       <hr />
     </div>
+    </div>
+    
   );
 };
 
