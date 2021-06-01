@@ -12,6 +12,7 @@ const TableRequestsClient = ({ date, hour }) => {
     const [state, setState] = useState(false);
 
     let option = -1;
+    let reloadTable = 0;
 
     const userProfile =
         localStorage.getItem('loginUser') ?
@@ -20,7 +21,7 @@ const TableRequestsClient = ({ date, hour }) => {
     let id = userProfile.user ? userProfile.user.id : '';
 
 
-    // GET para obtener los valores por defecto
+    // GET para obtener las solicitudes
     useEffect(() => {
         fetch("http://127.0.0.1:5000/user/requests_client/" + id)
             .then(respuesta => respuesta.json())
@@ -35,7 +36,7 @@ const TableRequestsClient = ({ date, hour }) => {
                 }
             })
             .catch(error => console.error(error));
-    }, [])
+    }, [reloadTable])
 
     const checkInput = (index) => {
         option = index;
@@ -73,7 +74,7 @@ const TableRequestsClient = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
+                                            reloadTable ++;
                                         });
 
                                 })
@@ -113,7 +114,7 @@ const TableRequestsClient = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
+                                            reloadTable ++;
                                         });
 
                                 })
