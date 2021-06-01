@@ -25,3 +25,20 @@ textarea:focus, input:focus, input[type]:focus {
      margin-top: 20%;
 
 }
+
+.sideBar-right{
+ 
+  background :rgb(89,141,88);
+  color: white;
+
+}
+
+.ayudo{
+
+  margin: 0 auto;  
+}
+
+.laLista{
+  list-style: none;
+  font-size: 25px;
+}

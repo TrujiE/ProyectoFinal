@@ -48,10 +48,9 @@ const TableRequestsClient = ({ date, hour }) => {
         if (option == -1) {
             swal("Por favor, seleccione una solicitud");
         } else {
-            if (valueDefault[option].requests.request_status != 'pendiente') {
-                swal("No puede cancelar un servicio que ya a sido aceptado o cancelado");
-            }
-            else {
+            if (valueDefault[option].requests.request_status == 'cancelada' || valueDefault[option].requests.request_status == 'resuelta') {
+                swal("Solo puede cancelar solicitudes pendientes o aceptados");
+            } else {
                 swal({
                     title: "¿Está seguro que desea CANCELAR la solicitud?",
                     icon: "warning",
@@ -80,9 +79,6 @@ const TableRequestsClient = ({ date, hour }) => {
                                 })
                                 .catch(error => console.error(error));
                         }
-                        else {
-                            swal("Su solicitud continua pendiente");
-                        }
                     });
             }
         }
@@ -92,7 +88,7 @@ const TableRequestsClient = ({ date, hour }) => {
             swal("Por favor, seleccione una solicitud");
         } else {
             if (valueDefault[option].requests.request_status != 'aceptada') {
-                swal("No puede resolver un servicio que no ha sido aceptado");
+                swal("Solo puede resolver solicitudes en estado aceptado");
             }
             else {
                 swal({
@@ -122,9 +118,6 @@ const TableRequestsClient = ({ date, hour }) => {
 
                                 })
                                 .catch(error => console.error(error));
-                        }
-                        else {
-                            swal("Su solicitud continua aceptada");
                         }
                     });
             }
