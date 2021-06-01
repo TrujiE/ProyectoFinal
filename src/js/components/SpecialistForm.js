@@ -5,6 +5,7 @@ import Select from "react-select";
 import comunasList2 from "../utils/communesFile"
 import comunasList from "../utils/comunasObj"
 import specialties from "../utils/specialties"
+import swal from "sweetalert";
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
@@ -135,10 +136,19 @@ const SpecialistForm = () => {
       .then(data => {
         console.log(data);
         if (typeof data == 'object'){
-          alert(JSON.stringify('Perfil creado con éxito', null, 2));
-          window.location.href = "/";
-        }else{
-          alert(JSON.stringify(data, null, 2));
+          
+          swal({
+            title: "Felicidades ahora eres un especialista! ;)",
+            text: "Ahora te redirecionaremos al inicio de sesion para que puedas entrar a tu perfil!",
+            icon: "success",
+            button: "ir",
+          }).then(() => {
+            window.location.href = "/";
+          });
+        } else {
+          swal(data, { icon: "error" }).then(() => {
+            window.location.href = "/";
+          });
         }
   })  
   .catch(error => console.error(error))
@@ -155,7 +165,7 @@ const SpecialistForm = () => {
           id="firstName"
           name="firstName"
           type="text"
-          placeholder="nombre"
+          placeholder="Nombre"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.firstName}
@@ -170,7 +180,7 @@ const SpecialistForm = () => {
           id="lastName"
           name="lastName"
           type="text"
-          placeholder="apellido"
+          placeholder="Apellido"
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
           onChange={formik.handleChange}
@@ -188,7 +198,7 @@ const SpecialistForm = () => {
           id="rut"
           name="rut"
           type="text"
-          placeholder="ingrese su rut"
+          placeholder="Ingrese su rut"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.rut}
@@ -259,7 +269,7 @@ const SpecialistForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.comuna}
         >
-          <option selected>seleccione su comuna</option>
+          <option selected>Seleccione su comuna</option>
         
           {listaComunas}
 
@@ -323,7 +333,7 @@ const SpecialistForm = () => {
           id="secretAswer"
           name="secretAswer"
           type="text"
-          placeholder="pizza sin piña"
+          placeholder="Pizza sin piña"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.secretAswer}
@@ -358,7 +368,7 @@ const SpecialistForm = () => {
           isMulti
           className="basic-multi-select mb-3"
           classNamePrefix="select"
-          placeholder="seleccione las comunas que atenderá"
+          placeholder="Seleccione las comunas que atenderá"
           options={comunasList}
           name="attentionComunes" 
 
@@ -382,17 +392,13 @@ const SpecialistForm = () => {
           value={formik.values.skills}
         >
 
-        <option selected>seleccione su experiencia</option>
+        <option selected>Seleccione su experiencia</option>
 
-          <option value="menos de 1 año">menos de 1 año</option>
-          <option value="mas de 1 año">mas de 1 año</option>
-          <option value="mas de 2 años">mas de 2 años</option>
-          <option value="mas de 3 años">mas de 3 años</option>
-          <option value="mas de 4 años">mas de 4 años</option>
-          <option value="mas de 5 años">mas de 5 años</option>
-          <option value="mas de 6 años">mas de 6 años</option>
-          <option value="mas de 7 años">mas de 7 años</option>
-          <option value="mas de 8 años">mas de 8 años</option>
+          <option value="Menos de 1 año">menos de 1 año</option>
+          <option value="De 1 a 3 años">De 1 a 3 años</option>
+          <option value="De 3 a 5 años">De 3 a 5 años</option>
+          <option value="De 5 a 10 años">De 5 a 10 años</option>
+          
           
         </select>
 

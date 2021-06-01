@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 import comunasList2 from "../utils/communesFile"
 import comunasList from "../utils/comunasObj"
 import specialties from "../utils/specialties"
+import swal from "sweetalert";
 
 
 
@@ -108,13 +109,27 @@ const EditFormSpecialist = () => {
             }      
           fetch("http://127.0.0.1:5000/user/profile/" + id, profile_user)
             .then(respuesta => respuesta.json())
-            .then(data => console.log(data))  
-            .catch(error => console.error(error))      
-            alert(JSON.stringify(values, null, 2));
+            .then((data) => {
+              console.log(data);
     
+              swal({
+                title: "Tu perfil se ha editado exitosamente!",
+                text: "Ahora podras volver a tu perfil de usuario!",
+                icon: "success",
+                button: "volver a mi perfil",
+              }).then(() => {
+                window.location.href = "/especialista";
+              });
+    
+              // else {
+              //   swal(data,{icon: "error"});
+              // }
+            })
+    
+            .catch((error) => console.error(error));
+          // alert(JSON.stringify(values, null, 2));
         },
       });
-    
       return (
         <div>
           <form onSubmit={formik.handleSubmit}>  
@@ -222,7 +237,7 @@ const EditFormSpecialist = () => {
               id="secretAswer"
               name="secretAswer"
               type="text"
-              placeholder="pizza sin piña"
+              placeholder="Pizza sin piña"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.secretAswer}
@@ -279,18 +294,13 @@ const EditFormSpecialist = () => {
           onBlur={formik.handleBlur}
           value={formik.values.skills}
         >
-           <option selected>seleccione su experiencia</option>
+           <option selected>Seleccione su experiencia</option>
 
-          <option value="menos de 1 año">menos de 1 año</option>
-          <option value="mas de 1 año">mas de 1 año</option>
-          <option value="mas de 2 años">mas de 2 años</option>
-          <option value="mas de 3 años">mas de 3 años</option>
-          <option value="mas de 4 años">mas de 4 años</option>
-          <option value="mas de 5 años">mas de 5 años</option>
-          <option value="mas de 6 años">mas de 6 años</option>
-          <option value="mas de 7 años">mas de 7 años</option>
-          <option value="mas de 8 años">mas de 8 años</option>
-
+           <option value="Menos de 1 año">Menos de 1 año</option>
+           <option value="De 1 a 3 años">De 1 a 3 años</option>
+           <option value="De 3 a 5 años">De 3 a 5 años</option>
+           <option value="De 5 a 10 años">De 5 a 10 años</option>
+         
         </select>
 
         {formik.touched.skills && formik.errors.skills ? (
