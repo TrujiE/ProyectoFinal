@@ -3,13 +3,9 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-<<<<<<< HEAD
-import "bootstrap/dist/css/bootstrap.css";
-=======
 import logoTA from "../../img/logoTA.bmp";
 import "../../js/custom.css";
 import swal from "sweetalert"
->>>>>>> 60f38c656a8cd449abc7987deead577a9f5e3c75
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
@@ -52,17 +48,6 @@ const Home = () => {
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-<<<<<<< HEAD
-          if (typeof data == 'object'){
-             <div className="alert alert-warning alert-dismissable">
-                <button type="button" className="close" data-dismiss="alert">&times;</button>
-                <strong>Bienvenido a la aplicación TeAyudo?.</strong>
-            </div>              
-            alert("Bienvenido a la aplicación TeAyudo?.");
-            window.location.href = "/seleccionUsuario";
-          }else{
-            alert(data);
-=======
            if (typeof data == 'object') {
                 swal({
                   title: "Bienvenido!",
@@ -74,7 +59,6 @@ const Home = () => {
                 
           } else {
             swal(data,{icon: "error"});
->>>>>>> 60f38c656a8cd449abc7987deead577a9f5e3c75
           }
           actions.setProfile(data);
           SaveLocalStore();

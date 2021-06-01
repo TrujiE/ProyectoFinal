@@ -64,6 +64,9 @@ const SignUpSpecialist = () => {
               </div>
             </div>
         </div>
+        </div>
+      </div>
+      </div>
     );
 };
 
