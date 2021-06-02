@@ -85,7 +85,7 @@ const Home = () => {
                   style={{ maxWidth: "150px" }}
                 />
               </div>
-
+            
               <form className=" col-12 " onSubmit={formik.handleSubmit}>
                 <div className="form-group">
                   <input

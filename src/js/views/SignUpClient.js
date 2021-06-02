@@ -5,31 +5,35 @@ import ClientForm from "../components/ClientForm";
 import logoTA from "../../img/logoTA.bmp";
 
 const SignUpClient = () => {
-  return (
-    <div className="container mt-5">
-      <h1 className=" text-center">Te ayudo... con tu registro?</h1>
-      <hr />
-      <div className="row">
-        <div className="col-8">
-          <ul className="nav nav-pills nav-fill mb-5">
-            <li className="nav-item ">
-              <button className="btn   btn-success">Cliente</button>
-              {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/registroEspecialista"
-                className="nav-link text-success "
-              >
-                Especialista
+    return (
+
+      
+        <div className="container mt-5">
+            <h1 className=" text-center">Te ayudo... con tu registro?</h1>
+            <hr />
+            <div className="row">
+                <div className="col-8">
+                    <ul className="nav nav-pills nav-fill mb-5">
+                        <li className="nav-item ">
+                            <button className="btn   btn-success" style={{color:"black"}}><strong>Cliente</strong></button>
+                            {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                to="/registroEspecialista"
+                                className="nav-link text-dark "
+                            ><strong>
+                                Especialista
+                            </strong>
                             </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/"
-                className="nav-link text-success"
-              >
-                Volver al Inicio
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                to="/"
+                                className="nav-link text-dark"
+                            > <strong>
+                                Volver al Inicio
+                                </strong>
                             </Link>
             </li>
           </ul>
@@ -72,6 +76,8 @@ const SignUpClient = () => {
         <hr />
       </div>
     </div>
+
+    
   );
 };
 

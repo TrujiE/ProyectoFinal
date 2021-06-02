@@ -12,23 +12,23 @@ const SignUpSpecialist = () => {
                 <div className="col-8">
                     <ul className="nav nav-pills nav-fill mb-5">
                         <li className="nav-item ">
-                            <Link to="/registroCliente" className="btn  text-success">
+                            <Link to="/registroCliente" className="btn  text-dark"><strong>
                                 Cliente
-                            </Link>
+                                </strong></Link>
                             {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link btn-success btn-sm " href="#">
+                            <button className="btn   btn-success" style={{color:"black"}}><strong>
                                 Especialista
-                            </a>
+                                </strong></button>
                         </li>
                         <li className="nav-item">
                             <Link
                                 to="/"
-                                className="nav-link text-success  "
-                            >
+                                className="nav-link text-dark "
+                            ><strong>
                                 Volver al Inicio
-                            </Link>
+                            </strong></Link>
                         </li>
                     </ul>
 
@@ -64,7 +64,7 @@ const SignUpSpecialist = () => {
               </div>
             </div>
         </div>
-        </div>
+      </div>
       </div>
       </div>
     );

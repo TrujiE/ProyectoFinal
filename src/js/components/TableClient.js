@@ -10,6 +10,8 @@ const TableRequestsClient = ({ date, hour }) => {
     const { store, actions } = useContext(Context);
 
     const [state, setState] = useState(false);
+    
+    const [reloadTable, setTable] = useState(0);
 
     let option = -1;
 
@@ -20,7 +22,7 @@ const TableRequestsClient = ({ date, hour }) => {
     let id = userProfile.user ? userProfile.user.id : '';
 
 
-    // GET para obtener los valores por defecto
+    // GET para obtener las solicitudes
     useEffect(() => {
         fetch("http://127.0.0.1:5000/user/requests_client/" + id)
             .then(respuesta => respuesta.json())
@@ -35,7 +37,7 @@ const TableRequestsClient = ({ date, hour }) => {
                 }
             })
             .catch(error => console.error(error));
-    }, [])
+    }, [reloadTable])
 
     const checkInput = (index) => {
         option = index;
@@ -73,12 +75,13 @@ const TableRequestsClient = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
                                         });
 
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         }
+
                     });
             }
         }
@@ -113,11 +116,11 @@ const TableRequestsClient = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
                                         });
 
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         }
                     });
             }
@@ -126,9 +129,9 @@ const TableRequestsClient = ({ date, hour }) => {
 
     return (
         <div className="table-responsive-xl">
-            <table className="table table-sm">
+            <table className="table table-sm table-bordered table-striped  enable-rounded=true">
                 <thead>
-                    <tr>
+                    <tr className="bg-success text-white">
                         <th scope="col">Id</th>
                         <th scope="col">Especialidad</th>
                         <th scope="col">Nombre</th>
@@ -139,7 +142,7 @@ const TableRequestsClient = ({ date, hour }) => {
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-striped ">
                     {
                         state == true ?
                             valueDefault.map((list, index) =>

@@ -192,7 +192,7 @@ const SpecialistForm = () => {
           <div className="text-danger">{formik.errors.lastName}</div>
         ) : null}
 
-        <label htmlFor="rut">Rut</label>
+        <label htmlFor="rut">RUT<span class="text-muted"> formato 20541822-9</span></label>
         <input
           className="form-control mb-3"
           id="rut"
