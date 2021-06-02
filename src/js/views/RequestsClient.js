@@ -23,12 +23,14 @@ const RequestsClient = () => {
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
     let id = userProfile.user ? userProfile.user.id : '';
+    let token = userProfile.access_token ? userProfile.access_token : '';
 
     const SendValue = () => {
         const config = {
-            headers: { 'Content-Type': 'Application/json' },
-            body: JSON.stringify({
-            }),
+            headers: {
+                'Content-Type': 'Application/json',
+                'Authorization': 'Bearer ' + token
+            },
             method: "GET"
         }
         fetch("http://127.0.0.1:5000/user/requests_client/" + id, config)

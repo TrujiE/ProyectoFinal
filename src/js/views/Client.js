@@ -52,7 +52,7 @@ const Client = () => {
         }
     }, [])
 
-
+    let token = userProfile.access_token ? userProfile.access_token : '';
     // Funcion para habilitar el imput address
     const setCheck = (e) => {
         if (e.target.checked == false) {
@@ -88,9 +88,11 @@ const Client = () => {
             setAfternoon(0);
             setEvening(1);
         }
-        console.log(morning, afternoon, evening, hour);
         const config = {
-            headers: { 'Content-Type': 'Application/json' },
+            headers: {
+                'Content-Type': 'Application/json',
+                'Authorization': 'Bearer ' + token
+            },
             body: JSON.stringify({
                 "name_specialty": specialty,
                 "name_commune": commune,

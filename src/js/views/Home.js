@@ -48,16 +48,6 @@ const Home = () => {
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-<<<<<<< HEAD
-          if (data !== "Ha ingresado mal la contraseña.") {
-            alert("Bienvenido a la aplicación TeAyudo?");
-            //abrir una ventana aparte
-            //window.open("/seleccionUsuario" , "seleccionUsuario" , "width=1920,height=1080,scrollbars=NO")
-            //redireccionar a seleccionUsuario
-            window.location.href = "/cliente";
-          }else{
-            alert(data);
-=======
            if (typeof data == 'object') {
                 swal({
                   title: "Bienvenido!",
@@ -69,7 +59,6 @@ const Home = () => {
                 
           } else {
             swal(data,{icon: "error"});
->>>>>>> d16886f32070b0d8bb267273e7c89117d01a2cbb
           }
           actions.setProfile(data);
           SaveLocalStore();
