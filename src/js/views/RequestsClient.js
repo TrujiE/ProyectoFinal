@@ -45,7 +45,7 @@ const RequestsClient = () => {
             <Nabvar />
             <div className="row">
                 <div className="col">
-                    <h4>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes revisar tus solicitudes</h4>
+                    <h4><strong>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes revisar tus solicitudes</strong></h4>
                 </div>
             </div>
             <div className="row">   

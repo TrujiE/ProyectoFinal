@@ -168,7 +168,7 @@ const ClientForm = () => {
         ) : null}
 
         <label htmlFor="rut">
-          Rut <span class="text-muted"> formato 1111111-1</span>
+          RUT <span class="text-muted"> formato 20541822-9</span>
         </label>
         <input
           className="form-control mb-3"
