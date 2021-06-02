@@ -19,13 +19,12 @@ const Specialist = () => {
             <Nabvar />
             <div className="row">
                 <div className="col">
-                    <h4>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes revisar tus servicios</h4>
+                    <h4><strong>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes revisar tus servicios</strong></h4>
                 </div>
             </div>
 
             <div className="row">
                 <SidebarSpecialist />
-
                 <div className="col-10 mt-4">
                     <div className="container">
                         <div className="row">

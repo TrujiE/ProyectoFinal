@@ -119,7 +119,7 @@ const Client = () => {
             <Nabvar />
             <div className="row">
                 <div className="col">
-                    <h4 style={{ textAlign: "left" }}>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes crear una solicitud</h4>
+                    <h4 style={{ textAlign: "left" }}><strong>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes crear una solicitud</strong></h4>
                 </div>
             </div>
             <div className="row">

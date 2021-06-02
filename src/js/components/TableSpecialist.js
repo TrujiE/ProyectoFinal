@@ -11,6 +11,8 @@ const TableRequestsSpecialist = ({ date, hour }) => {
 
     const [state, setState] = useState(false);
 
+    const [reloadTable, setTable] = useState(0);
+
     let option = -1;
 
     const userProfile =
@@ -35,7 +37,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                 }
             })
             .catch(error => console.error(error));
-    }, [])
+    }, [reloadTable])
 
     const checkInput = (index) => {
         option = index;
@@ -72,10 +74,10 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
                                         });
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         } 
                     });
             }
@@ -111,10 +113,10 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
                                         });
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         } 
                     });
             }
@@ -149,11 +151,11 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                                     swal(data)
                                         .then(() => {
                                             actions.setAvailable(data);
-                                            window.location.reload();
                                         });
 
                                 })
                                 .catch(error => console.error(error));
+                                setTable(reloadTable + 1);
                         }
                     });
             }
@@ -162,9 +164,9 @@ const TableRequestsSpecialist = ({ date, hour }) => {
 
     return (
         <div className="table-responsive-xl">
-            <table className="table table-sm">
+            <table className="table table-sm table-bordered table-striped  enable-rounded=true">
                 <thead>
-                    <tr>
+                    <tr className="bg-success text-white">
                         <th scope="col">Id</th>
                         <th scope="col">Especialidad</th>
                         <th scope="col">Nombre</th>
@@ -176,7 +178,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-striped ">
                     {
                         state == true ?
                             valueDefault.map((list, index) =>
