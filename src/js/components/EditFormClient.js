@@ -1,59 +1,40 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useParams } from "react-router-dom";
 import comunasList2 from "../utils/communesFile";
 import swal from "sweetalert";
-
-const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
-const rutRegex = "^([0-9]+-[0-9Kk])$";
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
-const ClientForm = () => {
+const EditFormClient = () => {
   const listaComunas = comunasList2.map((comuna, index) => (
     <option value={comuna}>{comuna}</option>
   ));
 
+  const userProfile = localStorage.getItem("loginUser")
+    ? JSON.parse(localStorage.getItem("loginUser"))
+    : {};
+
+  let id = userProfile.user ? userProfile.user.id : "";
+  let token = userProfile.access_token ? userProfile.access_token : '';
+
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      rut: "",
-      email: "",
-      phoneNumber: "",
-      adress: "",
-      comuna: "",
+      phoneNumber: userProfile.user ? userProfile.user.phone : "",
+      adress: userProfile.user ? userProfile.user.address : "",
+      comuna: userProfile.user ? userProfile.user.name_commune : "",
       password: "",
       confirmPassword: "",
-      secretQuestion: "",
-      secretAswer: "",
+      secretQuestion: userProfile.user ? userProfile.profile.question : "",
+      secretAswer: userProfile.user ? userProfile.profile.answer : "",
+      // specialty: userProfile.user? userProfile.profile.role :'',
     },
 
     validationSchema: Yup.object().shape({
-      firstName: Yup.string()
-        .required("se requiere el nombre")
-        .min(2, "nombre debe ser mayor aun caracter")
-        .max(15, "nombre muy largo debe ser 15 caracteres maximo"),
-
-      lastName: Yup.string()
-        .required("se requiere el apellido")
-        .min(2, "apellido debe ser mayor aun caracter")
-        .max(15, "apellido muy largo debe ser 15 caracteres maximo"),
-
-      rut: Yup.string()
-        .required("se requiere el rut")
-        .matches(rutRegex, "rut invalido"),
-
-      email: Yup.string()
-        .lowercase()
-        .notOneOf(emailadresses, "ese correo ya esxiste")
-        .email("correo invalido")
-        .max(30, "correo  debe ser 30 caracteres maximo")
-        .required("se requiere el correo"),
-
       phoneNumber: Yup.string()
         .required("se requiere el telefono")
         .matches(phonereg, "ingrese un formato de numero valido"),
@@ -89,12 +70,11 @@ const ClientForm = () => {
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
       const profile_user = {
-        headers: { "Content-Type": "Application/json" },
+        headers: {
+          "Content-Type": "Application/json",
+          'Authorization': 'Bearer ' + token
+        },
         body: JSON.stringify({
-          email: values.email,
-          rut: values.rut,
-          full_name: values.firstName,
-          last_name: values.lastName,
           phone: values.phoneNumber,
           address: values.adress,
           name_commune: values.comuna,
@@ -103,104 +83,35 @@ const ClientForm = () => {
           question: values.secretQuestion,
           answer: values.secretAswer,
         }),
-        method: "POST",
+        method: "PUT",
       };
-      fetch("http://127.0.0.1:5000/user/profile", profile_user)
+      fetch("http://127.0.0.1:5000/user/profile/" + id, profile_user)
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-          if (typeof data == "object") {
-            swal({
-              title: "Felicidades se ha creado tu perfil con exito!",
-              text: "Ahora te redirecionaremos al inicio de sesion para que puedas entrar a tu perfil!",
-              icon: "success",
-              button: "ir",
-            }).then(() => {
-              window.location.href = "/";
-            });
-          } else {
-            swal(data, { icon: "error" }).then(() => {
-              window.location.href = "/";
-            });
-          }
+
+          swal({
+            title: "Tu perfil se ha editado exitosamente!",
+            text: "Ahora podras volver a tu perfil de usuario!",
+            icon: "success",
+            button: "volver a mi perfil",
+          }).then(() => {
+            window.location.href = "/cliente";
+          });
+
+          // else {
+          //   swal(data,{icon: "error"});
+          // }
         })
+
         .catch((error) => console.error(error));
+      // alert(JSON.stringify(values, null, 2));
     },
   });
 
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="firstName">Nombre</label>
-        <input
-          className="form-control mb-3"
-          id="firstName"
-          name="firstName"
-          type="text"
-          placeholder="Nombre"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.firstName}
-        />
-
-        {formik.touched.firstName && formik.errors.firstName ? (
-          <div className=" text-danger " role>
-            {formik.errors.firstName}
-          </div>
-        ) : null}
-
-        <label htmlFor="lastName">Apellido</label>
-        <input
-          className="form-control mb-3"
-          id="lastName"
-          name="lastName"
-          type="text"
-          placeholder="Apellido"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.lastName}
-        />
-
-        {formik.touched.lastName && formik.errors.lastName ? (
-          <div className="text-danger">{formik.errors.lastName}</div>
-        ) : null}
-
-        <label htmlFor="rut">
-          RUT <span class="text-muted"> formato 20541822-9</span>
-        </label>
-        <input
-          className="form-control mb-3"
-          id="rut"
-          name="rut"
-          type="text"
-          placeholder="Ingrese su rut"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.rut}
-        />
-
-        {formik.touched.rut && formik.errors.rut ? (
-          <div className="text-danger">{formik.errors.rut}</div>
-        ) : null}
-
-        <label htmlFor="email">Correo</label>
-        <input
-          className="form-control mb-3"
-          id="email"
-          name="email"
-          type="email"
-          placeholder="ejemplo@correo.com"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-
-        {formik.touched.email && formik.errors.email ? (
-          <div className="text-danger">{formik.errors.email}</div>
-        ) : null}
-
         <label htmlFor="phoneNumber">Telefono</label>
         <input
           className="form-control mb-3"
@@ -242,7 +153,7 @@ const ClientForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.comuna}
         >
-          <option selected>Seleccione su comuna</option>
+          <option selected>Elija una comuna</option>
 
           {listaComunas}
         </select>
@@ -305,7 +216,7 @@ const ClientForm = () => {
           id="secretAswer"
           name="secretAswer"
           type="text"
-          placeholder="Pizza sin piña"
+          placeholder="pizza sin piña"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.secretAswer}
@@ -315,12 +226,12 @@ const ClientForm = () => {
           <div className="text-danger"> {formik.errors.secretAswer}</div>
         ) : null}
 
-        <button type="submit" className="btn btn-danger   text-white">
-          Registrarse
+        <button type="submit" className="btn btn-danger    text-white">
+          Editar
         </button>
       </form>
     </div>
   );
 };
 
-export default ClientForm;
+export default EditFormClient;
