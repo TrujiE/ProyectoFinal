@@ -8,7 +8,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			  startDate: new Date(),
 			  counter: 0,
 			  specialists: 0,
-              especialist: []
+              especialist: [],
+			  auth:{
+				  isLogged: false
+			  }
 		},
 		actions: {
 			setProfile:(data)=>{

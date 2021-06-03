@@ -20,9 +20,13 @@ const Client = () => {
     //const [check, setCheck] = useState(false);
     const [address, setAddress] = useState("");
 
-    const [morning, setMorning] = useState(1)
-    const [afternoon, setAfternoon] = useState(0)
-    const [evening, setEvening] = useState(0)
+    // const [morning, setMorning] = useState(1);
+    // const [afternoon, setAfternoon] = useState(0);
+    // const [evening, setEvening] = useState(0);
+
+    let morning=1;
+    let afternoon=0;
+    let evening=0;
 
     const { store, actions } = useContext(Context);
 
@@ -52,7 +56,7 @@ const Client = () => {
         }
     }, [])
 
-    let token = userProfile.access_token ? userProfile.access_token : '';
+    
     // Funcion para habilitar el imput address
     const setCheck = (e) => {
         if (e.target.checked == false) {
@@ -69,24 +73,34 @@ const Client = () => {
 
     //Lo que veo en consola
     const array = [specialty, commune, hour, address]
-    console.log(array)
+    console.log(array,"errorrrrrrrrrr")
     //console.log(check)
 
     //POST para obtener los especialistas disponibles
 
     const SendValue = () => {
+        let token = userProfile.access_token ? userProfile.access_token : '';
         if (hour == "morning") {
-            setMorning(1);
-            setAfternoon(0);
-            setEvening(0);
+            morning=1;
+            afternoon=0;
+            evening=0;
+            // setMorning(1);
+            // setAfternoon(0);
+            // setEvening(0);
         } else if (hour == "afternoon") {
-            setMorning(0);
-            setAfternoon(1);
-            setEvening(0);
+            morning=0;
+            afternoon=1;
+            evening=0;
+            // setMorning(0);
+            // setAfternoon(1);
+            // setEvening(0);
         } else if (hour == "evening") {
-            setMorning(0);
-            setAfternoon(0);
-            setEvening(1);
+            morning=0;
+            afternoon=0;
+            evening=1;
+            // setMorning(0);
+            // setAfternoon(0);
+            // setEvening(1);
         }
         const config = {
             headers: {
@@ -106,7 +120,7 @@ const Client = () => {
         fetch("http://127.0.0.1:5000/service/" + id, config)
             .then(respuesta => respuesta.json())
             .then(data => {
-                console.log(data)
+                console.log(data);
                 actions.setAvailable(data);
                 if (data) {
                     actions.setCounter();
