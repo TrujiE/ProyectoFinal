@@ -91,9 +91,10 @@ const Client = () => {
         }
 
         const config = {
-            headers: { 'Content-Type': 'Application/json',
-                        'Authorization': 'Bearer ' + token 
-                    },
+            headers: {
+                'Content-Type': 'Application/json',
+                'Authorization': 'Bearer ' + token
+            },
             body: JSON.stringify({
                 "name_specialty": specialty,
                 "name_commune": commune,
@@ -125,72 +126,74 @@ const Client = () => {
                     <h4 style={{ textAlign: "left" }}><strong>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes crear una solicitud</strong></h4>
                 </div>
             </div>
-            <div className="row">
-                {userProfile.profile.role == "client" ?
-                    <SidebarClient />
-                    :
-                    <SidebarSpecialist />
-                }
-                <div className="col-10 mt-4">
-                    <div className="row">
-                        <div className="col-3">
-                            <Select defaultValue={{ label: "Especialidad", value: 0 }}
-                                options={specialties}
-                                onChange={e => setSpecialty(e.value)}
-                            />
+            <div className="container">
+                <div className="row">
+                    {userProfile.profile.role == "client" ?
+                        <SidebarClient />
+                        :
+                        <SidebarSpecialist />
+                    }
+                    <div className="col-10 mt-4">
+                        <div className="row">
+                            <div className="col-3">
+                                <Select defaultValue={{ label: "Especialidad", value: 0 }}
+                                    options={specialties}
+                                    onChange={e => setSpecialty(e.value)}
+                                />
+                            </div>
+
+                            <div className="col-3">
+                                <Select defaultValue={{ label: "Comuna", value: 0 }}
+                                    options={listCommunes}
+                                    onChange={e => setCommune(e.value)}
+                                />
+                            </div>
+
+                            <div className="col-2">
+                                <Calendar_client
+                                />
+                            </div>
+
+                            <div className="col-2">
+                                <Select defaultValue={{ label: "Horario", value: 0 }}
+                                    options={hours}
+                                    onChange={e => setHour(e.value)}
+                                />
+                            </div>
+
+                            <div className="col-2">
+                                <button type="button" className="btn btn-success" onClick={SendValue}
+                                >Buscar</button>
+                            </div>
                         </div>
+                        <br />
 
-                        <div className="col-3">
-                            <Select defaultValue={{ label: "Comuna", value: 0 }}
-                                options={listCommunes}
-                                onChange={e => setCommune(e.value)}
-                            />
-                        </div>
-
-                        <div className="col-2">
-                            <Calendar_client
-                            />
-                        </div>
-
-                        <div className="col-2">
-                            <Select defaultValue={{ label: "Horario", value: 0 }}
-                                options={hours}
-                                onChange={e => setHour(e.value)}
-                            />
-                        </div>
-
-                        <div className="col-2">
-                            <button type="button" className="btn btn-success" onClick={SendValue}
-                            >Buscar</button>
-                        </div>
-                    </div>
-                    <br />
-
-                    <div className="col-6">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="address"
-                            value={address}
-                            disabled="disabled"
-                            onChange={handleChange}
-                        />
-
-                        <div className="form-group form-check">
+                        <div className="col-6">
                             <input
-                                type="checkbox"
-                                className="form-check-input"
-                                id="Check"
-                                defaultChecked={false}
-                                onChange={setCheck}
+                                type="text"
+                                className="form-control"
+                                id="address"
+                                value={address}
+                                disabled="disabled"
+                                onChange={handleChange}
                             />
-                            <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
-                        </div>
-                    </div>
 
-                    <div className="form-group col-10">
-                        <h5>Seleccione su especialista</h5>
-                        <TableComponet commune={commune} address={address} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
+                            <div className="form-group form-check">
+                                <input
+                                    type="checkbox"
+                                    className="form-check-input"
+                                    id="Check"
+                                    defaultChecked={false}
+                                    onChange={setCheck}
+                                />
+                                <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
+                            </div>
+                        </div>
+
+                        <div className="form-group col-10">
+                            <h5>Seleccione su especialista</h5>
+                            <TableComponet commune={commune} address={address} hour={hour} date={format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000')} />
+                        </div>
                     </div>
                 </div>
             </div>
