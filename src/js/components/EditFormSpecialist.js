@@ -114,7 +114,7 @@ const EditFormSpecialist = () => {
       fetch("http://127.0.0.1:5000/user/profile/" + id, profile_user)
         .then(respuesta => respuesta.json())
         .then((data) => {
-          console.log(data);
+          localStorage.setItem('loginUser', JSON.stringify(data));
 
           swal({
             title: "Tu perfil se ha editado exitosamente!",
@@ -122,7 +122,7 @@ const EditFormSpecialist = () => {
             icon: "success",
             button: "volver a mi perfil",
           }).then(() => {
-            window.location.href = "/especialista";
+            window.location.href = "/cliente";
           });
 
           // else {

@@ -26,7 +26,11 @@ function App() {
                         <Route exact path="/" component={Home} />
                         <Route exact path="/registroCliente" component={SignUpClient} />
                         <Route exact path="/registroEspecialista" component={SignUpSpecialist} />
-                        <Route exact path="/cliente" component={Client} />
+                        <Route exact path="/cliente" render={
+                            () => userProfile.profile?
+                                    <Client />
+                                :
+                                <Redirect to={{ pathname: "/" }}></Redirect>} />
                         <Route exact path="/especialista" render={
                             () => userProfile.profile ?
                                 userProfile.profile.role == "client" ?
@@ -35,9 +39,21 @@ function App() {
                                     <Specialist />
                                 :
                                 <Redirect to={{ pathname: "/" }}></Redirect>} />
-                        <Route exact path="/solicitudes" component={RequestsClient} />
-                        <Route exact path="/editarCliente" component={EditClient} />
-                        <Route exact path="/editarEspecialista" component={EditSpecialist} />
+                        <Route exact path="/solicitudes" render={
+                            () => userProfile.profile?
+                                    <RequestsClient />
+                                :
+                                <Redirect to={{ pathname: "/" }}></Redirect>} />
+                        <Route exact path="/editarCliente" render={
+                            () => userProfile.profile?
+                                    <EditClient />
+                                :
+                                <Redirect to={{ pathname: "/" }}></Redirect>} />
+                        <Route exact path="/editarEspecialista" render={
+                            () => userProfile.profile?
+                                    <EditSpecialist />
+                                :
+                                <Redirect to={{ pathname: "/" }}></Redirect>} />
                         <Route render={() => <h1 className="notfound">Not found!</h1>} />
                     </Switch>
                 </div>
