@@ -75,22 +75,25 @@ const Client = () => {
     //POST para obtener los especialistas disponibles
 
     const SendValue = () => {
-        if (hours == "morning") {
+        let token = userProfile.access_token ? userProfile.access_token : '';
+        if (hour == "morning") {
             setMorning(1);
             setAfternoon(0);
             setEvening(0);
-        } else if (hours == "afternoon") {
+        } else if (hour == "afternoon") {
             setMorning(0);
             setAfternoon(1);
             setEvening(0);
-        } else if (hours == "evening") {
+        } else if (hour == "evening") {
             setMorning(0);
             setAfternoon(0);
             setEvening(1);
         }
 
         const config = {
-            headers: { 'Content-Type': 'Application/json' },
+            headers: { 'Content-Type': 'Application/json',
+                        'Authorization': 'Bearer ' + token 
+                    },
             body: JSON.stringify({
                 "name_specialty": specialty,
                 "name_commune": commune,

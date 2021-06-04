@@ -29,9 +29,9 @@ const Home = () => {
       password: Yup.string()
         .required("No se ingresó contraseña")
         .min(4, "La contraseña debe tener un mínimo de 4 caracteres")
-        .matches(lowercaseRegex, "se requiere almenos una minuscula")
-        .matches(uppercaseRegex, "se requiere almenos una mayuscula")
-        .matches(numericRegex, "se requiere almenos un numero")
+        .matches(lowercaseRegex, "se requiere al menos una minuscula")
+        .matches(uppercaseRegex, "se requiere al menos una mayuscula")
+        .matches(numericRegex, "se requiere al menos un numero")
         .max(10, "la contraseña  debe ser 30 caracteres maximo"),
     }),
 

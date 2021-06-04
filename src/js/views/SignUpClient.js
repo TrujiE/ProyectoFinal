@@ -35,8 +35,8 @@ const SignUpClient = () => {
                                 Volver al Inicio
                                 </strong>
                             </Link>
-                        </li>
-                    </ul>
+            </li>
+          </ul>
 
           <ClientForm />
         </div>
@@ -62,21 +62,21 @@ const SignUpClient = () => {
 
               <div>
                 <ul class="list-group  laLista">
-                <li class="  mt-5 ">Electricista</li>
+                  <li class="  mt-5 ">Electricista</li>
                   <li class="  mt-5">Carpintero</li>
                   <li class="  mt-5">Pintor</li>
                   <li class="  mt-5">Albañil</li>
                   <li class="  mt-5">Plomero</li>
                 </ul>
               </div>
-            </div>
-         
+            </div>            
 
+          </div>
         </div>
+        <hr />
       </div>
-      <hr />
     </div>
-    </div>
+
     
   );
 };
