@@ -182,7 +182,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
         <div className="table-responsive-xl">
             <table className="table table-sm table-bordered table-striped  enable-rounded=true">
                 <thead>
-                    <tr className="bg-success text-white">
+                    <tr className="bg-color text-white">
                         <th scope="col">Id</th>
                         <th scope="col">Especialidad</th>
                         <th scope="col">Nombre</th>

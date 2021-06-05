@@ -17,8 +17,12 @@ const EditSpecialist = () => {
                 </h1>
                 <hr />
                 <div className="row">
+                    <div className="col-sm-12 col-lg-2">
+
                     <SidebarSpecialist />
-                    <div className="col-8 ml-5">
+
+                    </div>
+                    <div className="colo-sm12 col-lg-8">
                         <ul className="nav nav-pills nav-fill mb-5">
                             <li className="nav-item ">
                                 {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}

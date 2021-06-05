@@ -50,10 +50,28 @@ const RequestsClient = () => {
                 </div>
             </div>
             <div className="row">   
-                 {userProfile.profile.role == "client" ?
-                <SidebarClient/>
+                 {userProfile.profile.role === "client" ?
+
+                 (          
+                    <div className="col-sm-12 col-lg-2">
+
+                        <SidebarClient/>
+
+                    </div>
+
+                 )
+
                 :
-                <SidebarSpecialist/>
+
+                (          
+                    <div className="col-sm-12 col-lg-2">
+
+                       
+                        <SidebarSpecialist/>
+
+                    </div>
+
+                 )
             }
                 <div className="col-10">
                     <div className="row mt-4">

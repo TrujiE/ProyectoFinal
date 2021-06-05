@@ -25,7 +25,11 @@ const Specialist = () => {
             </div>
 
             <div className="row">
+                <div className="col-sm-12 col-lg-2">
+
                 <SidebarSpecialist />
+
+                </div>
                 <div className="col-10 mt-4">
                     <div className="container">
                         <div className="row">
