@@ -1,15 +1,21 @@
-import React from 'react';
+import React , { useContext }from 'react';
 import { Link, useHistory } from "react-router-dom";
+import { Context } from "../store/appContext";
 import Log_out from "./LogOut";
 
 const Nabvar = () => {
     //<Link className="nav-link" to="/cliente"><Log_out /></Link>
     const history = useHistory();
+    const { actions } = useContext(Context);
 
     const LogOut = () => {
         localStorage.setItem('loginUser', JSON.stringify({}));
-        let path = ``;
+        actions.setProfile({});
+        //debugger;
+        let path = `/`;
 		history.push(path);
+        
+        
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light row justify-content-between">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
@@ -20,6 +20,7 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 const EditFormSpecialist = () => {
 
+
   const listaComunas = comunasList2.map((comuna, index) =>
     <option value={comuna}>{comuna}</option>
   )
@@ -31,6 +32,36 @@ const EditFormSpecialist = () => {
   let id = userProfile.user ? userProfile.user.id : '';
   let token = userProfile.access_token ? userProfile.access_token : '';
 
+  let specialtyName = [];
+  let communeName = [];
+  useEffect(() => {
+    if (userProfile.specialists) {
+      for (const specialtyName2 of specialties) {
+        for (const specialtyName3 of userProfile.specialists) {
+          console.log(specialtyName2.value, "specialtyName2");
+          console.log(specialtyName3, "spssssssss");
+          if (String(specialtyName2.value) == String(specialtyName3)) {
+            specialtyName.push(specialtyName2)
+            console.log(specialtyName, "Holaaa");
+          }
+        }
+      }
+    }
+    if (userProfile.communes) {
+      for (const communeName2 of comunasList) {
+        for (const communeName3 of userProfile.communes) {
+          console.log(communeName2.value, "communeName2");
+          console.log(communeName3, "spssssssss");
+          if (String(communeName2.value) == String(communeName3)) {
+            communeName.push(communeName2)
+            console.log(communeName, "Holaaa");
+          }
+        }
+      }
+    }
+    console.log(specialtyName, "arreglo");
+  }, [])
+
   const formik = useFormik({
 
     initialValues: {
@@ -41,8 +72,8 @@ const EditFormSpecialist = () => {
       confirmPassword: "",
       secretQuestion: userProfile.user ? userProfile.profile.question : '',
       secretAswer: userProfile.user ? userProfile.profile.answer : '',
-      specialty: userProfile.user ? userProfile.profile.name_specialty : [],
-      attentionComunes: userProfile.user ? userProfile.profile.communes : [],
+      specialty: userProfile.specialists ? specialtyName : [],
+      attentionComunes: userProfile.communes ? communeName : [],
       skills: userProfile.user ? userProfile.profile.experience : '',
     },
 
@@ -279,7 +310,6 @@ const EditFormSpecialist = () => {
           name="attentionComunes"
           onChange={e => (formik.setFieldValue("attentionComunes", e))}
           value={formik.values.attentionComunes}
-
 
         />
 

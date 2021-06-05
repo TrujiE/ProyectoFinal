@@ -1,22 +1,25 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import logoTA from "../../img/logoTA.bmp";
 import "../../js/custom.css";
-import swal from "sweetalert"
+import swal from "sweetalert";
+import { createBrowserHistory } from "history";
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 
 const Home = () => {
-    const { store, actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
 
-    const SaveLocalStore = () => {
-        localStorage.setItem("loginUser", JSON.stringify(store.profileUser));
-    };
+  const history = useHistory();
+
+  const SaveLocalStore = () => {
+    localStorage.setItem("loginUser", JSON.stringify(store.profileUser));
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -48,20 +51,27 @@ const Home = () => {
         .then((respuesta) => respuesta.json())
         .then((data) => {
           console.log(data);
-           if (typeof data == 'object') {
-                swal({
-                  title: "Bienvenido!",
-                  text: "Ahora iras a tu perfil de usuario en la aplicacaion !",
-                  icon: "success",
-                  button: "ir",
-                })
-                .then(()=> { window.location.href = "/cliente";});
+          if (typeof data == 'object') {
+            actions.setProfile(data);
+            SaveLocalStore();
+            swal({
+              title: "Bienvenido!",
+              text: "Ahora iras a tu perfil de usuario en la aplicacaion !",
+              icon: "success",
+              confirmButton: "ir",
+            })
+              .then(() => {
+                //history.replace("/", "urlhistory");
+                //debugger;
+                let path = `cliente`;
+                history.push(path);
+                //history.push(path);
                 
+              });
+
           } else {
-            swal(data,{icon: "error"});
+            swal(data, { icon: "error" });
           }
-          actions.setProfile(data);
-          SaveLocalStore();
         })
         .catch((error) => console.error(error));
       // alert(JSON.stringify(values, null, 2));
@@ -85,7 +95,7 @@ const Home = () => {
                   style={{ maxWidth: "150px" }}
                 />
               </div>
-            
+
               <form className=" col-12 " onSubmit={formik.handleSubmit}>
                 <div className="form-group">
                   <input
@@ -138,9 +148,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-        </div>
-        </div>
-    ); //Finaliza el return
+      </div>
+    </div>
+  ); //Finaliza el return
 };
 
 export default Home;
