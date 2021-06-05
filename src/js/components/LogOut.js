@@ -6,7 +6,7 @@ const LogOut = () =>{
 	return (
 	<div className="container ">  		    
         <h6 style={{textAlign:"right"}}>            
-            <Link to="/" className="btn btn-success my-2 my-sm-2" onClick={ () => window.close()}>
+            <Link to="/" className="btn btn-ta-danger text-white my-2 " onClick={ () => window.close()}>
                 Cerrar sesion
             </Link>            
         </h6>

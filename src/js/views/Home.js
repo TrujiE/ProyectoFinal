@@ -121,7 +121,7 @@ const Home = () => {
 
                 <button
                   type="submit"
-                  className="btn btn-success btn-block  text-white "
+                  className="btn btn-ta btn-block  text-white "
                 >
                   Ingresar
                 </button>

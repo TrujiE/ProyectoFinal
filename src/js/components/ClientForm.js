@@ -315,7 +315,7 @@ const ClientForm = () => {
           <div className="text-danger"> {formik.errors.secretAswer}</div>
         ) : null}
 
-        <button type="submit" className="btn btn-danger   text-white">
+        <button type="submit" className="btn btn-ta-blue   text-white">
           Registrarse
         </button>
       </form>

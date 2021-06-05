@@ -5,6 +5,7 @@ import TableRequestsSpecialist from '../components/TableSpecialist';
 import { Context } from "../store/appContext";
 import SidebarSpecialist from '../components/SidebarSpecialist';
 import Nabvar from '../components/Nabvar';
+import Footer from '../components/Footer';
 
 const Specialist = () => {
     const { store, actions } = useContext(Context);
@@ -38,9 +39,7 @@ const Specialist = () => {
                     </div>
                 </div>
             </div>
-            <br />
-            <br />
-            <Components />
+            <Footer/>
         </div>
 
     );
