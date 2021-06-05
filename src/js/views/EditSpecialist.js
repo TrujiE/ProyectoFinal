@@ -5,6 +5,7 @@ import ClientForm from "../components/ClientForm";
 import EditFormSpecialist from "../components/EditFormSpecialist";
 import Nabvar from "../components/Nabvar";
 import SidebarSpecialist from "../components/SidebarSpecialist";
+import Footer from "../components/Footer";
 
 const EditSpecialist = () => {
     return (
@@ -29,8 +30,8 @@ const EditSpecialist = () => {
                         <EditFormSpecialist />
                     </div>
                 </div>
-                <hr />
             </div>
+            <Footer/>
         </div>
     );
 };

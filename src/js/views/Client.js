@@ -11,6 +11,7 @@ import listCommunes from '../utility/ListCommunes';
 import SidebarClient from '../components/SidebarClient';
 import SidebarSpecialist from '../components/SidebarSpecialist';
 import Nabvar from '../components/Nabvar';
+import Footer from '../components/Footer';
 
 const Client = () => {
 
@@ -162,7 +163,7 @@ const Client = () => {
                             </div>
 
                             <div className="col-2">
-                                <button type="button" className="btn btn-success" onClick={SendValue}
+                                <button type="button" className="btn btn-ta-blue text-white" onClick={SendValue}
                                 >Buscar</button>
                             </div>
                         </div>
@@ -197,9 +198,8 @@ const Client = () => {
                     </div>
                 </div>
             </div>
-            <br />
-            <br />
-            <Components />
+           <Footer/>
+            
         </div>
 
     );

@@ -156,7 +156,7 @@ const TableComponet = ({ commune, date, hour, address }) => {
                     }
                 </tbody>
             </table>
-            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={Choose}
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-ta-blue text-white" onClick={Choose}
             >Solicitar</button>
         </div>
     )

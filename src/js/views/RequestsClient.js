@@ -7,6 +7,7 @@ import Components from "../components/Components";
 import SidebarClient from "../components/SidebarClient";
 import SidebarSpecialist from "../components/SidebarSpecialist";
 import Nabvar from '../components/Nabvar';
+import Footer from '../components/Footer';
 
 const RequestsClient = () => {
     const [hour, setHour] = useState("");
@@ -66,9 +67,7 @@ const RequestsClient = () => {
                 </div>
 
             </div>
-            <br />
-            <br />
-            <Components />
+           <Footer/>
         </div>
     );
 };

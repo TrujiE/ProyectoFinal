@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SpecialistForm from "../components/SpecialistForm";
-import logoTA from "../../img/logoTA.bmp";
+import logoTA from "../../img/logoTA.png";
+import Footer from "../components/Footer";
 
 const SignUpSpecialist = () => {
     return (
@@ -18,7 +19,7 @@ const SignUpSpecialist = () => {
                             {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
                         </li>
                         <li className="nav-item">
-                            <button className="btn   btn-success" style={{color:"black"}}><strong>
+                            <button className="btn   btn-ta1" style={{color:"white"}}><strong>
                                 Especialista
                                 </strong></button>
                         </li>
@@ -43,8 +44,8 @@ const SignUpSpecialist = () => {
                   <img
                     src={logoTA}
                     alt=""
-                    className="mt-3 "
-                    style={{ maxWidth: "150px" }}
+                    className="mt-3 mb-3"
+                    style={{ maxWidth: "130px" }}
                   />
                 </div>
               </div>
@@ -66,6 +67,7 @@ const SignUpSpecialist = () => {
         </div>
       </div>
       </div>
+      <Footer/>
       </div>
     );
 };

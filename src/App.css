@@ -63,6 +63,14 @@
   color:#7c3235 !important;
 }
 
+
+bg-ta-softGreen{
+
+  background-color: rgb(53,124,50)!important;
+  color: black !important;
+
+}
+
 textarea:focus, input:focus, input[type]:focus, select[type]:focus {
 
     border-color: rgb(3, 143, 72);
