@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import logoClient from "../../img/imgClient.png"
 
 const SidebarClient = () => {
     return (
@@ -7,8 +8,8 @@ const SidebarClient = () => {
             
                 <div className="card mt-4">
                     <img
-                        src="https://ingeniousservices.com/service-forms/wp-content/uploads/wpcf7_drag-n-drop_uploads/panamaorganico-com/juan-gomez.png"
-                        className=" "
+                        src={logoClient}
+                        className="ml-2"
                         alt="..."
                         style={{ maxWidth: "130px" }}
                     ></img>

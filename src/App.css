@@ -67,13 +67,12 @@
   background-color: rgb(60,124,60);
 }
 
-
-bg-ta-softGreen{
-
-  background-color: rgb(53,124,50)!important;
-  color: black !important;
-
+.btn-outline-success:hover, .btn-outline-success:active, .btn-outline-success:visited {
+  background-color: rgb(60,124,60) !important;
+  border-color: rgb(60,124,60) !important;
+  color: rgb(60,124,60);
 }
+
 
 textarea:focus, input:focus, input[type]:focus, select[type]:focus {
 
