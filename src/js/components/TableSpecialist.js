@@ -20,11 +20,18 @@ const TableRequestsSpecialist = ({ date, hour }) => {
             JSON.parse(localStorage.getItem('loginUser')) : {};
 
     let id = userProfile.user ? userProfile.user.id : '';
-
+    let token = userProfile.access_token ? userProfile.access_token : '';
 
     // GET para obtener los valores por defecto
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/user/requests_specialist/" + id)
+        const config = {
+            headers: {
+                'Content-Type': 'Application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            method: "GET"
+        }
+        fetch("http://127.0.0.1:5000/user/requests_specialist/" + id, config)
             .then(respuesta => respuesta.json())
             .then(data => {
                 setValueDefault(data);
@@ -61,7 +68,10 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                     .then((willDelete) => {
                         if (willDelete) {
                             const config = {
-                                headers: { 'Content-Type': 'Application/json' },
+                                headers: {
+                                    'Content-Type': 'Application/json',
+                                    'Authorization': 'Bearer ' + token
+                                },
                                 body: JSON.stringify({
                                     "id": valueDefault[option].requests.id
                                 }),
@@ -77,8 +87,8 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                                         });
                                 })
                                 .catch(error => console.error(error));
-                                setTable(reloadTable + 1);
-                        } 
+                            setTable(reloadTable + 1);
+                        }
                     });
             }
         }
@@ -100,7 +110,10 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                     .then((willDelete) => {
                         if (willDelete) {
                             const config = {
-                                headers: { 'Content-Type': 'Application/json' },
+                                headers: {
+                                    'Content-Type': 'Application/json',
+                                    'Authorization': 'Bearer ' + token
+                                },
                                 body: JSON.stringify({
                                     "id": valueDefault[option].requests.id
                                 }),
@@ -116,8 +129,8 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                                         });
                                 })
                                 .catch(error => console.error(error));
-                                setTable(reloadTable + 1);
-                        } 
+                            setTable(reloadTable + 1);
+                        }
                     });
             }
         }
@@ -138,7 +151,10 @@ const TableRequestsSpecialist = ({ date, hour }) => {
                     .then((willDelete) => {
                         if (willDelete) {
                             const config = {
-                                headers: { 'Content-Type': 'Application/json' },
+                                headers: {
+                                    'Content-Type': 'Application/json',
+                                    'Authorization': 'Bearer ' + token
+                                },
                                 body: JSON.stringify({
                                     "id": valueDefault[option].requests.id
                                 }),
@@ -155,7 +171,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
 
                                 })
                                 .catch(error => console.error(error));
-                                setTable(reloadTable + 1);
+                            setTable(reloadTable + 1);
                         }
                     });
             }

@@ -17,12 +17,9 @@ const EditClient = () => {
         <hr />
         <div className="row">
             <SidebarClient />
-          <div className="col-8">
+          <div className="col-8 ml-5">
             <ul className="nav nav-pills nav-fill mb-5">
               <li className="nav-item ">
-                <Link className="btn   btn-success mt-5" to="/cliente">
-                  Volver a mi perfil{" "}
-                </Link>
                 {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
               </li>
               {/* <li className="nav-item">

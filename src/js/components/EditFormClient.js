@@ -20,6 +20,7 @@ const EditFormClient = () => {
     : {};
 
   let id = userProfile.user ? userProfile.user.id : "";
+  let token = userProfile.access_token ? userProfile.access_token : '';
 
   const formik = useFormik({
     initialValues: {
@@ -69,7 +70,10 @@ const EditFormClient = () => {
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
       const profile_user = {
-        headers: { "Content-Type": "Application/json" },
+        headers: {
+          "Content-Type": "Application/json",
+          'Authorization': 'Bearer ' + token
+        },
         body: JSON.stringify({
           phone: values.phoneNumber,
           address: values.adress,
