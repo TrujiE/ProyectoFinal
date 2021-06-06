@@ -50,8 +50,8 @@ const SignUpSpecialist = () => {
                 </div>
               </div>
               <p className="mt-5">
-                Registrandote en nuestra aplicacion como ESPECIALISTA te
-                ayudaremos a prestar tus servicios en las siguientes categorias:
+                Registrándote en nuestra aplicacion como ESPECIALISTA te
+                ayudaremos a prestar tus servicios en las siguientes categorías:
               </p>
 
               <div>

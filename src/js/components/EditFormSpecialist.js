@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
-import { useParams } from "react-router-dom";
 import comunasList2 from "../utils/communesFile"
 import comunasList from "../utils/comunasObj"
 import specialties from "../utils/specialties"
 import swal from "sweetalert";
+import { Context } from '../store/appContext';
+import { useHistory } from 'react-router';
 
 
 
@@ -20,16 +21,42 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 const EditFormSpecialist = () => {
 
+
   const listaComunas = comunasList2.map((comuna, index) =>
     <option value={comuna}>{comuna}</option>
   )
 
-  const userProfile =
-    localStorage.getItem('loginUser') ?
-      JSON.parse(localStorage.getItem('loginUser')) : {};
+  const history = useHistory();
+
+  const { store } = useContext(Context);
+
+  const userProfile =store.profileUser;
 
   let id = userProfile.user ? userProfile.user.id : '';
   let token = userProfile.access_token ? userProfile.access_token : '';
+
+  let specialtyName = [];
+  let communeName = [];
+  useEffect(() => {
+    if (userProfile.specialists) {
+      for (const specialtyName2 of specialties) {
+        for (const specialtyName3 of userProfile.specialists) {
+          if (String(specialtyName2.value) == String(specialtyName3)) {
+            specialtyName.push(specialtyName2)
+          }
+        }
+      }
+    }
+    if (userProfile.communes) {
+      for (const communeName2 of comunasList) {
+        for (const communeName3 of userProfile.communes) {
+          if (String(communeName2.value) == String(communeName3)) {
+            communeName.push(communeName2)
+          }
+        }
+      }
+    }
+  }, [])
 
   const formik = useFormik({
 
@@ -41,30 +68,30 @@ const EditFormSpecialist = () => {
       confirmPassword: "",
       secretQuestion: userProfile.user ? userProfile.profile.question : '',
       secretAswer: userProfile.user ? userProfile.profile.answer : '',
-      specialty: userProfile.user ? userProfile.profile.name_specialty : [],
-      attentionComunes: userProfile.user ? userProfile.profile.communes : [],
+      specialty: userProfile.specialists ? specialtyName : [],
+      attentionComunes: userProfile.communes ? communeName : [],
       skills: userProfile.user ? userProfile.profile.experience : '',
     },
 
     validationSchema: Yup.object().shape({
 
-      phoneNumber: Yup.string().required("se requiere el telefono")
-        .matches(phonereg, "ingrese un formato de numero valido"),
+      phoneNumber: Yup.string().required("se requiere el teléfono")
+        .matches(phonereg, "ingrese un formato de número valido"),
 
       adress: Yup.string()
-        .required("se requiere la direccion")
-        .min(5, " direccion debe ser mayor 5 caracteres")
-        .max(30, "direccion  debe ser 30 caracteres maximo"),
+        .required("se requiere la dirección")
+        .min(5, " dirección debe ser mayor 5 caracteres")
+        .max(30, "dirección  debe ser 30 caracteres máximo"),
 
       comuna: Yup.string().required("se requiere la comuna"),
 
       password: Yup.string()
         .required("se requiere la contraseña")
-        .matches(lowercaseRegex, "se requiere almenos una minuscula")
-        .matches(uppercaseRegex, "se requiere almenos una mayuscula")
-        .matches(numericRegex, "se requiere almenos un numero")
-        .min(4, "contraseña muy corta , minimo 4 caracteres")
-        .max(10, "la contraseña  debe ser 30 caracteres maximo"),
+        .matches(lowercaseRegex, "se requiere al menos una minuscula")
+        .matches(uppercaseRegex, "se requiere al menos una mayuscula")
+        .matches(numericRegex, "se requiere al menos un numero")
+        .min(4, "contraseña muy corta , mínimo 4 caracteres")
+        .max(10, "la contraseña  debe tener 30 caracteres como máximo"),
 
       confirmPassword: Yup.string()
 
@@ -72,17 +99,12 @@ const EditFormSpecialist = () => {
         .required("se requiere confirmar contraseña"),
 
       secretQuestion: Yup.string()
-        .required("se requiere el la pregunta secreta")
-        .max(60, "pregunta  debe ser 60 caracteres maximo"),
+        .required("se requiere la pregunta secreta")
+        .max(60, "debe tener 60 caracteres máximo"),
       secretAswer: Yup.string()
         .required("se requiere la respuesta secreta")
-        .max(30, "respuesta  debe ser 30 caracteres maximo"),
+        .max(30, "debe tener 30 caracteres máximo"),
 
-      // specialty: Yup.string()
-      // .required("se requiere la especialidad"),
-
-      // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
-      // .required(),
 
       skills: Yup.string()
         .required("se requiere  la experiencia"),
@@ -90,7 +112,6 @@ const EditFormSpecialist = () => {
     }),
 
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
       const profile_user = {
         headers: {
           'Content-Type': 'Application/json',
@@ -122,7 +143,8 @@ const EditFormSpecialist = () => {
             icon: "success",
             button: "volver a mi perfil",
           }).then(() => {
-            window.location.href = "/cliente";
+            let path = `cliente`;
+            history.push(path);
           });
 
           // else {
@@ -279,7 +301,6 @@ const EditFormSpecialist = () => {
           name="attentionComunes"
           onChange={e => (formik.setFieldValue("attentionComunes", e))}
           value={formik.values.attentionComunes}
-
 
         />
 

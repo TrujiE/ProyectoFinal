@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import swal from 'sweetalert';
 
-const TableComponet = ({ commune, date, hour, address }) => {
+const TableComponet = ({  date, hour, address }) => {
 
     const [valueDefault, setValueDefault] = useState([]);
 
@@ -12,9 +12,7 @@ const TableComponet = ({ commune, date, hour, address }) => {
 
     let option = -1;
 
-    const userProfile =
-        localStorage.getItem('loginUser') ?
-            JSON.parse(localStorage.getItem('loginUser')) : {};
+    const userProfile =store.profileUser;
 
     let id = userProfile.user ? userProfile.user.id : '';
     let token = userProfile.access_token ? userProfile.access_token : '';
@@ -47,7 +45,7 @@ const TableComponet = ({ commune, date, hour, address }) => {
         if (Array.isArray(store.specialistsAvailable) && store.specialists > 0) {
             actions.resetSpecialists();
             setValueDefault(store.specialistsAvailable);
-            console.log(valueDefault, "uno mas")
+            console.log(valueDefault, hour, "uno mas")
             setState(true)
         } else {
             setState(false)

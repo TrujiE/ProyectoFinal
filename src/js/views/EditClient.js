@@ -1,7 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
-import ClientForm from "../components/ClientForm";
 import EditFormClient from "../components/EditFormClient";
 import Nabvar from "../components/Nabvar";
 import SidebarClient from "../components/SidebarClient";
@@ -13,7 +10,7 @@ const EditClient = () => {
       <Nabvar />
       <div className="container mt-5">
         <h1 className=" text-center">
-          Te ayudo... con la edicion de tus datos ?
+          Te ayudo... con la edición de tus datos ?
         </h1>
         <hr />
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useFormik } from "formik";
 import ClientForm from "../components/ClientForm";
 import logoTA from "../../img/logoTA.png";
 import Footer from "../components/Footer";
@@ -56,9 +55,9 @@ const SignUpClient = () => {
                 </div>
               </div>
               <p className="mt-5">
-                Registrandote en nuestra aplicacion como CLIENTE te ayudaremos a encontrar a
+                Registrándote en nuestra aplicación como CLIENTE te ayudaremos a encontrar a
                 los mejores prestadores de servicio en las siguientes
-                categorias:
+                categorías:
               </p>
 
               <div>

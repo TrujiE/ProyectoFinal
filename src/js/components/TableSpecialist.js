@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
-import { format, compareAsc } from 'date-fns';
 import swal from 'sweetalert';
 
-const TableRequestsSpecialist = ({ date, hour }) => {
+const TableRequestsSpecialist = () => {
 
     const [valueDefault, setValueDefault] = useState([]);
 
@@ -15,9 +14,7 @@ const TableRequestsSpecialist = ({ date, hour }) => {
 
     let option = -1;
 
-    const userProfile =
-        localStorage.getItem('loginUser') ?
-            JSON.parse(localStorage.getItem('loginUser')) : {};
+    const userProfile =store.profileUser;
 
     let id = userProfile.user ? userProfile.user.id : '';
     let token = userProfile.access_token ? userProfile.access_token : '';
