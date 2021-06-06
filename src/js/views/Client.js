@@ -120,7 +120,17 @@ const Client = () => {
   return (
     <div className="container">
       <Nabvar />
-      <div className="row">
+      <div className="container mt-5">
+      <h1 className=" text-center">
+      Hola{" "}
+              {userProfile.user.full_name ? userProfile.user.full_name : ""},
+              acá puedes crear una solicitud
+        </h1>
+        <hr />
+
+
+
+      {/* <div className="row">
         <div className="col">
           <h4 style={{ textAlign: "left" }}>
             <strong>
@@ -130,8 +140,8 @@ const Client = () => {
             </strong>
           </h4>
         </div>
-      </div>
-      <div className="container">
+      </div> */}
+  
         <div className="row ">
           {userProfile.profile.role === "client" ? (
             <div className="col-sm-12 col-lg-2">
@@ -222,7 +232,13 @@ const Client = () => {
             </div>
           </div>
         </div>
+
       </div>
+
+
+
+
+      
       <Footer />
     </div>
   );

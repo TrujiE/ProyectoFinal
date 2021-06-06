@@ -16,17 +16,23 @@ const EditClient = () => {
           Te ayudo... con la edicion de tus datos ?
         </h1>
         <hr />
+
+
+
+
+
+
+
+
+
         <div className="row">
+          <div className="col-sm-12 col-lg-2">
             <SidebarClient />
-          <div className="col-8 ml-5">
-            <ul className="nav nav-pills nav-fill mb-5">
-              <li className="nav-item ">
-                {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
-              </li>
-              {/* <li className="nav-item">
-              
-              </li> */}
-            </ul>
+          </div>
+
+
+          <div className="col-10 mt-4">
+           
             <EditFormClient />
           </div>
         </div>

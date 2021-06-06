@@ -1,7 +1,7 @@
 /* color logo : rgba(0,91,0,255) */
 /* verde claro fondos : rgb(89,141,88) */
 /* verde aux botones : rgb(60,124,60) */
-/* berde mas claro : rgb(204,217,204) */
+/* verde mas claro : rgb(204,217,204) */
 
 /* verde2 aux botones  : rgb(53,124,50) */
 /*  verde2 complementario azul : #32707c */
@@ -65,6 +65,11 @@
 
 .bg-color {
   background-color: rgb(60,124,60);
+
+}
+
+.bg-ta-nav{
+  background-color: ;
 }
 
 .btn-outline-success:hover, .btn-outline-success:active, .btn-outline-success:visited {
