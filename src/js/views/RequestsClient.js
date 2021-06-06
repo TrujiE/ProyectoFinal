@@ -1,15 +1,12 @@
 import React, { useState, useContext } from 'react';
 import TableRequestsClient from '../components/TableClient';
 import { Context } from "../store/appContext";
-import { format} from 'date-fns';
 import SidebarClient from "../components/SidebarClient";
 import SidebarSpecialist from "../components/SidebarSpecialist";
 import Nabvar from '../components/Nabvar';
 import Footer from '../components/Footer';
 
 const RequestsClient = () => {
-
-    const [hour, setHour] = useState("");
     
     const { store, actions } = useContext(Context);
 
@@ -38,7 +35,7 @@ const RequestsClient = () => {
             <Nabvar />
             <div className="row">
                 <div className="col">
-                    <h4><strong>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes revisar tus solicitudes</strong></h4>
+                    <h4><strong>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, aquí puedes revisar tus solicitudes</strong></h4>
                 </div>
             </div>
             <div className="row">   
@@ -53,7 +50,7 @@ const RequestsClient = () => {
                             <h5>Seleccione su Solicitud</h5>
                         </div>
                         <div className="form-group col-10">
-                            <TableRequestsClient hour={hour} date={format((store.startDate), 'yyyy-MM-dd')} />
+                            <TableRequestsClient />
                         </div>
                     </div>
                 </div>

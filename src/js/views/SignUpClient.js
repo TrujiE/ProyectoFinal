@@ -55,9 +55,9 @@ const SignUpClient = () => {
                 </div>
               </div>
               <p className="mt-5">
-                Registrandote en nuestra aplicacion como CLIENTE te ayudaremos a encontrar a
+                Registrándote en nuestra aplicación como CLIENTE te ayudaremos a encontrar a
                 los mejores prestadores de servicio en las siguientes
-                categorias:
+                categorías:
               </p>
 
               <div>

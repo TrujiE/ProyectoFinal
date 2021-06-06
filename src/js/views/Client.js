@@ -114,7 +114,7 @@ const Client = () => {
             <Nabvar />
             <div className="row">
                 <div className="col">
-                    <h4 style={{ textAlign: "left" }}><strong>Hola {userProfile.user? userProfile.user.full_name : ""}, acá puedes crear una solicitud</strong></h4>
+                    <h4 style={{ textAlign: "left" }}><strong>Hola {userProfile.user? userProfile.user.full_name : ""}, aquí puedes crear una solicitud</strong></h4>
                 </div>
             </div>
             <div className="container">
@@ -177,7 +177,7 @@ const Client = () => {
                                     defaultChecked={false}
                                     onChange={setCheck}
                                 />
-                                <label className="form-check-label" for="exampleCheck1">Nueva Direccion</label>
+                                <label className="form-check-label" for="exampleCheck1">Nueva Dirección</label>
                             </div>
                         </div>
 

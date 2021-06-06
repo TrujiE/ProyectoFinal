@@ -1,7 +1,6 @@
 import { daysInWeek } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
-	debugger;
 	return {
 		store: {
               profileUser: localStorage.getItem('loginUser') == null ? {} : JSON.parse(localStorage.getItem('loginUser')),

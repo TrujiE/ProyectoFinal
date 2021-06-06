@@ -6,13 +6,14 @@ import comunasList2 from "../utils/communesFile"
 import comunasList from "../utils/comunasObj"
 import specialties from "../utils/specialties"
 import swal from "sweetalert";
+import { useHistory } from "react-router";
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
-const rutRegex= ("^([0-9]+-[0-9Kk])$");
+const rutRegex = ("^([0-9]+-[0-9Kk])$");
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 
@@ -22,8 +23,10 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 const SpecialistForm = () => {
 
   const listaComunas = comunasList2.map((comuna, index) =>
-  <option value={comuna}>{comuna}</option>
-)
+    <option value={comuna}>{comuna}</option>
+  )
+
+  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -31,7 +34,7 @@ const SpecialistForm = () => {
       lastName: "",
       rut: "",
       email: "",
-      phoneNumber:"",
+      phoneNumber: "",
       adress: "",
       comuna: "",
       password: "",
@@ -46,13 +49,13 @@ const SpecialistForm = () => {
     validationSchema: Yup.object().shape({
       firstName: Yup.string()
         .required("se requiere el nombre")
-        .min(2, "nombre debe ser mayor aun caracter")
-        .max(15, "nombre muy largo debe ser 15 caracteres maximo"),
+        .min(2, "nombre debe ser mayor a un caracter")
+        .max(15, "nombre muy largo debe ser 15 caracteres máximo"),
 
       lastName: Yup.string()
         .required("se requiere el apellido")
-        .min(2, "apellido debe ser mayor aun caracter")
-        .max(15, "apellido muy largo debe ser 15 caracteres maximo"),
+        .min(2, "apellido debe ser mayor a un caracter")
+        .max(15, "apellido muy largo debe ser 15 caracteres máximo"),
 
       rut: Yup.string().required("se requiere el rut")
         .matches(rutRegex, "rut invalido"),
@@ -62,26 +65,26 @@ const SpecialistForm = () => {
         .lowercase()
         .notOneOf(emailadresses, "ese correo ya esxiste")
         .email("correo invalido")
-        .max(30, "correo  debe ser 30 caracteres maximo")
+        .max(30, "correo  debe ser 30 caracteres máximo")
         .required("se requiere el correo"),
 
-      phoneNumber: Yup.string().required("se requiere el telefono")
-        .matches(phonereg,"ingrese un formato de numero valido"),
+      phoneNumber: Yup.string().required("se requiere el teléfono")
+        .matches(phonereg, "ingrese un formato de número valido"),
 
       adress: Yup.string()
         .required("se requiere la direccion")
-        .min(5, " direccion debe ser mayor 5 caracteres")
-        .max(30, "direccion  debe ser 30 caracteres maximo"),
+        .min(5, " dirección debe ser mayor 5 caracteres")
+        .max(30, "dirección  debe ser 30 caracteres maximo"),
 
       comuna: Yup.string().required("se requiere la comuna"),
 
       password: Yup.string()
         .required("se requiere la contraseña")
-        .matches(lowercaseRegex, "se requiere almenos una minuscula")
-        .matches(uppercaseRegex, "se requiere almenos una mayuscula")
-        .matches(numericRegex, "se requiere almenos un numero")
-        .min(4, "contraseña muy corta , minimo 4 caracteres")
-        .max(10, "la contraseña  debe ser 30 caracteres maximo"),
+        .matches(lowercaseRegex, "se requiere al menos una minúscula")
+        .matches(uppercaseRegex, "se requiere al menos una mayúscula")
+        .matches(numericRegex, "se requiere al menos un número")
+        .min(4, "contraseña muy corta , mínimo 4 caracteres")
+        .max(10, "la contraseña  debe ser tener 30 caracteres como máximo"),
 
       confirmPassword: Yup.string()
 
@@ -89,17 +92,17 @@ const SpecialistForm = () => {
         .required("se requiere confirmar contraseña"),
 
       secretQuestion: Yup.string()
-        .required("se requiere el la pregunta secreta")
-        .max(60, "pregunta  debe ser 60 caracteres maximo"),
+        .required("se requiere la pregunta secreta")
+        .max(60, "pregunta  debe ser 60 caracteres máximo"),
       secretAswer: Yup.string()
         .required("se requiere la respuesta secreta")
-        .max(30, "respuesta  debe ser 30 caracteres maximo"),
+        .max(30, "la respuesta debe tener 30 caracteres como máximo"),
 
       // specialty: Yup.Array().of(yup.string)
       //   .required("se requiere la especialidad"),
 
-        // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
-        // .required(),
+      // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
+      // .required(),
 
       skills: Yup.string()
         .required("se requiere la experiencia"),
@@ -112,47 +115,49 @@ const SpecialistForm = () => {
       // alert(JSON.stringify(values, null, 2));
 
       const profile_specialist = {
-        headers: {'Content-Type' :'Application/json'},  
+        headers: { 'Content-Type': 'Application/json' },
         body: JSON.stringify({
-          "email" : values.email,
-          "rut" : values.rut,
+          "email": values.email,
+          "rut": values.rut,
           "full_name": values.firstName,
-          "last_name" : values.lastName,
-          "phone" : values.phoneNumber,
-          "address" : values.adress,
-          "name_commune" : values.comuna,
-          "password" : values.password,
-          "role" : "specialist",
+          "last_name": values.lastName,
+          "phone": values.phoneNumber,
+          "address": values.adress,
+          "name_commune": values.comuna,
+          "password": values.password,
+          "role": "specialist",
           "question": values.secretQuestion,
           "answer": values.secretAswer,
           "experience": values.skills,
           "name_specialty": values.specialty.map(item => item.value),
-          "communes": values.attentionComunes.map(item => item.value) 
+          "communes": values.attentionComunes.map(item => item.value)
         }),
         method: "POST"
-        }
+      }
       fetch("http://127.0.0.1:5000/user/profile", profile_specialist)
-      .then(respuesta => respuesta.json())
-      .then(data => {
-        console.log(data);
-        if (typeof data == 'object'){
-          
-          swal({
-            title: "Felicidades ahora eres un especialista! ;)",
-            text: "Ahora te redirecionaremos al inicio de sesion para que puedas entrar a tu perfil!",
-            icon: "success",
-            button: "ir",
-          }).then(() => {
-            window.location.href = "/";
-          });
-        } else {
-          swal(data, { icon: "error" }).then(() => {
-            window.location.href = "/";
-          });
-        }
-  })  
-  .catch(error => console.error(error))
-      
+        .then(respuesta => respuesta.json())
+        .then(data => {
+          console.log(data);
+          if (typeof data == 'object') {
+
+            swal({
+              title: "Felicidades ahora eres un especialista! ;)",
+              text: "Ahora te redireccionaremos al inicio de sesión para que puedas entrar a tu perfil!",
+              icon: "success",
+              button: "ir",
+            }).then(() => {
+              let path = ``;
+              history.push(path);
+            });
+          } else {
+            swal(data, { icon: "error" }).then(() => {
+              let path = ``;
+              history.push(path);;
+            });
+          }
+        })
+        .catch(error => console.error(error))
+
     },
   });
 
@@ -270,7 +275,7 @@ const SpecialistForm = () => {
           value={formik.values.comuna}
         >
           <option selected>Seleccione su comuna</option>
-        
+
           {listaComunas}
 
         </select>
@@ -350,13 +355,13 @@ const SpecialistForm = () => {
           id="specialty"
           name="specialty"
           placeholder="Elija una especialidad"
-          options = {specialties}
-          onChange = {e => (formik.setFieldValue("specialty", e))}
-          value = {formik.values.specialty}
-          
-          
+          options={specialties}
+          onChange={e => (formik.setFieldValue("specialty", e))}
+          value={formik.values.specialty}
+
+
         />
-      
+
 
         {formik.touched.specialty && formik.errors.specialty ? (
           <div className="text-danger"> {formik.errors.specialty}</div>
@@ -370,10 +375,10 @@ const SpecialistForm = () => {
           classNamePrefix="select"
           placeholder="Seleccione las comunas que atenderá"
           options={comunasList}
-          name="attentionComunes" 
+          name="attentionComunes"
 
-          onChange = {e =>  ( formik.setFieldValue("attentionComunes", e))}
-          value= {formik.values.attentionComunes}           
+          onChange={e => (formik.setFieldValue("attentionComunes", e))}
+          value={formik.values.attentionComunes}
 
         />
 
@@ -392,14 +397,14 @@ const SpecialistForm = () => {
           value={formik.values.skills}
         >
 
-        <option selected>Seleccione su experiencia</option>
+          <option selected>Seleccione su experiencia</option>
 
           <option value="Menos de 1 año">menos de 1 año</option>
           <option value="De 1 a 3 años">De 1 a 3 años</option>
           <option value="De 3 a 5 años">De 3 a 5 años</option>
           <option value="De 5 a 10 años">De 5 a 10 años</option>
-          
-          
+
+
         </select>
 
         {formik.touched.skills && formik.errors.skills ? (

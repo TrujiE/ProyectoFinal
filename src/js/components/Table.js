@@ -45,7 +45,7 @@ const TableComponet = ({  date, hour, address }) => {
         if (Array.isArray(store.specialistsAvailable) && store.specialists > 0) {
             actions.resetSpecialists();
             setValueDefault(store.specialistsAvailable);
-            console.log(valueDefault, "uno mas")
+            console.log(valueDefault, hour, "uno mas")
             setState(true)
         } else {
             setState(false)

@@ -15,7 +15,7 @@ const Specialist = () => {
             <Nabvar />
             <div className="row">
                 <div className="col">
-                    <h4><strong>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes revisar tus servicios</strong></h4>
+                    <h4><strong>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, aquí puedes revisar tus servicios</strong></h4>
                 </div>
             </div>
 
