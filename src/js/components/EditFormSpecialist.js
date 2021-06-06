@@ -7,6 +7,7 @@ import comunasList from "../utils/comunasObj"
 import specialties from "../utils/specialties"
 import swal from "sweetalert";
 import { Context } from '../store/appContext';
+import { useHistory } from 'react-router';
 
 
 
@@ -25,6 +26,8 @@ const EditFormSpecialist = () => {
     <option value={comuna}>{comuna}</option>
   )
 
+  const history = useHistory();
+
   const { store } = useContext(Context);
 
   const userProfile =store.profileUser;
@@ -38,11 +41,8 @@ const EditFormSpecialist = () => {
     if (userProfile.specialists) {
       for (const specialtyName2 of specialties) {
         for (const specialtyName3 of userProfile.specialists) {
-          console.log(specialtyName2.value, "specialtyName2");
-          console.log(specialtyName3, "spssssssss");
           if (String(specialtyName2.value) == String(specialtyName3)) {
             specialtyName.push(specialtyName2)
-            console.log(specialtyName, "Holaaa");
           }
         }
       }
@@ -50,16 +50,12 @@ const EditFormSpecialist = () => {
     if (userProfile.communes) {
       for (const communeName2 of comunasList) {
         for (const communeName3 of userProfile.communes) {
-          console.log(communeName2.value, "communeName2");
-          console.log(communeName3, "spssssssss");
           if (String(communeName2.value) == String(communeName3)) {
             communeName.push(communeName2)
-            console.log(communeName, "Holaaa");
           }
         }
       }
     }
-    console.log(specialtyName, "arreglo");
   }, [])
 
   const formik = useFormik({
@@ -79,23 +75,23 @@ const EditFormSpecialist = () => {
 
     validationSchema: Yup.object().shape({
 
-      phoneNumber: Yup.string().required("se requiere el telefono")
-        .matches(phonereg, "ingrese un formato de numero valido"),
+      phoneNumber: Yup.string().required("se requiere el teléfono")
+        .matches(phonereg, "ingrese un formato de número valido"),
 
       adress: Yup.string()
-        .required("se requiere la direccion")
-        .min(5, " direccion debe ser mayor 5 caracteres")
-        .max(30, "direccion  debe ser 30 caracteres maximo"),
+        .required("se requiere la dirección")
+        .min(5, " dirección debe ser mayor 5 caracteres")
+        .max(30, "dirección  debe ser 30 caracteres máximo"),
 
       comuna: Yup.string().required("se requiere la comuna"),
 
       password: Yup.string()
         .required("se requiere la contraseña")
-        .matches(lowercaseRegex, "se requiere almenos una minuscula")
-        .matches(uppercaseRegex, "se requiere almenos una mayuscula")
-        .matches(numericRegex, "se requiere almenos un numero")
-        .min(4, "contraseña muy corta , minimo 4 caracteres")
-        .max(10, "la contraseña  debe ser 30 caracteres maximo"),
+        .matches(lowercaseRegex, "se requiere al menos una minuscula")
+        .matches(uppercaseRegex, "se requiere al menos una mayuscula")
+        .matches(numericRegex, "se requiere al menos un numero")
+        .min(4, "contraseña muy corta , mínimo 4 caracteres")
+        .max(10, "la contraseña  debe tener 30 caracteres como máximo"),
 
       confirmPassword: Yup.string()
 
@@ -103,17 +99,12 @@ const EditFormSpecialist = () => {
         .required("se requiere confirmar contraseña"),
 
       secretQuestion: Yup.string()
-        .required("se requiere el la pregunta secreta")
-        .max(60, "pregunta  debe ser 60 caracteres maximo"),
+        .required("se requiere la pregunta secreta")
+        .max(60, "debe tener 60 caracteres máximo"),
       secretAswer: Yup.string()
         .required("se requiere la respuesta secreta")
-        .max(30, "respuesta  debe ser 30 caracteres maximo"),
+        .max(30, "debe tener 30 caracteres máximo"),
 
-      // specialty: Yup.string()
-      // .required("se requiere la especialidad"),
-
-      // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
-      // .required(),
 
       skills: Yup.string()
         .required("se requiere  la experiencia"),
@@ -121,7 +112,6 @@ const EditFormSpecialist = () => {
     }),
 
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
       const profile_user = {
         headers: {
           'Content-Type': 'Application/json',
@@ -153,7 +143,8 @@ const EditFormSpecialist = () => {
             icon: "success",
             button: "volver a mi perfil",
           }).then(() => {
-            window.location.href = "/cliente";
+            let path = `cliente`;
+            history.push(path);
           });
 
           // else {

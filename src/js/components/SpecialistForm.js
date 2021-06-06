@@ -50,12 +50,12 @@ const SpecialistForm = () => {
       firstName: Yup.string()
         .required("se requiere el nombre")
         .min(2, "nombre debe ser mayor a un caracter")
-        .max(15, "nombre muy largo debe ser 15 caracteres máximo"),
+        .max(15, "nombre muy largo, debe tener 15 caracteres como máximo"),
 
       lastName: Yup.string()
         .required("se requiere el apellido")
         .min(2, "apellido debe ser mayor a un caracter")
-        .max(15, "apellido muy largo debe ser 15 caracteres máximo"),
+        .max(15, "apellido muy largo, debe tener 15 caracteres como máximo"),
 
       rut: Yup.string().required("se requiere el rut")
         .matches(rutRegex, "rut invalido"),
@@ -73,8 +73,8 @@ const SpecialistForm = () => {
 
       adress: Yup.string()
         .required("se requiere la direccion")
-        .min(5, " dirección debe ser mayor 5 caracteres")
-        .max(30, "dirección  debe ser 30 caracteres maximo"),
+        .min(5, " dirección debe ser mayor a 5 caracteres")
+        .max(30, "dirección debe tener 30 caracteres como máximo"),
 
       comuna: Yup.string().required("se requiere la comuna"),
 
@@ -84,7 +84,7 @@ const SpecialistForm = () => {
         .matches(uppercaseRegex, "se requiere al menos una mayúscula")
         .matches(numericRegex, "se requiere al menos un número")
         .min(4, "contraseña muy corta , mínimo 4 caracteres")
-        .max(10, "la contraseña  debe ser tener 30 caracteres como máximo"),
+        .max(10, "la contraseña debe tener 30 caracteres como máximo"),
 
       confirmPassword: Yup.string()
 
@@ -391,7 +391,6 @@ const SpecialistForm = () => {
           className="form-control mb-3"
           id="skills"
           name="skills"
-          // placeholder="escoja su tiempo de experiencia"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.skills}

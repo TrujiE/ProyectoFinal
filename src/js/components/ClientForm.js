@@ -59,12 +59,12 @@ const ClientForm = () => {
 
       phoneNumber: Yup.string()
         .required("se requiere el teléfono")
-        .matches(phonereg, "ingrese un formato de numero valido"),
+        .matches(phonereg, "ingrese un formato de número valido"),
 
       adress: Yup.string()
         .required("se requiere la dirección")
         .min(5, " dirección debe ser mayor 5 caracteres")
-        .max(30, "dirección  debe ser 30 caracteres maximo"),
+        .max(30, "dirección  debe ser 30 caracteres máximo"),
 
       comuna: Yup.string().required("se requiere la comuna"),
 
@@ -86,7 +86,7 @@ const ClientForm = () => {
         .max(60, "pregunta  debe ser 60 caracteres máximo"),
       secretAswer: Yup.string()
         .required("se requiere la respuesta secreta")
-        .max(30, "respuesta  debe ser 30 caracteres máximo"),
+        .max(30, "la respuesta debe tener 30 caracteres como máximo"),
     }),
 
     onSubmit: (values) => {
