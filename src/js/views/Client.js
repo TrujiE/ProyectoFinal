@@ -1,23 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import Components from "../components/Components";
 import { Context } from "../store/appContext";
-import Calendar_component from "../components/CalendarClient";
 import Calendar_client from '../components/CalendarClient';
 import TableComponet from '../components/Table';
 import Select from 'react-select'
-import { format, compareAsc } from 'date-fns';
+import { format} from 'date-fns';
 import listCommunes from '../utility/ListCommunes';
 import SidebarClient from '../components/SidebarClient';
 import SidebarSpecialist from '../components/SidebarSpecialist';
 import Nabvar from '../components/Nabvar';
+import Footer from '../components/Footer';
 
 const Client = () => {
 
     const [specialty, setSpecialty] = useState("");
     const [commune, setCommune] = useState("");
     const [hour, setHour] = useState("");
-    //const [check, setCheck] = useState(false);
     const [address, setAddress] = useState("");
 
     const [morning, setMorning] = useState(1)
@@ -39,9 +36,7 @@ const Client = () => {
         { value: "evening", label: '14:00 - 17:00' }
     ]
 
-    const userProfile =
-        localStorage.getItem('loginUser') ?
-            JSON.parse(localStorage.getItem('loginUser')) : {};
+    const userProfile = store.profileUser;
 
     let id = userProfile.user ? userProfile.user.id : '';
     useEffect(() => {
@@ -67,14 +62,10 @@ const Client = () => {
         setAddress(e.target.value)
     }
 
-    //Lo que veo en consola
-    const array = [specialty, commune, hour, address]
-    console.log(array)
-    //console.log(check)
 
     //POST para obtener los especialistas disponibles
 
-    const SendValue = () => {
+    const sendValue = () => {
         let token = userProfile.access_token ? userProfile.access_token : '';
         if (hour == "morning") {
             setMorning(1);
@@ -162,7 +153,7 @@ const Client = () => {
                             </div>
 
                             <div className="col-2">
-                                <button type="button" className="btn btn-success" onClick={SendValue}
+                                <button type="button" className="btn btn-ta-blue text-white" onClick={sendValue}
                                 >Buscar</button>
                             </div>
                         </div>
@@ -197,9 +188,8 @@ const Client = () => {
                     </div>
                 </div>
             </div>
-            <br />
-            <br />
-            <Components />
+           <Footer/>
+            
         </div>
 
     );

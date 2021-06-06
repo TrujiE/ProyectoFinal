@@ -1,10 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
-import ClientForm from "../components/ClientForm";
 import EditFormClient from "../components/EditFormClient";
 import Nabvar from "../components/Nabvar";
 import SidebarClient from "../components/SidebarClient";
+import Footer from "../components/Footer";
 
 const EditClient = () => {
   return (
@@ -29,8 +27,9 @@ const EditClient = () => {
             <EditFormClient />
           </div>
         </div>
-        <hr />
+        
       </div>
+      <Footer/>   
     </div>
   );
 };

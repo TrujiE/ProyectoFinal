@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
-import { format, compareAsc } from 'date-fns';
 import swal from 'sweetalert';
 
-const TableRequestsClient = ({ date, hour }) => {
+const TableRequestsClient = () => {
 
     const [valueDefault, setValueDefault] = useState([]);
 
@@ -15,9 +14,7 @@ const TableRequestsClient = ({ date, hour }) => {
 
     let option = -1;
 
-    const userProfile =
-        localStorage.getItem('loginUser') ?
-            JSON.parse(localStorage.getItem('loginUser')) : {};
+    const userProfile =store.profileUser;
 
     let id = userProfile.user ? userProfile.user.id : '';
     let token = userProfile.access_token ? userProfile.access_token : '';
@@ -187,9 +184,9 @@ const TableRequestsClient = ({ date, hour }) => {
                     }
                 </tbody>
             </table>
-            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CancelRequest}
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-ta-danger text-white" onClick={CancelRequest}
             >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
-            <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={CloseRequest}
+            <button style={{ textAlign: "right" }} type="button" className="btn btn-ta-blue text-white" onClick={CloseRequest}
             >Resolver Solicitud</button>
         </div>
     )

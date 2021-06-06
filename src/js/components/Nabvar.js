@@ -3,23 +3,20 @@ import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const Nabvar = () => {
-    //<Link className="nav-link" to="/cliente"><Log_out /></Link>
     const history = useHistory();
     const { actions } = useContext(Context);
 
     const LogOut = () => {
-        localStorage.setItem('loginUser', JSON.stringify({}));
+        localStorage.removeItem("loginUser");
         actions.setProfile({});
-        //debugger;
         let path = `/`;
-		history.push(path);
-        
-        
+		history.push(path);    
     }
+
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light row justify-content-between">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light row justify-content-end">
             <div className="navbar-nav">
-                <button style={{ textAlign: "right" }} type="button" className="btn btn-success" onClick={LogOut}
+                <button style={{ textAlign: "right" }} type="button" className="btn btn-ta-danger text-white" onClick={LogOut}
                     >Cerrar sesión</button>
             </div>
         </nav>

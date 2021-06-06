@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useParams } from "react-router-dom";
 import comunasList2 from "../utils/communesFile";
 import swal from "sweetalert";
+import { Context } from "../store/appContext";
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
@@ -11,13 +11,14 @@ const numericRegex = /(?=.*[0-9])/;
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 const EditFormClient = () => {
+
   const listaComunas = comunasList2.map((comuna, index) => (
     <option value={comuna}>{comuna}</option>
   ));
 
-  const userProfile = localStorage.getItem("loginUser")
-    ? JSON.parse(localStorage.getItem("loginUser"))
-    : {};
+  const { store} = useContext(Context);
+
+  const userProfile = store.profileUser;
 
   let id = userProfile.user ? userProfile.user.id : "";
   let token = userProfile.access_token ? userProfile.access_token : '';
@@ -226,7 +227,7 @@ const EditFormClient = () => {
           <div className="text-danger"> {formik.errors.secretAswer}</div>
         ) : null}
 
-        <button type="submit" className="btn btn-danger    text-white">
+        <button type="submit" className="btn btn-ta-blue    text-white">
           Editar
         </button>
       </form>

@@ -1,18 +1,14 @@
-import React, { useState, useContext } from 'react';
-import Components from "../components/Components";
-import { Link } from "react-router-dom";
+import React, { useContext } from 'react';
 import TableRequestsSpecialist from '../components/TableSpecialist';
 import { Context } from "../store/appContext";
 import SidebarSpecialist from '../components/SidebarSpecialist';
 import Nabvar from '../components/Nabvar';
+import Footer from '../components/Footer';
 
 const Specialist = () => {
-    const { store, actions } = useContext(Context);
-    const userProfile =
-        localStorage.getItem('loginUser') ?
-            JSON.parse(localStorage.getItem('loginUser')) : {};
-
-    let id = userProfile.user ? userProfile.user.id : '';
+   
+    const { store } = useContext(Context);
+    const userProfile = store.profileUser;
 
     return (
         <div className="container">
@@ -34,13 +30,11 @@ const Specialist = () => {
                         </div>
                     </div>
                     <div className="form-group col-10">
-                        <TableRequestsSpecialist hour={234} date={'2012-08-19'} />
+                        <TableRequestsSpecialist />
                     </div>
                 </div>
             </div>
-            <br />
-            <br />
-            <Components />
+            <Footer/>
         </div>
 
     );

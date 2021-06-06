@@ -6,19 +6,18 @@ import * as Yup from "yup";
 import logoTA from "../../img/logoTA.bmp";
 import "../../js/custom.css";
 import swal from "sweetalert";
-import { createBrowserHistory } from "history";
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 
 const Home = () => {
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
 
   const history = useHistory();
 
-  const SaveLocalStore = () => {
-    localStorage.setItem("loginUser", JSON.stringify(store.profileUser));
+  const SaveLocalStore = (profileUser) => {
+    localStorage.setItem("loginUser", JSON.stringify(profileUser));
   };
 
   const formik = useFormik({
@@ -50,33 +49,17 @@ const Home = () => {
       fetch("http://127.0.0.1:5000/user/login", config)
         .then((respuesta) => respuesta.json())
         .then((data) => {
-          console.log(data);
           if (typeof data == 'object') {
             actions.setProfile(data);
-            SaveLocalStore();
-            swal({
-              title: "Bienvenido!",
-              text: "Ahora iras a tu perfil de usuario en la aplicacaion !",
-              icon: "success",
-              confirmButton: "ir",
-            })
-              .then(() => {
-                //history.replace("/", "urlhistory");
-                //debugger;
-                let path = `cliente`;
-                history.push(path);
-                //history.push(path);
-                
-              });
-
+            SaveLocalStore(data);
+            let path = `cliente`;
+            history.push(path);
           } else {
             swal(data, { icon: "error" });
           }
         })
         .catch((error) => console.error(error));
-      // alert(JSON.stringify(values, null, 2));
-      // swal("has ingresado")
-    }, //console.log(data))
+    },
   });
 
   return (
@@ -131,7 +114,7 @@ const Home = () => {
 
                 <button
                   type="submit"
-                  className="btn btn-success btn-block  text-white "
+                  className="btn btn-ta btn-block  text-white "
                 >
                   Ingresar
                 </button>

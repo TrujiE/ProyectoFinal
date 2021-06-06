@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import DatePicker from "react-datepicker";
 import { addDays } from "date-fns";
 import { Context } from "../store/appContext";
-import getState from "../store/flux";
 
 import "react-datepicker/dist/react-datepicker.css";
 

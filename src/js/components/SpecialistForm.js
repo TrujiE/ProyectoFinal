@@ -406,7 +406,7 @@ const SpecialistForm = () => {
           <div className="text-danger"> {formik.errors.skills}</div>
         ) : null}
 
-        <button type="submit" className="btn btn-danger   text-white">
+        <button type="submit" className="btn btn-ta-blue   text-white">
           Registrarse
         </button>
       </form>

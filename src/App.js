@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from './js/views/Home';
 import SignUpClient from './js/views/SignUpClient';
@@ -6,7 +6,7 @@ import SignUpSpecialist from './js/views/SignUpSpecialist';
 import Client from './js/views/Client';
 import Specialist from './js/views/Specialist';
 import RequestsClient from './js/views/RequestsClient';
-import injectContext from "./js/store/appContext";
+import injectContext, { Context } from "./js/store/appContext";
 import EditClient from "./js/views/EditClient";
 import EditSpecialist from "./js/views/EditSpecialist";
 import "./App.css"
@@ -14,21 +14,33 @@ import "./App.css"
 
 function App() {
 
-    const userProfile =
-        localStorage.getItem('loginUser') ?
-            JSON.parse(localStorage.getItem('loginUser')) : {};
+    const { store } = useContext(Context);
+
+    const userProfile = store.profileUser;
 
     return (
         <div className="App">
             <BrowserRouter>
                 <div>
                     <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/registroCliente" component={SignUpClient} />
-                        <Route exact path="/registroEspecialista" component={SignUpSpecialist} />
+                        <Route exact path="/" render={
+                            () => userProfile.profile ?
+                                <Redirect to={{ pathname: "/cliente" }}></Redirect>
+                                :
+                                <Home />} />
+                        <Route exact path="/registroEspecialista" render={
+                            () => userProfile.profile ?
+                                <Redirect to={{ pathname: "/cliente" }}></Redirect>
+                                :
+                                <SignUpSpecialist />} />
+                        <Route exact path="/registroCliente" render={
+                            () => userProfile.profile ?
+                                <Redirect to={{ pathname: "/cliente" }}></Redirect>
+                                :
+                                <SignUpClient/>} />
                         <Route exact path="/cliente" render={
-                            () => userProfile.profile?
-                                    <Client />
+                            () => userProfile.profile ?
+                                <Client />
                                 :
                                 <Redirect to={{ pathname: "/" }}></Redirect>} />
                         <Route exact path="/especialista" render={
@@ -40,18 +52,18 @@ function App() {
                                 :
                                 <Redirect to={{ pathname: "/" }}></Redirect>} />
                         <Route exact path="/solicitudes" render={
-                            () => userProfile.profile?
-                                    <RequestsClient />
+                            () => userProfile.profile ?
+                                <RequestsClient />
                                 :
                                 <Redirect to={{ pathname: "/" }}></Redirect>} />
                         <Route exact path="/editarCliente" render={
-                            () => userProfile.profile?
-                                    <EditClient />
+                            () => userProfile.profile ?
+                                <EditClient />
                                 :
                                 <Redirect to={{ pathname: "/" }}></Redirect>} />
                         <Route exact path="/editarEspecialista" render={
-                            () => userProfile.profile?
-                                    <EditSpecialist />
+                            () => userProfile.profile ?
+                                <EditSpecialist />
                                 :
                                 <Redirect to={{ pathname: "/" }}></Redirect>} />
                         <Route render={() => <h1 className="notfound">Not found!</h1>} />

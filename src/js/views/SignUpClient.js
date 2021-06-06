@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useFormik } from "formik";
 import ClientForm from "../components/ClientForm";
-import logoTA from "../../img/logoTA.bmp";
+import logoTA from "../../img/logoTA.png";
+import Footer from "../components/Footer";
 
 const SignUpClient = () => {
     return (
@@ -15,7 +15,7 @@ const SignUpClient = () => {
                 <div className="col-8">
                     <ul className="nav nav-pills nav-fill mb-5">
                         <li className="nav-item ">
-                            <button className="btn   btn-success" style={{color:"black"}}><strong>Cliente</strong></button>
+                            <button className="btn   btn-ta1" style={{color:"white"}}><strong>Cliente</strong></button>
                             {/* <a className="nav-link text-success active-success" href="#">Cliente</a> */}
                         </li>
                         <li className="nav-item">
@@ -49,8 +49,8 @@ const SignUpClient = () => {
                   <img
                     src={logoTA}
                     alt=""
-                    className="mt-3 "
-                    style={{ maxWidth: "150px" }}
+                    className="mt-3 mb-3 "
+                    style={{ maxWidth: "130px" }}
                   />
                 </div>
               </div>
@@ -75,6 +75,7 @@ const SignUpClient = () => {
         </div>
         <hr />
       </div>
+      <Footer/>
     </div>
 
     

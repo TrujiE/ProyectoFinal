@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
-import { useParams } from "react-router-dom";
 import comunasList2 from "../utils/communesFile"
 import comunasList from "../utils/comunasObj"
 import specialties from "../utils/specialties"
 import swal from "sweetalert";
+import { Context } from '../store/appContext';
 
 
 
@@ -25,9 +25,9 @@ const EditFormSpecialist = () => {
     <option value={comuna}>{comuna}</option>
   )
 
-  const userProfile =
-    localStorage.getItem('loginUser') ?
-      JSON.parse(localStorage.getItem('loginUser')) : {};
+  const { store } = useContext(Context);
+
+  const userProfile =store.profileUser;
 
   let id = userProfile.user ? userProfile.user.id : '';
   let token = userProfile.access_token ? userProfile.access_token : '';
@@ -341,7 +341,7 @@ const EditFormSpecialist = () => {
           <div className="text-danger"> {formik.errors.skills}</div>
         ) : null}
 
-        <button type="submit" className="btn btn-danger    text-white">
+        <button type="submit" className="btn btn-ta-blue     text-white">
           Editar
             </button>
       </form>
