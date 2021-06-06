@@ -1,132 +1,141 @@
 /* color logo : rgba(0,91,0,255) */
 /* verde claro fondos : rgb(89,141,88) */
 /* verde aux botones : rgb(60,124,60) */
-/* berde mas claro : rgb(204,217,204) */
+/* verde mas claro : rgb(204,217,204) */
 
 /* verde2 aux botones  : rgb(53,124,50) */
 /*  verde2 complementario azul : #32707c */
 /* verde2 complementario "rojo": #7c3235 */
+/* 
+boton blue hover 
+boton danger hover 
+boton verde hover  */
 
-
-
-
-
-
-.App{
-      
-    /* font-family:roboto; */
-    /* background-color: rgb(102,205,170); */
-    /* background-color: rgb(204,217,204); */
-    font-family: 'Poppins', sans-serif;
+.App {
+  /* font-family:roboto; */
+  /* background-color: rgb(102,205,170); */
+  /* background-color: rgb(204,217,204); */
+  font-family: "Poppins", sans-serif;
 }
 
-.btn-ta{
-  background-color:rgb(88,141,88) !important;
+.btn-ta {
+  background-color: rgb(88, 141, 88) !important;
   border-color: rgb(3, 143, 72) !important;
-  
+
   /* box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6) !important; */
 
   outline: 0 none;
-
 }
 
-.btn-ta1{
-  background-color:rgb(60,124,60) !important;
+.btn-ta1 {
+  background-color: rgb(60, 124, 60) !important;
   border-color: rgb(3, 143, 72) !important;
-  
+
   /* box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6) !important; */
 
   outline: 0 none;
-
 }
-.btn-ta-danger{
-  background-color:#7c3235 !important;
- 
-  
+.btn-ta1:hover {
+  background-color: #185918 !important;
+}
+
+
+.btn-ta-danger {
+  background-color: #7c3235 !important;
+
   /* box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6) !important; */
 
   outline: 0 none;
-
 }
-.btn-ta-blue{
-  background-color:#32707c !important;
- 
-  
+
+
+.btn-ta-danger:hover {
+  background-color: #88171b !important;
+} 
+
+
+.btn-ta-blue {
+  background-color: #32707c !important;
+
   /* box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6) !important; */
 
   outline: 0 none;
-
 }
 
-.text-ta-danger{
+.btn-ta-blue:hover {
+  background-color: #1c7c8e !important;
+} 
 
-  color:#7c3235 !important;
+.text-ta-danger {
+  color: #7c3235 !important;
 }
 
 
-bg-ta-softGreen{
-
-  background-color: rgb(53,124,50)!important;
-  color: black !important;
-
+.bg-color {
+  background-color: rgb(60, 124, 60);
 }
 
-textarea:focus, input:focus, input[type]:focus, select[type]:focus {
+.bg-ta-nav {
+  background-color: ;
+}
+.ta-margin{
+  margin-top: 130px;
+}
 
-    border-color: rgb(3, 143, 72);
-  
-    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6);
-  
-    outline: 0 none;
-  
-  }
+.btn-outline-success:hover,
+.btn-outline-success:active,
+.btn-outline-success:visited {
+  background-color: rgb(60, 124, 60) !important;
+  border-color: rgb(60, 124, 60) !important;
+  color: rgb(60, 124, 60);
+}
+
+textarea:focus,
+input:focus,
+input[type]:focus,
+select[type]:focus {
+  border-color: rgb(3, 143, 72);
+
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
+    0 0 8px rgba(3, 143, 0, 0.6);
+
+  outline: 0 none;
+}
 
 .main-section {
-
-     margin: 0 auto;
-     margin-top: 20%;
-
+  margin: 0 auto;
+  margin-top: 20%;
 }
 
-.sideBar-right{
-
+.sideBar-right {
   /* background: linear-gradient(90deg, #357c32, #598d58 25%, #598d58); */
- 
-  background :rgb(89,141,88);
+
+  background: rgb(89, 141, 88);
   color: white;
-
 }
 
-.sidebarE{
-
-  
-
-
+.sidebarE {
 }
 
-.ayudo{
-
-  margin: 0 auto;  
+.ayudo {
+  margin: 0 auto;
 }
 
-.laLista{
+.laLista {
   list-style: none;
   font-size: 25px;
 }
-
 
 /* estilos swal  */
 
 .swal-button {
   padding: 7px 19px;
   border-radius: 2px;
-  background-color: rgb(89,141,88);
+  background-color: rgb(89, 141, 88);
   font-size: 12px;
-  border: 1px solid rgb(89,141,88);
+  border: 1px solid rgb(89, 141, 88);
   text-shadow: 0px -1px 0px rgba(60, 124, 60, 0.3);
   margin: 0 auto;
-  
-  
 }
 
 /* .swal-modal {
@@ -136,14 +145,14 @@ textarea:focus, input:focus, input[type]:focus, select[type]:focus {
 } */
 
 .swal-text {
-  background-color: rgb(60,124,60);
+  background-color: rgb(60, 124, 60);
   padding: 17px;
-  border: 1px solid rgb(89,141,88);
+  border: 1px solid rgb(89, 141, 88);
   border-radius: 2mm;
   display: block;
   margin: 22px;
   text-align: center;
-  color:white;
+  color: white;
 }
 
 .swal-overlay {

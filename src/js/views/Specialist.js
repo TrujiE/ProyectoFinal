@@ -1,48 +1,66 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from "react";
 import Components from "../components/Components";
 import { Link } from "react-router-dom";
-import TableRequestsSpecialist from '../components/TableSpecialist';
+import TableRequestsSpecialist from "../components/TableSpecialist";
 import { Context } from "../store/appContext";
-import SidebarSpecialist from '../components/SidebarSpecialist';
-import Nabvar from '../components/Nabvar';
-import Footer from '../components/Footer';
+import SidebarSpecialist from "../components/SidebarSpecialist";
+import Nabvar from "../components/Nabvar";
+import Footer from "../components/Footer";
 
 const Specialist = () => {
-    const { store, actions } = useContext(Context);
-    const userProfile =
-        localStorage.getItem('loginUser') ?
-            JSON.parse(localStorage.getItem('loginUser')) : {};
+  const { store, actions } = useContext(Context);
+  const userProfile = localStorage.getItem("loginUser")
+    ? JSON.parse(localStorage.getItem("loginUser"))
+    : {};
 
-    let id = userProfile.user ? userProfile.user.id : '';
+  let id = userProfile.user ? userProfile.user.id : "";
 
-    return (
-        <div className="container">
-            <Nabvar />
-            <div className="row">
-                <div className="col">
-                    <h4><strong>Hola {userProfile.user.full_name ? userProfile.user.full_name : ""}, acá puedes revisar tus servicios</strong></h4>
-                </div>
-            </div>
+  return (
+    <div className="container">
+      <Nabvar />
 
-            <div className="row">
-                <SidebarSpecialist />
-                <div className="col-10 mt-4">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-4">
-                                <h5>Seleccione el Servicio</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="form-group col-10">
-                        <TableRequestsSpecialist hour={234} date={'2012-08-19'} />
-                    </div>
-                </div>
-            </div>
-            <Footer/>
+      <div className="container mt-5">
+        <h1 className=" text-center">
+          Hola {userProfile.user.full_name ? userProfile.user.full_name : ""},
+          acá puedes revisar tus servicios
+        </h1>
+        <hr />
+
+        {/* <div className="row">
+        <div className="col">
+          <h4>
+            <strong>
+              Hola{" "}
+              {userProfile.user.full_name ? userProfile.user.full_name : ""},
+              acá puedes revisar tus servicios
+            </strong>
+          </h4>
         </div>
+      </div> */}
+        <div className="row">
+          <div className="col-sm-12 col-lg-2">
+            <SidebarSpecialist />
+          </div>
 
-    );
-}
+          <div className="col-sm-12 col-lg-10 ">
+            <div className="row mt-4">
+              <div className="col-sm-12 col-lg-10">
+                <h3>
+                  <strong>Seleccione el Servicio</strong>
+                </h3>
+              </div>
+
+              <div className="form-group col-sm-12 col-lg-12">
+                <TableRequestsSpecialist hour={234} date={"2012-08-19"} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  );
+};
 
 export default Specialist;
