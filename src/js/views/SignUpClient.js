@@ -12,7 +12,7 @@ const SignUpClient = () => {
             <h1 className=" text-center">Te ayudo... con tu registro?</h1>
             <hr />
             <div className="row">
-                <div className="col-8">
+                <div className="col-sm-12 col-lg-8">
                     <ul className="nav nav-pills nav-fill mb-5">
                         <li className="nav-item ">
                             <button className="btn   btn-ta1" style={{color:"white"}}><strong>Cliente</strong></button>
@@ -41,7 +41,7 @@ const SignUpClient = () => {
           <ClientForm />
         </div>
 
-        <div className="col-4 sideBar-right rounded border border-secondary">
+        <div className=" col-sm-12 col-lg-4 mt-3 sideBar-right rounded border border-secondary">
           <div className=" modal-dialog text-center ">
             <div className="">
               <div className="modal-content">
