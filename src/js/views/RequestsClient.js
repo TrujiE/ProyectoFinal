@@ -43,17 +43,14 @@ const RequestsClient = () => {
   return (
     <div className="container">
       <Nabvar />
-    <div className="container mt-5">
-
-    <h1 className=" text-center">
-    Hola{" "}
-              {userProfile.user.full_name ? userProfile.user.full_name : ""},
-              acá puedes revisar tus solicitudes
+      <div className="container mt-5">
+        <h1 className=" text-center">
+          Hola {userProfile.user.full_name ? userProfile.user.full_name : ""},
+          acá puedes revisar tus solicitudes
         </h1>
         <hr />
 
-
-      {/* <div className="row">
+        {/* <div className="row">
         <div className="col">
           <h4>
             <strong>
@@ -64,35 +61,35 @@ const RequestsClient = () => {
           </h4>
         </div>
       </div> */}
-      <div className="row">
-        {userProfile.profile.role === "client" ? (
-          <div className="col-sm-12 col-lg-2">
-            <SidebarClient />
-          </div>
-        ) : (
-          <div className="col-sm-12 col-lg-2">
-            <SidebarSpecialist />
-          </div>
-        )}
-        <div className="col-10">
-          <div className="row mt-4">
-            <div className="col-10">
-              <h5>Seleccione su Solicitud</h5>
+        <div className="row">
+          {userProfile.profile.role === "client" ? (
+            <div className="col-sm-12 col-lg-2">
+              <SidebarClient />
             </div>
-            <div className="form-group col-10">
-              <TableRequestsClient
-                hour={hour}
-                date={format(store.startDate, "yyyy-MM-dd")}
-              />
+          ) : (
+            <div className="col-sm-12 col-lg-2">
+              <SidebarSpecialist />
+            </div>
+          )}
+
+          <div className="col-sm-12 col-lg-10">
+            <div className="row mt-4">
+              <div className="col-sm-12 col-lg-10">
+                <h3>
+                  <strong>Seleccione su Solicitud</strong>
+                </h3>
+              </div>
+
+              <div className="form-group col-sm-12 col-lg-12">
+                <TableRequestsClient
+                  hour={hour}
+                  date={format(store.startDate, "yyyy-MM-dd")}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-
-
-
 
       <Footer />
     </div>

@@ -121,16 +121,13 @@ const Client = () => {
     <div className="container">
       <Nabvar />
       <div className="container mt-5">
-      <h1 className=" text-center">
-      Hola{" "}
-              {userProfile.user.full_name ? userProfile.user.full_name : ""},
-              acá puedes crear una solicitud
+        <h1 className=" text-center">
+          Hola {userProfile.user.full_name ? userProfile.user.full_name : ""},
+          acá puedes crear una solicitud
         </h1>
         <hr />
 
-
-
-      {/* <div className="row">
+        {/* <div className="row">
         <div className="col">
           <h4 style={{ textAlign: "left" }}>
             <strong>
@@ -141,7 +138,7 @@ const Client = () => {
           </h4>
         </div>
       </div> */}
-  
+
         <div className="row ">
           {userProfile.profile.role === "client" ? (
             <div className="col-sm-12 col-lg-2">
@@ -152,7 +149,7 @@ const Client = () => {
               <SidebarSpecialist />
             </div>
           )}
-          <div className="col-10  mt-4">
+          <div className="col-sm-12 col-lg-10  mt-4">
             <div className="row">
               <div className="col-sm-12 col-lg-3">
                 <Select
@@ -218,27 +215,30 @@ const Client = () => {
               </div>
             </div>
 
-            <div className="form-group col-10">
-              <h5>Seleccione su especialista</h5>
-              <TableComponet
-                commune={commune}
-                address={address}
-                hour={hour}
-                date={format(
-                  new Date(store.startDate),
-                  "yyyy-MM-dd 00:00:00.000000"
-                )}
-              />
+            <div className="col-sm-12 col-lg-10">
+              <div className="row mt-4">
+                <div className="col-sm-12 col-lg-10">
+                  <h3>
+                    <strong>Seleccione su especialista</strong>
+                  </h3>
+                </div>
+                <div className="form-group col-sm-12 col-lg-12">
+                  <TableComponet
+                    commune={commune}
+                    address={address}
+                    hour={hour}
+                    date={format(
+                      new Date(store.startDate),
+                      "yyyy-MM-dd 00:00:00.000000"
+                    )}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
 
-
-
-
-      
       <Footer />
     </div>
   );

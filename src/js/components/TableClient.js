@@ -187,10 +187,20 @@ const TableRequestsClient = ({ date, hour }) => {
                     }
                 </tbody>
             </table>
-            <button style={{ textAlign: "right" }} type="button" className="btn btn-ta-danger text-white" onClick={CancelRequest}
-            >Cancelar Solicitud</button>&nbsp;&nbsp;&nbsp;
-            <button style={{ textAlign: "right" }} type="button" className="btn btn-ta-blue text-white" onClick={CloseRequest}
+
+            <div className="row justify-content-between mt-5">
+                <div className="col-sm-12 col-lg-3">
+            <button type="button" className="btn btn-block btn-ta-danger text-white" onClick={CancelRequest}
+            >Cancelar Solicitud</button>
+
+                </div>
+                <div className="col-sm-12 col-lg-3">
+            <button type="button" className="btn btn-block btn-ta-blue text-white" onClick={CloseRequest}
             >Resolver Solicitud</button>
+
+                </div>
+
+            </div>
         </div>
     )
 }

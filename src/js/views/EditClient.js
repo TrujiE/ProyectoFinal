@@ -17,28 +17,17 @@ const EditClient = () => {
         </h1>
         <hr />
 
-
-
-
-
-
-
-
-
         <div className="row">
           <div className="col-sm-12 col-lg-2">
             <SidebarClient />
           </div>
 
-
-          <div className="col-10 mt-4">
-           
+          <div className="col-sm-12 col-lg-10 mt-4">
             <EditFormClient />
           </div>
         </div>
-        
       </div>
-      <Footer/>   
+      <Footer />
     </div>
   );
 };
