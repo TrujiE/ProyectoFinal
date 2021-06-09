@@ -29,7 +29,7 @@ const SignUpClient = () => {
                         </li>
                         <li className="nav-item">
                             <Link
-                                to="/"
+                                to="/Login"
                                 className="nav-link text-dark"
                             > <strong>
                                 Volver al Inicio

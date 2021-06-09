@@ -11,7 +11,7 @@ const Nabvar = () => {
     const LogOut = () => {
         localStorage.removeItem("loginUser");
         actions.setProfile({});
-        let path = `/`;
+        let path = `/Login`;
 		history.push(path);    
     }
 

@@ -119,12 +119,12 @@ const ClientForm = () => {
               icon: "success",
               button: "ir",
             }).then(() => {
-              let path = ``;
+              let path = `/Login`;
               history.push(path);
             });
           } else {
             swal(data, { icon: "error" }).then(() => {
-              let path = ``;
+              let path = `/Login`;
               history.push(path);
             });
           }
