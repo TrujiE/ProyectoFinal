@@ -1,46 +1,34 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import TableRequestsClient from "../components/TableClient";
+import React, { useContext } from 'react';
+import TableRequestsClient from '../components/TableClient';
 import { Context } from "../store/appContext";
-import { format, compareAsc } from "date-fns";
-import Components from "../components/Components";
 import SidebarClient from "../components/SidebarClient";
 import SidebarSpecialist from "../components/SidebarSpecialist";
 import Nabvar from "../components/Nabvar";
 import Footer from "../components/Footer";
 
 const RequestsClient = () => {
-  const [hour, setHour] = useState("");
-  //const [check, setCheck] = useState(false);
-  const [address, setAddress] = useState("");
+    const { store, actions } = useContext(Context);
 
-  const [morning, setMorning] = useState(1);
-  const [afternoon, setAfternoon] = useState(0);
-  const [evening, setEvening] = useState(0);
+    const userProfile = store.profileUser;
 
-  const { store, actions } = useContext(Context);
-  const userProfile = localStorage.getItem("loginUser")
-    ? JSON.parse(localStorage.getItem("loginUser"))
-    : {};
+    let id = userProfile.user ? userProfile.user.id : '';
 
-  let id = userProfile.user ? userProfile.user.id : "";
-
-  const SendValue = () => {
-    const config = {
-      headers: { "Content-Type": "Application/json" },
-      body: JSON.stringify({}),
-      method: "GET",
-    };
-    fetch("http://127.0.0.1:5000/user/requests_client/" + id, config)
-      .then((respuesta) => respuesta.json())
-      .then((data) => {
-        console.log(data);
-        actions.setAvailable(data);
-      })
-      .catch((error) => console.error(error));
-  };
-
-  return (
+    const SendValue = () => {
+        const config = {
+            headers: { 'Content-Type': 'Application/json' },
+            body: JSON.stringify({
+            }),
+            method: "GET"
+        }
+        fetch("http://127.0.0.1:5000/user/requests_client/" + id, config)
+            .then(respuesta => respuesta.json())
+            .then(data => {
+                console.log(data)
+                actions.setAvailable(data);
+            })
+            .catch(error => console.error(error));
+    }
+   return (
     <div className="container">
       <Nabvar />
       <div className="container mt-5">
@@ -81,10 +69,7 @@ const RequestsClient = () => {
               </div>
 
               <div className="form-group col-sm-12 col-lg-12">
-                <TableRequestsClient
-                  hour={hour}
-                  date={format(store.startDate, "yyyy-MM-dd")}
-                />
+                <TableRequestsClient/>
               </div>
             </div>
           </div>

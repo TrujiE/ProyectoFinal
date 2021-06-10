@@ -3,7 +3,7 @@ import { daysInWeek } from "date-fns";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-              profileUser: {},
+              profileUser: localStorage.getItem('loginUser') == null ? {} : JSON.parse(localStorage.getItem('loginUser')),
               specialistsAvailable: [],
 			  startDate: new Date(),
 			  counter: 0,

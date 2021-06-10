@@ -1,18 +1,20 @@
-import React from 'react';
+import React , { useContext }from 'react';
 import { Link, useHistory } from "react-router-dom";
-import Log_out from "./LogOut";
+import { Context } from "../store/appContext";
 import logoTA from "../../img/logoTA.png";
 
 
 const Nabvar = () => {
-    //<Link className="nav-link" to="/cliente"><Log_out /></Link>
     const history = useHistory();
+    const { actions } = useContext(Context);
 
     const LogOut = () => {
-        localStorage.setItem('loginUser', JSON.stringify({}));
-        let path = ``;
-		history.push(path);
+        localStorage.removeItem("loginUser");
+        actions.setProfile({});
+        let path = `/`;
+		history.push(path);    
     }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light row justify-content-between">
             {/* <Link className="navbar-brand btn btn-ta1 text-white" to="/">Home</Link> */}

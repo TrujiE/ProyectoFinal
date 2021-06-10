@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import comunasList2 from "../utils/communesFile";
 import swal from "sweetalert";
+import { useHistory } from "react-router";
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
@@ -17,6 +18,8 @@ const ClientForm = () => {
     <option value={comuna}>{comuna}</option>
   ));
 
+  const history = useHistory();
+  
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -35,13 +38,13 @@ const ClientForm = () => {
     validationSchema: Yup.object().shape({
       firstName: Yup.string()
         .required("se requiere el nombre")
-        .min(2, "nombre debe ser mayor aun caracter")
-        .max(15, "nombre muy largo debe ser 15 caracteres maximo"),
+        .min(2, "nombre debe ser mayor a un caracter")
+        .max(15, "nombre muy largo, debe ser 15 caracteres máximo"),
 
       lastName: Yup.string()
         .required("se requiere el apellido")
         .min(2, "apellido debe ser mayor aun caracter")
-        .max(15, "apellido muy largo debe ser 15 caracteres maximo"),
+        .max(15, "apellido muy largo, debe ser 15 caracteres máximo"),
 
       rut: Yup.string()
         .required("se requiere el rut")
@@ -49,29 +52,29 @@ const ClientForm = () => {
 
       email: Yup.string()
         .lowercase()
-        .notOneOf(emailadresses, "ese correo ya esxiste")
+        .notOneOf(emailadresses, "ese correo ya existe")
         .email("correo invalido")
-        .max(30, "correo  debe ser 30 caracteres maximo")
+        .max(30, "correo  debe ser 30 caracteres máximo")
         .required("se requiere el correo"),
 
       phoneNumber: Yup.string()
-        .required("se requiere el telefono")
-        .matches(phonereg, "ingrese un formato de numero valido"),
+        .required("se requiere el teléfono")
+        .matches(phonereg, "ingrese un formato de número valido"),
 
       adress: Yup.string()
-        .required("se requiere la direccion")
-        .min(5, " direccion debe ser mayor 5 caracteres")
-        .max(30, "direccion  debe ser 30 caracteres maximo"),
+        .required("se requiere la dirección")
+        .min(5, " dirección debe ser mayor 5 caracteres")
+        .max(30, "dirección  debe ser 30 caracteres máximo"),
 
       comuna: Yup.string().required("se requiere la comuna"),
 
       password: Yup.string()
         .required("se requiere la contraseña")
-        .matches(lowercaseRegex, "se requiere almenos una minuscula")
-        .matches(uppercaseRegex, "se requiere almenos una mayuscula")
-        .matches(numericRegex, "se requiere almenos un numero")
-        .min(4, "contraseña muy corta , minimo 4 caracteres")
-        .max(10, "la contraseña  debe ser 30 caracteres maximo"),
+        .matches(lowercaseRegex, "se requiere al menos una minúscula")
+        .matches(uppercaseRegex, "se requiere al menos una mayúscula")
+        .matches(numericRegex, "se requiere al menos un número")
+        .min(4, "contraseña muy corta , mínimo 4 caracteres")
+        .max(10, "la contraseña  debe ser 30 caracteres máximo"),
 
       confirmPassword: Yup.string()
 
@@ -79,11 +82,11 @@ const ClientForm = () => {
         .required("se requiere confirmar contraseña"),
 
       secretQuestion: Yup.string()
-        .required("se requiere el la pregunta secreta")
-        .max(60, "pregunta  debe ser 60 caracteres maximo"),
+        .required("se requiere la pregunta secreta")
+        .max(60, "pregunta  debe ser 60 caracteres máximo"),
       secretAswer: Yup.string()
         .required("se requiere la respuesta secreta")
-        .max(30, "respuesta  debe ser 30 caracteres maximo"),
+        .max(30, "la respuesta debe tener 30 caracteres como máximo"),
     }),
 
     onSubmit: (values) => {
@@ -111,16 +114,18 @@ const ClientForm = () => {
           console.log(data);
           if (typeof data == "object") {
             swal({
-              title: "Felicidades se ha creado tu perfil con exito!",
-              text: "Ahora te redirecionaremos al inicio de sesion para que puedas entrar a tu perfil!",
+              title: "Felicidades se ha creado tu perfil con éxito!",
+              text: "Ahora te redireccionaremos al inicio de sesión para que puedas entrar a tu perfil!",
               icon: "success",
               button: "ir",
             }).then(() => {
-              window.location.href = "/";
+              let path = ``;
+              history.push(path);
             });
           } else {
             swal(data, { icon: "error" }).then(() => {
-              window.location.href = "/";
+              let path = ``;
+              history.push(path);
             });
           }
         })

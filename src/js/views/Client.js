@@ -1,108 +1,100 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Components from "../components/Components";
+import React, { useState, useContext, useEffect } from 'react';
 import { Context } from "../store/appContext";
-import Calendar_component from "../components/CalendarClient";
-import Calendar_client from "../components/CalendarClient";
-import TableComponet from "../components/Table";
-import Select from "react-select";
-import { format, compareAsc } from "date-fns";
-import listCommunes from "../utility/ListCommunes";
-import SidebarClient from "../components/SidebarClient";
-import SidebarSpecialist from "../components/SidebarSpecialist";
-import Nabvar from "../components/Nabvar";
-import Footer from "../components/Footer";
+import Calendar_client from '../components/CalendarClient';
+import TableComponet from '../components/Table';
+import Select from 'react-select'
+import { format} from 'date-fns';
+import listCommunes from '../utility/ListCommunes';
+import SidebarClient from '../components/SidebarClient';
+import SidebarSpecialist from '../components/SidebarSpecialist';
+import Nabvar from '../components/Nabvar';
+import Footer from '../components/Footer';
 
 const Client = () => {
-  const [specialty, setSpecialty] = useState("");
-  const [commune, setCommune] = useState("");
-  const [hour, setHour] = useState("");
-  //const [check, setCheck] = useState(false);
-  const [address, setAddress] = useState("");
 
-  const [morning, setMorning] = useState(1);
-  const [afternoon, setAfternoon] = useState(0);
-  const [evening, setEvening] = useState(0);
+    const [specialty, setSpecialty] = useState("");
+    const [commune, setCommune] = useState("");
+    const [hour, setHour] = useState("");
+    const [address, setAddress] = useState("");
 
-  const { store, actions } = useContext(Context);
+    const [morning, setMorning] = useState(1)
+    const [afternoon, setAfternoon] = useState(0)
+    const [evening, setEvening] = useState(0)
 
-  const specialties = [
-    { value: "electricista", label: "Electricista" },
-    { value: "pintor", label: "Pintor" },
-    { value: "plomero", label: "Plomero" },
-    { value: "albañil", label: "Albañil" },
-    { value: "carpintero", label: "Carpintero" },
-  ];
-  const hours = [
-    { value: "morning", label: "08:00 - 11:00" },
-    { value: "afternoon", label: "11:00 - 14:00" },
-    { value: "evening", label: "14:00 - 17:00" },
-  ];
+    const { store, actions } = useContext(Context);
 
-  const userProfile = localStorage.getItem("loginUser")
-    ? JSON.parse(localStorage.getItem("loginUser"))
-    : {};
+    const specialties = [
+        { value: 'electricista', label: 'Electricista' },
+        { value: "pintor", label: 'Pintor' },
+        { value: 'plomero', label: 'Plomero' },
+        { value: 'albañil', label: 'Albañil' },
+        { value: 'carpintero', label: 'Carpintero' }
+    ]
+    const hours = [
+        { value: "morning", label: '08:00 - 11:00' },
+        { value: "afternoon", label: '11:00 - 14:00' },
+        { value: "evening", label: '14:00 - 17:00' }
+    ]
 
-  let id = userProfile.user ? userProfile.user.id : "";
-  useEffect(() => {
-    if (userProfile.user) {
-      setAddress(userProfile.user.address);
-    } else {
-      setAddress("");
-    }
-  }, []);
+    const userProfile = store.profileUser;
 
-  // Funcion para habilitar el imput address
-  const setCheck = (e) => {
-    if (e.target.checked == false) {
-      document.getElementById("address").disabled = true;
-      setAddress(userProfile.user.address);
-    } else {
-      document.getElementById("address").disabled = false;
-    }
+    let id = userProfile.user ? userProfile.user.id : '';
+    useEffect(() => {
+        if (userProfile.user) {
+            setAddress(userProfile.user.address);
+        } else {
+            setAddress("");
+        }
+    }, [])
+
+
+    // Funcion para habilitar el imput address
+    const setCheck = (e) => {
+        if (e.target.checked == false) {
+            document.getElementById("address").disabled = true;
+            setAddress(userProfile.user.address)
+        } else {
+            document.getElementById("address").disabled = false;
+        }
   };
 
   const handleChange = (e) => {
     setAddress(e.target.value);
   };
 
-  //Lo que veo en consola
-  const array = [specialty, commune, hour, address];
-  console.log(array);
-  //console.log(check)
-
+  
   //POST para obtener los especialistas disponibles
 
-  const SendValue = () => {
-    let token = userProfile.access_token ? userProfile.access_token : "";
-    if (hour == "morning") {
-      setMorning(1);
-      setAfternoon(0);
-      setEvening(0);
-    } else if (hour == "afternoon") {
-      setMorning(0);
-      setAfternoon(1);
-      setEvening(0);
-    } else if (hour == "evening") {
-      setMorning(0);
-      setAfternoon(0);
-      setEvening(1);
-    }
+    const sendValue = () => {
+        let token = userProfile.access_token ? userProfile.access_token : '';
+        if (hour == "morning") {
+            setMorning(1);
+            setAfternoon(0);
+            setEvening(0);
+        } else if (hour == "afternoon") {
+            setMorning(0);
+            setAfternoon(1);
+            setEvening(0);
+        } else if (hour == "evening") {
+            setMorning(0);
+            setAfternoon(0);
+            setEvening(1);
+        }
 
-    const config = {
-      headers: {
-        "Content-Type": "Application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({
-        name_specialty: specialty,
-        name_commune: commune,
-        date: format(new Date(store.startDate), "yyyy-MM-dd 00:00:00.000000"),
-        morning: morning,
-        afternoon: afternoon,
-        evening: evening,
-      }),
-      method: "POST",
+        const config = {
+            headers: {
+                'Content-Type': 'Application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                "name_specialty": specialty,
+                "name_commune": commune,
+                "date": format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000'),
+                "morning": morning,
+                "afternoon": afternoon,
+                "evening": evening
+            }),
+            method: "POST"
     };
     fetch("http://127.0.0.1:5000/service/" + id, config)
       .then((respuesta) => respuesta.json())
@@ -117,7 +109,7 @@ const Client = () => {
       .catch((error) => console.error(error));
   };
 
-  return (
+   return (
     <div className="container">
       <Nabvar />
       <div className="container mt-5">
@@ -183,7 +175,7 @@ const Client = () => {
                 <button
                   type="button"
                   className="btn btn-ta-blue text-white"
-                  onClick={SendValue}
+                  onClick={sendValue}
                 >
                   Buscar
                 </button>
