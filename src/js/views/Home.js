@@ -51,7 +51,7 @@ const Home = () => {
            if (typeof data == 'object') {
                 swal({
                   title: "Bienvenido!",
-                  text: "Ahora iras a tu perfil de usuario en la aplicacaion !",
+                  text: "Ahora iras a tu perfil de usuario en la aplicación !",
                   icon: "success",
                   button: "ir",
                 })
@@ -71,7 +71,7 @@ const Home = () => {
 
   return (
     <div className="container mt-5">
-      <hr />
+     
 
       <div className=" main-b">
         <div className=" modal-dialog text-center ">
@@ -121,7 +121,7 @@ const Home = () => {
 
                 <button
                   type="submit"
-                  className="btn btn-ta btn-block  text-white "
+                  className="btn btn-ta1 btn-block  text-white "
                 >
                   Ingresar
                 </button>
