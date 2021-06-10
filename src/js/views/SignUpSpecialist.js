@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 const SignUpSpecialist = () => {
     return (
         <div className="container mt-5">
-            <h1 className=" text-center">Te ayudo... con tu registro?</h1>
+            <h1 className=" text-center">¿Te ayudo... con tu registro?</h1>
             <hr />
             <div className="row">
                 <div className="col-sm-12 col-lg-8">

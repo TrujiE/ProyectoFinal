@@ -10,7 +10,7 @@ const EditClient = () => {
       <Nabvar />
       <div className="container mt-5">
         <h1 className=" text-center">
-          Te ayudo... con la edición de tus datos ?
+          ¿Te ayudo... con la edición de tus datos?
         </h1>
         <hr />
 

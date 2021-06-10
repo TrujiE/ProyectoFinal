@@ -58,18 +58,18 @@ const SpecialistForm = () => {
         .max(15, "apellido muy largo, debe tener 15 caracteres como máximo"),
 
       rut: Yup.string().required("se requiere el rut")
-        .matches(rutRegex, "rut invalido"),
+        .matches(rutRegex, "rut inválido"),
 
 
       email: Yup.string()
         .lowercase()
-        .notOneOf(emailadresses, "ese correo ya esxiste")
+        .notOneOf(emailadresses, "ese correo ya existe")
         .email("correo invalido")
         .max(30, "correo  debe ser 30 caracteres máximo")
         .required("se requiere el correo"),
 
       phoneNumber: Yup.string().required("se requiere el teléfono")
-        .matches(phonereg, "ingrese un formato de número valido"),
+        .matches(phonereg, "ingrese un formato de número válido"),
 
       adress: Yup.string()
         .required("se requiere la direccion")
@@ -141,7 +141,7 @@ const SpecialistForm = () => {
           if (typeof data == 'object') {
 
             swal({
-              title: "Felicidades ahora eres un especialista! ;)",
+              title: "¡Felicidades ahora eres un especialista! ;)",
               text: "Ahora te redireccionaremos al inicio de sesión para que puedas entrar a tu perfil!",
               icon: "success",
               button: "ir",
@@ -229,7 +229,7 @@ const SpecialistForm = () => {
           <div className="text-danger">{formik.errors.email}</div>
         ) : null}
 
-        <label htmlFor="phoneNumber">Telefono</label>
+        <label htmlFor="phoneNumber">Teléfono</label>
         <input
           className="form-control mb-3"
           id="phoneNumber"
@@ -247,7 +247,7 @@ const SpecialistForm = () => {
         ) : null}
 
 
-        <label htmlFor="adress">Direccion</label>
+        <label htmlFor="adress">Dirección</label>
         <input
           className="form-control mb-3"
           id="adress"

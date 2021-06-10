@@ -1,31 +1,47 @@
 import React, { useContext } from "react";
 import "../../js/custom.css";
 import { Link } from "react-router-dom";
+import logoTA from "../../img/logoTA.bmp";
 
-const lowercaseRegex = /(?=.*[a-z])/;
-const uppercaseRegex = /(?=.*[A-Z])/;
-const numericRegex = /(?=.*[0-9])/;
 
 const Home = () => {
     return (
         <div className="container">
-            <h3>Te Ayudo nace de la necesidad de realizar un proyecto que entregue un servicio.
-            Facilitando a la region metropolitana de Chile realizar match con:
-            Plomeria, Albañileria, Electricidad, Carpinteria y Pintura en una primera etapa.
-            Los perfiles habilitados son Cliente y Especialista, ambos deben tener un correo
-            electronico, un numero celular y Rut como rquisitos para el registro.
-            Los horarios habilitados son de 8:00-11:00, 11:00-14:00 y 14:00-17:00.
-            Para los especialistas una vez registrados tendran habilitado 15 dias corridos de prueba.
-            Tanto cliente como especialista ingresan por el mismo <Link to="/Login"> LOGIN</Link>.
-                Si deseas crear una cuenta <Link to="/registroCliente">REGISTRATE AQUI</Link></h3>
+            <div className="light">
+                <div className="row justify-content-md-center">
+                    <img
+                        src={logoTA}
+                        alt=""
+                        className="mt-3"
+                        style={{ maxWidth: "300px" }}
+                    />
+                </div>
+                <hr className="my-4"></hr>
+                <br />
+                <p className="lead text-justify"><em>TeAyudo?® nace de la necesidad de realizar un proyecto que entregue un servicio,
+                facilitando a la region metropolitana de Chile realizar match con:
+                Plomeria, Albañileria, Electricidad, Carpinteria y Pintura en una primera etapa.
+                Los perfiles habilitados son Cliente y Especialista, ambos deben tener un correo
+                electrónico, un número celular y Rut como rquisitos para el registro.
+                Los horarios habilitados son de 8:00-11:00, 11:00-14:00 y 14:00-17:00.
+                Para los especialistas una vez registrados tendran habilitado 15 días corridos de prueba.</em></p>
+                <p className="lead text-justify"><em>Tanto cliente como especialista ingresan por el mismo Login y
+                si deseas crear una cuenta debes registrarte.</em></p>
+                <hr className="my-4"></hr>
 
-
-            <Link to="/Login">
-                <div className="text-center " style={{ fontSize: "15px" }}>
-                    IR
+                <div className="row justify-content-center mt-5">
+                    <div className="col-sm-12 col-lg-4">
+                        <Link to="/Login" className="btn btn-block btn-ta1 text-white" href="#" role="button">Login</Link>
+                    </div>
+                    <div className="col-sm-12 col-lg-4">
+                        <Link to="/registroCliente" className="btn btn-block btn-ta1 text-white" href="#" role="button">Registrate Aquí</Link>
+                    </div>
+                </div>
             </div>
-            </Link>
-        </div>
+            <br />
+            <br />
+        </div >
+
     )
 
 };

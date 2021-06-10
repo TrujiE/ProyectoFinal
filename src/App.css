@@ -158,3 +158,7 @@ select[type]:focus {
 .swal-overlay {
   background-color: rgba(204, 217, 204, 0.45);
 }
+
+.bg-jumbotron{
+    background-color: white !important;
+}

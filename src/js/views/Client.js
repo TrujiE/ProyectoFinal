@@ -202,7 +202,7 @@ const Client = () => {
                   onChange={setCheck}
                 />
                 <label className="form-check-label" for="exampleCheck1">
-                  Nueva Direccion
+                  Nueva Dirección
                 </label>
               </div>
             </div>
