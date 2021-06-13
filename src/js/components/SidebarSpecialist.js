@@ -13,6 +13,7 @@ const SidebarSpecialist = () => {
                     style={{ maxWidth: "130px" }}
                     
                 ></img>
+                <h5>Usuario especialista</h5>
             </div>
             <br />
             <div className="col-12">

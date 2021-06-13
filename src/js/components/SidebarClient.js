@@ -13,6 +13,7 @@ const SidebarClient = () => {
                         alt="..."
                         style={{ maxWidth: "130px" }}
                     ></img>
+                    <h5>Usuario cliente</h5>
                 </div>
             
             <br />

@@ -72,7 +72,7 @@ const SpecialistForm = () => {
         .matches(phonereg, "ingrese un formato de número válido"),
 
       adress: Yup.string()
-        .required("se requiere la direccion")
+        .required("se requiere la dirección")
         .min(5, " dirección debe ser mayor a 5 caracteres")
         .max(30, "dirección debe tener 30 caracteres como máximo"),
 
