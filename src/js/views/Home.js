@@ -21,9 +21,9 @@ const Home = () => {
                 <div className="my-4"></div>
                 <br />
                 <br />
-                <p className="lead text-justify"><strong>TeAyudo?® nace de la necesidad de realizar un proyecto que entregue un servicio,
-                facilitando a la region metropolitana de Chile realizar match con:
-                Plomeria, Albañileria, Electricidad, Carpinteria y Pintura en una primera etapa.
+                <p className="lead text-justify"><strong>TeAyudo?® es un nombre ficticio que fue creado para nuestro proyecto de titulación. 
+                La finalidad es entregar cinco servicios domésticos dentro de la región metropolitana, ampliandose a 15 servicios 
+                domesticos que abarcarán las regiones de Valparaíso, Santiago y Concepción en una segunda etapa.
                 Los perfiles habilitados son Cliente y Especialista, ambos deben tener un correo
                 electrónico, un número celular y Rut como rquisitos para el registro.
                 Los horarios habilitados son de 8:00-11:00, 11:00-14:00 y 14:00-17:00.
