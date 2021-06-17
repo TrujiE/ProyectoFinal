@@ -174,3 +174,11 @@ select[type]:focus {
 .bg-jumbotron{
     background-color: white !important;
 }
+
+
+
+.bi-eye , .bi-eye-slash {
+  font-size: 25px;
+  margin-left: -10px;
+  color: #aaa
+}

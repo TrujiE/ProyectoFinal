@@ -162,6 +162,22 @@ const EditFormClient = () => {
         ) : null}
 
         <label htmlFor="password">Contraseña</label>
+
+
+
+
+
+        <div className="row">
+            <div className="col-10">
+
+            </div>
+            <div className="col-2">
+
+            </div>
+        </div>
+
+
+
         <input
           className="form-control mb-3"
           id="password"
@@ -178,6 +194,21 @@ const EditFormClient = () => {
         ) : null}
 
         <label htmlFor="confirmPassword">Confirmar contraseña</label>
+
+
+
+
+        <div className="row">
+            <div className="col-10">
+
+            </div>
+            <div className="col-2">
+
+            </div>
+        </div>
+
+
+        
         <input
           className="form-control mb-3"
           id="confirmPassword"
