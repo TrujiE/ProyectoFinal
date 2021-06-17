@@ -1,9 +1,10 @@
-import React from "react";
+import React,  { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import comunasList2 from "../utils/communesFile";
 import swal from "sweetalert";
 import { useHistory } from "react-router";
+import $ from 'jquery';
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
@@ -20,6 +21,16 @@ const ClientForm = () => {
 
   const history = useHistory();
   
+  useEffect(() => {
+    $(document).ready(function () {
+      let autocomplete = new window.google.maps.places.Autocomplete((document.getElementById("adress")), {
+        types: ['geocode'], componentRestrictions: {
+          country: "cl"
+        }
+      });
+    });
+  }, [])
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -61,10 +72,10 @@ const ClientForm = () => {
         .required("se requiere el teléfono")
         .matches(phonereg, "ingrese un formato de número valido"),
 
-      adress: Yup.string()
+      /* adress: Yup.string()
         .required("se requiere la dirección")
         .min(5, " dirección debe ser mayor 5 caracteres")
-        .max(30, "dirección  debe ser 30 caracteres máximo"),
+        .max(30, "dirección  debe ser 30 caracteres máximo"), */
 
       comuna: Yup.string().required("se requiere la comuna"),
 
@@ -206,7 +217,7 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.email}</div>
         ) : null}
 
-        <label htmlFor="phoneNumber">Telefono</label>
+        <label htmlFor="phoneNumber">Teléfono</label>
         <input
           className="form-control mb-3"
           id="phoneNumber"
@@ -222,15 +233,15 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.phoneNumber}</div>
         ) : null}
 
-        <label htmlFor="adress">Direccion</label>
+        <label htmlFor="adress">Dirección</label>
         <input
           className="form-control mb-3"
           id="adress"
           name="adress"
           type="text"
-          placeholder="Av las acacias nro 74"
+          placeholder="Av las acacias nro 75"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          onBlur={formik.handleChange}
           value={formik.values.adress}
         />
 

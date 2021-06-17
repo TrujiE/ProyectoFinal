@@ -1,4 +1,4 @@
-import React from "react";
+import React,  { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
@@ -7,6 +7,7 @@ import comunasList from "../utils/comunasObj"
 import specialties from "../utils/specialties"
 import swal from "sweetalert";
 import { useHistory } from "react-router";
+import $ from 'jquery';
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
@@ -21,6 +22,16 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 
 const SpecialistForm = () => {
+
+  useEffect(() => {
+    $(document).ready(function () {
+      let autocomplete = new window.google.maps.places.Autocomplete((document.getElementById("adress")), {
+        types: ['geocode'], componentRestrictions: {
+          country: "cl"
+        }
+      });
+    });
+  }, [])
 
   const listaComunas = comunasList2.map((comuna, index) =>
     <option value={comuna}>{comuna}</option>
@@ -71,10 +82,10 @@ const SpecialistForm = () => {
       phoneNumber: Yup.string().required("se requiere el teléfono")
         .matches(phonereg, "ingrese un formato de número valido"),
 
-      adress: Yup.string()
+      /* adress: Yup.string()
         .required("se requiere la direccion")
         .min(5, " dirección debe ser mayor a 5 caracteres")
-        .max(30, "dirección debe tener 30 caracteres como máximo"),
+        .max(30, "dirección debe tener 30 caracteres como máximo"), */
 
       comuna: Yup.string().required("se requiere la comuna"),
 
@@ -97,13 +108,6 @@ const SpecialistForm = () => {
       secretAswer: Yup.string()
         .required("se requiere la respuesta secreta")
         .max(30, "la respuesta debe tener 30 caracteres como máximo"),
-
-      // specialty: Yup.Array().of(yup.string)
-      //   .required("se requiere la especialidad"),
-
-      // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
-      // .required(),
-
       skills: Yup.string()
         .required("se requiere la experiencia"),
 
@@ -229,7 +233,7 @@ const SpecialistForm = () => {
           <div className="text-danger">{formik.errors.email}</div>
         ) : null}
 
-        <label htmlFor="phoneNumber">Telefono</label>
+        <label htmlFor="phoneNumber">Teléfono</label>
         <input
           className="form-control mb-3"
           id="phoneNumber"
@@ -247,15 +251,15 @@ const SpecialistForm = () => {
         ) : null}
 
 
-        <label htmlFor="adress">Direccion</label>
+        <label htmlFor="adress">Dirección</label>
         <input
           className="form-control mb-3"
           id="adress"
           name="adress"
           type="text"
-          placeholder="Av las acacias nro 74"
+          placeholder="Av las acacias nro 77"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          onBlur={formik.handleChange}
           value={formik.values.adress}
         />
 

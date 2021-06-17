@@ -108,10 +108,10 @@ const EditFormClient = () => {
     },
   });
 
-  return (
+  return (  
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="phoneNumber">Telefono</label>
+        <label htmlFor="phoneNumber">Teléfono</label>
         <input
           className="form-control mb-3"
           id="phoneNumber"
@@ -127,7 +127,7 @@ const EditFormClient = () => {
           <div className="text-danger">{formik.errors.phoneNumber}</div>
         ) : null}
 
-        <label htmlFor="adress">Direccion</label>
+        <label htmlFor="adress">Dirección</label>
         <input
           className="form-control mb-3"
           id="adress"

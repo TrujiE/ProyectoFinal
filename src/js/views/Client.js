@@ -3,98 +3,105 @@ import { Context } from "../store/appContext";
 import Calendar_client from '../components/CalendarClient';
 import TableComponet from '../components/Table';
 import Select from 'react-select'
-import { format} from 'date-fns';
+import { format } from 'date-fns';
 import listCommunes from '../utility/ListCommunes';
 import SidebarClient from '../components/SidebarClient';
 import SidebarSpecialist from '../components/SidebarSpecialist';
 import Nabvar from '../components/Nabvar';
 import Footer from '../components/Footer';
+import $ from 'jquery';
+
+
+
 
 const Client = () => {
 
-    const [specialty, setSpecialty] = useState("");
-    const [commune, setCommune] = useState("");
-    const [hour, setHour] = useState("");
-    const [address, setAddress] = useState("");
 
-    const [morning, setMorning] = useState(1)
-    const [afternoon, setAfternoon] = useState(0)
-    const [evening, setEvening] = useState(0)
+  const [specialty, setSpecialty] = useState("");
+  const [commune, setCommune] = useState("");
+  const [hour, setHour] = useState("");
+  const [address, setAddress] = useState("");
 
-    const { store, actions } = useContext(Context);
+  const [morning, setMorning] = useState(1)
+  const [afternoon, setAfternoon] = useState(0)
+  const [evening, setEvening] = useState(0)
 
-    const specialties = [
-        { value: 'electricista', label: 'Electricista' },
-        { value: "pintor", label: 'Pintor' },
-        { value: 'plomero', label: 'Plomero' },
-        { value: 'albañil', label: 'Albañil' },
-        { value: 'carpintero', label: 'Carpintero' }
-    ]
-    const hours = [
-        { value: "morning", label: '08:00 - 11:00' },
-        { value: "afternoon", label: '11:00 - 14:00' },
-        { value: "evening", label: '14:00 - 17:00' }
-    ]
-
-    const userProfile = store.profileUser;
-
-    let id = userProfile.user ? userProfile.user.id : '';
-    useEffect(() => {
-        if (userProfile.user) {
-            setAddress(userProfile.user.address);
-        } else {
-            setAddress("");
-        }
-    }, [])
+  const { store, actions } = useContext(Context);
 
 
-    // Funcion para habilitar el imput address
-    const setCheck = (e) => {
-        if (e.target.checked == false) {
-            document.getElementById("address").disabled = true;
-            setAddress(userProfile.user.address)
-        } else {
-            document.getElementById("address").disabled = false;
-        }
+  const specialties = [
+    { value: 'electricista', label: 'Electricista' },
+    { value: "pintor", label: 'Pintor' },
+    { value: 'plomero', label: 'Plomero' },
+    { value: 'albañil', label: 'Albañil' },
+    { value: 'carpintero', label: 'Carpintero' }
+  ]
+  const hours = [
+    { value: "morning", label: '08:00 - 11:00' },
+    { value: "afternoon", label: '11:00 - 14:00' },
+    { value: "evening", label: '14:00 - 17:00' }
+  ]
+
+  const userProfile = store.profileUser;
+
+  let id = userProfile.user ? userProfile.user.id : '';
+  useEffect(() => {
+    if (userProfile.user) {
+      setAddress(userProfile.user.address);
+    } else {
+      setAddress("");
+    }
+  }, [])
+
+
+  // Funcion para habilitar el imput address
+  const setCheck = (e) => {
+    if (e.target.checked == false) {
+      document.getElementById("search_input").disabled = true;
+      setAddress(userProfile.user.address)
+    } else {
+      document.getElementById("search_input").disabled = false;
+    }
   };
 
   const handleChange = (e) => {
+    console.log(e, "value")
     setAddress(e.target.value);
   };
 
-  
+
   //POST para obtener los especialistas disponibles
 
-    const sendValue = () => {
-        let token = userProfile.access_token ? userProfile.access_token : '';
-        if (hour == "morning") {
-            setMorning(1);
-            setAfternoon(0);
-            setEvening(0);
-        } else if (hour == "afternoon") {
-            setMorning(0);
-            setAfternoon(1);
-            setEvening(0);
-        } else if (hour == "evening") {
-            setMorning(0);
-            setAfternoon(0);
-            setEvening(1);
-        }
+  const sendValue = () => {
+    let token = userProfile.access_token ? userProfile.access_token : '';
+    if (hour == "morning") {
+      setMorning(1);
+      setAfternoon(0);
+      setEvening(0);
+    } else if (hour == "afternoon") {
+      setMorning(0);
+      setAfternoon(1);
+      setEvening(0);
+    } else if (hour == "evening") {
+      setMorning(0);
+      setAfternoon(0);
+      setEvening(1);
+    }
 
-        const config = {
-            headers: {
-                'Content-Type': 'Application/json',
-                'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify({
-                "name_specialty": specialty,
-                "name_commune": commune,
-                "date": format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000'),
-                "morning": morning,
-                "afternoon": afternoon,
-                "evening": evening
-            }),
-            method: "POST"
+    const config = {
+      headers: {
+        'Content-Type': 'Application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        "name_specialty": specialty,
+        "name_commune": commune,
+        "date": format(new Date(store.startDate), 'yyyy-MM-dd 00:00:00.000000'),
+        "morning": morning,
+        "afternoon": afternoon,
+        "evening": evening
+      }),
+      method: "POST"
     };
     fetch("http://127.0.0.1:5000/service/" + id, config)
       .then((respuesta) => respuesta.json())
@@ -109,7 +116,20 @@ const Client = () => {
       .catch((error) => console.error(error));
   };
 
-   return (
+  //AUTOCOMPLETAR DIRECCIONES
+  useEffect(() => {
+    $(document).ready(function () {
+      let autocomplete = new window.google.maps.places.Autocomplete((document.getElementById("search_input")), {
+        types: ['geocode'], componentRestrictions: {
+          country: "cl"
+        }
+      });
+    });
+  }, [])
+
+  
+
+  return (
     <div className="container">
       <Nabvar />
       <div className="container mt-5">
@@ -118,18 +138,6 @@ const Client = () => {
           acá puedes crear una solicitud
         </h1>
         <hr />
-
-        {/* <div className="row">
-        <div className="col">
-          <h4 style={{ textAlign: "left" }}>
-            <strong>
-              Hola{" "}
-              {userProfile.user.full_name ? userProfile.user.full_name : ""},
-              acá puedes crear una solicitud
-            </strong>
-          </h4>
-        </div>
-      </div> */}
 
         <div className="row ">
           {userProfile.profile.role === "client" ? (
@@ -184,14 +192,24 @@ const Client = () => {
             <br />
 
             <div className="col-6">
-              <input
-                type="text"
-                className="form-control"
-                id="address"
-                value={address}
-                disabled="disabled"
-                onChange={handleChange}
-              />
+              
+
+              {/* Autocomplete location search input*/}
+              <div className="form-group">
+                <label>Location:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="search_input"
+                  placeholder="Escribir dirección"
+                  value={address}
+                  disabled="disabled"
+                  onChange={handleChange}
+                  onBlur={handleChange} />
+
+              </div>
+              {/*Fin*/}
+
 
               <div className="form-group form-check">
                 <input
