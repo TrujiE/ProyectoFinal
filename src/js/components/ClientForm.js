@@ -114,17 +114,17 @@ const ClientForm = () => {
           console.log(data);
           if (typeof data == "object") {
             swal({
-              title: "Felicidades se ha creado tu perfil con éxito!",
+              title: "¡Felicidades se ha creado tu perfil con éxito!",
               text: "Ahora te redireccionaremos al inicio de sesión para que puedas entrar a tu perfil!",
               icon: "success",
               button: "ir",
             }).then(() => {
-              let path = ``;
+              let path = `/Login`;
               history.push(path);
             });
           } else {
             swal(data, { icon: "error" }).then(() => {
-              let path = ``;
+              let path = `/Login`;
               history.push(path);
             });
           }
@@ -206,7 +206,7 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.email}</div>
         ) : null}
 
-        <label htmlFor="phoneNumber">Telefono</label>
+        <label htmlFor="phoneNumber">Teléfono</label>
         <input
           className="form-control mb-3"
           id="phoneNumber"
@@ -222,7 +222,7 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.phoneNumber}</div>
         ) : null}
 
-        <label htmlFor="adress">Direccion</label>
+        <label htmlFor="adress">Dirección</label>
         <input
           className="form-control mb-3"
           id="adress"

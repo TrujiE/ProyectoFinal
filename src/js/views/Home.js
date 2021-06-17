@@ -1,139 +1,52 @@
 import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import { Link, useHistory } from "react-router-dom";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import logoTA from "../../img/logoTA.bmp";
 import "../../js/custom.css";
-import swal from "sweetalert";
+import { Link } from "react-router-dom";
+import logoTA from "../../img/logoTA.png";
 
-const lowercaseRegex = /(?=.*[a-z])/;
-const uppercaseRegex = /(?=.*[A-Z])/;
-const numericRegex = /(?=.*[0-9])/;
 
 const Home = () => {
-  const { actions } = useContext(Context);
-
-  const history = useHistory();
-
-  const SaveLocalStore = (profileUser) => {
-    localStorage.setItem("loginUser", JSON.stringify(profileUser));
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "", // Valores Iniciales
-    },
-    validationSchema: Yup.object({
-      // Validaciones Email y Password
-      email: Yup.string().email("Ingrese un email").required("Requerido"),
-      password: Yup.string()
-        .required("No se ingresó contraseña")
-        .min(4, "La contraseña debe tener un mínimo de 4 caracteres")
-        .matches(lowercaseRegex, "se requiere al menos una minuscula")
-        .matches(uppercaseRegex, "se requiere al menos una mayuscula")
-        .matches(numericRegex, "se requiere al menos un numero")
-        .max(10, "la contraseña  debe ser 30 caracteres maximo"),
-    }),
-
-    onSubmit: (values) => {
-      const config = {
-        headers: { "Content-Type": "Application/json" },
-        body: JSON.stringify({
-          email: formik.values.email,
-          password: formik.values.password,
-        }),
-        method: "POST",
-      };
-      fetch("http://127.0.0.1:5000/user/login", config)
-        .then((respuesta) => respuesta.json())
-        .then((data) => {
-          if (typeof data == 'object') {
-            actions.setProfile(data);
-            SaveLocalStore(data);
-            let path = `cliente`;
-            history.push(path);
-          } else {
-            swal(data, { icon: "error" });
-          }
-        })
-        .catch((error) => console.error(error));
-    },
-  });
-
-  return (
-    <div className="container mt-5">
-      <hr />
-
-      <div className=" main-b">
-        <div className=" modal-dialog text-center ">
-          <div className=" col-sm-8 main-section">
-            <div className="modal-content">
-              <div className=" col-12 main-logo">
-                <img
-                  src={logoTA}
-                  alt=""
-                  className="mt-3 "
-                  style={{ maxWidth: "150px" }}
-                />
-              </div>
-
-              <form className=" col-12 " onSubmit={formik.handleSubmit}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control text-center mt-5"
-                    id="email"
-                    placeholder="Ingrese su correo"
-                    name="email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  {formik.touched.email && formik.errors.email && (
-                    <div className=" text-danger mt-2">{formik.errors.email}</div>
-                  )}
+    return (
+        <div className="container home">
+            <div className="light">
+                <div className="row justify-content-md-center">
+                    <div className="col-md-auto">
+                        <img
+                            src={logoTA}
+                            alt=""
+                            className="mt-3"
+                            style={{ maxWidth: "300px" }}
+                        />
+                    </div>
                 </div>
+                <div className="my-4"></div>
+                <br />
+                <br />
+                <p className="lead text-justify"><strong>TeAyudo?® es un nombre ficticio que fue creado para nuestro proyecto de titulación. 
+                La finalidad es entregar cinco servicios domésticos dentro de la región metropolitana, ampliándose a 15 servicios 
+                domésticos que abarcarán las regiones de Valparaíso, Santiago y Concepción en una segunda etapa.
+                Los perfiles habilitados son Cliente y Especialista, ambos deben tener un correo
+                electrónico, un número celular y Rut como requisitos para el registro.
+                Los horarios habilitados son de 8:00-11:00 hrs, 11:00-14:00 hrs y 14:00-17:00 hrs.
+                Para los especialistas una vez registrados tendrán habilitado 15 días corridos de prueba.</strong></p>
+                <p className="lead text-justify"><strong>Tanto cliente como especialista pueden iniciar sesión desde la misma página de ingreso, y
+                si deseas crear una cuenta debes registrarte.</strong></p>
+                <hr className="my-4"></hr>
 
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className="form-control  text-center"
-                    id="password"
-                    placeholder="Contraseña"
-                    name="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  {formik.touched.password && formik.errors.password ? (
-                    <div className="text-danger mt-2">{formik.errors.password}</div>
-                  ) : null}
+                <div className="row justify-content-center mt-5">
+                    <div className="col-sm-12 col-lg-4">
+                        <Link to="/Login" className="btn btn-block btn-ta1 text-white" href="#" role="button">Ingresa Aquí</Link>
+                    </div>
+                    <div className="col-sm-12 col-lg-4">
+                        <Link to="/registroCliente" className="btn btn-block btn-ta1 text-white" href="#" role="button">Registrate Aquí</Link>
+                    </div>
                 </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-ta btn-block  text-white "
-                >
-                  Ingresar
-                </button>
-
-                <div className="mt-2 mb-2">
-                  <Link to="/registroCliente">
-                    <u className="text-center " style={{ fontSize: "15px" }}>
-                      {" "}
-                      Registrarse{" "}
-                    </u>{" "}
-                  </Link>
-                </div>
-              </form>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  ); //Finaliza el return
+            <br />
+            <br />
+        </div >
+
+    )
+
 };
 
 export default Home;

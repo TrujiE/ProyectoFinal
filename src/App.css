@@ -18,6 +18,12 @@ boton verde hover  */
   font-family: "Poppins", sans-serif;
 }
 
+.home{
+    background-image: url("https://st2.depositphotos.com/28289130/47606/v/600/depositphotos_476066172-stock-illustration-construction-tools-background-for-work.jpg");
+    /*background-attachment: fixed; */
+    background-repeat: repeat-x;
+    background-color: rgb(204,217,204);
+}
 .btn-ta {
   background-color: rgb(88, 141, 88) !important;
   border-color: rgb(3, 143, 72) !important;
@@ -65,6 +71,12 @@ boton verde hover  */
 .btn-ta-blue:hover {
   background-color: #1c7c8e !important;
 } 
+
+.btn-ta-white {
+    background-color:white !important;
+    color: green !important;
+
+}
 
 .text-ta-danger {
   color: #7c3235 !important;
@@ -157,4 +169,8 @@ select[type]:focus {
 
 .swal-overlay {
   background-color: rgba(204, 217, 204, 0.45);
+}
+
+.bg-jumbotron{
+    background-color: white !important;
 }
