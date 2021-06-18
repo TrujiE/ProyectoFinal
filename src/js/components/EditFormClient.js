@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import comunasList2 from "../utils/communesFile";
@@ -12,6 +12,10 @@ const numericRegex = /(?=.*[0-9])/;
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 const EditFormClient = () => {
+
+
+  const [showPasword, setShowPasword] = useState(false);
+  const [showComfirmPassword, setShowConfirmPassword] = useState(false);
 
   const listaComunas = comunasList2.map((comuna, index) => (
     <option value={comuna}>{comuna}</option>
@@ -162,32 +166,76 @@ const EditFormClient = () => {
         ) : null}
 
         <label htmlFor="password">Contraseña</label>
+
+
+
+
+
+        <div className="row">
+            <div className="col-10">
+
         <input
           className="form-control mb-3"
           id="password"
           name="password"
-          type="password"
+          type={showPasword ? "text" : "password"}
           placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
+            </div>
+            <div className="col-2">
+            {
+              <i
+                class={showPasword ? "bi bi-eye-slash" : "bi bi-eye"}
+                onClick={() => setShowPasword(!showPasword)}
+              ></i>
+            }
+
+            </div>
+        </div>
+
+
+
 
         {formik.touched.password && formik.errors.password ? (
           <div className="text-danger">{formik.errors.password}</div>
         ) : null}
 
         <label htmlFor="confirmPassword">Confirmar contraseña</label>
+
+
+
+
+        <div className="row">
+            <div className="col-10">
+
         <input
           className="form-control mb-3"
           id="confirmPassword"
           name="confirmPassword"
-          type="password"
+          type={showComfirmPassword ? "text " : "password"}
           placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.confirmPassword}
         />
+            </div>
+            <div className="col-2">
+            {
+              <i
+                className={
+                  showComfirmPassword ? "bi bi-eye-slash" : "bi bi-eye"
+                }
+                onClick={() => setShowConfirmPassword(!showComfirmPassword)}
+              ></i>
+            }
+            </div>
+        </div>
+
+
+        
 
         {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
           <div className="text-danger">{formik.errors.confirmPassword}</div>

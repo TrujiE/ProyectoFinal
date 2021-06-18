@@ -64,12 +64,12 @@ const SignUpSpecialist = () => {
                 </ul>
               </div>
             </div>
+          </div>
         </div>
       </div>
-      </div>
-      <Footer/>
-      </div>
-    );
+      <Footer />
+    </div>
+  );
 };
 
 export default SignUpSpecialist;

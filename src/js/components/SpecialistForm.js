@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
-import comunasList2 from "../utils/communesFile"
-import comunasList from "../utils/comunasObj"
-import specialties from "../utils/specialties"
+import comunasList2 from "../utils/communesFile";
+import comunasList from "../utils/comunasObj";
+import specialties from "../utils/specialties";
 import swal from "sweetalert";
 import { useHistory } from "react-router";
 
@@ -13,18 +13,16 @@ const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
-const rutRegex = ("^([0-9]+-[0-9Kk])$");
+const rutRegex = "^([0-9]+-[0-9Kk])$";
 const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
-
-
-
-
 const SpecialistForm = () => {
+  const [showPasword, setShowPasword] = useState(false);
+  const [showComfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const listaComunas = comunasList2.map((comuna, index) =>
+  const listaComunas = comunasList2.map((comuna, index) => (
     <option value={comuna}>{comuna}</option>
-  )
+  ));
 
   const history = useHistory();
 
@@ -57,9 +55,9 @@ const SpecialistForm = () => {
         .min(2, "apellido debe ser mayor a un caracter")
         .max(15, "apellido muy largo, debe tener 15 caracteres como máximo"),
 
-      rut: Yup.string().required("se requiere el rut")
+      rut: Yup.string()
+        .required("se requiere el rut")
         .matches(rutRegex, "rut inválido"),
-
 
       email: Yup.string()
         .lowercase()
@@ -68,7 +66,8 @@ const SpecialistForm = () => {
         .max(30, "correo  debe ser 30 caracteres máximo")
         .required("se requiere el correo"),
 
-      phoneNumber: Yup.string().required("se requiere el teléfono")
+      phoneNumber: Yup.string()
+        .required("se requiere el teléfono")
         .matches(phonereg, "ingrese un formato de número válido"),
 
       adress: Yup.string()
@@ -104,42 +103,37 @@ const SpecialistForm = () => {
       // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
       // .required(),
 
-      skills: Yup.string()
-        .required("se requiere la experiencia"),
-
-
-
+      skills: Yup.string().required("se requiere la experiencia"),
     }),
 
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
 
       const profile_specialist = {
-        headers: { 'Content-Type': 'Application/json' },
+        headers: { "Content-Type": "Application/json" },
         body: JSON.stringify({
-          "email": values.email,
-          "rut": values.rut,
-          "full_name": values.firstName,
-          "last_name": values.lastName,
-          "phone": values.phoneNumber,
-          "address": values.adress,
-          "name_commune": values.comuna,
-          "password": values.password,
-          "role": "specialist",
-          "question": values.secretQuestion,
-          "answer": values.secretAswer,
-          "experience": values.skills,
-          "name_specialty": values.specialty.map(item => item.value),
-          "communes": values.attentionComunes.map(item => item.value)
+          email: values.email,
+          rut: values.rut,
+          full_name: values.firstName,
+          last_name: values.lastName,
+          phone: values.phoneNumber,
+          address: values.adress,
+          name_commune: values.comuna,
+          password: values.password,
+          role: "specialist",
+          question: values.secretQuestion,
+          answer: values.secretAswer,
+          experience: values.skills,
+          name_specialty: values.specialty.map((item) => item.value),
+          communes: values.attentionComunes.map((item) => item.value),
         }),
-        method: "POST"
-      }
+        method: "POST",
+      };
       fetch("http://127.0.0.1:5000/user/profile", profile_specialist)
-        .then(respuesta => respuesta.json())
-        .then(data => {
+        .then((respuesta) => respuesta.json())
+        .then((data) => {
           console.log(data);
-          if (typeof data == 'object') {
-
+          if (typeof data == "object") {
             swal({
               title: "¡Felicidades ahora eres un especialista! ;)",
               text: "Ahora te redireccionaremos al inicio de sesión para que puedas entrar a tu perfil!",
@@ -152,12 +146,11 @@ const SpecialistForm = () => {
           } else {
             swal(data, { icon: "error" }).then(() => {
               let path = `/Login`;
-              history.push(path);;
+              history.push(path);
             });
           }
         })
-        .catch(error => console.error(error))
-
+        .catch((error) => console.error(error));
     },
   });
 
@@ -197,7 +190,9 @@ const SpecialistForm = () => {
           <div className="text-danger">{formik.errors.lastName}</div>
         ) : null}
 
-        <label htmlFor="rut">RUT<span class="text-muted"> formato 20541822-9</span></label>
+        <label htmlFor="rut">
+          RUT<span class="text-muted"> formato 20541822-9</span>
+        </label>
         <input
           className="form-control mb-3"
           id="rut"
@@ -241,11 +236,9 @@ const SpecialistForm = () => {
           value={formik.values.phoneNumber}
         />
 
-
         {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
           <div className="text-danger">{formik.errors.phoneNumber}</div>
         ) : null}
-
 
         <label htmlFor="adress">Dirección</label>
         <input
@@ -258,7 +251,6 @@ const SpecialistForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.adress}
         />
-
 
         {formik.touched.adress && formik.errors.adress ? (
           <div className="text-danger">{formik.errors.adress}</div>
@@ -277,7 +269,6 @@ const SpecialistForm = () => {
           <option selected>Seleccione su comuna</option>
 
           {listaComunas}
-
         </select>
 
         {formik.touched.comuna && formik.errors.comuna ? (
@@ -285,32 +276,60 @@ const SpecialistForm = () => {
         ) : null}
 
         <label htmlFor="password">Contraseña</label>
-        <input
-          className="form-control mb-3"
-          id="password"
-          name="password"
-          type="password"
-          placeholder="********"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.password}
-        />
+
+        <div className="row">
+          <div className="col-10">
+            <input
+              className="form-control mb-3"
+              id="password"
+              name="password"
+              type={showPasword ? "text" : "password"}
+              placeholder="********"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+            />
+          </div>
+          <div className="col-2">
+            {
+              <i
+                class={showPasword ? "bi bi-eye-slash" : "bi bi-eye"}
+                onClick={() => setShowPasword(!showPasword)}
+              ></i>
+            }
+          </div>
+        </div>
 
         {formik.touched.password && formik.errors.password ? (
           <div className="text-danger">{formik.errors.password}</div>
         ) : null}
 
         <label htmlFor="confirmPassword">Confirmar contraseña</label>
-        <input
-          className="form-control mb-3"
-          id="confirmPassword"
-          name="confirmPassword"
-          type="password"
-          placeholder="*********"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.confirmPassword}
-        />
+
+        <div className="row">
+          <div className="col-10">
+            <input
+              className="form-control mb-3"
+              id="confirmPassword"
+              name="confirmPassword"
+              type={showComfirmPassword ? "text " : "password"}
+              placeholder="*********"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.confirmPassword}
+            />
+          </div>
+          <div className="col-2">
+            {
+              <i
+                className={
+                  showComfirmPassword ? "bi bi-eye-slash" : "bi bi-eye"
+                }
+                onClick={() => setShowConfirmPassword(!showComfirmPassword)}
+              ></i>
+            }
+          </div>
+        </div>
 
         {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
           <div className="text-danger">{formik.errors.confirmPassword}</div>
@@ -356,12 +375,9 @@ const SpecialistForm = () => {
           name="specialty"
           placeholder="Elija una especialidad"
           options={specialties}
-          onChange={e => (formik.setFieldValue("specialty", e))}
+          onChange={(e) => formik.setFieldValue("specialty", e)}
           value={formik.values.specialty}
-
-
         />
-
 
         {formik.touched.specialty && formik.errors.specialty ? (
           <div className="text-danger"> {formik.errors.specialty}</div>
@@ -376,10 +392,8 @@ const SpecialistForm = () => {
           placeholder="Seleccione las comunas que atenderá"
           options={comunasList}
           name="attentionComunes"
-
-          onChange={e => (formik.setFieldValue("attentionComunes", e))}
+          onChange={(e) => formik.setFieldValue("attentionComunes", e)}
           value={formik.values.attentionComunes}
-
         />
 
         {formik.touched.attentionComune && formik.errors.attentionComune ? (
@@ -395,15 +409,12 @@ const SpecialistForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.skills}
         >
-
           <option selected>Seleccione su experiencia</option>
 
           <option value="Menos de 1 año">menos de 1 año</option>
           <option value="De 1 a 3 años">De 1 a 3 años</option>
           <option value="De 3 a 5 años">De 3 a 5 años</option>
           <option value="De 5 a 10 años">De 5 a 10 años</option>
-
-
         </select>
 
         {formik.touched.skills && formik.errors.skills ? (
