@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import comunasList2 from "../utils/communesFile";
 import swal from "sweetalert";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router";
+import $ from 'jquery';
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
@@ -13,11 +14,12 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 const EditFormClient = () => {
 
+  
   const listaComunas = comunasList2.map((comuna, index) => (
     <option value={comuna}>{comuna}</option>
   ));
 
-  const { store} = useContext(Context);
+  const { actions ,store} = useContext(Context);
 
   const history = useHistory();
 
@@ -25,6 +27,16 @@ const EditFormClient = () => {
 
   let id = userProfile.user ? userProfile.user.id : "";
   let token = userProfile.access_token ? userProfile.access_token : '';
+
+  useEffect(() => {
+    $(document).ready(function () {
+      let autocomplete = new window.google.maps.places.Autocomplete((document.getElementById("adress")), {
+        types: ['geocode'], componentRestrictions: {
+          country: "cl"
+        }
+      });
+    });
+  }, [])
 
   const formik = useFormik({
     initialValues: {
@@ -41,11 +53,6 @@ const EditFormClient = () => {
       phoneNumber: Yup.string()
         .required("se requiere el teléfono")
         .matches(phonereg, "ingrese un formato de número valido"),
-
-      adress: Yup.string()
-        .required("se requiere la dirección")
-        .min(5, " dirección debe ser mayor 5 caracteres")
-        .max(30, "dirección  debe ser 30 caracteres máximo"),
 
       comuna: Yup.string().required("se requiere la comuna"),
 
@@ -90,6 +97,8 @@ const EditFormClient = () => {
       fetch("http://127.0.0.1:5000/user/profile/" + id, profile_user)
         .then((respuesta) => respuesta.json())
         .then((data) => {
+          actions.setProfile(data);
+          localStorage.setItem('loginUser', JSON.stringify(data));
           console.log(data);
 
           swal({
@@ -135,7 +144,7 @@ const EditFormClient = () => {
           type="text"
           placeholder="Av las acacias nro 74"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          onBlur={formik.handleChange}
           value={formik.values.adress}
         />
 
