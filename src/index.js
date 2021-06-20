@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import "bootstrap/dist/css/bootstrap.css";
-import "./"
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "./";
 
 
 ReactDOM.render(

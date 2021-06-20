@@ -11,12 +11,12 @@ const Nabvar = () => {
     const LogOut = () => {
         localStorage.removeItem("loginUser");
         actions.setProfile({});
-        let path = `/`;
+        let path = `/Login`;
 		history.push(path);    
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light row justify-content-between">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light row justify-content-between home">
             {/* <Link className="navbar-brand btn btn-ta1 text-white" to="/">Home</Link> */}
             <div>
                 <img 

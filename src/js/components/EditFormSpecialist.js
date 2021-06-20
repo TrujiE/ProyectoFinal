@@ -1,4 +1,4 @@
- import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState  } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
@@ -21,6 +21,9 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 
 const EditFormSpecialist = () => {
+
+  const [showPasword, setShowPasword] = useState(false);
+  const [showComfirmPassword, setShowConfirmPassword] = useState(false);
 
 
   const listaComunas = comunasList2.map((comuna, index) =>
@@ -71,7 +74,7 @@ const EditFormSpecialist = () => {
     initialValues: {
       phoneNumber: userProfile.user ? userProfile.user.phone : '',
       adress: userProfile.user ? userProfile.user.address : '',
-      comuna: userProfile.user ? userProfile.user.name_commune : '',
+      comuna: "comuna",
       password: "",
       confirmPassword: "",
       secretQuestion: userProfile.user ? userProfile.profile.question : '',
@@ -85,8 +88,6 @@ const EditFormSpecialist = () => {
 
       phoneNumber: Yup.string().required("se requiere el teléfono")
         .matches(phonereg, "ingrese un formato de número valido"),
-
-      comuna: Yup.string().required("se requiere la comuna"),
 
       password: Yup.string()
         .required("se requiere la contraseña")
@@ -124,7 +125,7 @@ const EditFormSpecialist = () => {
 
           "phone": values.phoneNumber,
           "address": values.adress,
-          "name_commune": values.comuna,
+          "name_commune": "comuna",
           "password": values.password,
           "role": "specialist",
           "question": values.secretQuestion,
@@ -164,7 +165,7 @@ const EditFormSpecialist = () => {
     <div>
       <form onSubmit={formik.handleSubmit}>
 
-        <label htmlFor="phoneNumber">Telefono</label>
+        <label htmlFor="phoneNumber">Teléfono</label>
         <input
           className="form-control mb-3"
           id="phoneNumber"
@@ -180,7 +181,7 @@ const EditFormSpecialist = () => {
           <div className="text-danger">{formik.errors.phoneNumber}</div>
         ) : null}
 
-        <label htmlFor="adress">Direccion</label>
+        <label htmlFor="adress">Dirección</label>
         <input
           className="form-control mb-3"
           id="adress"
@@ -196,50 +197,84 @@ const EditFormSpecialist = () => {
           <div className="text-danger">{formik.errors.adress}</div>
         ) : null}
 
-        <label htmlFor="comuna">Comuna</label>
-        <select
-          className="form-control mb-3"
-          id="comuna"
-          name="comuna"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.comuna}
-        >
-          <option selected>Elija una comuna</option>
-          {listaComunas}
-        </select>
+        
 
         {formik.touched.comuna && formik.errors.comuna ? (
           <div className="text-danger">{formik.errors.comuna}</div>
         ) : null}
 
         <label htmlFor="password">Contraseña</label>
+
+
+        <div className="row">
+            <div className="col-10">
+
         <input
           className="form-control mb-3"
           id="password"
           name="password"
-          type="password"
+          type={showPasword ? "text" : "password"}
           placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
+            </div>
+            <div className="col-2">
+            {
+              <i
+                class={showPasword ? "bi bi-eye-slash" : "bi bi-eye"}
+                onClick={() => setShowPasword(!showPasword)}
+              ></i>
+            }
+
+            </div>
+        </div>
+
+
+
+
 
         {formik.touched.password && formik.errors.password ? (
           <div className="text-danger">{formik.errors.password}</div>
         ) : null}
 
         <label htmlFor="confirmPassword">Confirmar contraseña</label>
+
+
+
+
+        <div className="row">
+            <div className="col-10">
+
         <input
           className="form-control mb-3"
           id="confirmPassword"
           name="confirmPassword"
-          type="password"
+          type={showComfirmPassword ? "text " : "password"}
           placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.confirmPassword}
         />
+            </div>
+            <div className="col-2">
+            {
+              <i
+                className={
+                  showComfirmPassword ? "bi bi-eye-slash" : "bi bi-eye"
+                }
+                onClick={() => setShowConfirmPassword(!showComfirmPassword)}
+              ></i>
+            }
+
+            </div>
+        </div>
+
+
+
+
+        
 
         {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
           <div className="text-danger">{formik.errors.confirmPassword}</div>

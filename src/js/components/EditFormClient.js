@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState  } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import comunasList2 from "../utils/communesFile";
@@ -14,7 +14,10 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
 const EditFormClient = () => {
 
-  
+
+  const [showPasword, setShowPasword] = useState(false);
+  const [showComfirmPassword, setShowConfirmPassword] = useState(false);
+
   const listaComunas = comunasList2.map((comuna, index) => (
     <option value={comuna}>{comuna}</option>
   ));
@@ -54,7 +57,6 @@ const EditFormClient = () => {
         .required("se requiere el teléfono")
         .matches(phonereg, "ingrese un formato de número valido"),
 
-      comuna: Yup.string().required("se requiere la comuna"),
 
       password: Yup.string()
         .required("se requiere la contraseña")
@@ -86,7 +88,7 @@ const EditFormClient = () => {
         body: JSON.stringify({
           phone: values.phoneNumber,
           address: values.adress,
-          name_commune: values.comuna,
+          name_commune: "comuna",
           password: values.password,
           role: "client",
           question: values.secretQuestion,
@@ -152,51 +154,77 @@ const EditFormClient = () => {
           <div className="text-danger">{formik.errors.adress}</div>
         ) : null}
 
-        <label htmlFor="comuna">Comuna</label>
-        <select
-          className="form-control mb-3"
-          id="comuna"
-          name="comuna"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.comuna}
-        >
-          <option selected>Elija una comuna</option>
-
-          {listaComunas}
-        </select>
-
         {formik.touched.comuna && formik.errors.comuna ? (
           <div className="text-danger">{formik.errors.comuna}</div>
         ) : null}
 
         <label htmlFor="password">Contraseña</label>
+
+        <div className="row">
+            <div className="col-10">
+
         <input
           className="form-control mb-3"
           id="password"
           name="password"
-          type="password"
+          type={showPasword ? "text" : "password"}
           placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
+            </div>
+            <div className="col-2">
+            {
+              <i
+                class={showPasword ? "bi bi-eye-slash" : "bi bi-eye"}
+                onClick={() => setShowPasword(!showPasword)}
+              ></i>
+            }
+
+            </div>
+        </div>
+
+
+
 
         {formik.touched.password && formik.errors.password ? (
           <div className="text-danger">{formik.errors.password}</div>
         ) : null}
 
         <label htmlFor="confirmPassword">Confirmar contraseña</label>
+
+
+
+
+        <div className="row">
+            <div className="col-10">
+
         <input
           className="form-control mb-3"
           id="confirmPassword"
           name="confirmPassword"
-          type="password"
+          type={showComfirmPassword ? "text " : "password"}
           placeholder="********"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.confirmPassword}
         />
+            </div>
+            <div className="col-2">
+            {
+              <i
+                className={
+                  showComfirmPassword ? "bi bi-eye-slash" : "bi bi-eye"
+                }
+                onClick={() => setShowConfirmPassword(!showComfirmPassword)}
+              ></i>
+            }
+            </div>
+        </div>
+
+
+        
 
         {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
           <div className="text-danger">{formik.errors.confirmPassword}</div>

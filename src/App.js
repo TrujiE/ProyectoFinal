@@ -10,6 +10,7 @@ import injectContext, { Context } from "./js/store/appContext";
 import EditClient from "./js/views/EditClient";
 import EditSpecialist from "./js/views/EditSpecialist";
 import "./App.css"
+import Login from "./js/views/Login";
 
 
 function App() {
@@ -28,6 +29,11 @@ function App() {
                                 <Redirect to={{ pathname: "/cliente" }}></Redirect>
                                 :
                                 <Home />} />
+                        <Route exact path="/Login" render={
+                            () => userProfile.profile ?
+                                <Redirect to={{ pathname: "/cliente" }}></Redirect>
+                                :
+                                <Login />} />
                         <Route exact path="/registroEspecialista" render={
                             () => userProfile.profile ?
                                 <Redirect to={{ pathname: "/cliente" }}></Redirect>
