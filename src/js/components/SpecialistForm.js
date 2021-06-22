@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React,  { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
@@ -7,6 +7,7 @@ import comunasList from "../utils/comunasObj";
 import specialties from "../utils/specialties";
 import swal from "sweetalert";
 import { useHistory } from "react-router";
+import $ from 'jquery';
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
@@ -19,6 +20,16 @@ const phonereg = /^(56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 const SpecialistForm = () => {
   const [showPasword, setShowPasword] = useState(false);
   const [showComfirmPassword, setShowConfirmPassword] = useState(false);
+
+  useEffect(() => {
+    $(document).ready(function () {
+      let autocomplete = new window.google.maps.places.Autocomplete((document.getElementById("adress")), {
+        types: ['geocode'], componentRestrictions: {
+          country: "cl"
+        }
+      });
+    });
+  }, [])
 
   const listaComunas = comunasList2.map((comuna, index) => (
     <option value={comuna}>{comuna}</option>
@@ -70,13 +81,7 @@ const SpecialistForm = () => {
         .required("se requiere el teléfono")
         .matches(phonereg, "ingrese un formato de número válido"),
 
-      adress: Yup.string()
-        .required("se requiere la dirección")
-        .min(5, " dirección debe ser mayor a 5 caracteres")
-        .max(30, "dirección debe tener 30 caracteres como máximo"),
-
-      comuna: Yup.string().required("se requiere la comuna"),
-
+     
       password: Yup.string()
         .required("se requiere la contraseña")
         .matches(lowercaseRegex, "se requiere al menos una minúscula")
@@ -97,18 +102,12 @@ const SpecialistForm = () => {
         .required("se requiere la respuesta secreta")
         .max(30, "la respuesta debe tener 30 caracteres como máximo"),
 
-      // specialty: Yup.Array().of(yup.string)
-      //   .required("se requiere la especialidad"),
-
-      // attentionComunes: Yup.string("se requiere almenos una comuna de atencion")
-      // .required(),
 
       skills: Yup.string().required("se requiere la experiencia"),
     }),
 
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
-
+      
       const profile_specialist = {
         headers: { "Content-Type": "Application/json" },
         body: JSON.stringify({
@@ -118,7 +117,7 @@ const SpecialistForm = () => {
           last_name: values.lastName,
           phone: values.phoneNumber,
           address: values.adress,
-          name_commune: values.comuna,
+          name_commune: "comuna",
           password: values.password,
           role: "specialist",
           question: values.secretQuestion,
@@ -246,9 +245,9 @@ const SpecialistForm = () => {
           id="adress"
           name="adress"
           type="text"
-          placeholder="Av las acacias nro 74"
+          placeholder="Av las acacias nro 77"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          onBlur={formik.handleChange}
           value={formik.values.adress}
         />
 
@@ -256,20 +255,6 @@ const SpecialistForm = () => {
           <div className="text-danger">{formik.errors.adress}</div>
         ) : null}
 
-        <label htmlFor="comuna">Comuna</label>
-        <select
-          className="form-control mb-3"
-          id="comuna"
-          name="comuna"
-          // placeholder="Elija una comuna"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.comuna}
-        >
-          <option selected>Seleccione su comuna</option>
-
-          {listaComunas}
-        </select>
 
         {formik.touched.comuna && formik.errors.comuna ? (
           <div className="text-danger">{formik.errors.comuna}</div>
@@ -400,7 +385,7 @@ const SpecialistForm = () => {
           <div className="text-danger"> {formik.errors.attentionComune}</div>
         ) : null}
 
-        <label htmlFor="skills">Experiencia</label>
+        <label htmlFor="skills">Experiencia domiciliaria</label>
         <select
           className="form-control mb-3"
           id="skills"

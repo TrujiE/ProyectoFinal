@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState  } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
@@ -8,6 +8,7 @@ import specialties from "../utils/specialties"
 import swal from "sweetalert";
 import { Context } from '../store/appContext';
 import { useHistory } from 'react-router';
+import $ from 'jquery';
 
 
 
@@ -31,7 +32,7 @@ const EditFormSpecialist = () => {
 
   const history = useHistory();
 
-  const { store } = useContext(Context);
+  const { actions ,store} = useContext(Context);
 
   const userProfile =store.profileUser;
 
@@ -59,6 +60,13 @@ const EditFormSpecialist = () => {
         }
       }
     }
+    $(document).ready(function () {
+      let autocomplete = new window.google.maps.places.Autocomplete((document.getElementById("adress")), {
+        types: ['geocode'], componentRestrictions: {
+          country: "cl"
+        }
+      });
+    });
   }, [])
 
   const formik = useFormik({
@@ -66,7 +74,7 @@ const EditFormSpecialist = () => {
     initialValues: {
       phoneNumber: userProfile.user ? userProfile.user.phone : '',
       adress: userProfile.user ? userProfile.user.address : '',
-      comuna: userProfile.user ? userProfile.user.name_commune : '',
+      comuna: "comuna",
       password: "",
       confirmPassword: "",
       secretQuestion: userProfile.user ? userProfile.profile.question : '',
@@ -80,13 +88,6 @@ const EditFormSpecialist = () => {
 
       phoneNumber: Yup.string().required("se requiere el teléfono")
         .matches(phonereg, "ingrese un formato de número valido"),
-
-      adress: Yup.string()
-        .required("se requiere la dirección")
-        .min(5, " dirección debe ser mayor 5 caracteres")
-        .max(30, "dirección  debe ser 30 caracteres máximo"),
-
-      comuna: Yup.string().required("se requiere la comuna"),
 
       password: Yup.string()
         .required("se requiere la contraseña")
@@ -124,7 +125,7 @@ const EditFormSpecialist = () => {
 
           "phone": values.phoneNumber,
           "address": values.adress,
-          "name_commune": values.comuna,
+          "name_commune": "comuna",
           "password": values.password,
           "role": "specialist",
           "question": values.secretQuestion,
@@ -138,6 +139,7 @@ const EditFormSpecialist = () => {
       fetch("http://127.0.0.1:5000/user/profile/" + id, profile_user)
         .then(respuesta => respuesta.json())
         .then((data) => {
+          actions.setProfile(data);
           localStorage.setItem('loginUser', JSON.stringify(data));
 
           swal({
@@ -171,7 +173,7 @@ const EditFormSpecialist = () => {
           type="text"
           placeholder="56912345678"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          onBlur={formik.handleChange}
           value={formik.values.phoneNumber}
         />
 
@@ -187,7 +189,7 @@ const EditFormSpecialist = () => {
           type="text"
           placeholder="Av las acacias nro 74"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          onBlur={formik.handleChange}
           value={formik.values.adress}
         />
 
@@ -195,26 +197,13 @@ const EditFormSpecialist = () => {
           <div className="text-danger">{formik.errors.adress}</div>
         ) : null}
 
-        <label htmlFor="comuna">Comuna</label>
-        <select
-          className="form-control mb-3"
-          id="comuna"
-          name="comuna"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.comuna}
-        >
-          <option selected>Elija una comuna</option>
-          {listaComunas}
-        </select>
+        
 
         {formik.touched.comuna && formik.errors.comuna ? (
           <div className="text-danger">{formik.errors.comuna}</div>
         ) : null}
 
         <label htmlFor="password">Contraseña</label>
-
-
 
 
         <div className="row">

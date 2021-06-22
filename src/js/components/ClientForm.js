@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React,  { useEffect, useState  } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import comunasList2 from "../utils/communesFile";
 import swal from "sweetalert";
 import { useHistory } from "react-router";
+import $ from 'jquery';
 
 const emailadresses = ["test1@gmail.com", "test2@gmail.com", "test3@gamil.com"];
 
@@ -22,6 +23,16 @@ const ClientForm = () => {
   ));
 
   const history = useHistory();
+  
+  useEffect(() => {
+    $(document).ready(function () {
+      let autocomplete = new window.google.maps.places.Autocomplete((document.getElementById("adress")), {
+        types: ['geocode'], componentRestrictions: {
+          country: "cl"
+        }
+      });
+    });
+  }, [])
 
   const formik = useFormik({
     initialValues: {
@@ -64,12 +75,8 @@ const ClientForm = () => {
         .required("se requiere el teléfono")
         .matches(phonereg, "ingrese un formato de número valido"),
 
-      adress: Yup.string()
-        .required("se requiere la dirección")
-        .min(5, " dirección debe ser mayor 5 caracteres")
-        .max(30, "dirección  debe ser 30 caracteres máximo"),
+      
 
-      comuna: Yup.string().required("se requiere la comuna"),
 
       password: Yup.string()
         .required("se requiere la contraseña")
@@ -103,7 +110,7 @@ const ClientForm = () => {
           last_name: values.lastName,
           phone: values.phoneNumber,
           address: values.adress,
-          name_commune: values.comuna,
+          name_commune: "comuna",
           password: values.password,
           role: "client",
           question: values.secretQuestion,
@@ -209,7 +216,7 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.email}</div>
         ) : null}
 
-        <label htmlFor="phoneNumber">Telefono</label>
+        <label htmlFor="phoneNumber">Teléfono</label>
         <input
           className="form-control mb-3"
           id="phoneNumber"
@@ -225,15 +232,15 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.phoneNumber}</div>
         ) : null}
 
-        <label htmlFor="adress">Direccion</label>
+        <label htmlFor="adress">Dirección</label>
         <input
           className="form-control mb-3"
           id="adress"
           name="adress"
           type="text"
-          placeholder="Av las acacias nro 74"
+          placeholder="Av las acacias nro 75"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          onBlur={formik.handleChange}
           value={formik.values.adress}
         />
 
@@ -241,7 +248,7 @@ const ClientForm = () => {
           <div className="text-danger">{formik.errors.adress}</div>
         ) : null}
 
-        <label htmlFor="comuna">Comuna</label>
+        {/* <label htmlFor="comuna">Comuna</label>
         <select
           className="form-control mb-3"
           id="comuna"
@@ -253,7 +260,7 @@ const ClientForm = () => {
           <option selected>Seleccione su comuna</option>
 
           {listaComunas}
-        </select>
+        </select> */}
 
         {formik.touched.comuna && formik.errors.comuna ? (
           <div className="text-danger">{formik.errors.comuna}</div>
