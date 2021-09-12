@@ -1,0 +1,184 @@
+/* color logo : rgba(0,91,0,255) */
+/* verde claro fondos : rgb(89,141,88) */
+/* verde aux botones : rgb(60,124,60) */
+/* verde mas claro : rgb(204,217,204) */
+
+/* verde2 aux botones  : rgb(53,124,50) */
+/*  verde2 complementario azul : #32707c */
+/* verde2 complementario "rojo": #7c3235 */
+/* 
+boton blue hover 
+boton danger hover 
+boton verde hover  */
+
+.App {
+  /* font-family:roboto; */
+  /* background-color: rgb(102,205,170); */
+  /* background-color: rgb(204,217,204); */
+  font-family: "Poppins", sans-serif;
+}
+
+.home{
+    background-image: url("https://st2.depositphotos.com/28289130/47606/v/600/depositphotos_476066172-stock-illustration-construction-tools-background-for-work.jpg");
+    /*background-attachment: fixed; */
+    background-repeat: repeat-x;
+    background-color: rgb(204,217,204);
+}
+.btn-ta {
+  background-color: rgb(88, 141, 88) !important;
+  border-color: rgb(3, 143, 72) !important;
+
+  /* box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6) !important; */
+
+  outline: 0 none;
+}
+
+.btn-ta1 {
+  background-color: rgb(60, 124, 60) !important;
+  border-color: rgb(3, 143, 72) !important;
+
+  /* box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6) !important; */
+
+  outline: 0 none;
+}
+.btn-ta1:hover {
+  background-color: #185918 !important;
+}
+
+
+.btn-ta-danger {
+  background-color: #7c3235 !important;
+
+  /* box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6) !important; */
+
+  outline: 0 none;
+}
+
+
+.btn-ta-danger:hover {
+  background-color: #88171b !important;
+} 
+
+
+.btn-ta-blue {
+  background-color: #32707c !important;
+
+  /* box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(3,143,0,0.6) !important; */
+
+  outline: 0 none;
+}
+
+.btn-ta-blue:hover {
+  background-color: #1c7c8e !important;
+} 
+
+.btn-ta-white {
+    background-color:white !important;
+    color: green !important;
+
+}
+
+.text-ta-danger {
+  color: #7c3235 !important;
+}
+
+
+.bg-color {
+  background-color: rgb(60, 124, 60);
+}
+
+.bg-ta-nav {
+  background-color: ;
+}
+.ta-margin{
+  margin-top: 130px;
+}
+
+.btn-outline-success:hover,
+.btn-outline-success:active,
+.btn-outline-success:visited {
+  background-color: rgb(60, 124, 60) !important;
+  border-color: rgb(60, 124, 60) !important;
+  color: rgb(60, 124, 60);
+}
+
+textarea:focus,
+input:focus,
+input[type]:focus,
+select[type]:focus {
+  border-color: rgb(3, 143, 72);
+
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
+    0 0 8px rgba(3, 143, 0, 0.6);
+
+  outline: 0 none;
+}
+
+.main-section {
+  margin: 0 auto;
+  margin-top: 20%;
+}
+
+.sideBar-right {
+  /* background: linear-gradient(90deg, #357c32, #598d58 25%, #598d58); */
+
+  background: rgb(89, 141, 88);
+  color: white;
+}
+
+.sidebarE {
+}
+
+.ayudo {
+  margin: 0 auto;
+}
+
+.laLista {
+  list-style: none;
+  font-size: 25px;
+}
+
+/* estilos swal  */
+
+.swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  background-color: rgb(89, 141, 88);
+  font-size: 12px;
+  border: 1px solid rgb(89, 141, 88);
+  text-shadow: 0px -1px 0px rgba(60, 124, 60, 0.3);
+  margin: 0 auto;
+}
+
+/* .swal-modal {
+  background-color: #ccd9cc;
+  border: 3px solid white;
+  color: #7c3235;
+} */
+
+.swal-text {
+  background-color: rgb(60, 124, 60);
+  padding: 17px;
+  border: 1px solid rgb(89, 141, 88);
+  border-radius: 2mm;
+  display: block;
+  margin: 22px;
+  text-align: center;
+  color: white;
+}
+
+.swal-overlay {
+  background-color: rgba(204, 217, 204, 0.45);
+}
+
+.bg-jumbotron{
+    background-color: white !important;
+}
+
+
+
+.bi-eye , .bi-eye-slash {
+  font-size: 25px;
+  margin-left: -10px;
+  color: #aaa
+}
